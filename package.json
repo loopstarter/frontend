@@ -6,7 +6,7 @@
     "analyze": "ANALYZE=true yarn build",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -- -H localhost",
     "test": "jest",
     "test:config": "jest src/__tests__/config/ --testPathIgnorePatterns",
     "integration-test": "start-server-and-test start http://localhost:3000 'cypress run'",
