@@ -174,16 +174,16 @@ const Stats = () => {
   }
 
   const moveToOutPartner = useCallback(() => {
-    refStaking.current.scrollIntoView({
+    refStaking && refStaking?.current.scrollIntoView({
       behavior: "smooth",
     });
-  });
+  },[]);
 
   const moveToLoopNew = useCallback(() => {
-    refLoopNew.current.scrollIntoView({
+    refLoopNew && refLoopNew?.current.scrollIntoView({
       behavior: "smooth",
     });
-  });
+  }, []);
 
   return (
     <Section justifyContent="center" alignItems="center" flexDirection="column">
