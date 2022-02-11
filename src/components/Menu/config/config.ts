@@ -8,63 +8,63 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
   {
     label: t('Loop Starter'),
     icon: 'Swap',
-    href: '/swap',
+    href: '/#',
     showItemsOnMobile: false,
     items: [
       {
         label: t('Trade'),
-        href: '/swap',
+        href: '/#',
       },
       {
         label: t('Exchange'),
-        href: '/swap',
+        href: '/#',
       },
       {
         label: t('Liquidity'),
-        href: '/liquidity',
+        href: '/#',
       },
     ],
   },
   {
     label: t('Voting'),
-    href: '/voting',
+    href: '/#',
     icon: 'Earn',
   },
   {
     label: t('Buy Loops'),
-    href: '/buy-loops',
+    href: '/#',
     icon: 'Trophy',
     items: [],
   },
   {
     label: t('Document'),
-    href: '/document',
+    href: '/#',
     icon: 'Nft',
     items: [
       {
         label: t('Overview'),
-        href: `${nftsBaseUrl}`,
+        href: '/#',
       },
       {
         label: t('Collections'),
-        href: `${nftsBaseUrl}/collections`,
+        href: '/#',
       },
       {
         label: t('Activity'),
-        href: `${nftsBaseUrl}/activity`,
+        href: '/#',
       },
     ],
   },
   {
     label: 'Contract',
-    href: '/contract',
+    href: '/#',
     icon: 'More',
     hideSubNav: true,
     items: [],
   },
   {
     label: 'Privacy Policy',
-    href: '/policy',
+    href: '/#',
     icon: 'More',
     hideSubNav: true,
     items: [],
