@@ -10,60 +10,32 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     icon: 'Swap',
     href: '/#',
     showItemsOnMobile: false,
+  },
+  {
+    label: t('Exchange'),
+    href: '/#',
+    icon: 'Earn',
     items: [
       {
-        label: t('Trade'),
-        href: '/#',
-      },
-      {
         label: t('Exchange'),
-        href: '/#',
+        href: 'https://defifarms.org/swap',
+        target:"blank"
       },
       {
         label: t('Liquidity'),
-        href: '/#',
+        href: 'https://defifarms.org/liquidity',
+        target:"blank"
       },
     ],
   },
   {
-    label: t('Voting'),
+    label: t('Stake'),
     href: '/#',
-    icon: 'Earn',
-  },
-  {
-    label: t('Buy Loops'),
-    href: '/#',
-    icon: 'Trophy',
+    icon: 'Stake',
     items: [],
   },
   {
-    label: t('Document'),
-    href: '/#',
-    icon: 'Nft',
-    items: [
-      {
-        label: t('Overview'),
-        href: '/#',
-      },
-      {
-        label: t('Collections'),
-        href: '/#',
-      },
-      {
-        label: t('Activity'),
-        href: '/#',
-      },
-    ],
-  },
-  {
-    label: 'Contract',
-    href: '/#',
-    icon: 'More',
-    hideSubNav: true,
-    items: [],
-  },
-  {
-    label: 'Privacy Policy',
+    label: 'Token Dao',
     href: '/#',
     icon: 'More',
     hideSubNav: true,

@@ -65,7 +65,7 @@ function MyApp(props: AppProps) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="🥞 Loopstarter - A next evolution DeFi exchange on Binance Smart Chain (BSC)"
+          content="Loopstarter - A next evolution DeFi exchange on Binance Smart Chain (BSC)"
         />
         <title>Loopstarter</title>
       </Head>
