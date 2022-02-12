@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef,useCallback } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Flex, Skeleton, ChartIcon, CommunityIcon, SwapIcon, Button } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
@@ -87,13 +87,14 @@ const flyingAnim = () => keyframes`
 const ArrowWrapper = styled.div`
   animation: ${flyingAnim} 4s ease-in-out infinite;
   animation-delay: 1s;
-
+ cursor: pointer;
 `
 
 const LoopStarter = () => {
   const { t } = useTranslation()
   const data = useGetStats()
   const { theme } = useTheme()
+  const refViewAll = useRef();
 
   const tvlString = data ? formatLocalisedCompactNumber(data.tvl) : '-'
   const trades = formatLocalisedCompactNumber(txCount)
@@ -114,15 +115,21 @@ const LoopStarter = () => {
     icon: <ChartIcon color="failure" width="36px" />,
   }
 
+  const moveToViewAll = useCallback(() => {
+    refViewAll && refViewAll?.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
-    <Section justifyContent="center" alignItems="center" flexDirection="column">
-      <Heading>
+    <Section justifyContent="center" alignItems="center" flexDirection="column" >
+      <Heading ref={refViewAll}>
         {t('About')}
       </Heading>
       <Heading font="FSMagistralBold">
         {t('LOOP STARTER')}
       </Heading>
-      <ArrowWrapper>
+      <ArrowWrapper onClick={moveToViewAll}>
          <picture>
           <img src="/images/home/arrow-1.png" alt={t('Lunar bunny')} />
         </picture>

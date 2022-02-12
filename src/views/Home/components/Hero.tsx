@@ -6,7 +6,7 @@ import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
 import ConnectWalletButton from 'components/ConnectWalletButton'
 import useTheme from 'hooks/useTheme'
-import { SlideSvgDark, SlideSvgLight } from './SlideSvg'
+import SvgComponent from './SlideSvg'
 import CompositeImage, { getSrcSet, CompositeImageProps } from './CompositeImage'
 
 const flyingAnim = () => keyframes`
@@ -57,7 +57,7 @@ const BgWrapper = styled.div`
   height: 100%;
   bottom: 0px;
   left: 0px;
-  background-image: url('/images/home/banner.png');
+  background-image: url('/images/home/banner-01.svg');
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -179,7 +179,7 @@ const Hero = () => {
   return (
     <>
       <BgWrapper>
-        
+       
       </BgWrapper>
       <Flex
         position="relative"
@@ -190,7 +190,7 @@ const Hero = () => {
         id="homepage-hero"
       >
         <Flex flex="1" flexDirection="column" alignItems="center">
-          <BunnyWrapper>
+          {/* <BunnyWrapper>
             <picture>
               <source type="image/webp" srcSet={getSrcSet(imagePath, imageSrc, '.webp')} />
               <source type="image/png" srcSet={getSrcSet(imagePath, imageSrc)} />
@@ -201,7 +201,7 @@ const Hero = () => {
             <picture>
               <img src='/images/home/polygon.png' alt={t('Lunar bunny')} />
             </picture>
-          </PolyGonWrapper>
+          </PolyGonWrapper> */}
           <HeadingTitle scale="xxl" color="secondary" mb="24px">
             {t('LOOP STARTER')}
           </HeadingTitle>

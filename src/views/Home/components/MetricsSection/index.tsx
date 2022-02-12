@@ -152,6 +152,7 @@ const Stats = () => {
   const { theme } = useTheme()
   const refStaking = useRef();
   const refLoopNew = useRef();
+  const refViewAll = useRef();
 
   const tvlString = data ? formatLocalisedCompactNumber(data.tvl) : '-'
   const trades = formatLocalisedCompactNumber(txCount)
@@ -184,16 +185,22 @@ const Stats = () => {
       behavior: "smooth",
     });
   }, []);
-
+  const moveToViewAll = useCallback(() => {
+    refViewAll && refViewAll?.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <Section justifyContent="center" alignItems="center" flexDirection="column">
       <Heading>
         {t('IDO POOLS')}
       </Heading>
-      <ViewAll>
-        <picture>
-          <img src="/images/home/arrow.png" alt={t('Lunar bunny')} />
-        </picture>
+      <ViewAll ref={refViewAll}>
+        <ArrowWrapper onClick={moveToViewAll}>
+          <picture>
+            <img src="/images/home/arrow.png" alt={t('Lunar bunny')} />
+          </picture>
+         </ArrowWrapper>
         <Label>View All</Label>
       </ViewAll>
       <Flex flexWrap="wrap" alignItems="center">
@@ -272,12 +279,12 @@ const Stats = () => {
           </picture>
           <Flex padding="50px 0 0" alignItems="center">
             <picture>
-              <a href="medium.com" target="_blank">
+              <a href="https://t.me/Loopstarter" target="_blank">
                 <img src="/images/home/message.png" alt={t('message')} />
               </a>
             </picture>
             <picture style={{padding: '0 47px'}}>
-              <a href="medium.com" target="_blank">
+              <a href="https://twitter.com/Loopstarter" target="_blank">
                 <img src="/images/home/twitter-1.png" alt={t('twitter')} />
               </a>
             </picture>
