@@ -17,15 +17,22 @@ const Section = styled(Flex)`
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 350px 0 0;
+  padding: 50px 0 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 350px 0 0;
+  }
 `
 
 const Heading = styled.p<{ font?: string }>`
   font-family: ${({ font }) => font || 'FSMagistralLight'};
-  font-size: 55px;
-  line-height: 65px;
+  font-size: 41px;
+  line-height: 58px;
   text-align: center;
   color: #150159;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 55px;
+    line-height: 65px;
+  }
 `
 
 const Label = styled.p`
@@ -39,11 +46,16 @@ const Label = styled.p`
 
 const Text = styled.p`
   font-family: FSMagistralBold;
-  font-size: 33.105px;
-  line-height: 46px;
+  font-size: 24px;
+  line-height: 33px;
   text-align: justify;
   color: #150159;
-  padding: 70px 0 0;
+  padding: 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 33.105px;
+    line-height: 46px;
+    padding: 70px 0 0;
+  }
 `
 
 const ButtonStyle = styled(Button)`
@@ -61,14 +73,18 @@ const ButtonStyle = styled(Button)`
 
 const Wrapper = styled.div`
   max-width: 577px;
-  padding-left: 37px;
+  padding: 0 20px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 0 0 0 37px;
+  }
 `
 
 const Picture = styled.picture`
-  padding-right: 37px;  
+  padding: 20px 20px 0;  
   width: 100%;
   ${({ theme }) => theme.mediaQueries.md} {
     width: 50%;
+    padding: 0 37px 0 0;  
   }
 `
 
@@ -88,6 +104,12 @@ const ArrowWrapper = styled.div`
   animation: ${flyingAnim} 4s ease-in-out infinite;
   animation-delay: 1s;
  cursor: pointer;
+ img {
+    height: 40px;
+    ${({ theme }) => theme.mediaQueries.md} {
+      height: 52px;
+    }
+  }
 `
 
 const LoopStarter = () => {

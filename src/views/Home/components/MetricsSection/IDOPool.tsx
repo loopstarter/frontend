@@ -149,10 +149,14 @@ const Button = styled(IconButton)`
   }
 `
 
-const FlexWrapper = styled(Flex)<{ padding?: string }>`
+const FlexWrapper = styled(Flex)<{ padding?: string, margin?: string }>`
   padding: 0 0 140px;
+  margin: 0;
   ${({ theme }) => theme.mediaQueries.md} {
     padding: ${({ padding }) => padding};
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin: ${({ margin }) => margin};
   }
 `
 

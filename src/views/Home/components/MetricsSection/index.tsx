@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { Flex, Text, Skeleton, ChartIcon, CommunityIcon, SwapIcon } from '@loopstarter/uikit'
+import { Flex, Text, Skeleton, ChartIcon, CommunityIcon, SwapIcon, useMatchBreakpoints } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { useGetStats } from 'hooks/api'
 import useTheme from 'hooks/useTheme'
@@ -25,21 +25,35 @@ const Section = styled(Flex)`
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 104px 0 0;
+  padding: 35px 0 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 104px 0 0;
+  }
 `
 
 const Heading = styled.p`
   font-family: FSMagistralBold;
-  font-size: 61.8284px;
-  line-height: 87px;
+  font-size: 52px;
+  line-height: 72px;
   color: #6FA8FF;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 62px;
+    line-height: 87px;
+  }
 `
 
 const Label = styled.p`
   font-family: FSMagistralMedium;
-  font-size: 23.1857px;
-  line-height: 30px;
+  font-size: 19px;
+  line-height: 25px;
   color: #6EA8FF;
+  padding: 20px 0 80px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 20px 0 0;
+    font-size: 23.1857px;
+    line-height: 30px;
+  }
+
 `
 
 const ViewAll = styled.a`
@@ -51,18 +65,24 @@ const ViewAll = styled.a`
 
 const Title = styled.p<{ color?: string }>`
   font-family: FSMagistralLight;
-  font-size: 55px;
+  font-size: 45px;
   line-height: 65px;
   text-align: center;
   color: ${({ color }) => color || '#150159'};
   span {
     font-family: FSMagistralBold;
   }
-
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 55px;
+    line-height: 65px;
+  }
 `
 
 const Picture = styled.picture`
-  padding: 10px 35px;
+  padding: 55px 35px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 10px 35px;
+  }
 `
 
 const Language = styled.p`
@@ -83,6 +103,10 @@ const Li = styled.li`
 const Ul = styled.ul<{ padding?: string }>`
   list-style: none;
   padding: ${({ padding }) => padding || '0'};
+  width: 100%;
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: auto;
+  }
 `
 
 const fading = () => keyframes`
@@ -106,7 +130,7 @@ const flyingAnim = () => keyframes`
     transform: translate(0,  0px);
   }
   50% {
-    transform: scale(1.2,1.2) translate(0px, 25px);
+    transform: scale(1.1,1.1) translate(0px, 25px);
   }
   to {
     transform: translate(0, 0px);
@@ -137,6 +161,12 @@ const ArrowWrapper = styled.div`
   animation: ${flyingAnim} 4s ease-in-out infinite;
   animation-delay: 1s;
   cursor: pointer;
+  img {
+    height: 40px;
+    ${({ theme }) => theme.mediaQueries.md} {
+      height: 52px;
+    }
+  }
 
 `
 
@@ -147,13 +177,34 @@ const FlexWrapper = styled(Flex)`
   }
 `
 
+const FlexBox = styled(Flex)`
+  padding: 50px 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 100px 0 130px
+  }
+`
+
+const Footer = styled(Flex)`
+  background-image: url('/images/home/footer.png');
+  background-position: top, center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 44px 20px 0;
+  justify-content: left;
+  ${({ theme }) => theme.mediaQueries.md} {
+    background-image: url('/images/home/footer.jpg');
+    justify-content: center;
+    padding: 0;
+  }
+`
+
 const Stats = () => {
   const data = useGetStats()
   const { theme } = useTheme()
   const refStaking = useRef();
   const refLoopNew = useRef();
   const refViewAll = useRef();
-
+  const { isMobile } = useMatchBreakpoints()
   const tvlString = data ? formatLocalisedCompactNumber(data.tvl) : '-'
   const trades = formatLocalisedCompactNumber(txCount)
   const users = formatLocalisedCompactNumber(addressCount)
@@ -211,7 +262,7 @@ const Stats = () => {
       
       <LoopStarter />
       <div>
-        <Flex justifyContent="center" alignItems="center" flexDirection="column" padding="100px 0 131px">
+        <FlexBox alignItems="center" flexDirection="column">
          <Title  ref={refLoopNew}>
             LOOP <span> NEWS</span>
           </Title>
@@ -220,7 +271,7 @@ const Stats = () => {
               <img src="/images/home/arrow-1.png" alt={t('Lunar bunny')} />
             </picture>
           </ArrowWrapper>
-        </Flex>
+        </FlexBox>
          
         <Flex flexWrap="wrap">
           <LoopNew
@@ -245,7 +296,7 @@ const Stats = () => {
           <img src="/images/home/isolation-mode.png" alt={t('Lunar bunny')} />
         </picture>
       </StarsWrapper>
-      <Flex justifyContent="center" alignItems="center" flexDirection="column" padding="100px 0 131px">
+      <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
          <Title color="#fff">
             OUT <span> PARTNER</span>
           </Title>
@@ -254,7 +305,7 @@ const Stats = () => {
               <img src="/images/home/arrow-3.png" alt={t('Lunar bunny')} />
             </picture>
           </ArrowWrapper>
-        </Flex>
+      </FlexBox>
       <Flex ref={refStaking} justifyContent="center" flexWrap="wrap" alignItems="center" padding="0 0 148px">
         <Picture>
           <img src="/images/home/emurgo.png" alt={t('emurgo')} />
@@ -272,7 +323,7 @@ const Stats = () => {
           <img src="/images/home/scalable.png" alt={t('scalable')} />
         </Picture>
       </Flex>
-      <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
+      <Footer justifyContent="center" alignItems="center" flexWrap="wrap">
         <FlexWrapper flexDirection="column" flexWrap="wrap">
           <picture>
             <img src="/images/home/logo.png" alt={t('logo')} />
@@ -305,7 +356,7 @@ const Stats = () => {
             <Li>Ecosystem</Li>
             <Li>VC DAO</Li>
           </Ul>
-          <Ul padding="0 68px">
+          <Ul padding={isMobile ? '0' : '0 68px'}>
             <Li>Loop Starter</Li>
             <Li>Exchange</Li>
             <Li>Stake</Li>
@@ -317,7 +368,7 @@ const Stats = () => {
             <Li>Contact</Li>
           </Ul>
         </Flex>
-      </Flex>
+      </Footer>
     </Section>
   )
 }

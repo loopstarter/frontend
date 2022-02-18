@@ -14,7 +14,7 @@ const txCount = 30841921
 const addressCount = 2751624
 
 const Section = styled(Flex)`
-  width: 400px;
+  width: 100%;
   padding: 25px 0;
   ${({ theme }) => theme.mediaQueries.md} {
     width: 440px;
@@ -72,8 +72,19 @@ const PictureWrapper = styled.div`
 `
 
 const Picture = styled.picture`
-  margin-top: -490px;
+  margin: -450px 8px 0;
   display: block;
+  ${({ theme }) => theme.mediaQueries.md} {
+   margin: -450px 0 0;
+  }
+`
+
+const PictureBg = styled.picture`
+  margin: 0 8px;
+  display: block;
+  ${({ theme }) => theme.mediaQueries.md} {
+   margin: 0;
+  }
 `
 
 const TextWrapper = styled.div`
@@ -81,8 +92,11 @@ const TextWrapper = styled.div`
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
-  margin-top: -187px;
+  margin: -187px 8px 0;
   padding: 0 31px 90px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin: -187px 0 0;
+  }
 `
 
 const LoopNew = ({ title, description, img }) => {
@@ -112,9 +126,9 @@ const LoopNew = ({ title, description, img }) => {
   return (
     <Section justifyContent="center" alignItems="center" flexDirection="column">
       <PictureWrapper>
-        <picture>
+        <PictureBg>
           <img src="/images/home/vector.png" alt={t('Lunar bunny')} />
-        </picture>
+        </PictureBg>
         <Picture>
           <img src={img} alt={t('Lunar bunny')} />
         </Picture>
