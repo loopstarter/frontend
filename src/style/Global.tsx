@@ -22,6 +22,22 @@ const GlobalStyle = createGlobalStyle`
     font-family: FSMagistralMedium;
     src: url('../fonts/FS-Magistral-Medium.ttf');
   }
+
+  @font-face {
+    font-family: HKGrotesk;
+    src: url('../fonts/HKGrotesk-Medium.otf');
+  }
+
+  @font-face {
+    font-family: HKGroteskBold;
+    src: url('../fonts/HKGrotesk-Bold.otf');
+  }
+
+  @font-face {
+    font-family: HKGroteskLight;
+    src: url('../fonts/HKGrotesk-Light.otf');
+  }
+
   * {
     font-family: 'Kanit', sans-serif;
   }
