@@ -34,6 +34,7 @@ const Pools: React.FC = () => {
   const { account } = useWeb3React()
   const { userDataLoaded } = usePools()
   const pools = usePoolsWithVault()
+  pools.length= 10;
   const cardLayout = (
     <>
       {pools.map((pool) =>
