@@ -1,3 +1,4 @@
+import React from 'react'
 import { useRouter } from 'next/router'
 import { NextLinkFromReactRouter } from 'components/NextLink'
 import { Menu as UikitMenu } from '@loopstarter/uikit'
@@ -23,7 +24,11 @@ const Menu = (props) => {
       linkComponent={(linkProps) => {
         return <NextLinkFromReactRouter to={linkProps.href} {...linkProps} prefetch={false} />
       }}
-      userMenu={<><UserMenu toggleMenu={props.toggleMenu} /></>}
+      userMenu={
+        <>
+          <UserMenu toggleMenu={props.toggleMenu} />
+        </>
+      }
       isDark={isDark}
       toggleTheme={toggleTheme}
       currentLang={currentLanguage.code}
