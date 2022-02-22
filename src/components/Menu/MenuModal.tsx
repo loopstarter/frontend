@@ -62,7 +62,7 @@ const ModalWrapper = styled.div<{ isShowModal: boolean }>`
   width: 99vw;
   height: 100vh;
   background-color: #280D5F99;
-  z-index: 20;
+  z-index: 22;
   transition: visibility 0.5s linear;  
   overflow: hidden;
   visibility: ${({ isShowModal }) => (isShowModal ? "inherit" : "hidden")};
