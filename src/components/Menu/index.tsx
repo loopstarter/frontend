@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { NextLinkFromReactRouter } from 'components/NextLink'
 import { Menu as UikitMenu } from '@loopstarter/uikit'
@@ -12,6 +12,7 @@ import config from './config/config'
 import UserMenu from './UserMenu'
 import { getActiveMenuItem, getActiveSubMenuItem } from './utils'
 import { footerLinks } from './config/footerConfig'
+import MenuModal from './MenuModal'
 
 const Menu = (props) => {
   const { isDark, toggleTheme } = useTheme()
@@ -19,7 +20,7 @@ const Menu = (props) => {
   const { currentLanguage, setLanguage, t } = useTranslation()
   const { pathname } = useRouter()
   const [showPhishingWarningBanner] = usePhishingBannerManager()
-
+  const [isShowMenu, setShowMenu] = useState<boolean>(false)
   const activeMenuItem = getActiveMenuItem({ menuConfig: config(t), pathname })
   const activeSubMenuItem = getActiveSubMenuItem({ menuItem: activeMenuItem, pathname })
 
@@ -28,7 +29,7 @@ const Menu = (props) => {
       linkComponent={(linkProps) => {
         return <NextLinkFromReactRouter to={linkProps.href} {...linkProps} prefetch={false} />
       }}
-      userMenu={<UserMenu />}
+      userMenu={<><UserMenu toggleMenu={props.toggleMenu} /></>}
       isDark={isDark}
       toggleTheme={toggleTheme}
       currentLang={currentLanguage.code}
@@ -42,6 +43,7 @@ const Menu = (props) => {
       activeSubItem={activeSubMenuItem?.href}
       buyCakeLabel={t('Buy CAKE')}
       {...props}
+      // banner={<MenuModal onDismiss={toggleMenu} isShowModal={isShowMenu} />}
     />
   )
 }

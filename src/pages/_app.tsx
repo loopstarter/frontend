@@ -11,7 +11,7 @@ import useSentryUser from 'hooks/useSentryUser'
 import useUserAgent from 'hooks/useUserAgent'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { PersistGate } from 'redux-persist/integration/react'
 import { useStore, persistor } from 'state'
 import { usePollBlockNumber } from 'state/block/hooks'
@@ -23,6 +23,7 @@ import ErrorBoundary from '../components/ErrorBoundary'
 import Menu from '../components/Menu'
 import Providers from '../Providers'
 import GlobalStyle from '../style/Global'
+import MenuModal from 'components/Menu/MenuModal'
 
 // This config is required for number formatting
 BigNumber.config({
@@ -109,9 +110,15 @@ type AppPropsWithLayout = AppProps & {
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   // Use the layout defined at the page level, if available
   const Layout = Component.Layout || Fragment
+  const [isShowMenu, setShowMenu] = useState<boolean>(false)
+  const toggleMenu = () => {
+    setShowMenu(!isShowMenu)
+  }
+
   return (
     <ErrorBoundary>
-      <Menu>
+    <MenuModal onDismiss={toggleMenu} isShowModal={isShowMenu} /> 
+      <Menu toggleMenu={toggleMenu}>
         <Layout>
           <Component {...pageProps} />
         </Layout>

@@ -18,12 +18,12 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     items: [
       {
         label: t('Exchange'),
-        href: 'https://defifarms.org/swap',
+        href: 'https://dex.loopstarter.com/swap',
         target:"blank"
       },
       {
         label: t('Liquidity'),
-        href: 'https://defifarms.org/liquidity',
+        href: 'https://dex.loopstarter.com/liquidity',
         target:"blank"
       },
     ],
