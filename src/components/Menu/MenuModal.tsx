@@ -248,7 +248,7 @@ const MenuModal: React.FC<InjectedModalProps> = ({ onDismiss, isShowModal }) => 
 
   return (
     <ModalWrapper isShowModal={isShowModal}>
-      <StyledModal ref={wrapperRef} headerBackground="gradients.cardHeader" isShowModal={isShowModal}>
+      <StyledModal headerBackground="gradients.cardHeader" isShowModal={isShowModal}>
         <Flex alignItems="flex-start" justifyContent="space-between">
           <div>
             {menuItems.map((item) => (
