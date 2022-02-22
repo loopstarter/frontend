@@ -1,20 +1,37 @@
-import React, { useCallback } from 'react'
+import React, { useRef, useEffect } from 'react'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import styled, { keyframes } from 'styled-components'
 import { useDispatch } from 'react-redux'
-import { 
-  Flex,
-  CloseIcon, 
-  IconButton ,
-  ChevronRightIcon,
-  } from '@loopstarter/uikit'
+import { Flex, CloseIcon, IconButton, ChevronRightIcon } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 import orderBy from 'lodash/orderBy'
 import { isTransactionRecent, useAllTransactions } from 'state/transactions/hooks'
 import { AppDispatch } from 'state'
-import { clearAllTransactions } from 'state/transactions/actions'
 import LangSelector from 'components/Menu/LangSelector'
 import { languageList } from 'config/localization/languages'
+
+/**
+ * Hook that alerts clicks outside of the passed ref
+ */
+function useOutsideAlerter(ref, onClick) {
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        onClick()
+      }
+    }
+
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [ref])
+}
 
 const fading = () => keyframes`
   0% {
@@ -56,17 +73,18 @@ const showModal = () => keyframes`
 `
 
 const ModalWrapper = styled.div<{ isShowModal: boolean }>`
-  position: fixed;  
+  position: fixed;
   top: 0px;
-  left: 0px;
+  right: 0px;
   width: 99vw;
   height: 100vh;
-  background-color: #280D5F99;
+  background-color: #280d5f99;
   z-index: 22;
-  transition: visibility 0.5s linear;  
+  transition: visibility 0.5s linear;
   overflow: hidden;
-  visibility: ${({ isShowModal }) => (isShowModal ? "inherit" : "hidden")};
-  // animation: ${({ isShowModal }) => (isShowModal ? showModal : hiddenModal)} 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  visibility: ${({ isShowModal }) => (isShowModal ? 'inherit' : 'hidden')};
+  // animation: ${({ isShowModal }) =>
+    isShowModal ? showModal : hiddenModal} 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 `
 
 const CloseBtn = styled(IconButton)`
@@ -76,16 +94,19 @@ const CloseBtn = styled(IconButton)`
   box-shadow: none;
 `
 export const StyledModal = styled.div<{ isShowModal: boolean }>`
-  width: 471px;
+  width: 390px;
   background-image: url('/images/menu.png');
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: contain;
   height: 100%;
-  padding: 87px;
+  padding: 50px;
   float: right;
-  animation: ${({ isShowModal }) => (isShowModal ? fading : hidden)} 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-
+  animation: ${({ isShowModal }) => (isShowModal ? fading : hidden)} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  @media screen and (min-width: 1500px) {
+    padding: 87px;
+    width: 471px;
+  }
 `
 
 export const Item = styled.a`
@@ -106,25 +127,28 @@ const Li = styled.li<{ isActive?: boolean }>`
   font-weight: normal;
   font-size: 24px;
   line-height: 28px;
-  color: ${({ isActive }) => (isActive ? "#FFAA2E" : "#fff")};
+  color: ${({ isActive }) => (isActive ? '#FFAA2E' : '#fff')};
   cursor: pointer;
-  padding: 0 0 36px;
-   svg {
-    fill: ${({ isActive }) => (isActive ? "#FFAA2E" : "#fff")};
+  padding: 0 0 30px;
+  svg {
+    fill: ${({ isActive }) => (isActive ? '#FFAA2E' : '#fff')};
   }
 
   &:hover {
-    color: #FFAA2E;
+    color: #ffaa2e;
     div:last-child {
       display: block;
       opacity: 1;
-      transition: opacity 2s linear;  
+      transition: opacity 2s linear;
     }
     svg {
-      fill: #FFAA2E;
+      fill: #ffaa2e;
       transform: rotate(90deg);
-      transition: transform 0.5s linear;  
+      transition: transform 0.5s linear;
     }
+  }
+  @media screen and (min-width: 1500px) {
+    padding: 0 0 36px;
   }
 `
 
@@ -136,18 +160,21 @@ const SubLi = styled(Li)<{ isActive?: boolean }>`
 const SubMenu = styled.div<{ isActive?: boolean }>`
   display: none;
   opacity: 0;
-  transition: opacity 2s linear;  
+  transition: opacity 2s linear;
 `
 
 const Footer = styled(Flex)`
   position: absolute;
-  bottom: 80px;
+  bottom: 50px;
+  @media screen and (min-width: 1500px) {
+    bottom: 80px;
+  }
 `
 
 const Link = styled.a`
   display: flex;
-  alignItems: flex-start;
-  justifyContent: flex-start;
+  alignitems: flex-start;
+  justifycontent: flex-start;
 `
 
 const menu = (t) => [
@@ -155,7 +182,7 @@ const menu = (t) => [
     label: t('Loop DEX'),
     href: 'https://dex.loopstarter.com/',
     items: [],
-    target:"blank"
+    target: 'blank',
   },
   {
     label: t('Loop Starter'),
@@ -165,14 +192,14 @@ const menu = (t) => [
         label: t('Pool IDO'),
         href: '/#',
       },
-       {
+      {
         label: t('Stake'),
         href: '/#',
       },
       {
         label: t('Marketplace'),
         href: '/#',
-      }
+      },
     ],
   },
   {
@@ -203,13 +230,15 @@ const menu = (t) => [
 ]
 
 const MenuModal: React.FC<InjectedModalProps> = ({ onDismiss, isShowModal }) => {
-
   const { chainId } = useActiveWeb3React()
   const dispatch = useDispatch<AppDispatch>()
   const allTransactions = useAllTransactions()
   const { currentLanguage, setLanguage, t } = useTranslation()
 
   const menuItems = menu(t)
+
+  const wrapperRef = useRef(null)
+  useOutsideAlerter(wrapperRef, onDismiss)
 
   const sortedRecentTransactions = orderBy(
     Object.values(allTransactions).filter(isTransactionRecent),
@@ -219,21 +248,20 @@ const MenuModal: React.FC<InjectedModalProps> = ({ onDismiss, isShowModal }) => 
 
   return (
     <ModalWrapper isShowModal={isShowModal}>
-      <StyledModal headerBackground="gradients.cardHeader" isShowModal={isShowModal}>
+      <StyledModal ref={wrapperRef} headerBackground="gradients.cardHeader" isShowModal={isShowModal}>
         <Flex alignItems="flex-start" justifyContent="space-between">
-          
           <div>
-            {menuItems.map(item => (
+            {menuItems.map((item) => (
               <Li key={item.label}>
                 <Link {...item}>
                   {item.label}
-                  {!!item.items.length && <ChevronRightIcon  />}
+                  {!!item.items.length && <ChevronRightIcon />}
                 </Link>
-                
+
                 {!!item.items.length && (
                   <SubMenu>
-                    {item.items.map(sub => (
-                       <SubLi key={sub.label}>{sub.label}</SubLi>
+                    {item.items.map((sub) => (
+                      <SubLi key={sub.label}>{sub.label}</SubLi>
                     ))}
                   </SubMenu>
                 )}
@@ -242,27 +270,25 @@ const MenuModal: React.FC<InjectedModalProps> = ({ onDismiss, isShowModal }) => 
           </div>
 
           <div>
-            <CloseBtn onClick={onDismiss}><CloseIcon width="25px" color="#fff"/></CloseBtn>
+            <CloseBtn onClick={onDismiss}>
+              <CloseIcon width="25px" color="#fff" />
+            </CloseBtn>
           </div>
         </Flex>
         <Footer alignItems="center">
-            <picture>
-              <a href="https://t.me/Loopstarter" target="_blank">
-                <img src="/images/home/message.png" alt={t('message')} />
-              </a>
-            </picture>
-            <picture style={{padding: '0 47px'}}>
-              <a href="https://twitter.com/Loopstarter" target="_blank">
-                <img src="/images/home/twitter-1.png" alt={t('twitter')} />
-              </a>
-            </picture>
-            <Flex >
-              <LangSelector
-                currentLang={currentLanguage.code}
-                langs={languageList}
-                setLang={setLanguage}
-              />
-            </Flex>
+          <picture>
+            <a href="https://t.me/Loopstarter" target="_blank">
+              <img src="/images/home/message.png" alt={t('message')} />
+            </a>
+          </picture>
+          <picture style={{ padding: '0 47px' }}>
+            <a href="https://twitter.com/Loopstarter" target="_blank">
+              <img src="/images/home/twitter-1.png" alt={t('twitter')} />
+            </a>
+          </picture>
+          <Flex>
+            <LangSelector currentLang={currentLanguage.code} langs={languageList} setLang={setLanguage} />
+          </Flex>
         </Footer>
       </StyledModal>
     </ModalWrapper>

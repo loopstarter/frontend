@@ -1,6 +1,5 @@
-import { MenuItemsType, DropdownMenuItemType } from '@loopstarter/uikit'
+import { MenuItemsType } from '@loopstarter/uikit'
 import { ContextApi } from 'contexts/Localization/types'
-import { nftsBaseUrl } from 'views/Nft/market/constants'
 
 export type ConfigMenuItemsType = MenuItemsType & { hideSubNav?: boolean }
 
@@ -19,12 +18,12 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
       {
         label: t('Exchange'),
         href: 'https://dex.loopstarter.com/swap',
-        target:"blank"
+        target: 'blank',
       },
       {
         label: t('Liquidity'),
         href: 'https://dex.loopstarter.com/liquidity',
-        target:"blank"
+        target: 'blank',
       },
     ],
   },

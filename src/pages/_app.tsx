@@ -55,19 +55,18 @@ function MyApp(props: AppProps) {
         />
         <meta
           name="description"
-          content="Cheaper and faster than Uniswap? Discover Loopstarter, the leading DEX on Binance Smart Chain (BSC) with the best farms in DeFi and a lottery for CAKE."
+          content="The first DAO multi-chain and multi-launchpad platform with full DEX and deflation mechanism
+"
         />
         <meta name="theme-color" content="#1FC7D4" />
         <meta name="twitter:image" content="https://loopstarter.com/images/home/banner-hero.png" />
         <meta
           name="twitter:description"
-          content="The most popular AMM on BSC! Earn CAKE through yield farming or win it in the Lottery, then stake it in Syrup Pools to earn more tokens! Initial Farm Offerings (new token launch model pioneered by Loopstarter), NFTs, and more, on a platform you can trust."
+          content="The first DAO multi-chain and multi-launchpad platform with full DEX and deflation mechanism
+"
         />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Loopstarter - A next evolution DeFi exchange on Binance Smart Chain (BSC)"
-        />
+        <meta name="twitter:title" content="A evolution of Dao on Multi chain " />
         <title>Loopstarter</title>
       </Head>
       <Providers store={store}>
@@ -117,7 +116,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   return (
     <ErrorBoundary>
-    <MenuModal onDismiss={toggleMenu} isShowModal={isShowMenu} /> 
+      <MenuModal onDismiss={toggleMenu} isShowModal={isShowMenu} />
       <Menu toggleMenu={toggleMenu}>
         <Layout>
           <Component {...pageProps} />
