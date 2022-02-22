@@ -1,26 +1,18 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import styled, { keyframes } from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { 
-  Modal, 
-  ModalBody, 
-  Text, 
-  Button, 
   Flex,
   CloseIcon, 
   IconButton ,
   ChevronRightIcon,
-  ChevronDownIcon,
   } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 import orderBy from 'lodash/orderBy'
 import { isTransactionRecent, useAllTransactions } from 'state/transactions/hooks'
-import { TransactionDetails } from 'state/transactions/reducer'
 import { AppDispatch } from 'state'
 import { clearAllTransactions } from 'state/transactions/actions'
-import { AutoRow } from '../Layout/Row'
-import ConnectWalletButton from '../ConnectWalletButton'
 import LangSelector from 'components/Menu/LangSelector'
 import { languageList } from 'config/localization/languages'
 
@@ -97,17 +89,6 @@ export const StyledModal = styled.div<{ isShowModal: boolean }>`
 `
 
 export const Item = styled.a`
-  width: 600px;
-  background-image: url('/images/menu.png');
-  background-position: top, center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-  padding: 87px;
-  float: right;
-`
-
-const Ul = styled.ul`
   width: 600px;
   background-image: url('/images/menu.png');
   background-position: top, center;
@@ -221,14 +202,9 @@ const menu = (t) => [
   },
 ]
 
- interface ModalProps {
-  onDismiss: () => void
-  isShowModal: boolean
-}
-
 const MenuModal: React.FC<InjectedModalProps> = ({ onDismiss, isShowModal }) => {
-  console.log('isShowModal', isShowModal)
-  const { account, chainId } = useActiveWeb3React()
+
+  const { chainId } = useActiveWeb3React()
   const dispatch = useDispatch<AppDispatch>()
   const allTransactions = useAllTransactions()
   const { currentLanguage, setLanguage, t } = useTranslation()
@@ -240,13 +216,6 @@ const MenuModal: React.FC<InjectedModalProps> = ({ onDismiss, isShowModal }) => 
     'addedTime',
     'desc',
   )
-
-  const pending = sortedRecentTransactions.filter((tx) => !tx.receipt)
-  const confirmed = sortedRecentTransactions.filter((tx) => tx.receipt)
-
-  const clearAllTransactionsCallback = useCallback(() => {
-    if (chainId) dispatch(clearAllTransactions({ chainId }))
-  }, [dispatch, chainId])
 
   return (
     <ModalWrapper isShowModal={isShowModal}>
