@@ -64,11 +64,11 @@ const BgWrapper = styled.div`
 `
 
 const HeadingTitle = styled(Heading)`
-  animation: ${animText} 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+  animation: ${animText} 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
   font-family: FSMagistralBold;
   font-size: 44px;
   line-height: 124px;
-  color: #6FA8FF;
+  color: #6fa8ff;
   padding: 700px 0 0;
   text-align: center;
   ${({ theme }) => theme.mediaQueries.md} {
@@ -78,18 +78,17 @@ const HeadingTitle = styled(Heading)`
 `
 
 const Description = styled.p`
-  animation: ${animText} 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+  animation: ${animText} 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
   font-family: FSMagistralLight;
   font-size: 33.2932px;
   line-height: 40px;
   text-align: center;
-  color: #FFFFFF;
-  padding: 0 0 18px;
+  color: #ffffff;
 `
 
 const ButtonStyle = styled(Button)`
   margin: 0 9px;
-  background: linear-gradient(94.76deg, #44AEEA 0%, #5150FF 139.11%);
+  background: linear-gradient(94.76deg, #44aeea 0%, #5150ff 139.11%);
   border-radius: 9.24812px;
   width: 110px;
   height: 48px;
@@ -100,7 +99,7 @@ const ButtonStyle = styled(Button)`
   font-size: 16px;
   line-height: 22px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   ${({ theme }) => theme.mediaQueries.md} {
     width: 140px;
   }
@@ -113,7 +112,7 @@ const InnerWrapper = styled.div`
 `
 
 const BunnyWrapper = styled.div`
-  animation: ${fading} 3.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite;
+  animation: ${fading} 3.5s cubic-bezier(0.39, 0.575, 0.565, 1) infinite;
   position: absolute;
   top: 80px;
   padding-left: 61px;
@@ -126,7 +125,7 @@ const BunnyWrapper = styled.div`
 `
 
 const PolyGonWrapper = styled.div`
-  animation: ${fading} 3.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite;
+  animation: ${fading} 3.5s cubic-bezier(0.39, 0.575, 0.565, 1) infinite;
   position: absolute;
   top: 122px;
   left: 153px;
@@ -178,9 +177,7 @@ const Hero = () => {
 
   return (
     <>
-      <BgWrapper>
-       
-      </BgWrapper>
+      <BgWrapper></BgWrapper>
       <Flex
         position="relative"
         flexDirection={['column-reverse', null, null, 'row']}
@@ -190,25 +187,16 @@ const Hero = () => {
         id="homepage-hero"
       >
         <Flex flex="1" flexDirection="column" alignItems="center">
-          {/* <BunnyWrapper>
-            <picture>
-              <source type="image/webp" srcSet={getSrcSet(imagePath, imageSrc, '.webp')} />
-              <source type="image/png" srcSet={getSrcSet(imagePath, imageSrc)} />
-              <img src={`${imagePath}${imageSrc}.png`} alt={t('Lunar bunny')} />
-            </picture>
-          </BunnyWrapper>
-          <PolyGonWrapper>
-            <picture>
-              <img src='/images/home/polygon.png' alt={t('Lunar bunny')} />
-            </picture>
-          </PolyGonWrapper> */}
           <HeadingTitle scale="xxl" color="secondary" mb="24px">
             {t('LOOP STARTER')}
           </HeadingTitle>
+          <Description>{t('Welcome to the future of fundraising.')}</Description>
           <Description>
-            {t('Welcome to the future of fundraising. Finally, a platform built for:')}
+            {t(
+              'The first DAO supports a multi-chain, cross-platform launchpad with a full DEX and deflation mechanism.',
+            )}
           </Description>
-          <Flex>
+          <Flex padding="18px 0 0">
             <NextLinkFromReactRouter to="/swap">
               <ButtonStyle variant={!account ? 'secondary' : 'primary'}>{t('Investors')}</ButtonStyle>
             </NextLinkFromReactRouter>
@@ -220,7 +208,6 @@ const Hero = () => {
             </NextLinkFromReactRouter>
           </Flex>
         </Flex>
-        
       </Flex>
     </>
   )

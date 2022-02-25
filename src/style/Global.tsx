@@ -55,6 +55,12 @@ const GlobalStyle = createGlobalStyle`
       font-family: FSMagistralLight;
     }
   }
+
+  progress[value]::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  }
 `
 
 export default GlobalStyle

@@ -1,13 +1,11 @@
-import React, {useRef,useCallback } from 'react'
+import React, { useRef, useCallback } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { Flex, Skeleton, ChartIcon, CommunityIcon, SwapIcon, Button } from '@loopstarter/uikit'
+import { Flex, ChartIcon, CommunityIcon, SwapIcon, Button } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { useGetStats } from 'hooks/api'
 import useTheme from 'hooks/useTheme'
 import { formatLocalisedCompactNumber } from 'utils/formatBalance'
-import IconCard, { IconCardData } from '../IconCard'
-import StatCardContent from './StatCardContent'
-import GradientLogo from '../GradientLogoSvg'
+import { IconCardData } from '../IconCard'
 
 // Values fetched from bitQuery effective 6/9/21
 const txCount = 30841921
@@ -19,7 +17,7 @@ const Section = styled(Flex)`
   background-size: cover;
   padding: 50px 0 0;
   ${({ theme }) => theme.mediaQueries.md} {
-    padding: 350px 0 0;
+    padding: 100px 0 0;
   }
 `
 
@@ -37,8 +35,8 @@ const Heading = styled.p<{ font?: string }>`
 
 const Label = styled.p`
   font-family: FSMagistralMedium;
-  font-size: 21.9313px;
-  line-height: 25px;
+  font-size: 20px;
+  line-height: 23px;
   text-align: justify;
   color: #150159;
   padding: 15px 0 30px;
@@ -46,20 +44,20 @@ const Label = styled.p`
 
 const Text = styled.p`
   font-family: FSMagistralBold;
-  font-size: 24px;
-  line-height: 33px;
+  font-size: 25px;
+  line-height: 35px;
   text-align: justify;
   color: #150159;
   padding: 0;
   ${({ theme }) => theme.mediaQueries.md} {
-    font-size: 33.105px;
-    line-height: 46px;
-    padding: 70px 0 0;
+    font-size: 25px;
+    line-height: 35px;
+    padding: 15px 0 0;
   }
 `
 
 const ButtonStyle = styled(Button)`
-  background: linear-gradient(94.76deg, #44AEEA 0%, #5150FF 139.11%);
+  background: linear-gradient(94.76deg, #44aeea 0%, #5150ff 139.11%);
   border-radius: 9.24812px;
   width: 167px;
   height: 48px;
@@ -68,7 +66,7 @@ const ButtonStyle = styled(Button)`
   font-size: 16px;
   line-height: 22px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const Wrapper = styled.div`
@@ -80,11 +78,11 @@ const Wrapper = styled.div`
 `
 
 const Picture = styled.picture`
-  padding: 20px 20px 0;  
+  padding: 20px 20px 0;
   width: 100%;
   ${({ theme }) => theme.mediaQueries.md} {
     width: 50%;
-    padding: 0 37px 0 0;  
+    padding: 0 37px 0 0;
   }
 `
 
@@ -103,8 +101,8 @@ const flyingAnim = () => keyframes`
 const ArrowWrapper = styled.div`
   animation: ${flyingAnim} 4s ease-in-out infinite;
   animation-delay: 1s;
- cursor: pointer;
- img {
+  cursor: pointer;
+  img {
     height: 40px;
     ${({ theme }) => theme.mediaQueries.md} {
       height: 52px;
@@ -116,7 +114,7 @@ const LoopStarter = () => {
   const { t } = useTranslation()
   const data = useGetStats()
   const { theme } = useTheme()
-  const refViewAll = useRef();
+  const refViewAll = useRef()
 
   const tvlString = data ? formatLocalisedCompactNumber(data.tvl) : '-'
   const trades = formatLocalisedCompactNumber(txCount)
@@ -138,36 +136,32 @@ const LoopStarter = () => {
   }
 
   const moveToViewAll = useCallback(() => {
-    refViewAll && refViewAll?.current.scrollIntoView({
-      behavior: "smooth",
-    });
-  }, []);
+    refViewAll &&
+      refViewAll?.current.scrollIntoView({
+        behavior: 'smooth',
+      })
+  }, [])
 
   return (
-    <Section justifyContent="center" alignItems="center" flexDirection="column" >
-      <Heading ref={refViewAll}>
-        {t('About')}
-      </Heading>
-      <Heading font="FSMagistralBold">
-        {t('LOOP STARTER')}
-      </Heading>
+    <Section justifyContent="center" alignItems="center" flexDirection="column">
+      <Heading ref={refViewAll}>{t('About')}</Heading>
+      <Heading font="FSMagistralBold">{t('LOOP STARTER')}</Heading>
       <ArrowWrapper onClick={moveToViewAll}>
-         <picture>
+        <picture>
           <img src="/images/home/arrow-1.png" alt={t('Lunar bunny')} />
         </picture>
       </ArrowWrapper>
-     
 
-      <Flex flexWrap="wrap" alignItems="flex-start">
+      <Flex flexWrap="wrap" alignItems="flex-start" padding="55px 0 0">
         <Picture>
           <img src="/images/home/laptop.png" alt={t('laptop')} />
         </Picture>
         <Wrapper>
-          <Text>
-            {t('LOOP STARTER THE CARDANO LAUCHCPAD')}
-          </Text>
+          <Text>{t('LOOPSTARTER - DIVERSIFYING DECENTRALIZED FINANCES')}</Text>
           <Label>
-            {t('Occam is around since the early days of Cardano’s DeFi ecosystem. We have launched some of Cardano’s most promising projects, projects that today play a pivotal role in shaping this flourishing ecosystem.')}
+            {t(
+              'LOOPStarter is beyond just being a IDO Launchpad platform. It’s an integrated ecosystem that introduces an all-in-one solution to launch and manage decentralized finances. It supports all the major Multi-chain wallets along with our inline wallet management system. The portal will integrate a launchpad for decentralized fundraising for new projects needing liquidity at the start in a fair manner. Further, it will have LOOP DEX, token swapping, staking, vesting & other capabilities that we’ll cover later in depth. ',
+            )}
           </Label>
           <ButtonStyle>{t('Learn more')}</ButtonStyle>
         </Wrapper>

@@ -37,29 +37,31 @@ const Label = styled.p`
   font-size: 16px;
   line-height: 18px;
   text-align: justify;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 10px 0 20px;
+  min-height: 174px;
 `
 
 const Text = styled.p`
   font-family: FSMagistralBold;
   font-size: 24px;
   line-height: 34px;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 255px 0 10px;
+  min-height: 367px;
 `
 
 const ButtonStyle = styled(Button)`
-  background: linear-gradient(94.76deg, #44AEEA 0%, #5150FF 139.11%);
+  background: linear-gradient(94.76deg, #44aeea 0%, #5150ff 139.11%);
   border-radius: 9.24812px;
   width: 145px;
   height: 48px;
-  border: 0.924812px solid #FFFFFF;
+  border: 0.924812px solid #ffffff;
   font-family: FSMagistralMedium;
   font-size: 16px;
   line-height: 21px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const Wrapper = styled.div`
@@ -75,7 +77,11 @@ const Picture = styled.picture`
   margin: -450px 8px 0;
   display: block;
   ${({ theme }) => theme.mediaQueries.md} {
-   margin: -450px 0 0;
+    margin: -480px 0 0;
+
+    img {
+      width: 460px;
+    }
   }
 `
 
@@ -83,7 +89,7 @@ const PictureBg = styled.picture`
   margin: 0 8px;
   display: block;
   ${({ theme }) => theme.mediaQueries.md} {
-   margin: 0;
+    margin: 0 0.5px;
   }
 `
 
@@ -134,12 +140,8 @@ const LoopNew = ({ title, description, img }) => {
         </Picture>
       </PictureWrapper>
       <TextWrapper>
-        <Text>
-            {title}
-        </Text>
-        <Label>
-          {description}
-        </Label>
+        <Text>{title}</Text>
+        <Label>{description}</Label>
         <Flex flex="1" flexDirection="column" alignItems="center">
           <ButtonStyle>{t('Learn more')}</ButtonStyle>
         </Flex>
