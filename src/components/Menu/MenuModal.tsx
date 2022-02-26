@@ -190,7 +190,7 @@ const menu = (t) => [
     items: [
       {
         label: t('Pool IDO'),
-        href: '/#',
+        href: '/pools',
       },
       {
         label: t('Stake'),
