@@ -85,10 +85,16 @@ const ControlStretch = styled(Flex)`
     flex: 1;
   }
 `
-const PageHeaderWrap = styled.div`
+const PageHeaderTop = styled.div`
   height: 64px;
-  // background-color: #c951d8;
   background: transparent;
+`
+const PageHeaderHeaderPoolIDO = styled.div`
+  height: auto;
+  max-height: 200px;
+  background: linear-gradient(96.67deg, #ffc677 -20.93%, #c94fd8 43.46%);
+  padding: 24px;
+  overflow: hidden;
 `
 
 const NUMBER_OF_POOLS_VISIBLE = 12
@@ -238,43 +244,34 @@ const PoolIDO: React.FC = () => {
   chosenPools = sortPools(chosenPools).slice(0, numberOfPoolsVisible)
   chosenPoolsLength.current = chosenPools.length
 
-  const cardLayout = (
-    <CardLayout>
-      {chosenPools.map((pool) =>
-        pool.vaultKey ? (
-          <CakeVaultCard key={pool.vaultKey} pool={pool} showStakedOnly={stakedOnly} />
-        ) : (
-          <PoolCard key={pool.sousId} pool={pool} account={account} />
-        ),
-      )}
-    </CardLayout>
-  )
 
   const tableLayout = <PoolsTable pools={chosenPools} account={account} userDataLoaded={userDataLoaded} />
 
   return (
     <>
-      {/* <PageHeader>
-        <Flex justifyContent="space-between" flexDirection={['column', null, null, 'row']}>
-          <Flex flex="1" flexDirection="column" mr={['8px', 0]}>
-            <Heading as="h1" scale="xxl" color="secondary" mb="24px">
-              {t('Syrup Pools')}
-            </Heading>
-            <Heading scale="md" color="text">
-              {t('Just stake some tokens to earn.')}
-            </Heading>
-            <Heading scale="md" color="text">
-              {t('High APR, low risk.')}
-            </Heading>
-          </Flex>
-          <Flex flex="1" height="fit-content" justifyContent="center" alignItems="center" mt={['24px', null, '0']}>
-            <HelpButton />
-            <BountyCard />
-          </Flex>
-        </Flex>
-      </PageHeader> */}
       <Page>
-        <PageHeaderWrap />
+        <PageHeaderTop />
+        <PageHeaderHeaderPoolIDO>
+          <Flex justifyContent="space-between" flexDirection={['column', null, null, 'row']}>
+            <Flex flex="1" flexDirection="column" mr={['8px', 0]}>
+              <Heading as="h1" scale="xxl" color="white" mb="12px">
+                {t('IDO Pools')}
+              </Heading>
+              <Heading scale="md" color="white">
+                {t('Staking Defi to join our IDO Guaranteed.')}
+              </Heading>
+              <Heading scale="md" color="white">
+                {t('Allocation on DefiStation Launchpad.')}
+              </Heading>
+            </Flex>
+            <Flex flex="1" justifyContent="center" alignItems="center" mt={['24px', null, '0']} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '-10%', marginRight: '-15%' }}>
+                <picture style={{ objectFit: 'cover' }}>
+                  <img src='/images/pool-ido/header.png' alt='' style={{ objectFit: 'cover'}} />
+                </picture>
+            </Flex>
+          </Flex>
+        </PageHeaderHeaderPoolIDO>
+
         <PoolControls>
           <PoolTabButtons
             stakedOnly={stakedOnly}
@@ -332,8 +329,9 @@ const PoolIDO: React.FC = () => {
         )}
         {tableLayout}
         <div ref={observerRef} />
+        <div style={{ height: 120 }} />
       </Page>
-      <div style={{ background: '#100151' }}>
+      <div style={{ background: '#100151'}}>
         <div
           style={{
             background: 'linear-gradient(91.59deg, rgba(83, 83, 238, 0.38) 16.47%, rgba(25, 25, 140, 0.41) 92.23%)',
