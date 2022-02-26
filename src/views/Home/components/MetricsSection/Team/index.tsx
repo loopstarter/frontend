@@ -140,9 +140,10 @@ const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = ({ padding, m
             mb='16px'
             width='100%'
             borderRadius={400}
+            maxWidth={200}
             style={{ overflow: 'hidden', borderWidth: 8, borderColor: '#39BCFF', borderStyle: 'solid' }}
           >
-            <StyledImage src={infoMember.profile} width={160} height={160} />
+            <StyledImage src={infoMember.profile} width={200} height={200} />
           </Flex>
           <Text color="white" fontWeight="bold" mb='8px'>
             {infoMember.name}
