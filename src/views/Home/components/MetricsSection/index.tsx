@@ -17,8 +17,10 @@ import LoopStarter from './LoopStarter'
 import LoopNew from './LoopNew'
 import Footer from './Footer'
 import Roadmap from './Roadmap'
+import Team from './Team'
 import { parse1, parse2, parse3, parse4 } from './constants'
 import RoadmapLoop from './RoadmapLoop'
+import Container from '../../../../components/Layout/Container'
 
 // Values fetched from bitQuery effective 6/9/21
 const txCount = 30841921
@@ -371,7 +373,7 @@ const Stats = () => {
           <Roadmap icon="/images/home/parse-4.png" title="Phase 4: LOOPStarter V2" items={parse1} />
         </Flex>
       </RoadmapWrapper>
-      <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
+      <FlexBox justifyContent="center" alignItems="center" flexDirection="column" flex={1} style={{ width: '100%' }}>
         <Title color="#fff">
           Loops
           <span> TEAMS</span>
@@ -381,6 +383,7 @@ const Stats = () => {
             <img src="/images/home/arrow-3.png" alt={t('Lunar bunny')} />
           </picture>
         </ArrowWrapper>
+        <Team />
       </FlexBox>
       <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
         <Title color="#fff">
