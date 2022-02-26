@@ -22,6 +22,9 @@ const StyledPage = styled(Container)`
     padding-bottom: 32px;
   }
 `
+const WrapPage = styled.div`
+  background: #100052;
+`
 
 export const PageMeta: React.FC<{ symbol?: string }> = ({ symbol }) => {
   const { t } = useTranslation()
@@ -54,7 +57,9 @@ const Page: React.FC<PageProps> = ({ children, symbol, ...props }) => {
   return (
     <>
       <PageMeta symbol={symbol} />
-      <StyledPage {...props}>{children}</StyledPage>
+      <WrapPage>
+        <StyledPage {...props}>{children}</StyledPage>
+      </WrapPage>
     </>
   )
 }

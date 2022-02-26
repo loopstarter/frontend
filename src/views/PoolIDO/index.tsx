@@ -37,6 +37,8 @@ import BountyCard from './components/BountyCard'
 import HelpButton from './components/HelpButton'
 import PoolsTable from './components/PoolsTable/PoolsTable'
 import { getCakeVaultEarnings } from './helpers'
+import Footer from './components/Footer'
+
 
 const CardLayout = styled(FlexLayout)`
   justify-content: center;
@@ -48,7 +50,7 @@ const PoolControls = styled.div`
   align-items: center;
   position: relative;
 
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
   margin-bottom: 32px;
 
@@ -83,10 +85,15 @@ const ControlStretch = styled(Flex)`
     flex: 1;
   }
 `
+const PageHeaderWrap = styled.div`
+  height: 64px;
+  // background-color: #c951d8;
+  background: transparent;
+`
 
 const NUMBER_OF_POOLS_VISIBLE = 12
 
-const Pools: React.FC = () => {
+const PoolIDO: React.FC = () => {
   const router = useRouter()
   const { t } = useTranslation()
   const { account } = useWeb3React()
@@ -247,7 +254,7 @@ const Pools: React.FC = () => {
 
   return (
     <>
-      <PageHeader>
+      {/* <PageHeader>
         <Flex justifyContent="space-between" flexDirection={['column', null, null, 'row']}>
           <Flex flex="1" flexDirection="column" mr={['8px', 0]}>
             <Heading as="h1" scale="xxl" color="secondary" mb="24px">
@@ -265,8 +272,9 @@ const Pools: React.FC = () => {
             <BountyCard />
           </Flex>
         </Flex>
-      </PageHeader>
+      </PageHeader> */}
       <Page>
+        <PageHeaderWrap />
         <PoolControls>
           <PoolTabButtons
             stakedOnly={stakedOnly}
@@ -275,7 +283,7 @@ const Pools: React.FC = () => {
             viewMode={viewMode}
             setViewMode={setViewMode}
           />
-          <FilterContainer>
+          {/* <FilterContainer>
             <LabelWrapper>
               <Text fontSize="12px" bold color="textSubtle" textTransform="uppercase">
                 {t('Sort by')}
@@ -310,7 +318,7 @@ const Pools: React.FC = () => {
               </Text>
               <SearchInput onChange={handleChangeSearchQuery} placeholder="Search Pools" />
             </LabelWrapper>
-          </FilterContainer>
+          </FilterContainer> */}
         </PoolControls>
         {showFinishedPools && (
           <Text fontSize="20px" color="failure" pb="32px">
@@ -322,19 +330,21 @@ const Pools: React.FC = () => {
             <Loading />
           </Flex>
         )}
-        {viewMode === ViewMode.CARD ? cardLayout : tableLayout}
+        {tableLayout}
         <div ref={observerRef} />
-        <Image
-          mx="auto"
-          mt="12px"
-          src="/images/decorations/3d-syrup-bunnies.png"
-          alt="Pancake illustration"
-          width={192}
-          height={184.5}
-        />
       </Page>
+      <div style={{ background: '#100151' }}>
+        <div
+          style={{
+            background: 'linear-gradient(91.59deg, rgba(83, 83, 238, 0.38) 16.47%, rgba(25, 25, 140, 0.41) 92.23%)',
+            backdropFilter: 'blur(100px)',
+          }}
+        >
+          <Footer />
+        </div>
+      </div>
     </>
   )
 }
 
-export default Pools
+export default PoolIDO

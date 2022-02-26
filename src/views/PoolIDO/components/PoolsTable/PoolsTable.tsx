@@ -12,19 +12,19 @@ interface PoolsTableProps {
 }
 
 const StyledTable = styled.div`
-  border-radius: ${({ theme }) => theme.radii.card};
+  border-radius: ${({ theme }) => '0px'};
   scroll-margin-top: 64px;
 
-  background-color: ${({ theme }) => theme.card.background};
+  background: ${({ theme }) => 'linear-gradient(167.72deg, #AE9CFF 4.27%, #857AFF 84.88%)'};
   > div:not(:last-child) {
-    border-bottom: 2px solid ${({ theme }) => theme.colors.disabled};
+    border-bottom: 1px solid #BAAEFF;
   }
 `
 
 const StyledTableBorder = styled.div`
-  border-radius: ${({ theme }) => theme.radii.card};
-  background-color: ${({ theme }) => theme.colors.cardBorder};
-  padding: 1px 1px 3px 1px;
+  border-radius: 4px;
+  background: #6955f2;
+  padding: 64px 48px;
   background-size: 400% 400%;
 `
 
