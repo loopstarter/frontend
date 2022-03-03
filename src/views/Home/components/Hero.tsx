@@ -69,24 +69,30 @@ const BgWrapper = styled.div`
 const HeadingTitle = styled(Heading)`
   animation: ${animText} 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
   font-family: FSMagistralBold;
-  font-size: 44px;
-  line-height: 124px;
+  font-size: 35px;
+  line-height: 61px;
   color: #6fa8ff;
-  padding: 700px 0 0;
+  padding: 385px 0 0;
   text-align: center;
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 88px;
     text-align: right;
+    line-height: 124px;
+    padding: 700px 0 0;
   }
 `
 
 const Description = styled.p`
   animation: ${animText} 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
   font-family: FSMagistralLight;
-  font-size: 33.2932px;
-  line-height: 40px;
+  font-size: 24px;
+  line-height: 29px;
   text-align: center;
   color: #ffffff;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 33.2932px;
+    line-height: 40px;
+  }
 `
 
 const ButtonStyle = styled(Button)`
@@ -184,7 +190,7 @@ const Hero = () => {
       <Flex
         position="relative"
         flexDirection={['column-reverse', null, null, 'row']}
-        alignItems={['flex-end', null, null, 'center']}
+        alignItems={['center', null, null, 'center']}
         justifyContent="center"
         mt={[account ? '280px' : '50px', null, 0]}
         id="homepage-hero"

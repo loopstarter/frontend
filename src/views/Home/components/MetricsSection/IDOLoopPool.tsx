@@ -35,30 +35,44 @@ const BgWrapper = styled(Flex)`
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 850px;
-  height: 978px;
+  width: 370px;
+  height: 450px;
   position: relative;
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 850px;
+    height: 978px;
+  }
 `
 
 const HeadingTitle = styled.p`
   font-family: FSMagistralBold;
-  font-size: 25.2515px;
-  line-height: 29px;
+  font-size: 11px;
+  line-height: 14px;
   text-align: center;
   color: #ffffff;
-  padding: 250px 0 10px;
+  padding: 110px 0 3px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 25.2515px;
+    line-height: 29px;
+    padding: 250px 0 10px;
+  }
 `
 
 const Description = styled.p`
   font-family: FSMagistralMedium;
-  font-size: 19px;
-  line-height: 126.6%;
+  font-size: 8px;
+  line-height: 11px;
   text-align: left;
   color: #ffffff;
   span {
     font-weight: 500;
   }
-  max-width: 535px;
+  max-width: 300px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 19px;
+    line-height: 126.6%;
+    max-width: 535px;
+  }
 `
 
 const InnerWrapper = styled.div`
@@ -114,48 +128,64 @@ const StarsWrapper = styled.div`
 
 const TimeWrapper = styled.div`
   width: 310px;
-  height: 90px;
   background: linear-gradient(96.18deg, rgba(255, 255, 255, 0.22) 3.05%, rgba(255, 255, 255, 0.15) 104.29%);
   border-radius: 5px;
   display: flex;
   padding: 10px;
-  margin: 18px 0 16px;
+  margin: 7px 0;
   justify-content: space-around;
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin: 18px 0 16px;
+  }
 `
 
 const Time = styled.p`
   font-family: FSMagistralBold;
-  font-size: 35px;
-  line-height: 40px;
+  font-size: 16px;
+  line-height: 19px;
   color: #f2c94c;
   text-align: center;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 35px;
+    line-height: 40px;
+  }
 `
 
 const TimeLabel = styled.p`
   font-family: FSMagistralMedium;
-  font-size: 15.4571px;
-  line-height: 18px;
+  font-size: 7px;
+  line-height: 8px;
   text-align: center;
   color: #ffffff;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 15.4571px;
+    line-height: 18px;
+  }
 `
 
 const FlexWrapper = styled(Flex)<{ padding?: string; margin?: string }>`
-  padding: 140px 0 0;
+  padding: 0;
   margin: 0;
   ${({ theme }) => theme.mediaQueries.md} {
     margin: ${({ margin }) => margin};
+    padding: 140px 0 0;
   }
 `
 
 const BtnStyle = styled(Button)`
-  height: 33px;
+  height: 15px;
   background: rgba(83, 245, 255, 0.49);
   border-radius: 90px;
   font-family: HKGroteskBold;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 7px;
+  line-height: 8px;
   text-align: center;
   color: #fff;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 16px;
+    line-height: 19px;
+    height: 33px;
+  }
 `
 
 const Ido = styled(Flex)`
@@ -163,41 +193,61 @@ const Ido = styled(Flex)`
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 653px;
-  height: 340px;
+  width: 303px;
+  height: 170px;
   position: relative;
   margin: 10px 0 0;
-  padding: 23px 40px;
+  padding: 12px 0 0 18px;
   flex-direction: column;
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 653px;
+    height: 340px;
+    padding: 23px 40px;
+  }
 `
 
 const Text = styled.p<{ fontFamily?: string; padding?: string }>`
   font-family: ${({ fontFamily }) => fontFamily || 'HKGrotesk'};
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 11px;
+  line-height: 13px;
   color: #ffffff;
   font-weight: ${({ fontFamily }) => (fontFamily ? '700' : '500')};
-  padding: ${({ padding }) => padding || '0'};
+  padding: 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 24px;
+    line-height: 28px;
+    padding: ${({ padding }) => padding || '0'};
+  }
 `
 
 const Line = styled.div`
   height: 1px;
   background: #fff;
   width: 100%;
-  margin: 14px 0;
+  margin: 5px 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin: 14px 0;
+  }
 `
 
 const IdoBtn = styled(Button)`
-  width: 220px;
-  height: 71px;
+  width: 102px;
+  height: 32px;
   background: linear-gradient(106.04deg, #ffc677 -44.63%, #c94fd8 92.68%);
-  border-radius: 15px;
+  border-radius: 7px;
   font-family: FSMagistralMedium;
   font-style: normal;
-  font-size: 27px;
-  line-height: 71px;
+  font-size: 12px;
+  line-height: 16px;
   text-align: center;
   color: #fff;
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 220px;
+    height: 71px;
+    border-radius: 15px;
+    font-size: 27px;
+    line-height: 71px;
+  }
 `
 const imagePath = '/images/home/lunar-bunny/'
 const imageSrc = 'bunny'
@@ -218,7 +268,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
     >
       <BgWrapper
         flexDirection={['column-reverse', null, null, 'row']}
-        alignItems={['flex-end', null, null, 'baseline']}
+        alignItems={['center', null, null, 'baseline']}
         justifyContent="center"
         mt={[account ? '280px' : '50px', null, 0]}
         id="homepage-hero"

@@ -27,20 +27,21 @@ const txCount = 30841921
 const addressCount = 2751624
 
 const Section = styled(Flex)`
-  background-image: url('/images/home/ido-bg.jpg');
+  background-image: url('/images/home/ido-bg-mobile.png');
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
   padding: 35px 0 0;
   ${({ theme }) => theme.mediaQueries.md} {
     padding: 50px 0 0;
+    background-image: url('/images/home/ido-bg.jpg');
   }
 `
 
 const Heading = styled.p<{ font?: string; color?: string }>`
   font-family: FSMagistralBold;
   font-family: ${({ font }) => font || 'FSMagistralBold'};
-  font-size: 52px;
+  font-size: 40px;
   line-height: 72px;
   color: ${({ color }) => color || '#6fa8ff'};
   ${({ theme }) => theme.mediaQueries.md} {
@@ -227,8 +228,12 @@ const RoadmapWrapper = styled(Flex)`
 `
 
 const SectionCenter = styled.div`
-  margin-top: -140px;
-  margin-bottom: -275px;
+  margin-top: 0;
+  margin-bottom: 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin-top: -140px;
+    margin-bottom: -275px;
+  }
 `
 
 const Stats = () => {
@@ -299,6 +304,11 @@ const Stats = () => {
        */}
 
         <Heading>{t('IDO UPCOMING')}</Heading>
+        <ArrowWrapper>
+          <picture>
+            <img src="/images/home/arrow.png" alt={t('Lunar bunny')} />
+          </picture>
+        </ArrowWrapper>
         <IDOLoopPool />
         <LoopStarter />
         <Heading font="FSMagistralLight" ref={refViewAll} color="#150159">
@@ -362,16 +372,18 @@ const Stats = () => {
           </picture>
         </ArrowWrapper>
         <RoadmapWrapper>
-          <Flex>
+          <Flex flexDirection={['column', null, null, 'row']}>
             <Roadmap icon="/images/home/parse-1.png" title="Phase 1: Development" items={parse1} />
             <Roadmap icon="/images/home/parse-2.png" title="Phase 2: Testnet" items={parse1} />
           </Flex>
-          <SectionCenter>
-            <RoadmapLoop />
-          </SectionCenter>
-          <Flex>
-            <Roadmap icon="/images/home/parse-3.png" title="Phase 3: Mainnet" items={parse1} />
-            <Roadmap icon="/images/home/parse-4.png" title="Phase 4: LOOPStarter V2" items={parse1} />
+          <Flex flexDirection={['column-reverse', null, null, 'column']}>
+            <SectionCenter>
+              <RoadmapLoop />
+            </SectionCenter>
+            <Flex flexDirection={['column', null, null, 'row']}>
+              <Roadmap icon="/images/home/parse-3.png" title="Phase 3: Mainnet" items={parse1} />
+              <Roadmap icon="/images/home/parse-4.png" title="Phase 4: LOOPStarter V2" items={parse1} />
+            </Flex>
           </Flex>
         </RoadmapWrapper>
         <FlexBox justifyContent="center" alignItems="center" flexDirection="column" flex={1} style={{ width: '100%' }}>

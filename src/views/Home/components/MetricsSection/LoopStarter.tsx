@@ -15,7 +15,7 @@ const Section = styled(Flex)`
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 50px 0 200px;
+  padding: 100px 0 200px;
   ${({ theme }) => theme.mediaQueries.md} {
     padding: 100px 0 200px;
   }
@@ -44,11 +44,11 @@ const Label = styled.p`
 
 const Text = styled.p`
   font-family: FSMagistralBold;
-  font-size: 25px;
-  line-height: 35px;
+  font-size: 23px;
+  line-height: 34px;
   text-align: justify;
   color: #150159;
-  padding: 0;
+  padding: 30px 0 0;
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 25px;
     line-height: 35px;
