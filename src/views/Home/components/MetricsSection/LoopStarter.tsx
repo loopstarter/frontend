@@ -15,9 +15,9 @@ const Section = styled(Flex)`
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 50px 0 0;
+  padding: 50px 0 200px;
   ${({ theme }) => theme.mediaQueries.md} {
-    padding: 100px 0 0;
+    padding: 100px 0 200px;
   }
 `
 

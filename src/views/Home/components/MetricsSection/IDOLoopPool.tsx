@@ -119,7 +119,7 @@ const TimeWrapper = styled.div`
   border-radius: 5px;
   display: flex;
   padding: 10px;
-  margin: 20px 0;
+  margin: 18px 0 16px;
   justify-content: space-around;
 `
 
@@ -148,7 +148,6 @@ const FlexWrapper = styled(Flex)<{ padding?: string; margin?: string }>`
 `
 
 const BtnStyle = styled(Button)`
-  width: 128px;
   height: 33px;
   background: rgba(83, 245, 255, 0.49);
   border-radius: 90px;
@@ -167,7 +166,7 @@ const Ido = styled(Flex)`
   width: 653px;
   height: 340px;
   position: relative;
-  margin: 20px 0 0;
+  margin: 10px 0 0;
   padding: 23px 40px;
   flex-direction: column;
 `

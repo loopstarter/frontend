@@ -1421,10 +1421,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.50.0.tgz#29c6419e8379d496ab6d0426eadf3c4d100cd186"
   integrity sha512-swKHYCOZUGyVt4ge0u8a7AwNcA//h4nx5wIi0sruGye1IJ5Cva0GyK9L2/WdX+kWVTKp92ZiEo1df31lrWGPgA==
 
-"@loopstarter/uikit@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@loopstarter/uikit/-/uikit-0.0.1.tgz#34999adfeecc17029f6dfc4ec0d7675c57ae7aee"
-  integrity sha512-7REv6fWQK9fr+lkD7gpxMLov36yhUynLVmFXjGX4tYSOyuqdh9mByNhCfqjHOZF87Y/oZBUIteFkchUbXTOKdA==
+"@loopstarter/uikit@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@loopstarter/uikit/-/uikit-0.0.2.tgz#1ae5739add5d6e9fc4ca96b381be3e13b9bebb08"
+  integrity sha512-J1ppPIvldj+LLPHqI+vvKguL13+LXFVsfkOIOK0uzcG1ga+Yl0uHn76MxOrMP8hYwD4fMP7EXXX1TLr+3+H+Uw==
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/styled-system" "^5.1.10"
@@ -8754,11 +8754,6 @@ human-signals@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
-
-husky@^7.0.0:
-  version "7.0.4"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-7.0.4.tgz#242048245dc49c8fb1bf0cc7cfb98dd722531535"
-  integrity sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==
 
 ice-cap@0.0.4:
   version "0.0.4"

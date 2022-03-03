@@ -57,10 +57,13 @@ const BgWrapper = styled.div`
   height: 100%;
   bottom: 0px;
   left: 0px;
-  background-image: url('/images/home/banner-01.svg');
+  background-image: url('/images/home/banner-02.png');
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
+  ${({ theme }) => theme.mediaQueries.md} {
+    background-image: url('/images/home/banner-01.svg');
+  }
 `
 
 const HeadingTitle = styled(Heading)`
