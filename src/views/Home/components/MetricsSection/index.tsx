@@ -222,9 +222,12 @@ const Future = styled(Flex)`
 `
 
 const RoadmapWrapper = styled(Flex)`
-  width: 1236px;
+  width: auto;
   position: relative;
   flex-direction: column;
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 1236px;
+  }
 `
 
 const SectionCenter = styled.div`

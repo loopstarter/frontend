@@ -39,11 +39,13 @@ const BgWrapper = styled(Flex)`
   position: relative;
   padding: 0 60px;
   background-size: contain;
+  margin: 30px 0 0;
   ${({ theme }) => theme.mediaQueries.md} {
     width: 412px;
     height: 490px;
     background-size: cover;
     padding: 0 65px;
+    margin: 0;
   }
 `
 
@@ -213,7 +215,6 @@ const IDOPool: React.FC<{ items: Array<string>; title: string; icon: string; pad
         flexDirection={['column-reverse', null, null, 'row']}
         alignItems={['flex-end', null, null, 'baseline']}
         justifyContent="center"
-        mt={[account ? '280px' : '50px', null, 0]}
         id="homepage-hero"
       >
         <Flex flex="1" flexDirection="column" alignItems="center">

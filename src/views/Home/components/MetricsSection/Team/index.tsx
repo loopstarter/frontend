@@ -1,10 +1,8 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
-import { NextLinkFromReactRouter } from 'components/NextLink'
-import { Flex, Heading, IconButton, Grid, CardBody, ProfileAvatar, Image, Text } from '@loopstarter/uikit'
+import styled from 'styled-components'
+import { Flex, Grid, CardBody, ProfileAvatar, Image, Text } from '@loopstarter/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
-import ConnectWalletButton from 'components/ConnectWalletButton'
 
 import useTheme from 'hooks/useTheme'
 

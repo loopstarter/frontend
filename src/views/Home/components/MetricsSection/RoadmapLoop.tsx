@@ -41,6 +41,10 @@ const BgWrapper = styled(Flex)`
   height: 440px;
   position: relative;
   z-index: 2;
+  margin: 30px 0 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin: 0;
+  }
 `
 
 const HeadingTitle = styled.p`
@@ -177,7 +181,6 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
         flexDirection={['column-reverse', null, null, 'row']}
         alignItems={['flex-end', null, null, 'center']}
         justifyContent="center"
-        mt={[account ? '280px' : '50px', null, 0]}
         id="homepage-hero"
       >
         <Flex flex="1" flexDirection="column" alignItems="center"></Flex>
