@@ -8,7 +8,6 @@ import ConnectWalletButton from 'components/ConnectWalletButton'
 
 import useTheme from 'hooks/useTheme'
 
-
 const BgWrapper = styled(Flex)`
   background-image: url('/images/home/roadmap-loop.png');
   background-position: top, center;
@@ -32,86 +31,86 @@ const FlexWrapper = styled(Flex)<{ padding?: string; margin?: string }>`
 `
 
 const TeamInfo = [
-    {
-        id: 1,
-        name: 'Leon Tran',
-        profile: '/images/teams/member_01.png',
-        telegram: '',
-        linkedin: '',
-        title: 'CEO & Co-founder'
-    },
-    {
-        id: 2,
-        name: 'Dree Do',
-        profile: '/images/teams/member_02.png',
-        telegram: '',
-        linkedin: '',
-        title: 'COO & Co-founder'
-    },
-    {
-        id: 3,
-        name: 'Thien Duyen',
-        profile: '/images/teams/member_03.png',
-        telegram: '',
-        linkedin: '',
-        title: 'CFO'
-    },
-    {
-        id: 4,
-        name: 'Roy Nguyen',
-        profile: '/images/teams/member_04.png',
-        telegram: '',
-        linkedin: '',
-        title: 'CMO'
-    },
-    {
-        id: 5,
-        name: 'Mr.Duy',
-        profile: '/images/teams/member_05.png',
-        telegram: '',
-        linkedin: '',
-        title: 'CTO'
-    },
-    {
-        id: 6,
-        name: 'Dung Nguyen',
-        profile: '/images/teams/member_06.png',
-        telegram: '',
-        linkedin: '',
-        title: 'DevOps SoftWare'
-    },
-    {
-        id: 7,
-        name: 'Phuc La',
-        profile: '/images/teams/member_07.png',
-        telegram: '',
-        linkedin: '',
-        title: 'DevOps Software'
-    },
-    {
-        id: 8,
-        name: 'Toan Dang',
-        profile: '/images/teams/member_08.png',
-        telegram: '',
-        linkedin: '',
-        title: 'UI/UX Designer'
-    },
-    {
-        id: 9,
-        name: 'Marshall Tran',
-        profile: '/images/teams/member_09.png',
-        telegram: '',
-        linkedin: '',
-        title: 'R&D'
-    },
-    {
-        id: 10,
-        name: 'Bach Pham',
-        profile: '/images/teams/member_10.png',
-        telegram: '',
-        linkedin: '',
-        title: 'R&D'
-    },
+  {
+    id: 1,
+    name: 'Leon Tran',
+    profile: '/images/teams/member_01.png',
+    telegram: '',
+    linkedin: '',
+    title: 'CEO & Co-founder',
+  },
+  {
+    id: 2,
+    name: 'Dree Do',
+    profile: '/images/teams/member_02.png',
+    telegram: '',
+    linkedin: '',
+    title: 'COO & Co-founder',
+  },
+  {
+    id: 3,
+    name: 'Thien Duyen',
+    profile: '/images/teams/member_03.png',
+    telegram: '',
+    linkedin: '',
+    title: 'CFO',
+  },
+  {
+    id: 4,
+    name: 'Roy Nguyen',
+    profile: '/images/teams/member_04.png',
+    telegram: '',
+    linkedin: '',
+    title: 'CMO',
+  },
+  {
+    id: 5,
+    name: 'Mr.Duy',
+    profile: '/images/teams/member_05.png',
+    telegram: '',
+    linkedin: '',
+    title: 'CTO',
+  },
+  {
+    id: 6,
+    name: 'Dung Nguyen',
+    profile: '/images/teams/member_06.png',
+    telegram: '',
+    linkedin: '',
+    title: 'DevOps SoftWare',
+  },
+  {
+    id: 7,
+    name: 'Phuc La',
+    profile: '/images/teams/member_07.png',
+    telegram: '',
+    linkedin: '',
+    title: 'DevOps Software',
+  },
+  {
+    id: 8,
+    name: 'Toan Dang',
+    profile: '/images/teams/member_08.png',
+    telegram: '',
+    linkedin: '',
+    title: 'UI/UX Designer',
+  },
+  {
+    id: 9,
+    name: 'Marshall Tran',
+    profile: '/images/teams/member_09.png',
+    telegram: '',
+    linkedin: '',
+    title: 'R&D',
+  },
+  {
+    id: 10,
+    name: 'Bach Pham',
+    profile: '/images/teams/member_10.png',
+    telegram: '',
+    linkedin: '',
+    title: 'R&D',
+  },
 ]
 const LoopsTeamAvatar = styled(ProfileAvatar)`
   left: 0;
@@ -124,8 +123,11 @@ const StyledImage = styled(Image)`
   img {
     border-radius: 4px;
   }
+  width: 180px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 200px;
+  }
 `
-
 
 const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = ({ padding, margin }) => {
   const { t } = useTranslation()
@@ -134,25 +136,25 @@ const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = ({ padding, m
 
   const TeamMember = ({ infoMember }) => {
     return (
-      <CardBody p="8px" m='16px'>
+      <CardBody p="8px" m="16px">
         <Flex flexDirection="column" justifyContent="center" alignItems="center">
           <Flex
-            mb='16px'
-            width='100%'
+            mb="16px"
+            width="100%"
             borderRadius={400}
             maxWidth={200}
             style={{ overflow: 'hidden', borderWidth: 8, borderColor: '#39BCFF', borderStyle: 'solid' }}
           >
             <StyledImage src={infoMember.profile} width={200} height={200} />
           </Flex>
-          <Text color="white" fontWeight="bold" mb='8px'>
+          <Text color="white" fontWeight="bold" mb="8px">
             {infoMember.name}
           </Text>
-          <Text color="white" mb='8px'>
+          <Text color="white" mb="8px">
             {infoMember.title}
           </Text>
-          <Flex justifyContent='center'>
-            <Flex m='4px'>
+          <Flex justifyContent="center">
+            <Flex m="4px">
               <svg width="24" height="24" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M0 2.45101C0 1.09806 1.12543 0 2.51293 0H31.4871C32.875 0 34 1.09806 34 2.45101V31.7648C34 33.1182 32.875 34.2154 31.4871 34.2154H2.51293C1.12543 34.2154 0 33.1182 0 31.7653V2.45056V2.45101Z"
@@ -164,7 +166,7 @@ const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = ({ padding, m
                 />
               </svg>
             </Flex>
-            <Flex m='4px'>
+            <Flex m="4px">
               <svg width="24" height="24" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M0 2.45101C0 1.09806 1.12543 0 2.51293 0H31.4871C32.875 0 34 1.09806 34 2.45101V31.7648C34 33.1182 32.875 34.2154 31.4871 34.2154H2.51293C1.12543 34.2154 0 33.1182 0 31.7653V2.45056V2.45101Z"
@@ -186,7 +188,6 @@ const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = ({ padding, m
     )
   }
 
-
   return (
     <Grid
       gridGap="16px"
@@ -195,7 +196,9 @@ const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = ({ padding, m
       width="100%"
       maxWidth={1200}
     >
-      {TeamInfo.map((member) => <TeamMember infoMember={member} />)}
+      {TeamInfo.map((member) => (
+        <TeamMember infoMember={member} />
+      ))}
     </Grid>
   )
 }

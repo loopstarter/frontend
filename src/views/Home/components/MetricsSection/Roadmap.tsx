@@ -1,10 +1,8 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { NextLinkFromReactRouter } from 'components/NextLink'
-import { Flex, Heading, IconButton } from '@loopstarter/uikit'
+import { Flex, IconButton } from '@loopstarter/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
-import ConnectWalletButton from 'components/ConnectWalletButton'
 
 import useTheme from 'hooks/useTheme'
 
@@ -36,20 +34,30 @@ const BgWrapper = styled(Flex)`
   background-image: url('/images/home/roadmap-bg.png');
   background-position: top, center;
   background-repeat: no-repeat;
-  background-size: cover;
-  width: 412px;
-  height: 490px;
+  width: 390px;
+  height: 450px;
   position: relative;
-  padding: 0 65px;
+  padding: 0 60px;
+  background-size: contain;
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 412px;
+    height: 490px;
+    background-size: cover;
+    padding: 0 65px;
+  }
 `
 
 const HeadingTitle = styled.p`
   font-family: FSMagistralBold;
-  font-size: 22px;
-  line-height: 34px;
+  font-size: 21px;
+  line-height: 30px;
   text-align: center;
   color: #ffffff;
   padding: 10px 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 22px;
+    line-height: 34px;
+  }
 `
 
 const Description = styled.p`
@@ -72,8 +80,11 @@ const InnerWrapper = styled.div`
 
 const BunnyWrapper = styled.div`
   padding: 60px 0 0;
-  picture {
-    width: 85px;
+  img {
+    width: auto;
+    ${({ theme }) => theme.mediaQueries.md} {
+      width: 85px;
+    }
   }
 `
 
@@ -162,10 +173,14 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   font-family: FSMagistralMedium;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 15px;
+  line-height: 18px;
   text-align: left;
   color: #ffffff;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 16px;
+    line-height: 20px;
+  }
 `
 
 const FlexWrapper = styled(Flex)<{ padding?: string; margin?: string }>`
