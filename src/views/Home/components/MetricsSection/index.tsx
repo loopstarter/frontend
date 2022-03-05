@@ -186,7 +186,7 @@ const FlexWrapper = styled(Flex)`
 const FlexBox = styled(Flex)`
   padding: 50px 0;
   ${({ theme }) => theme.mediaQueries.md} {
-    padding: 100px 0 130px;
+    padding: 100px 0;
   }
 `
 
@@ -215,9 +215,11 @@ const Future = styled(Flex)`
   ${({ theme }) => theme.mediaQueries.md} {
     background-image: url('/images/home/future-bg.png');
     justify-content: center;
-    margin: 100px 0 0;
-    width: 1500px;
-    height: 679px;
+    margin: 150px 0 0;
+    max-width: 1500px;
+    width: 90%;
+    height: auto;
+    background-position: center;
   }
 `
 
@@ -332,11 +334,14 @@ const Stats = () => {
         <div>
           <FlexBox alignItems="center" flexDirection="column">
             <Title ref={refLoopNew} color="#fff">
-              LOOP <span> NEWS & LEARNING</span>
+              LOOP
+            </Title>
+            <Title ref={refLoopNew} color="#fff">
+              <span> NEWS & LEARNING</span>
             </Title>
             <ArrowWrapper onClick={moveToLoopNew}>
               <picture>
-                <img src="/images/home/arrow-1.png" alt={t('Lunar bunny')} />
+                <img src="/images/home/arrow-3.png" alt={t('Lunar bunny')} />
               </picture>
             </ArrowWrapper>
           </FlexBox>
@@ -389,7 +394,7 @@ const Stats = () => {
             </Flex>
           </Flex>
         </RoadmapWrapper>
-        <FlexBox justifyContent="center" alignItems="center" flexDirection="column" flex={1} style={{ width: '100%' }}>
+        <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
           <Title color="#fff">
             Loops
             <span> TEAMS</span>

@@ -84,9 +84,6 @@ const BunnyWrapper = styled.div`
   padding: 60px 0 0;
   img {
     width: auto;
-    ${({ theme }) => theme.mediaQueries.md} {
-      width: 85px;
-    }
   }
 `
 

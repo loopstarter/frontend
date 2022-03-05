@@ -14,7 +14,7 @@ import {
 import useAuth from 'hooks/useAuth'
 import { useRouter } from 'next/router'
 import { useProfile } from 'state/profile/hooks'
-import ConnectWalletButton from 'components/ConnectWalletButton'
+import ConnectWalletButton, { GoToAppButton } from 'components/ConnectWalletButton'
 import { useGetBnbBalance } from 'hooks/useTokenBalance'
 import { useTranslation } from 'contexts/Localization'
 import { nftsBaseUrl } from 'views/Nft/market/constants'
@@ -47,7 +47,8 @@ const UserMenu = ({ toggleMenu }) => {
   if (!account) {
     return (
       <>
-        <ConnectWalletButton scale="sm" />
+        {/* <ConnectWalletButton scale="sm" /> */}
+        <GoToAppButton scale="sm" />
         <IconButtonStyle onClick={toggleMenu} backgroundColor="#4B7CF5" color="#fff">
           <HamburgerIcon width="36px" color="#fff" />
         </IconButtonStyle>

@@ -59,7 +59,7 @@ const HeadingTitle = styled.p`
 `
 
 const Description = styled.p`
-  font-family: FSMagistralMedium;
+  font-family: FSMagistralLight;
   font-size: 8px;
   line-height: 11px;
   text-align: left;
@@ -70,8 +70,8 @@ const Description = styled.p`
   max-width: 300px;
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 19px;
-    line-height: 126.6%;
-    max-width: 535px;
+    line-height: 24px;
+    max-width: 646px;
   }
 `
 
@@ -264,7 +264,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
       flexDirection="column"
       alignItems="center"
       position="relative"
-      padding={padding || '0 0 140px'}
+      padding={padding || '0 0 100px'}
     >
       <BgWrapper
         flexDirection={['column-reverse', null, null, 'row']}
@@ -313,7 +313,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
               <Line />
               <Text>Swap progress</Text>
               <Flex alignItems="center">
-                <Slider width="100%" name="sliderdisabled" value={10} min={1} max={20} />
+                <Slider width="100%" name="sliderdisabled" value={0} min={1} max={100} />
                 <Text>0%</Text>
               </Flex>
               <Flex width="100%" justifyContent="space-between" padding="0 44px 0 0">

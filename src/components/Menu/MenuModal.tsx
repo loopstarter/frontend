@@ -98,7 +98,7 @@ export const StyledModal = styled.div<{ isShowModal: boolean }>`
   background-image: url('/images/menu.png');
   background-position: top, center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   height: 100%;
   padding: 50px;
   float: right;
