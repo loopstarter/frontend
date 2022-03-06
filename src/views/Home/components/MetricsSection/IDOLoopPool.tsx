@@ -62,7 +62,7 @@ const Description = styled.p`
   font-family: HKGrotesk;
   font-size: 8px;
   line-height: 11px;
-  text-align: justift;
+  text-align: justify;
   color: #ffffff;
   span {
     font-weight: 500;
