@@ -58,10 +58,14 @@ const ButtonStyle = styled(Button)`
   height: 48px;
   border: 0.924812px solid #ffffff;
   font-family: FSMagistralMedium;
-  font-size: 16px;
-  line-height: 21px;
+  font-size: 13px;
+  line-height: 17px;
   text-align: center;
   color: #ffffff;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 16px;
+    line-height: 21px;
+  }
 `
 
 const Wrapper = styled.div`

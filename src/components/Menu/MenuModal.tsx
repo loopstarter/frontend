@@ -180,7 +180,8 @@ const Link = styled.a`
 const menu = (t) => [
   {
     label: t('Loop DEX'),
-    href: 'https://dex.loopstarter.com/',
+    // href: 'https://dex.loopstarter.com/',
+    href: '/#',
     items: [],
     target: 'blank',
   },

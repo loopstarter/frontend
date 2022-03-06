@@ -119,9 +119,8 @@ const LoopsTeamAvatar = styled(ProfileAvatar)`
 
 const StyledImage = styled(Image)`
   img {
-    border-radius: 4px;
+    border-radius: 50%;
   }
-  width: 180px;
   ${({ theme }) => theme.mediaQueries.md} {
     width: 200px;
   }

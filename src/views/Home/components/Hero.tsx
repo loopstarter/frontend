@@ -4,10 +4,8 @@ import { NextLinkFromReactRouter } from 'components/NextLink'
 import { Flex, Heading, Button } from '@loopstarter/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
-import ConnectWalletButton from 'components/ConnectWalletButton'
 import useTheme from 'hooks/useTheme'
-import SvgComponent from './SlideSvg'
-import CompositeImage, { getSrcSet, CompositeImageProps } from './CompositeImage'
+import { CompositeImageProps } from './CompositeImage'
 
 const flyingAnim = () => keyframes`
   from {

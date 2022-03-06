@@ -1,13 +1,11 @@
+import styled from 'styled-components'
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
-import { Flex, Skeleton, ChartIcon, CommunityIcon, SwapIcon, Button } from '@loopstarter/uikit'
+import { Flex, ChartIcon, CommunityIcon, SwapIcon, Button } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { useGetStats } from 'hooks/api'
 import useTheme from 'hooks/useTheme'
 import { formatLocalisedCompactNumber } from 'utils/formatBalance'
-import IconCard, { IconCardData } from '../IconCard'
-import StatCardContent from './StatCardContent'
-import GradientLogo from '../GradientLogoSvg'
+import { IconCardData } from '../IconCard'
 
 // Values fetched from bitQuery effective 6/9/21
 const txCount = 30841921
@@ -53,7 +51,7 @@ const Text = styled.p`
 `
 
 const ButtonStyle = styled(Button)`
-  background: linear-gradient(94.76deg, #44AEEA 0%, #5150FF 139.11%);
+  background: linear-gradient(94.76deg, #44aeea 0%, #5150ff 139.11%);
   border-radius: 9.24812px;
   width: 167px;
   height: 48px;
@@ -64,7 +62,7 @@ const ButtonStyle = styled(Button)`
   font-size: 16px;
   line-height: 22px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const Wrapper = styled.div`
@@ -73,7 +71,7 @@ const Wrapper = styled.div`
 `
 
 const Picture = styled.picture`
-  padding-right: 37px;  
+  padding-right: 37px;
   width: 50%;
 `
 
@@ -84,7 +82,7 @@ const Language = styled.p`
   font-size: 35.8115px;
   line-height: 41px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const Li = styled.li`
@@ -93,7 +91,7 @@ const Li = styled.li`
   font-weight: normal;
   font-size: 24px;
   line-height: 75px;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const Ul = styled.ul<{ padding?: string }>`
@@ -137,7 +135,7 @@ const LoopStarter = () => {
               <img src="/images/home/message.png" alt={t('message')} />
             </a>
           </picture>
-          <picture style={{padding: '0 47px'}}>
+          <picture style={{ padding: '0 47px' }}>
             <a href="medium.com" target="_blank">
               <img src="/images/home/twitter-1.png" alt={t('twitter')} />
             </a>
@@ -152,7 +150,6 @@ const LoopStarter = () => {
           </Flex>
         </Flex>
       </Flex>
-     
 
       <Flex flexWrap="wrap" alignItems="flex-start">
         <Ul>
