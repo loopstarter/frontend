@@ -40,12 +40,12 @@ const BgWrapper = styled(Flex)`
   position: relative;
   ${({ theme }) => theme.mediaQueries.md} {
     width: 850px;
-    height: 978px;
+    height: 995px;
   }
 `
 
 const HeadingTitle = styled.p`
-  font-family: FSMagistralBold;
+  font-family: HKGroteskBold;
   font-size: 11px;
   line-height: 14px;
   text-align: center;
@@ -54,15 +54,15 @@ const HeadingTitle = styled.p`
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 25.2515px;
     line-height: 29px;
-    padding: 250px 0 10px;
+    padding: 265px 0 8px;
   }
 `
 
 const Description = styled.p`
-  font-family: FSMagistralLight;
+  font-family: HKGrotesk;
   font-size: 8px;
   line-height: 11px;
-  text-align: left;
+  text-align: justify;
   color: #ffffff;
   span {
     font-weight: 500;
@@ -140,7 +140,7 @@ const TimeWrapper = styled.div`
 `
 
 const Time = styled.p`
-  font-family: FSMagistralBold;
+  font-family: HKGroteskBold;
   font-size: 16px;
   line-height: 19px;
   color: #f2c94c;
@@ -152,7 +152,7 @@ const Time = styled.p`
 `
 
 const TimeLabel = styled.p`
-  font-family: FSMagistralMedium;
+  font-family: HKGroteskLight;
   font-size: 7px;
   line-height: 8px;
   text-align: center;
@@ -180,11 +180,13 @@ const BtnStyle = styled(Button)`
   font-size: 7px;
   line-height: 8px;
   text-align: center;
+  padding: 3.31px 4.97px;
   color: #fff;
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 16px;
     line-height: 19px;
     height: 33px;
+    padding: 7.14px 10.7px;
   }
 `
 
@@ -203,6 +205,7 @@ const Ido = styled(Flex)`
     width: 653px;
     height: 340px;
     padding: 23px 40px;
+    margin: 20px 0 0;
   }
 `
 
@@ -238,6 +241,7 @@ const IdoBtn = styled(Button)`
   font-family: FSMagistralMedium;
   font-style: normal;
   font-size: 12px;
+  font-weight: 500;
   line-height: 16px;
   text-align: center;
   color: #fff;
@@ -246,7 +250,8 @@ const IdoBtn = styled(Button)`
     height: 71px;
     border-radius: 15px;
     font-size: 27px;
-    line-height: 71px;
+    line-height: 36px;
+    padding: 13px 37px 23px 38px;
   }
 `
 const imagePath = '/images/home/lunar-bunny/'
@@ -275,7 +280,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
       >
         <Flex flex="1" flexDirection="column" alignItems="center">
           <HeadingTitle>{t('LOOPSTARTER - LOOPS')}</HeadingTitle>
-          <BtnStyle>Comming soon</BtnStyle>
+          <BtnStyle>Coming soon</BtnStyle>
           <TimeWrapper>
             <div>
               <Time>18</Time>

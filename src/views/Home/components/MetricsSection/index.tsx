@@ -15,7 +15,7 @@ import IDOLoopPool from './IDOLoopPool'
 import StatCardContent from './StatCardContent'
 import LoopStarter from './LoopStarter'
 import LoopNew from './LoopNew'
-import Footer from './Footer'
+// import Footer from './Footer'
 import Roadmap from './Roadmap'
 import Team from './Team'
 import { parse1, parse2, parse3, parse4 } from './constants'
@@ -104,6 +104,7 @@ const Li = styled.li`
   font-family: FSMagistralMedium;
   font-size: 24px;
   line-height: 75px;
+  font-weight: 400;
   color: #ffffff;
 `
 
@@ -200,7 +201,7 @@ const Footer = styled(Flex)`
   ${({ theme }) => theme.mediaQueries.md} {
     background-image: url('/images/home/footer-bg.png');
     justify-content: center;
-    padding: 0;
+    padding-top: 48px;
   }
 `
 
@@ -408,7 +409,7 @@ const Stats = () => {
         </FlexBox>
         <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
           <Title color="#fff">
-            OUT <span> PARTNER</span>
+            OUR <span> PARTNER</span>
           </Title>
           <ArrowWrapper onClick={moveToOutPartner}>
             <picture>
@@ -434,7 +435,7 @@ const Stats = () => {
           </Picture>
         </Flex>
       </Section>
-      <Footer justifyContent="center" alignItems="center" flexWrap="wrap">
+      <Footer justifyContent="center" flexWrap="wrap">
         <FlexWrapper flexDirection="column" flexWrap="wrap">
           <picture>
             <img src="/images/home/logo.png" alt={t('logo')} />
@@ -456,7 +457,7 @@ const Stats = () => {
           </Flex>
         </FlexWrapper>
 
-        <Flex flexWrap="wrap" alignItems="flex-start" flexWrap="wrap">
+        <Flex flexWrap="wrap" alignItems="flex-start">
           <Ul>
             <Li>About Us</Li>
             <Li>Ecosystem</Li>
