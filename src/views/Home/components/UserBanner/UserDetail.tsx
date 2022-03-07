@@ -68,17 +68,7 @@ const UserDetail = () => {
   return (
     <>
       <Desktop>
-        <Box mr="24px">
-          <Sticker>{profile ? <ProfileAvatarWithTeam profile={profile} /> : <StyledNoProfileAvatarIcon />}</Sticker>
-        </Box>
-        <Flex flexDirection="column">
-          {getDesktopHeading()}
-          {isLoading || !account ? (
-            <Skeleton width={160} height={16} my="4px" />
-          ) : (
-            <Text fontSize="16px"> {t('Connected with %address%', { address: truncatedAddress })}</Text>
-          )}
-        </Flex>
+        <Flex flexDirection="column">{getDesktopHeading()}</Flex>
       </Desktop>
       <Mobile>{getMobileHeading()}</Mobile>
     </>
