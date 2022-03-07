@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 const SvgComponent = (props) => (
   <svg
     width={1920}
@@ -11,14 +11,7 @@ const SvgComponent = (props) => (
     <path fill="url(#a)" d="M-6-2h1928v1082H-6z" />
     <circle cx={1385.04} cy={336.042} r={38.042} fill="url(#b)" />
     <g filter="url(#c)">
-      <circle
-        cx={1384.35}
-        cy={336.353}
-        r={37.353}
-        stroke="#fff"
-        strokeOpacity={0.6}
-        strokeWidth={4}
-      />
+      <circle cx={1384.35} cy={336.353} r={37.353} stroke="#fff" strokeOpacity={0.6} strokeWidth={4} />
     </g>
     <g clipPath="url(#d)" fill="#fff">
       <path d="m1373.82 332.816 8.29-8.277 8.28 8.277 4.83-4.804-13.1-13.106-13.11 13.106 4.81 4.82v-.016Zm-13.03 3.418 4.82-4.82 4.82 4.82-4.8 4.797-4.84-4.797Zm13.03 3.403 8.29 8.278 8.28-8.301 4.82 4.82-13.09 13.105-13.11-13.097 4.83-4.812-.02.007Zm19.98-3.41 4.82-4.82 4.81 4.82-4.81 4.82-4.82-4.82Z" />
@@ -26,69 +19,26 @@ const SvgComponent = (props) => (
     </g>
     <circle cx={663} cy={499} r={29} fill="url(#e)" />
     <g filter="url(#f)">
-      <circle
-        cx={663.155}
-        cy={499.155}
-        r={29.155}
-        stroke="#fff"
-        strokeOpacity={0.6}
-        strokeWidth={4}
-      />
+      <circle cx={663.155} cy={499.155} r={29.155} stroke="#fff" strokeOpacity={0.6} strokeWidth={4} />
     </g>
     <g clipPath="url(#g)">
-      <path
-        d="m661.288 479.964-.24.821v23.803l.24.24 11.054-6.528-11.054-18.336Z"
-        fill="#EDEEEF"
-      />
-      <path
-        d="M661.288 479.964 650.241 498.3l11.047 6.528v-24.864Z"
-        fill="#fff"
-      />
-      <path
-        d="m661.288 506.917-.133.167v8.484l.133.394 11.061-15.566-11.061 6.521Z"
-        fill="#EDEEEF"
-      />
-      <path
-        d="M661.288 515.962v-9.045l-11.047-6.521 11.047 15.566Z"
-        fill="#fff"
-      />
-      <path
-        d="m672.342 498.3-11.054 6.528v-11.554l11.054 5.026Z"
-        fill="#D5D8DB"
-      />
-      <path
-        d="M661.288 493.274v11.554l-11.047-6.528 11.047-5.026Z"
-        fill="#EDEEEF"
-      />
+      <path d="m661.288 479.964-.24.821v23.803l.24.24 11.054-6.528-11.054-18.336Z" fill="#EDEEEF" />
+      <path d="M661.288 479.964 650.241 498.3l11.047 6.528v-24.864Z" fill="#fff" />
+      <path d="m661.288 506.917-.133.167v8.484l.133.394 11.061-15.566-11.061 6.521Z" fill="#EDEEEF" />
+      <path d="M661.288 515.962v-9.045l-11.047-6.521 11.047 15.566Z" fill="#fff" />
+      <path d="m672.342 498.3-11.054 6.528v-11.554l11.054 5.026Z" fill="#D5D8DB" />
+      <path d="M661.288 493.274v11.554l-11.047-6.528 11.047-5.026Z" fill="#EDEEEF" />
     </g>
     <circle cx={988.403} cy={260.403} r={63.403} fill="url(#h)" />
     <g filter="url(#i)">
-      <circle
-        cx={987.589}
-        cy={259.589}
-        r={63.089}
-        stroke="#fff"
-        strokeOpacity={0.6}
-        strokeWidth={5}
-      />
+      <circle cx={987.589} cy={259.589} r={63.089} stroke="#fff" strokeOpacity={0.6} strokeWidth={5} />
     </g>
     <g filter="url(#j)">
-      <path
-        fill="url(#k)"
-        shapeRendering="crispEdges"
-        d="M937.74 238.378h95.104v56.844H937.74z"
-      />
+      <path fill="url(#k)" shapeRendering="crispEdges" d="M937.74 238.378h95.104v56.844H937.74z" />
     </g>
     <circle cx={618.042} cy={261.042} r={38.042} fill="url(#l)" />
     <g filter="url(#m)">
-      <circle
-        cx={617.353}
-        cy={261.353}
-        r={37.353}
-        stroke="#fff"
-        strokeOpacity={0.6}
-        strokeWidth={4}
-      />
+      <circle cx={617.353} cy={261.353} r={37.353} stroke="#fff" strokeOpacity={0.6} strokeWidth={4} />
     </g>
     <g clipPath="url(#n)">
       <path
@@ -98,23 +48,13 @@ const SvgComponent = (props) => (
     </g>
     <ellipse cx={1211.5} cy={555} rx={29.5} ry={30} fill="url(#o)" />
     <g filter="url(#p)">
-      <circle
-        cx={1211.5}
-        cy={555.5}
-        r={28.5}
-        stroke="#fff"
-        strokeOpacity={0.6}
-        strokeWidth={4}
-      />
+      <circle cx={1211.5} cy={555.5} r={28.5} stroke="#fff" strokeOpacity={0.6} strokeWidth={4} />
     </g>
     <path
       d="M1211.29 570.317c-7.59-1.506-11.19-8.721-8.29-14.803.59-1.23 1.35-2.46 2.31-3.428 3.55-3.583 5.94-7.687 5.97-13.086 4 3.152 5.32 8.916 3.16 12.793a24.525 24.525 0 0 1-2.53 3.683c-3.78 4.489-4.75 9.223-.62 14.841Z"
       fill="#fff"
     />
-    <path
-      d="M1215.12 570.374c-4.4-4.595-3.72-8.272 3.38-18.264 6.46 5.557 5.01 13.394-3.38 18.264Z"
-      fill="#fff"
-    />
+    <path d="M1215.12 570.374c-4.4-4.595-3.72-8.272 3.38-18.264 6.46 5.557 5.01 13.394-3.38 18.264Z" fill="#fff" />
     <defs>
       <filter
         id="c"
@@ -127,10 +67,7 @@ const SvgComponent = (props) => (
       >
         <feFlood floodOpacity={0} result="BackgroundImageFix" />
         <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-        <feGaussianBlur
-          stdDeviation={2}
-          result="effect1_foregroundBlur_217_7"
-        />
+        <feGaussianBlur stdDeviation={2} result="effect1_foregroundBlur_217_7" />
       </filter>
       <filter
         id="f"
@@ -143,10 +80,7 @@ const SvgComponent = (props) => (
       >
         <feFlood floodOpacity={0} result="BackgroundImageFix" />
         <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-        <feGaussianBlur
-          stdDeviation={2}
-          result="effect1_foregroundBlur_217_7"
-        />
+        <feGaussianBlur stdDeviation={2} result="effect1_foregroundBlur_217_7" />
       </filter>
       <filter
         id="i"
@@ -159,10 +93,7 @@ const SvgComponent = (props) => (
       >
         <feFlood floodOpacity={0} result="BackgroundImageFix" />
         <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-        <feGaussianBlur
-          stdDeviation={2}
-          result="effect1_foregroundBlur_217_7"
-        />
+        <feGaussianBlur stdDeviation={2} result="effect1_foregroundBlur_217_7" />
       </filter>
       <filter
         id="j"
@@ -174,25 +105,13 @@ const SvgComponent = (props) => (
         colorInterpolationFilters="sRGB"
       >
         <feFlood floodOpacity={0} result="BackgroundImageFix" />
-        <feColorMatrix
-          in="SourceAlpha"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          result="hardAlpha"
-        />
+        <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
         <feOffset dy={4} />
         <feGaussianBlur stdDeviation={2} />
         <feComposite in2="hardAlpha" operator="out" />
         <feColorMatrix values="0 0 0 0 0.802083 0 0 0 0 0.802083 0 0 0 0 0.9625 0 0 0 1 0" />
-        <feBlend
-          mode="multiply"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow_217_7"
-        />
-        <feBlend
-          in="SourceGraphic"
-          in2="effect1_dropShadow_217_7"
-          result="shape"
-        />
+        <feBlend mode="multiply" in2="BackgroundImageFix" result="effect1_dropShadow_217_7" />
+        <feBlend in="SourceGraphic" in2="effect1_dropShadow_217_7" result="shape" />
       </filter>
       <filter
         id="m"
@@ -205,10 +124,7 @@ const SvgComponent = (props) => (
       >
         <feFlood floodOpacity={0} result="BackgroundImageFix" />
         <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-        <feGaussianBlur
-          stdDeviation={2}
-          result="effect1_foregroundBlur_217_7"
-        />
+        <feGaussianBlur stdDeviation={2} result="effect1_foregroundBlur_217_7" />
       </filter>
       <filter
         id="p"
@@ -221,10 +137,7 @@ const SvgComponent = (props) => (
       >
         <feFlood floodOpacity={0} result="BackgroundImageFix" />
         <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-        <feGaussianBlur
-          stdDeviation={2}
-          result="effect1_foregroundBlur_217_7"
-        />
+        <feGaussianBlur stdDeviation={2} result="effect1_foregroundBlur_217_7" />
       </filter>
       <radialGradient
         id="b"
@@ -282,40 +195,18 @@ const SvgComponent = (props) => (
         <stop offset={1} stopColor="#4244E8" />
       </radialGradient>
       <clipPath id="d">
-        <path
-          fill="#fff"
-          transform="translate(1360.79 314.899)"
-          d="M0 0h42.633v42.633H0z"
-        />
+        <path fill="#fff" transform="translate(1360.79 314.899)" d="M0 0h42.633v42.633H0z" />
       </clipPath>
       <clipPath id="g">
-        <path
-          fill="#fff"
-          transform="translate(650.241 479.964)"
-          d="M0 0h22.107v35.998H0z"
-        />
+        <path fill="#fff" transform="translate(650.241 479.964)" d="M0 0h22.107v35.998H0z" />
       </clipPath>
       <clipPath id="n">
-        <path
-          fill="#fff"
-          transform="translate(601 246)"
-          d="M0 0h34.961v30.5H0z"
-        />
+        <path fill="#fff" transform="translate(601 246)" d="M0 0h34.961v30.5H0z" />
       </clipPath>
-      <pattern
-        id="a"
-        patternContentUnits="objectBoundingBox"
-        width={1}
-        height={1}
-      >
+      <pattern id="a" patternContentUnits="objectBoundingBox" width={1} height={1}>
         <use xlinkHref="#q" transform="matrix(.00024 0 0 .00044 0 -.001)" />
       </pattern>
-      <pattern
-        id="k"
-        patternContentUnits="objectBoundingBox"
-        width={1}
-        height={1}
-      >
+      <pattern id="k" patternContentUnits="objectBoundingBox" width={1} height={1}>
         <use xlinkHref="#r" transform="matrix(.00024 0 0 .0004 0 -.001)" />
       </pattern>
       <image

@@ -39,7 +39,6 @@ import PoolsTable from './components/PoolsTable/PoolsTable'
 import { getCakeVaultEarnings } from './helpers'
 import Footer from './components/Footer'
 
-
 const CardLayout = styled(FlexLayout)`
   justify-content: center;
 `
@@ -244,7 +243,6 @@ const PoolIDO: React.FC = () => {
   chosenPools = sortPools(chosenPools).slice(0, numberOfPoolsVisible)
   chosenPoolsLength.current = chosenPools.length
 
-
   const tableLayout = <PoolsTable pools={chosenPools} account={account} userDataLoaded={userDataLoaded} />
 
   return (
@@ -264,10 +262,22 @@ const PoolIDO: React.FC = () => {
                 {t('Allocation on DefiStation Launchpad.')}
               </Heading>
             </Flex>
-            <Flex flex="1" justifyContent="center" alignItems="center" mt={['24px', null, '0']} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '-10%', marginRight: '-15%' }}>
-                <picture style={{ objectFit: 'cover' }}>
-                  <img src='/images/pool-ido/header.png' alt='' style={{ objectFit: 'cover'}} />
-                </picture>
+            <Flex
+              flex="1"
+              justifyContent="center"
+              alignItems="center"
+              mt={['24px', null, '0']}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: '-10%',
+                marginRight: '-15%',
+              }}
+            >
+              <picture style={{ objectFit: 'cover' }}>
+                <img src="/images/pool-ido/header.png" alt="" style={{ objectFit: 'cover' }} />
+              </picture>
             </Flex>
           </Flex>
         </PageHeaderHeaderPoolIDO>
@@ -331,7 +341,7 @@ const PoolIDO: React.FC = () => {
         <div ref={observerRef} />
         <div style={{ height: 120 }} />
       </Page>
-      <div style={{ background: '#100151'}}>
+      <div style={{ background: '#100151' }}>
         <div
           style={{
             background: 'linear-gradient(91.59deg, rgba(83, 83, 238, 0.38) 16.47%, rgba(25, 25, 140, 0.41) 92.23%)',

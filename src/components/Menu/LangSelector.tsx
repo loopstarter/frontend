@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 import { Dropdown, Button } from '@loopstarter/uikit'
-import LanguageIcon from "./LanguageIcon";
-import { Language } from "./types";
-import MenuButton from "./MenuButton";
+import LanguageIcon from './LanguageIcon'
+import { Language } from './types'
+import MenuButton from './MenuButton'
 
 interface Props {
-  currentLang: string;
-  langs: Language[];
-  setLang: (lang: Language) => void;
+  currentLang: string
+  langs: Language[]
+  setLang: (lang: Language) => void
 }
 
 const Text = styled.p`
@@ -18,7 +18,7 @@ const Text = styled.p`
   font-size: 35.8115px;
   line-height: 41px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const LangSelector: React.FC<Props> = ({ currentLang, langs, setLang }) => {
@@ -26,11 +26,7 @@ const LangSelector: React.FC<Props> = ({ currentLang, langs, setLang }) => {
     <Dropdown
       position="top-right"
       target={
-        <Button
-          variant="text"
-          p="0"
-          startIcon={<LanguageIcon />}
-        >
+        <Button variant="text" p="0" startIcon={<LanguageIcon />}>
           <Text>{currentLang?.toUpperCase()}</Text>
         </Button>
       }
@@ -41,16 +37,13 @@ const LangSelector: React.FC<Props> = ({ currentLang, langs, setLang }) => {
           fullWidth
           onClick={() => setLang(lang)}
           // Safari fix
-          style={{ minHeight: "32px", height: "auto", color: '#1FC7D4' }}
+          style={{ minHeight: '32px', height: 'auto', color: '#1FC7D4' }}
         >
           {lang.language}
         </MenuButton>
       ))}
     </Dropdown>
-  );
+  )
 }
 
-export default React.memo(
-  LangSelector,
-  (prev, next) => prev.currentLang === next.currentLang
-);
+export default React.memo(LangSelector, (prev, next) => prev.currentLang === next.currentLang)

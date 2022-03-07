@@ -1,12 +1,8 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { NextLinkFromReactRouter } from 'components/NextLink'
-import { Flex, Heading, IconButton } from '@loopstarter/uikit'
+import { Flex, IconButton } from '@loopstarter/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
-import ConnectWalletButton from 'components/ConnectWalletButton'
-
-import useTheme from 'hooks/useTheme'
 
 const flyingAnim = () => keyframes`
   from {
@@ -17,18 +13,6 @@ const flyingAnim = () => keyframes`
   }
   to {
     transform: translate(0, 0px);
-  }
-`
-
-const fading = () => keyframes`
-  from {
-    opacity: 0.9;
-  }
-  50% {
-    opacity: 0.1;
-  }
-  to {
-    opacity: 0.9;
   }
 `
 
@@ -47,7 +31,7 @@ const HeadingTitle = styled.p`
   font-size: 25.2515px;
   line-height: 29px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 10px 0;
 `
 
@@ -56,17 +40,11 @@ const Description = styled.p`
   font-size: 15.4571px;
   line-height: 18px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 13px 40px;
   span {
     font-weight: 500;
   }
-`
-
-const InnerWrapper = styled.div`
-  position: absolute;
-  width: 100%;
-  bottom: -3px;
 `
 
 const BunnyWrapper = styled.div`
@@ -81,36 +59,11 @@ const IconBottom = styled.div`
   animation-delay: 1s;
 `
 
-const IdoIcon = styled.div`
-  padding: 40px 0 0;
-`
-
 const IconWrapper = styled.div`
   display: flex;
   padding: 0 0 20px;
   img {
     padding: 0 5px;
-  }
-`
-
-const StarsWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  & :nth-child(2) {
-    animation: ${fading} 2s ease-in-out infinite;
-    animation-delay: 1s;
-  }
-
-  & :nth-child(3) {
-    animation: ${fading} 5s ease-in-out infinite;
-    animation-delay: 0.66s;
-  }
-
-  & :nth-child(4) {
-    animation: ${fading} 2.5s ease-in-out infinite;
-    animation-delay: 0.33s;
   }
 `
 
@@ -122,14 +75,13 @@ const TimeWrapper = styled.div`
   display: flex;
   padding: 10px;
   justify-content: space-around;
-
 `
 
 const Time = styled.p`
   font-family: FSMagistralBold;
   font-size: 35px;
   line-height: 40px;
-  color: #F2C94C;
+  color: #f2c94c;
   text-align: center;
 `
 
@@ -138,7 +90,7 @@ const TimeLabel = styled.p`
   font-size: 15.4571px;
   line-height: 18px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const Button = styled(IconButton)`
@@ -149,7 +101,7 @@ const Button = styled(IconButton)`
   }
 `
 
-const FlexWrapper = styled(Flex)<{ padding?: string, margin?: string }>`
+const FlexWrapper = styled(Flex)<{ padding?: string; margin?: string }>`
   padding: 0 0 140px;
   margin: 0;
   ${({ theme }) => theme.mediaQueries.md} {
@@ -160,17 +112,19 @@ const FlexWrapper = styled(Flex)<{ padding?: string, margin?: string }>`
   }
 `
 
-const imagePath = '/images/home/lunar-bunny/'
-const imageSrc = 'bunny'
-
-
-const IDOPool: React.FC<{ padding?: string; margin?: string; }> = ({ padding, margin }) => {
+const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, margin }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
-  const { theme } = useTheme()
 
   return (
-    <FlexWrapper flex="1" margin={margin} flexDirection="column" alignItems="center" position="relative" padding={padding || "0 0 140px"}>  
+    <FlexWrapper
+      flex="1"
+      margin={margin}
+      flexDirection="column"
+      alignItems="center"
+      position="relative"
+      padding={padding || '0 0 140px'}
+    >
       <BgWrapper
         flexDirection={['column-reverse', null, null, 'row']}
         alignItems={['flex-end', null, null, 'center']}
@@ -184,9 +138,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string; }> = ({ padding, ma
               <img src="/images/home/ido-logo.png" alt={t('Lunar bunny')} />
             </picture>
           </BunnyWrapper>
-          <HeadingTitle>
-            {t('Chessus Defi')}
-          </HeadingTitle>
+          <HeadingTitle>{t('Chessus Defi')}</HeadingTitle>
           <IconWrapper>
             <picture>
               <a href="medium.com" target="_blank">

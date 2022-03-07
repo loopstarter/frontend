@@ -17,7 +17,7 @@ const StyledTable = styled.div`
 
   background: ${({ theme }) => 'linear-gradient(167.72deg, #AE9CFF 4.27%, #857AFF 84.88%)'};
   > div:not(:last-child) {
-    border-bottom: 1px solid #BAAEFF;
+    border-bottom: 1px solid #baaeff;
   }
 `
 
