@@ -1,17 +1,7 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
-import { Flex, Skeleton, ChartIcon, CommunityIcon, SwapIcon, Button } from '@loopstarter/uikit'
+import styled from 'styled-components'
+import { Flex, Button } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { useGetStats } from 'hooks/api'
-import useTheme from 'hooks/useTheme'
-import { formatLocalisedCompactNumber } from 'utils/formatBalance'
-import IconCard, { IconCardData } from '../IconCard'
-import StatCardContent from './StatCardContent'
-import GradientLogo from '../GradientLogoSvg'
-
-// Values fetched from bitQuery effective 6/9/21
-const txCount = 30841921
-const addressCount = 2751624
 
 const Section = styled(Flex)`
   width: 100%;
@@ -20,16 +10,6 @@ const Section = styled(Flex)`
     width: 440px;
     padding: 25px 20px;
   }
-`
-
-const Heading = styled.p<{ fontWeight?: string }>`
-  font-family: FS Magistral;
-  font-style: normal;
-  font-weight: ${({ fontWeight }) => fontWeight || '300'};
-  font-size: 55px;
-  line-height: 65px;
-  text-align: center;
-  color: #150159;
 `
 
 const Label = styled.p`
@@ -66,11 +46,6 @@ const ButtonStyle = styled(Button)`
     font-size: 16px;
     line-height: 21px;
   }
-`
-
-const Wrapper = styled.div`
-  max-width: 577px;
-  padding-left: 37px;
 `
 
 const PictureWrapper = styled.div`
@@ -111,27 +86,6 @@ const TextWrapper = styled.div`
 
 const LoopNew = ({ title, description, img }) => {
   const { t } = useTranslation()
-  const data = useGetStats()
-  const { theme } = useTheme()
-
-  const tvlString = data ? formatLocalisedCompactNumber(data.tvl) : '-'
-  const trades = formatLocalisedCompactNumber(txCount)
-  const users = formatLocalisedCompactNumber(addressCount)
-
-  const tvlText = t('And those users are now entrusting the platform with over $%tvl% in funds.', { tvl: tvlString })
-  const [entrusting, inFunds] = tvlText.split(tvlString)
-
-  const UsersCardData: IconCardData = {
-    icon: <CommunityIcon color="secondary" width="36px" />,
-  }
-
-  const TradesCardData: IconCardData = {
-    icon: <SwapIcon color="primary" width="36px" />,
-  }
-
-  const StakedCardData: IconCardData = {
-    icon: <ChartIcon color="failure" width="36px" />,
-  }
 
   return (
     <Section justifyContent="center" alignItems="center" flexDirection="column">

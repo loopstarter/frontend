@@ -1,30 +1,18 @@
 import React, { useRef, useCallback } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { Flex, Text, Skeleton, ChartIcon, CommunityIcon, SwapIcon, useMatchBreakpoints } from '@loopstarter/uikit'
+import { Flex, useMatchBreakpoints } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { useGetStats } from 'hooks/api'
-import useTheme from 'hooks/useTheme'
-import { formatLocalisedCompactNumber } from 'utils/formatBalance'
 
 import LangSelector from 'components/Menu/LangSelector'
 import { languageList } from 'config/localization/languages'
-import IconCard, { IconCardData } from '../IconCard'
-import GradientLogo from '../GradientLogoSvg'
-import IDOPool from './IDOPool'
 import IDOLoopPool from './IDOLoopPool'
-import StatCardContent from './StatCardContent'
 import LoopStarter from './LoopStarter'
 import LoopNew from './LoopNew'
 // import Footer from './Footer'
 import Roadmap from './Roadmap'
 import Team from './Team'
-import { parse1, parse2, parse3, parse4 } from './constants'
+import { parse1 } from './constants'
 import RoadmapLoop from './RoadmapLoop'
-import Container from '../../../../components/Layout/Container'
-
-// Values fetched from bitQuery effective 6/9/21
-const txCount = 30841921
-const addressCount = 2751624
 
 const Section = styled(Flex)`
   background-image: url('/images/home/ido-bg-mobile.png');
@@ -50,26 +38,6 @@ const Heading = styled.p<{ font?: string; color?: string }>`
   }
 `
 
-const Label = styled.p`
-  font-family: FSMagistralMedium;
-  font-size: 19px;
-  line-height: 25px;
-  color: #6ea8ff;
-  padding: 20px 0 80px;
-  ${({ theme }) => theme.mediaQueries.md} {
-    padding: 20px 0 0;
-    font-size: 23.1857px;
-    line-height: 30px;
-  }
-`
-
-const ViewAll = styled.a`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 0 -110px;
-`
-
 const Title = styled.p<{ color?: string }>`
   font-family: FSMagistralLight;
   font-size: 45px;
@@ -90,14 +58,6 @@ const Picture = styled.picture`
   ${({ theme }) => theme.mediaQueries.md} {
     padding: 10px 35px;
   }
-`
-
-const Language = styled.p`
-  font-family: FSMagistralMedium;
-  font-size: 35.8115px;
-  line-height: 41px;
-  text-align: center;
-  color: #ffffff;
 `
 
 const Li = styled.li`
@@ -243,31 +203,11 @@ const SectionCenter = styled.div`
 `
 
 const Stats = () => {
-  const data = useGetStats()
-  const { theme } = useTheme()
   const refStaking = useRef()
   const refLoopNew = useRef()
   const refViewAll = useRef()
   const { isMobile } = useMatchBreakpoints()
-  const tvlString = data ? formatLocalisedCompactNumber(data.tvl) : '-'
-  const trades = formatLocalisedCompactNumber(txCount)
-  const users = formatLocalisedCompactNumber(addressCount)
   const { currentLanguage, setLanguage, t } = useTranslation()
-
-  const tvlText = t('And those users are now entrusting the platform with over $%tvl% in funds.', { tvl: tvlString })
-  const [entrusting, inFunds] = tvlText.split(tvlString)
-
-  const UsersCardData: IconCardData = {
-    icon: <CommunityIcon color="secondary" width="36px" />,
-  }
-
-  const TradesCardData: IconCardData = {
-    icon: <SwapIcon color="primary" width="36px" />,
-  }
-
-  const StakedCardData: IconCardData = {
-    icon: <ChartIcon color="failure" width="36px" />,
-  }
 
   const moveToOutPartner = useCallback(() => {
     refStaking &&

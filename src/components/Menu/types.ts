@@ -1,70 +1,70 @@
-import { ReactElement, SVGAttributes } from "react";
-import { Colors } from '@loopstarter/uikit';
-import { DefaultTheme } from "styled-components";
-import { SpaceProps } from "styled-system";
+import { ReactElement, SVGAttributes } from 'react'
+import { Colors } from '@loopstarter/uikit'
+import { DefaultTheme } from 'styled-components'
+import { SpaceProps } from 'styled-system'
 
 export interface Language {
-  code: string;
-  language: string;
-  locale: string;
+  code: string
+  language: string
+  locale: string
 }
 
 export interface PushedProps {
-  isPushed: boolean;
-  pushNav: (isPushed: boolean) => void;
+  isPushed: boolean
+  pushNav: (isPushed: boolean) => void
 }
 
 export interface NavTheme {
-  background: string;
+  background: string
 }
 
 export interface LinkStatus {
-  text: string;
-  color: keyof Colors;
+  text: string
+  color: keyof Colors
 }
 
 export interface MenuSubEntry {
-  label: string;
-  href: string;
-  calloutClass?: string;
-  status?: LinkStatus;
-  target?: string;
+  label: string
+  href: string
+  calloutClass?: string
+  status?: LinkStatus
+  target?: string
 }
 
 export interface MenuEntry {
-  label: string;
-  icon: string;
-  items?: MenuSubEntry[];
-  href?: string;
-  calloutClass?: string;
-  initialOpenState?: boolean;
-  status?: LinkStatus;
+  label: string
+  icon: string
+  items?: MenuSubEntry[]
+  href?: string
+  calloutClass?: string
+  initialOpenState?: boolean
+  status?: LinkStatus
 }
 
 export interface PanelProps {
-  cakePriceUsd?: number;
-  currentLang: string;
-  langs: Language[];
-  setLang: (lang: Language) => void;
-  links: Array<MenuEntry>;
+  cakePriceUsd?: number
+  currentLang: string
+  langs: Language[]
+  setLang: (lang: Language) => void
+  links: Array<MenuEntry>
 }
 
 export interface NavProps extends PanelProps {
-  userMenu?: ReactElement;
-  isDark: boolean;
-  isChristmas?: boolean;
+  userMenu?: ReactElement
+  isDark: boolean
+  isChristmas?: boolean
 }
 
 export interface SvgProps extends SVGAttributes<HTMLOrSVGElement>, SpaceProps {
-  theme?: DefaultTheme;
-  spin?: boolean;
+  theme?: DefaultTheme
+  spin?: boolean
 }
 
 export type IconComponentType = {
-  iconName: string;
-  isActive?: boolean;
-  height?: string;
-  width?: string;
-  activeColor?: string;
-  activeBackgroundColor?: keyof Colors;
-} & SvgProps;
+  iconName: string
+  isActive?: boolean
+  height?: string
+  width?: string
+  activeColor?: string
+  activeBackgroundColor?: keyof Colors
+} & SvgProps

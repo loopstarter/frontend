@@ -1,27 +1,8 @@
-import React, { useMemo } from 'react'
-import BigNumber from 'bignumber.js'
+import React from 'react'
 import styled from 'styled-components'
-import {
-  Card,
-  CardBody,
-  Text,
-  Flex,
-  HelpIcon,
-  Button,
-  Heading,
-  Skeleton,
-  useModal,
-  Box,
-  useTooltip,
-  useWalletModal
-} from '@loopstarter/uikit'
+import { Flex, Button, useWalletModal } from '@loopstarter/uikit'
 import useAuth from 'hooks/useAuth'
 import { useTranslation } from 'contexts/Localization'
-import { getBalanceNumber } from 'utils/formatBalance'
-import { usePriceCakeBusd } from 'state/farms/hooks'
-import { useCakeVault } from 'state/pools/hooks'
-import Balance from 'components/Balance'
-import BountyModal from './BountyModal'
 
 const PrivatePoolStyle = styled(Flex)`
   background-image: url('/images/pools/pool-bg.png');
@@ -30,7 +11,7 @@ const PrivatePoolStyle = styled(Flex)`
   background-size: cover;
   max-width: 1287px;
   margin: 0 auto 32px;
-  padding: 50px 70px 45px 65px; 
+  padding: 50px 70px 45px 65px;
 `
 
 const ItemWrapper = styled(Flex)`
@@ -59,7 +40,7 @@ const ItemName = styled.p`
   line-height: 28px;
   text-align: center;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const TicketWrapper = styled.div`
@@ -80,7 +61,7 @@ const TicketName = styled.p`
   font-size: 19px;
   line-height: 23px;
   text-transform: uppercase;
-  color: #56CCF2;
+  color: #56ccf2;
 `
 
 const PoolSection = styled(Flex)`
@@ -97,7 +78,7 @@ const PoolName = styled.p`
   padding: 0 0 20px;
 `
 
-const Title = styled.p<{ fontFamily?: string, padding?: string, color?: string }>`
+const Title = styled.p<{ fontFamily?: string; padding?: string; color?: string }>`
   font-family: ${({ fontFamily }) => fontFamily || 'HKGrotesk'};
   font-size: 32px;
   line-height: 37px;
@@ -116,19 +97,19 @@ const PoolLink = styled.a`
   font-size: 21px;
   line-height: 25px;
   text-transform: capitalize;
-  color: #56CCF2;
+  color: #56ccf2;
 `
 
 const BtnStyle = styled(Button)`
   width: 257px;
   height: 75px;
-  background: #56CCF2;
+  background: #56ccf2;
   border-radius: 100px;
   font-family: HKGrotesk;
   font-size: 24px;
   line-height: 28px;
   text-transform: capitalize;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const PrivatePool = () => {
@@ -155,32 +136,43 @@ const PrivatePool = () => {
           <PoolItem flexDirection="column" justifyContent="space-between">
             <div>
               <Title>Required:</Title>
-              <Title fontFamily="HKGroteskBold" color="#56CCF2">=> 100.000 BCTZ</Title>
+              <Title fontFamily="HKGroteskBold" color="#56CCF2">
+                =&gt; 100.000 BCTZ
+              </Title>
             </div>
             <div>
               <Title>Remaining unlock:</Title>
-              <Title fontFamily="HKGroteskBold" color="#56CCF2">7 days : 00 hours : 00mins</Title>
+              <Title fontFamily="HKGroteskBold" color="#56CCF2">
+                7 days : 00 hours : 00mins
+              </Title>
             </div>
-           
           </PoolItem>
           <PoolItem flexDirection="column" justifyContent="space-between">
             <div>
               <Title>Staking:</Title>
-              <Title fontFamily="HKGroteskBold"  color="#56CCF2">0 BCTZ</Title>
+              <Title fontFamily="HKGroteskBold" color="#56CCF2">
+                0 BCTZ
+              </Title>
             </div>
-            <PoolLink href="#" target="blank">View Smart contract</PoolLink>
+            <PoolLink href="#" target="blank">
+              View Smart contract
+            </PoolLink>
           </PoolItem>
           <PoolItem flexDirection="column" justifyContent="space-between">
             <div>
               <Title>lock-up time</Title>
-              <Title fontFamily="HKGroteskBold" color="#56CCF2">7 days</Title>
+              <Title fontFamily="HKGroteskBold" color="#56CCF2">
+                7 days
+              </Title>
             </div>
-            <PoolLink href="#" target="blank">View Smart contract</PoolLink>
+            <PoolLink href="#" target="blank">
+              View Smart contract
+            </PoolLink>
           </PoolItem>
         </PoolSection>
         <Flex justifyContent="end" pt="40px">
           <BtnStyle px={['14px', null, null, null, '20px']} variant="subtle" onClick={onPresentConnectModal}>
-              {t('Connect wallet')}
+            {t('Connect wallet')}
           </BtnStyle>
         </Flex>
       </Flex>
