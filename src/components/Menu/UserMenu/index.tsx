@@ -44,36 +44,38 @@ const UserMenu = ({ toggleMenu }) => {
   const avatarSrc = profile?.nft?.image?.thumbnail
   const hasLowBnbBalance = fetchStatus === FetchStatus.Fetched && balance.lte(LOW_BNB_BALANCE)
 
-  if (!account) {
-    return (
-      <>
-        {/* <ConnectWalletButton scale="sm" /> */}
-        <GoToAppButton scale="sm" />
-        <IconButtonStyle onClick={toggleMenu} backgroundColor="#4B7CF5" color="#fff">
-          <HamburgerIcon width="36px" color="#fff" />
-        </IconButtonStyle>
-      </>
-    )
-  }
+  // if (!account) {
+  return (
+    <>
+      {/* <ConnectWalletButton scale="sm" /> */}
+      <GoToAppButton scale="sm" />
+      <IconButtonStyle onClick={toggleMenu} backgroundColor="#4B7CF5" color="#fff">
+        <HamburgerIcon width="36px" color="#fff" />
+      </IconButtonStyle>
+    </>
+  )
+  // }
 
   return (
     <UIKitUserMenu account={account} avatarSrc={avatarSrc}>
-      <WalletUserMenuItem hasLowBnbBalance={hasLowBnbBalance} onPresentWalletModal={onPresentWalletModal} />
-      <UserMenuItem as="button" onClick={onPresentTransactionModal}>
-        {t('Transactions')}
-      </UserMenuItem>
-      <UserMenuDivider />
-      <UserMenuItem as="button" onClick={() => router.push(`${nftsBaseUrl}/profile/${account.toLowerCase()}`)}>
-        {t('Your NFTs')}
-      </UserMenuItem>
-      <ProfileUserMenuItem isLoading={isLoading} hasProfile={hasProfile} />
-      <UserMenuDivider />
-      <UserMenuItem as="button" onClick={logout}>
-        <Flex alignItems="center" justifyContent="space-between" width="100%">
-          {t('Disconnect')}
-          <LogoutIcon />
-        </Flex>
-      </UserMenuItem>
+      <div>
+        <WalletUserMenuItem hasLowBnbBalance={hasLowBnbBalance} onPresentWalletModal={onPresentWalletModal} />
+        <UserMenuItem as="button" onClick={onPresentTransactionModal}>
+          {t('Transactions')}
+        </UserMenuItem>
+        <UserMenuDivider />
+        <UserMenuItem as="button" onClick={() => router.push(`${nftsBaseUrl}/profile/${account.toLowerCase()}`)}>
+          {t('Your NFTs')}
+        </UserMenuItem>
+        <ProfileUserMenuItem isLoading={isLoading} hasProfile={hasProfile} />
+        <UserMenuDivider />
+        <UserMenuItem as="button" onClick={logout}>
+          <Flex alignItems="center" justifyContent="space-between" width="100%">
+            {t('Disconnect')}
+            <LogoutIcon />
+          </Flex>
+        </UserMenuItem>
+      </div>
     </UIKitUserMenu>
   )
 }

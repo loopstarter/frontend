@@ -192,8 +192,8 @@ const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = ({ padding, m
       gridGap="16px"
       gridTemplateColumns={['1fr', '1fr', 'repeat(3, 1fr)', 'repeat(5, 1fr)']}
       mb="64px"
+      mt="64px"
       width="100%"
-      maxWidth={1200}
     >
       {TeamInfo.map((member) => (
         <TeamMember infoMember={member} />
