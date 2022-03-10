@@ -2,13 +2,12 @@ import React, { useRef, useCallback } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Flex, useMatchBreakpoints } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
-
+import Slider from 'react-slick'
 import LangSelector from 'components/Menu/LangSelector'
 import { languageList } from 'config/localization/languages'
 import IDOLoopPool from './IDOLoopPool'
 import LoopStarter from './LoopStarter'
 import LoopNew from './LoopNew'
-// import Footer from './Footer'
 import Roadmap from './Roadmap'
 import Team from './Team'
 import { parse1 } from './constants'
@@ -40,8 +39,8 @@ const Heading = styled.p<{ font?: string; color?: string }>`
 
 const Title = styled.p<{ color?: string }>`
   font-family: FSMagistralLight;
-  font-size: 45px;
-  line-height: 65px;
+  font-size: 34px;
+  line-height: 40px;
   text-align: center;
   color: ${({ color }) => color || '#150159'};
   span {
@@ -202,6 +201,21 @@ const SectionCenter = styled.div`
   }
 `
 
+const LoopNewWrapper = styled(Flex)`
+  display: none;
+  ${({ theme }) => theme.mediaQueries.md} {
+    display: flex;
+  }
+`
+
+const settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+}
+
 const Stats = () => {
   const refStaking = useRef()
   const refLoopNew = useRef()
@@ -287,24 +301,41 @@ const Stats = () => {
             </ArrowWrapper>
           </FlexBox>
 
-          <Flex flexWrap="wrap">
+          <LoopNewWrapper flexWrap="wrap">
             <LoopNew
               img="/images/home/2.png"
               title="What is DAO? Take the power of the collective to new heights."
               description="It goes without saying that the DAO model has long proved its efficiency in providing a successful system for collective management in crypto assets. However, it’s also true that its use cases can be taken a step further, and LOOPStarter makes this happen...."
             />
             <LoopNew
-              img="/images/home/1.png"
+              img="/images/home/3.png"
               title="Several promising features set the LOOPStarter platform apart."
               description="LOOPStarter ecosystem helps to launch and manage Decentralized Finances. The platform looks to democratize cryptocurrencies investment & bring Multi-chain adoption in fruition. We plan to make crypto investment fair and open for everyone, along with its easy accessibility. The LOOPStarter ecosystem will have these solutions..."
             />
             <LoopNew
-              img="/images/home/3.png"
+              img="/images/home/1.png"
               title="What is a LOOPS token?"
               description="LOOPStarter protocol will gain value over time thanks to its coin-burning and provide liquidity strategy, making LOOPS a deflationary digital currency. LOOPStarter also brings forward use cases that tend to appeal to more users. As DeFi continues to boom, it provides an effective platform that’s reliable..."
             />
-          </Flex>
+          </LoopNewWrapper>
         </div>
+        <Slider {...settings}>
+          <LoopNew
+            img="/images/home/2.png"
+            title="What is DAO? Take the power of the collective to new heights."
+            description="It goes without saying that the DAO model has long proved its efficiency in providing a successful system for collective management in crypto assets. However, it’s also true that its use cases can be taken a step further, and LOOPStarter makes this happen...."
+          />
+          <LoopNew
+            img="/images/home/3.png"
+            title="Several promising features set the LOOPStarter platform apart."
+            description="LOOPStarter ecosystem helps to launch and manage Decentralized Finances. The platform looks to democratize cryptocurrencies investment & bring Multi-chain adoption in fruition. We plan to make crypto investment fair and open for everyone, along with its easy accessibility. The LOOPStarter ecosystem will have these solutions..."
+          />
+          <LoopNew
+            img="/images/home/1.png"
+            title="What is a LOOPS token?"
+            description="LOOPStarter protocol will gain value over time thanks to its coin-burning and provide liquidity strategy, making LOOPS a deflationary digital currency. LOOPStarter also brings forward use cases that tend to appeal to more users. As DeFi continues to boom, it provides an effective platform that’s reliable..."
+          />
+        </Slider>
         <StarsWrapper>
           <picture style={{ margin: '-125px 0 0' }}>
             <img src="/images/home/isolation-mode.png" alt={t('Lunar bunny')} />

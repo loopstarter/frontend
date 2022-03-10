@@ -61,6 +61,51 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 2px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
   }
+
+  .slick-slider {
+    width: 100%;
+  }
+  
+  .slick-prev, .slick-next {
+    background-image: url(/images/home/right.png);
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    border-radius: 50%;
+    ::before {
+      content: '';
+    }
+    :hover {
+      background-image: url(/images/home/right.png) !important;
+      background-size: contain;
+    }
+  }
+  .slick-prev {
+    left: 1%;
+  }
+  .slick-next {
+    right: 1%;
+    top: 49%;
+    transform: rotate(180deg);
+  }
+
+  @media only screen and (min-width: 852px) {
+    .slick-slider {
+      display: none !important;
+    }
+  }
+  @media only screen and (min-width: 413px) {
+    .slick-prev, .slick-next {
+      width: 28px;
+      height: 28px;
+    }
+    .slick-prev {
+      left: 5%;
+    }
+    .slick-next {
+      right: 5%;
+    }
+  }
 `
 
 export default GlobalStyle

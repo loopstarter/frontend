@@ -1,38 +1,8 @@
-import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { NextLinkFromReactRouter } from 'components/NextLink'
 import { Flex, Heading, Button } from '@loopstarter/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
-import useTheme from 'hooks/useTheme'
-import { CompositeImageProps } from './CompositeImage'
-
-const flyingAnim = () => keyframes`
-  from {
-    transform: translate(0,  0px);
-  }
-  50% {
-    transform: translate(-5px, -5px);
-  }
-  to {
-    transform: translate(0, 0px);
-  }
-`
-
-const fading = () => keyframes`
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-`
 
 const animText = () => keyframes`
   0% {
@@ -76,7 +46,7 @@ const HeadingTitle = styled(Heading)`
     font-size: 88px;
     text-align: right;
     line-height: 124px;
-    padding: 700px 0 0;
+    padding: 595px 0 0;
   }
 `
 
@@ -112,79 +82,13 @@ const ButtonStyle = styled(Button)`
   }
 `
 
-const InnerWrapper = styled.div`
-  position: absolute;
-  width: 100%;
-  bottom: -3px;
-`
-
-const BunnyWrapper = styled.div`
-  animation: ${fading} 3.5s cubic-bezier(0.39, 0.575, 0.565, 1) infinite;
-  position: absolute;
-  top: 80px;
-  padding-left: 61px;
-  @media screen and (min-width: 1432px) {
-    top: 96px;
-  }
-  img {
-    width: 170px;
-  }
-`
-
-const PolyGonWrapper = styled.div`
-  animation: ${fading} 3.5s cubic-bezier(0.39, 0.575, 0.565, 1) infinite;
-  position: absolute;
-  top: 122px;
-  left: 153px;
-  @media screen and (min-width: 1432px) {
-    top: 123px;
-  }
-  img {
-    width: 120px;
-  }
-`
-
-const StarsWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  & :nth-child(2) {
-    animation: ${fading} 2s ease-in-out infinite;
-    animation-delay: 1s;
-  }
-
-  & :nth-child(3) {
-    animation: ${fading} 5s ease-in-out infinite;
-    animation-delay: 0.66s;
-  }
-
-  & :nth-child(4) {
-    animation: ${fading} 2.5s ease-in-out infinite;
-    animation-delay: 0.33s;
-  }
-`
-
-const imagePath = '/images/home/lunar-bunny/'
-const imageSrc = 'loop'
-
-const starsImage: CompositeImageProps = {
-  path: '/images/home/lunar-bunny/',
-  attributes: [
-    { src: 'star-l', alt: '3D Star' },
-    { src: 'star-r', alt: '3D Star' },
-    { src: 'star-top-r', alt: '3D Star' },
-  ],
-}
-
 const Hero = () => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
-  const { theme } = useTheme()
 
   return (
     <>
-      <BgWrapper></BgWrapper>
+      <BgWrapper />
       <Flex
         position="relative"
         flexDirection={['column-reverse', null, null, 'row']}
