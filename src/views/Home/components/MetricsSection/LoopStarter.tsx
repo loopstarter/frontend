@@ -38,7 +38,6 @@ const Text = styled.p`
   font-family: FSMagistralBold;
   font-size: 23px;
   line-height: 34px;
-  text-align: justify;
   color: #150159;
   padding: 30px 0 0;
   ${({ theme }) => theme.mediaQueries.md} {

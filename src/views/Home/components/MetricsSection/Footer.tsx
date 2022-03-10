@@ -41,17 +41,17 @@ const LoopStarter = () => {
     <Section justifyContent="center" alignItems="center">
       <Flex flexDirection="column">
         <picture>
-          <img src="/images/home/logo.png" alt={t('logo')} />
+          <img src="/images/home/logo.svg" alt={t('logo')} />
         </picture>
         <Flex padding="50px 0 0">
           <picture>
             <a href="medium.com" target="_blank">
-              <img src="/images/home/message.png" alt={t('message')} />
+              <img src="/images/home/message.svg" alt={t('message')} />
             </a>
           </picture>
           <picture style={{ padding: '0 47px' }}>
             <a href="medium.com" target="_blank">
-              <img src="/images/home/twitter-1.png" alt={t('twitter')} />
+              <img src="/images/home/twitter-1.svg" alt={t('twitter')} />
             </a>
           </picture>
           <Flex>

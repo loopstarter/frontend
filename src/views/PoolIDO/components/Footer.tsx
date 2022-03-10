@@ -51,7 +51,7 @@ const LoopStarter = () => {
         <Flex justifyContent="space-between" pb="32px">
           <Flex flexDirection="row" justifyContent="flex-start">
             <picture>
-              <img src="/images/home/logo.png" alt={t('logo')} width={80} />
+              <img src="/images/home/logo.svg" alt={t('logo')} width={80} />
             </picture>
             <Flex padding="50px 0 0" />
           </Flex>
