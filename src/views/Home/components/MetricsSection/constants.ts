@@ -43,5 +43,5 @@ export const parse4 = [
   'Launching IDO v2',
   'Voting v2',
   'Mobile App Betatest',
-  'Deploy layer 2 Ethereum bridge'
+  'Deploy layer 2 Ethereum bridge',
 ]

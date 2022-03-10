@@ -367,9 +367,7 @@ const Stats = () => {
           </Flex>
         </RoadmapWrapper>
         <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
-          <Title color="#fff">
-            Loops
-          </Title>
+          <Title color="#fff">Loops</Title>
           <Title color="#fff">
             <span> TEAMS</span>
           </Title>
