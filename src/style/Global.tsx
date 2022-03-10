@@ -81,10 +81,10 @@ const GlobalStyle = createGlobalStyle`
     }
   }
   .slick-prev {
-    left: 1%;
+    left: 3px;
   }
   .slick-next {
-    right: 1%;
+    right: 3px;
     top: 49%;
     transform: rotate(180deg);
   }
