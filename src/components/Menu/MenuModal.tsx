@@ -279,12 +279,12 @@ const MenuModal: React.FC<InjectedModalProps> = ({ onDismiss, isShowModal }) => 
         <Footer alignItems="center">
           <picture>
             <a href="https://t.me/Loopstarter" target="_blank">
-              <img src="/images/home/message.png" alt={t('message')} />
+              <img src="/images/home/message.svg" alt={t('message')} />
             </a>
           </picture>
           <picture style={{ padding: '0 47px' }}>
             <a href="https://twitter.com/Loopstarter" target="_blank">
-              <img src="/images/home/twitter-1.png" alt={t('twitter')} />
+              <img src="/images/home/twitter-1.svg" alt={t('twitter')} />
             </a>
           </picture>
           <Flex>

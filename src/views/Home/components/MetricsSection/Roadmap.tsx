@@ -17,7 +17,7 @@ const BgWrapper = styled(Flex)`
     width: 412px;
     height: 490px;
     background-size: cover;
-    padding: 0 65px;
+    padding: 0 53px;
     margin: 0;
   }
 `
@@ -36,7 +36,7 @@ const HeadingTitle = styled.p`
 `
 
 const BunnyWrapper = styled.div`
-  padding: 60px 0 0;
+  padding: 80px 0 0;
   img {
     width: auto;
   }
@@ -58,7 +58,7 @@ const Li = styled.li`
   color: #ffffff;
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 16px;
-    line-height: 20px;
+    line-height: 19px;
   }
 `
 

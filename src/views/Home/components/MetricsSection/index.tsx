@@ -10,7 +10,7 @@ import LoopStarter from './LoopStarter'
 import LoopNew from './LoopNew'
 import Roadmap from './Roadmap'
 import Team from './Team'
-import { parse1 } from './constants'
+import { parse1, parse2, parse3, parse4 } from './constants'
 import RoadmapLoop from './RoadmapLoop'
 
 const Section = styled(Flex)`
@@ -354,21 +354,21 @@ const Stats = () => {
         <RoadmapWrapper>
           <Flex flexDirection={['column', null, null, 'row']}>
             <Roadmap icon="/images/home/parse-1.png" title="Phase 1: Development" items={parse1} />
-            <Roadmap icon="/images/home/parse-2.png" title="Phase 2: Testnet" items={parse1} />
+            <Roadmap icon="/images/home/parse-2.png" title="Phase 2: Testnet" items={parse2} />
           </Flex>
           <Flex flexDirection={['column-reverse', null, null, 'column']}>
             <SectionCenter>
               <RoadmapLoop />
             </SectionCenter>
             <Flex flexDirection={['column', null, null, 'row']}>
-              <Roadmap icon="/images/home/parse-3.png" title="Phase 3: Mainnet" items={parse1} />
-              <Roadmap icon="/images/home/parse-4.png" title="Phase 4: LOOPStarter V2" items={parse1} />
+              <Roadmap icon="/images/home/parse-4.png" title="Phase 4: LOOPStarter V2" items={parse4} />
+              <Roadmap icon="/images/home/parse-3.png" title="Phase 3: Mainnet" items={parse3} />
             </Flex>
           </Flex>
         </RoadmapWrapper>
         <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
+          <Title color="#fff">Loops</Title>
           <Title color="#fff">
-            Loops
             <span> TEAMS</span>
           </Title>
           <ArrowWrapper onClick={moveToOutPartner}>
@@ -409,17 +409,17 @@ const Stats = () => {
       <Footer justifyContent="center" flexWrap="wrap">
         <FlexWrapper flexDirection="column" flexWrap="wrap">
           <picture>
-            <img src="/images/home/logo.png" alt={t('logo')} />
+            <img src="/images/home/logo.svg" alt={t('logo')} />
           </picture>
           <Flex padding="50px 0 0" alignItems="center">
             <picture>
               <a href="https://t.me/Loopstarter" target="_blank">
-                <img src="/images/home/message.png" alt={t('message')} />
+                <img src="/images/home/message.svg" alt={t('message')} />
               </a>
             </picture>
             <picture style={{ padding: '0 47px' }}>
               <a href="https://twitter.com/Loopstarter" target="_blank">
-                <img src="/images/home/twitter-1.png" alt={t('twitter')} />
+                <img src="/images/home/twitter-1.svg" alt={t('twitter')} />
               </a>
             </picture>
             <Flex>

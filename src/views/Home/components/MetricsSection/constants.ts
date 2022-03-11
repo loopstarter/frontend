@@ -22,7 +22,7 @@ export const parse2 = [
 ]
 
 export const parse3 = [
-  ' Multi-chain Exchange on Testnet (ETH,  Polygon, Heco.. )',
+  'Multi-chain Exchange on Testnet (ETH,  Polygon, Heco.. )',
   'Pools and Farm High Yield',
   'AMM Trading Mining (earn LOOPS)',
   'Referral System',
@@ -33,12 +33,15 @@ export const parse3 = [
 ]
 
 export const parse4 = [
-  'Multi-chain Exchange on Testnet (ETH,  Polygon, Heco.. )',
-  'Pools and Farm High Yield',
-  'AMM Trading Mining (earn LOOPS)',
-  'Referral System',
-  'NFT Marketplace v1 (mint and staking)',
-  'Deploy IDO on Multi-chain',
-  'Deploy DAO and Voting',
-  'Launching Public Auction Launchpad',
+  'Deploy Exchange on Multi-chain',
+  'Margin Trading',
+  'Fixed-Rate Swap',
+  'Exchange UI/UX v2',
+  'Limit orders',
+  'NFT Marketplace v2',
+  'Mega LOOPS token burn event',
+  'Launching IDO v2',
+  'Voting v2',
+  'Mobile App Betatest',
+  'Deploy layer 2 Ethereum bridge',
 ]
