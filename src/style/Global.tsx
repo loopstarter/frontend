@@ -113,6 +113,9 @@ const GlobalStyle = createGlobalStyle`
     .slick-next {
       right: 5%;
     }
+    #member10 {
+      display: none;
+    }
   }
   @media screen and (min-width: 370px) {
     #member10 {
