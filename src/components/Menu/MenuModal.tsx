@@ -134,6 +134,10 @@ const Li = styled.li<{ isActive?: boolean }>`
     fill: ${({ isActive }) => (isActive ? '#FFAA2E' : '#fff')};
   }
 
+  a {
+    font-family: FSMagistral;
+  }
+
   &:hover {
     color: #ffaa2e;
     div:last-child {

@@ -378,7 +378,7 @@ const Stats = () => {
           </ArrowWrapper>
           <Team />
         </FlexBox>
-        <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
+        {/* <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
           <Title color="#fff">
             OUR <span> PARTNER</span>
           </Title>
@@ -404,7 +404,7 @@ const Stats = () => {
           <Picture>
             <img src="/images/home/scalable.png" alt={t('scalable')} />
           </Picture>
-        </Flex>
+        </Flex> */}
       </Section>
       <Footer justifyContent="center" flexWrap="wrap">
         <FlexWrapper flexDirection="column" flexWrap="wrap">
