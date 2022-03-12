@@ -183,6 +183,11 @@ const Future = styled(Flex)`
     width: 90%;
     height: auto;
     background-position: center;
+    padding: 44px 20px 40px;
+  }
+  picture {
+    max-width: 70%;
+    margin: 0 auto;
   }
 `
 
