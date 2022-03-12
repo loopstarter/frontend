@@ -24,6 +24,7 @@ const Label = styled.p`
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 16px;
     line-height: 18px;
+    min-height: 174px;
   }
 `
 

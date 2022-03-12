@@ -7,7 +7,7 @@ const Section = styled(Flex)`
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 100px 0 200px;
+  padding: 100px 0;
   ${({ theme }) => theme.mediaQueries.md} {
     padding: 100px 0 200px;
   }
@@ -15,8 +15,8 @@ const Section = styled(Flex)`
 
 const Heading = styled.p<{ font?: string }>`
   font-family: ${({ font }) => font || 'FSMagistralLight'};
-  font-size: 41px;
-  line-height: 58px;
+  font-size: 40px;
+  line-height: 48px;
   text-align: center;
   color: #150159;
   ${({ theme }) => theme.mediaQueries.md} {
@@ -69,7 +69,7 @@ const Wrapper = styled.div`
 `
 
 const Picture = styled.picture`
-  padding: 20px 20px 0;
+  padding: 0 10px;
   width: 100%;
   ${({ theme }) => theme.mediaQueries.md} {
     width: 50%;
@@ -122,7 +122,7 @@ const LoopStarter = () => {
         </picture>
       </ArrowWrapper>
 
-      <Flex flexWrap="wrap" alignItems="flex-start" padding="55px 0 0">
+      <Flex flexWrap="wrap" alignItems="flex-start" padding={[null, '40px 0 0', '55px 0 0']}>
         <Picture>
           <img src="/images/home/laptop.png" alt={t('laptop')} />
         </Picture>

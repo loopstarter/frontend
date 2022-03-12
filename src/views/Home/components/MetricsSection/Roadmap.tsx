@@ -7,10 +7,10 @@ const BgWrapper = styled(Flex)`
   background-image: url('/images/home/roadmap-bg.png');
   background-position: top, center;
   background-repeat: no-repeat;
-  width: 390px;
-  height: 450px;
+  width: 325px;
+  height: 373px;
   position: relative;
-  padding: 0 60px;
+  padding: 0 40px;
   background-size: contain;
   margin: 30px 0 0;
   ${({ theme }) => theme.mediaQueries.md} {
@@ -24,21 +24,28 @@ const BgWrapper = styled(Flex)`
 
 const HeadingTitle = styled.p`
   font-family: FSMagistralBold;
-  font-size: 21px;
-  line-height: 30px;
+  font-size: 18px;
+  line-height: 26px;
   text-align: center;
   color: #ffffff;
   padding: 10px 0;
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 22px;
     line-height: 34px;
+    padding: 10px 0;
   }
 `
 
 const BunnyWrapper = styled.div`
-  padding: 80px 0 0;
+  padding: 50px 0 0;
   img {
-    width: auto;
+    width: 77%;
+    ${({ theme }) => theme.mediaQueries.md} {
+      width: auto;
+    }
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 80px 0 0;
   }
 `
 
@@ -52,8 +59,8 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   font-family: FSMagistralMedium;
-  font-size: 15px;
-  line-height: 18px;
+  font-size: 12px;
+  line-height: 15px;
   text-align: left;
   color: #ffffff;
   ${({ theme }) => theme.mediaQueries.md} {

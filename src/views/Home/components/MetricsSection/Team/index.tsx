@@ -1,32 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, Grid, CardBody, ProfileAvatar, Image, Text, Link } from '@loopstarter/uikit'
-import { useWeb3React } from '@web3-react/core'
-import { useTranslation } from 'contexts/Localization'
-
-import useTheme from 'hooks/useTheme'
-
-const BgWrapper = styled(Flex)`
-  background-image: url('/images/home/roadmap-loop.png');
-  background-position: top, center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 380px;
-  height: 440px;
-  position: relative;
-  z-index: 2;
-`
-
-const FlexWrapper = styled(Flex)<{ padding?: string; margin?: string }>`
-  padding: 0 0 140px;
-  margin: 0;
-  ${({ theme }) => theme.mediaQueries.md} {
-    padding: ${({ padding }) => padding};
-  }
-  ${({ theme }) => theme.mediaQueries.md} {
-    margin: ${({ margin }) => margin};
-  }
-`
+import { Flex, Grid, CardBody, Text, Link } from '@loopstarter/uikit'
 
 const TeamInfo = [
   {
@@ -109,47 +83,71 @@ const TeamInfo = [
     linkedin: '',
     title: 'R&D',
   },
+  {
+    id: 11,
+    name: 'Bach Pham',
+    profile: '/images/teams/member_10.png',
+    telegram: '',
+    linkedin: '',
+    title: 'R&D',
+  },
 ]
-const LoopsTeamAvatar = styled(ProfileAvatar)`
-  left: 0;
-  position: absolute;
-  top: -32px;
-  border: 4px white solid;
-`
 
-const StyledImage = styled(Image)`
+const ImageWrapper = styled(Flex)`
+  border-radius: 50%;
   img {
     border-radius: 50%;
+    width: 100%;
+    height: 100%;
   }
+  width: 110px;
+  height: 110px;
   ${({ theme }) => theme.mediaQueries.md} {
-    width: 200px;
+    width: 220px;
+    height: 220px;
   }
 `
 
-const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = ({ padding, margin }) => {
-  const { t } = useTranslation()
-  const { account } = useWeb3React()
-  const { theme } = useTheme()
+const TextStyle = styled(Text)`
+  font-family: FSMagistralBold;
+  font-size: 15px;
+  line-height: 21px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 30px;
+    line-height: 42px;
+  }
+`
 
+const TextTitle = styled(Text)`
+  font-family: FSMagistralMedium;
+  font-size: 12px;
+  line-height: 17px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 24px;
+    line-height: 33px;
+  }
+`
+
+const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = () => {
   const TeamMember = ({ infoMember }) => {
     return (
-      <CardBody p="8px" m="16px">
+      <CardBody id={`member${infoMember.id}`} p={[null, '0', '8px']} m={[null, '0', '16px']}>
         <Flex flexDirection="column" justifyContent="center" alignItems="center">
-          <Flex
+          <ImageWrapper
             mb="16px"
             width="100%"
-            borderRadius={400}
-            maxWidth={200}
             style={{ overflow: 'hidden', borderWidth: 8, borderColor: '#39BCFF', borderStyle: 'solid' }}
           >
-            <StyledImage src={infoMember.profile} width={200} height={200} />
-          </Flex>
-          <Text color="white" fontWeight="bold" mb="8px">
+            <picture>
+              <img src={infoMember.profile} alt={infoMember.name} />
+            </picture>
+          </ImageWrapper>
+          <TextStyle color="white" fontWeight="bold" mb="8px">
             {infoMember.name}
-          </Text>
-          <Text color="white" mb="8px">
+          </TextStyle>
+          <TextTitle color="white" mb="8px">
             {infoMember.title}
-          </Text>
+          </TextTitle>
           <Flex justifyContent="center">
             <Flex m="4px">
               <svg width="24" height="24" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -190,13 +188,13 @@ const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = ({ padding, m
   return (
     <Grid
       gridGap="16px"
-      gridTemplateColumns={['1fr', '1fr', 'repeat(3, 1fr)', 'repeat(5, 1fr)']}
+      gridTemplateColumns={[null, 'repeat(3, 1fr)', 'repeat(5, 1fr)']}
       mb="64px"
       mt="64px"
       width="100%"
     >
       {TeamInfo.map((member) => (
-        <TeamMember infoMember={member} />
+        <TeamMember key={member.id} infoMember={member} />
       ))}
     </Grid>
   )

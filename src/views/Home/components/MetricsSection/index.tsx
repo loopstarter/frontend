@@ -14,7 +14,7 @@ import { parse1, parse2, parse3, parse4 } from './constants'
 import RoadmapLoop from './RoadmapLoop'
 
 const Section = styled(Flex)`
-  background-image: url('/images/home/ido-bg-mobile.png');
+  background-image: url('/images/home/ido-bg-mobile.jpg');
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -25,15 +25,17 @@ const Section = styled(Flex)`
   }
 `
 
-const Heading = styled.p<{ font?: string; color?: string }>`
+const Heading = styled.p<{ font?: string; color?: string; padding?: string }>`
   font-family: FSMagistralBold;
   font-family: ${({ font }) => font || 'FSMagistralBold'};
   font-size: 40px;
   line-height: 72px;
   color: ${({ color }) => color || '#6fa8ff'};
+  padding: ${({ padding }) => padding || '0'};
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 62px;
     line-height: 87px;
+    padding: 0;
   }
 `
 
@@ -169,9 +171,10 @@ const Future = styled(Flex)`
   background-position: top, center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 44px 20px 0;
+  padding: 20px;
   justify-content: left;
   align-items: center;
+  margin: 100px 0 0;
   ${({ theme }) => theme.mediaQueries.md} {
     background-image: url('/images/home/future-bg.png');
     justify-content: center;
@@ -187,8 +190,10 @@ const RoadmapWrapper = styled(Flex)`
   width: auto;
   position: relative;
   flex-direction: column;
+  display: none;
   ${({ theme }) => theme.mediaQueries.md} {
     width: 1236px;
+    display: flex;
   }
 `
 
@@ -341,7 +346,7 @@ const Stats = () => {
             <img src="/images/home/isolation-mode.png" alt={t('Lunar bunny')} />
           </picture>
         </StarsWrapper>
-        <Heading font="FSMagistralLight" ref={refViewAll} color="#150159">
+        <Heading padding="100px 0 0" font="FSMagistralLight" ref={refViewAll} color="#150159">
           {t('LOOP')}
         </Heading>
         <Heading color="#150159">{t('ROADMAP')}</Heading>
@@ -353,7 +358,11 @@ const Stats = () => {
         </ArrowWrapper>
         <RoadmapWrapper>
           <Flex flexDirection={['column', null, null, 'row']}>
-            <Roadmap icon="/images/home/parse-1.png" title="Phase 1: Development" items={parse1} />
+            <Roadmap
+              icon={isMobile ? '/images/home/parse-1-mobile.png' : '/images/home/parse-1.png'}
+              title="Phase 1: Development"
+              items={parse1}
+            />
             <Roadmap icon="/images/home/parse-2.png" title="Phase 2: Testnet" items={parse2} />
           </Flex>
           <Flex flexDirection={['column-reverse', null, null, 'column']}>
@@ -366,6 +375,28 @@ const Stats = () => {
             </Flex>
           </Flex>
         </RoadmapWrapper>
+        <Slider {...settings} className="roadmap">
+          <Flex flexDirection={['column', null, null, 'row']}>
+            <Roadmap
+              icon={isMobile ? '/images/home/parse-1-mobile.png' : '/images/home/parse-1.png'}
+              title="Phase 1: Development"
+              items={parse1}
+            />
+            <RoadmapLoop />
+          </Flex>
+          <Flex flexDirection={['column', null, null, 'row']}>
+            <Roadmap icon="/images/home/parse-2.png" title="Phase 2: Testnet" items={parse2} />
+            <RoadmapLoop />
+          </Flex>
+          <Flex flexDirection={['column', null, null, 'row']}>
+            <Roadmap icon="/images/home/parse-3.png" title="Phase 3: Mainnet" items={parse3} />
+            <RoadmapLoop />
+          </Flex>
+          <Flex flexDirection={['column', null, null, 'row']}>
+            <Roadmap icon="/images/home/parse-4.png" title="Phase 4: LOOPStarter V2" items={parse4} />
+            <RoadmapLoop />
+          </Flex>
+        </Slider>
         <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
           <Title color="#fff">Loops</Title>
           <Title color="#fff">

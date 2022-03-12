@@ -89,6 +89,14 @@ const GlobalStyle = createGlobalStyle`
     transform: rotate(180deg);
   }
 
+  .roadmap .slick-next {
+    top: 43%;
+  }
+
+  .roadmap .slick-prev {
+    top: 43%;
+  }
+
   @media only screen and (min-width: 852px) {
     .slick-slider {
       display: none !important;
@@ -106,6 +114,13 @@ const GlobalStyle = createGlobalStyle`
       right: 5%;
     }
   }
+  @media screen and (min-width: 370px) {
+    #member10 {
+      visibility: hidden;
+    }
+  }
+
+  
 `
 
 export default GlobalStyle

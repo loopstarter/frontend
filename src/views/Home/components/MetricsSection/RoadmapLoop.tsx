@@ -16,23 +16,25 @@ const flyingAnim = () => keyframes`
 `
 
 const BgWrapper = styled(Flex)`
-  background-image: url('/images/home/roadmap-loop.png');
+  background-image: url('/images/home/roadmap-loop-mobile.png');
   background-position: top, center;
   background-repeat: no-repeat;
-  background-size: cover;
-  width: 380px;
-  height: 440px;
+  background-size: contain;
+  width: 325px;
+  height: 373px;
+  width: 325px;
   position: relative;
   z-index: 2;
-  margin: 30px 0 0;
   ${({ theme }) => theme.mediaQueries.md} {
-    margin: 0;
+    background-image: url('/images/home/roadmap-loop.png');
+    width: 380px;
+    height: 440px;
   }
 `
 
 const IconBottom = styled.div`
   position: absolute;
-  bottom: -10px;
+  bottom: 0;
   z-index: 1;
   animation: none;
   animation-delay: 1s;
@@ -41,6 +43,7 @@ const IconBottom = styled.div`
   }
   ${({ theme }) => theme.mediaQueries.md} {
     animation: ${flyingAnim} 3s ease-in-out infinite;
+    bottom: -10px;
   }
 `
 
