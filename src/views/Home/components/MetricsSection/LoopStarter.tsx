@@ -1,5 +1,6 @@
 import React, { useRef, useCallback } from 'react'
 import styled, { keyframes } from 'styled-components'
+import Image from 'next/image'
 import { Flex, Button, Text } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 
@@ -117,14 +118,12 @@ const LoopStarter = () => {
       <Heading ref={refViewAll}>{t('About')}</Heading>
       <Heading font="FSMagistralBold">{t('LOOP STARTER')}</Heading>
       <ArrowWrapper onClick={moveToViewAll}>
-        <picture>
-          <img src="/images/home/arrow-1.png" alt={t('Lunar bunny')} />
-        </picture>
+        <Image src="/images/home/arrow-1.png" alt="nodle" width="21" height="52" layout="intrinsic" />
       </ArrowWrapper>
 
       <Flex flexWrap="wrap" alignItems="flex-start" padding={[null, '40px 0 0', '55px 0 0']}>
         <Picture>
-          <img src="/images/home/laptop.png" alt={t('laptop')} />
+          <Image src="/images/home/laptop.png" alt="LOOP STARTER" width="760" height="466" layout="intrinsic" />
         </Picture>
         <Wrapper>
           <Text>{t('LOOPSTARTER - DIVERSIFYING DECENTRALIZED FINANCES')}</Text>
