@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from 'react'
 import styled, { keyframes } from 'styled-components'
 import Image from 'next/image'
-import { Flex, Button, Text } from '@loopstarter/uikit'
+import { Flex, Button, Text, useMatchBreakpoints } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 
 const Section = styled(Flex)`
@@ -37,11 +37,12 @@ const Label = styled.p`
 
 const Text = styled.p`
   font-family: FSMagistralBold;
-  font-size: 23px;
-  line-height: 34px;
+  font-size: 21px;
+  line-height: 30px;
   color: #150159;
   padding: 30px 0 0;
   ${({ theme }) => theme.mediaQueries.md} {
+    text-align: justify;
     font-size: 25px;
     line-height: 35px;
     padding: 15px 0 0;
@@ -62,10 +63,11 @@ const ButtonStyle = styled(Button)`
 `
 
 const Wrapper = styled.div`
-  max-width: 577px;
-  padding: 0 20px;
+  max-width: 662px;
+  padding: 20px 10px;
   ${({ theme }) => theme.mediaQueries.md} {
-    padding: 0 0 0 37px;
+    padding-left: 20px;
+    padding-right: 0;
   }
 `
 
@@ -74,7 +76,6 @@ const Picture = styled.picture`
   width: 100%;
   ${({ theme }) => theme.mediaQueries.md} {
     width: 50%;
-    padding: 0 37px 0 0;
   }
 `
 
@@ -105,7 +106,7 @@ const ArrowWrapper = styled.div`
 const LoopStarter = () => {
   const { t } = useTranslation()
   const refViewAll = useRef()
-
+  const { isMobile } = useMatchBreakpoints()
   const moveToViewAll = useCallback(() => {
     refViewAll &&
       refViewAll?.current.scrollIntoView({
@@ -128,9 +129,11 @@ const LoopStarter = () => {
         <Wrapper>
           <Text>{t('LOOPSTARTER - DIVERSIFYING DECENTRALIZED FINANCES')}</Text>
           <Label>
-            {t(
-              'LOOPStarter is beyond just being a IDO Launchpad platform. It’s an integrated ecosystem that introduces an all-in-one solution to launch and manage decentralized finances. It supports all the major Multi-chain wallets along with our inline wallet management system. The portal will integrate a launchpad for decentralized fundraising for new projects needing liquidity at the start in a fair manner. Further, it will have LOOP DEX, token swapping, staking, vesting & other capabilities that we’ll cover later in depth. ',
-            )}
+            {!isMobile
+              ? t(
+                  'LOOPStarter is beyond just being an IDO Launchpad platform. It’s an integrated ecosystem that introduces an all-in-one solution to launch and manage decentralized finances. It supports all the major Multi-chain wallets along with our inline wallet management system. The portal will integrate a launchpad for decentralized fundraising for new projects needing liquidity at the start in a fair manner. Further, it will have LOOP DEX, token swapping, staking, vesting & other capabilities that we’ll cover later in depth. ',
+                )
+              : 'LOOPStarter is beyond just being an IDO Launchpad platform. It’s an integrated ecosystem that introduces an all-in-one solution to launch and manage decentralized finances'}
           </Label>
           <ButtonStyle>{t('Learn more')}</ButtonStyle>
         </Wrapper>

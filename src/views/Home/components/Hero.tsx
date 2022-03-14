@@ -53,7 +53,7 @@ const HeadingTitle = styled(Heading)`
 const Description = styled.p`
   animation: ${animText} 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
   font-family: FSMagistralLight;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 29px;
   text-align: center;
   color: #ffffff;
