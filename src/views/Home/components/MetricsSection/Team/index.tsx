@@ -38,7 +38,7 @@ const TeamInfo = [
   {
     id: 5,
     name: 'Mr.Duy',
-    profile: '/images/teams/member_05.png',
+    profile: '/images/teams/member_05.webp',
     telegram: '',
     linkedin: '',
     title: 'CTO',
@@ -46,7 +46,7 @@ const TeamInfo = [
   {
     id: 6,
     name: 'Dung Nguyen',
-    profile: '/images/teams/member_06.png',
+    profile: '/images/teams/member_06.webp',
     telegram: '',
     linkedin: '',
     title: 'DevOps SoftWare',
@@ -54,7 +54,7 @@ const TeamInfo = [
   {
     id: 7,
     name: 'Phuc La',
-    profile: '/images/teams/member_07.png',
+    profile: '/images/teams/member_07.webp',
     telegram: '',
     linkedin: '',
     title: 'DevOps Software',
@@ -62,7 +62,7 @@ const TeamInfo = [
   {
     id: 8,
     name: 'Toan Dang',
-    profile: '/images/teams/member_08.png',
+    profile: '/images/teams/member_08.webp',
     telegram: '',
     linkedin: '',
     title: 'UI/UX Designer',
@@ -70,7 +70,7 @@ const TeamInfo = [
   {
     id: 9,
     name: 'Marshall Tran',
-    profile: '/images/teams/member_09.png',
+    profile: '/images/teams/member_9.webp',
     telegram: '',
     linkedin: '',
     title: 'R&D',
@@ -78,7 +78,7 @@ const TeamInfo = [
   {
     id: 10,
     name: 'Bach Pham',
-    profile: '/images/teams/member_10.png',
+    profile: '/images/teams/member_10.webp',
     telegram: '',
     linkedin: '',
     title: 'R&D',
@@ -86,7 +86,7 @@ const TeamInfo = [
   {
     id: 11,
     name: 'Bach Pham',
-    profile: '/images/teams/member_10.png',
+    profile: '/images/teams/member_10.webp',
     telegram: '',
     linkedin: '',
     title: 'R&D',
@@ -103,6 +103,10 @@ const ImageWrapper = styled(Flex)`
   width: 110px;
   height: 110px;
   ${({ theme }) => theme.mediaQueries.md} {
+    width: 150px;
+    height: 150px;
+  }
+  ${({ theme }) => theme.mediaQueries.xxxl} {
     width: 220px;
     height: 220px;
   }
@@ -113,6 +117,10 @@ const TextStyle = styled(Text)`
   font-size: 15px;
   line-height: 21px;
   ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  ${({ theme }) => theme.mediaQueries.xxxl} {
     font-size: 30px;
     line-height: 42px;
   }
@@ -123,6 +131,10 @@ const TextTitle = styled(Text)`
   font-size: 12px;
   line-height: 17px;
   ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 18px;
+    line-height: 25px;
+  }
+  ${({ theme }) => theme.mediaQueries.xxxl} {
     font-size: 24px;
     line-height: 33px;
   }
@@ -131,7 +143,7 @@ const TextTitle = styled(Text)`
 const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = () => {
   const TeamMember = ({ infoMember }) => {
     return (
-      <CardBody id={`member${infoMember.id}`} p={[null, '0', '8px']} m={[null, '0', '16px']}>
+      <CardBody id={`member${infoMember.id}`} p={[null, '0', '8px']} m={[null, '0', '0', '16px']}>
         <Flex flexDirection="column" justifyContent="center" alignItems="center">
           <ImageWrapper
             mb="16px"

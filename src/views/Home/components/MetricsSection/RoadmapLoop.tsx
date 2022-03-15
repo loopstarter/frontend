@@ -6,12 +6,15 @@ import { useTranslation } from 'contexts/Localization'
 const flyingAnim = () => keyframes`
   from {
     transform: translate(0,  0px);
+    -webkit-transform: translate(0,  0px);
   }
   50% {
     transform: translate(0, 15px) rotateY(70deg);
+    -webkit-transform: translate(0, 15px) ;
   }
   to {
     transform: translate(0, 0px);
+    -webkit-transform: translate(0, 0px);
   }
 `
 
@@ -43,6 +46,7 @@ const IconBottom = styled.div`
   }
   ${({ theme }) => theme.mediaQueries.md} {
     animation: ${flyingAnim} 3s ease-in-out infinite;
+    -webkit-animation: ${flyingAnim} 3s ease-in-out infinite;
     bottom: -10px;
   }
 `
