@@ -233,7 +233,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
                   <Text>Swap Amount</Text>
                   <Text>0 LOOPS</Text>
                 </div>
-                <Text>1 LOOPS = 0.06 BUSD</Text>
+                <Text>1 LOOPS = 0.055 BUSD</Text>
               </Flex>
               <Line />
               <Text>Swap progress</Text>
@@ -255,7 +255,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
               </Flex>
               <Flex width="100%" justifyContent="space-between" padding="0 0 10px">
                 <Text>2,000,000 LOOPS</Text>
-                <Text>120,000 BUSD</Text>
+                <Text>110,000 BUSD</Text>
               </Flex>
             </Flex>
             <Flex justifyContent="center">
