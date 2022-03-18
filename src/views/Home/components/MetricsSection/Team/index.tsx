@@ -47,8 +47,8 @@ const TeamInfo = [
     id: 5,
     name: 'Mr.Duy',
     profile: '/images/teams/member_05.webp',
-    telegram: '',
-    linkedin: '',
+    telegram: 'https://github.com/mooo-ooo',
+    linkedin: 'https://www.linkedin.com/in/huquduy/',
     github: 'https://www.linkedin.com/in/huquduy/',
     description: 'I have been working in blockchain domain since 2019 with lot of experiences in developing dapp',
     title: 'CTO',
@@ -77,7 +77,7 @@ const TeamInfo = [
     name: 'Toan Dang',
     profile: '/images/teams/member_08.webp',
     telegram: '',
-    linkedin: '',
+    linkedin: 'https://www.behance.net/toandang',
     title: 'UI/UX Designer',
     description: '',
   },
@@ -181,7 +181,7 @@ const TeamMember = ({ infoMember }) => {
         </TextTitle>
         <Flex justifyContent="center">
           <Flex m="4px">
-            <Link external href={infoMember.linkedin}>
+            <Link external href={infoMember.linkedin || infoMember.github}>
               <svg width="24" height="24" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M0 2.45101C0 1.09806 1.12543 0 2.51293 0H31.4871C32.875 0 34 1.09806 34 2.45101V31.7648C34 33.1182 32.875 34.2154 31.4871 34.2154H2.51293C1.12543 34.2154 0 33.1182 0 31.7653V2.45056V2.45101Z"
