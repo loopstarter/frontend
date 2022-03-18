@@ -10,7 +10,8 @@ const TeamInfo = [
     telegram: 'https://t.me/LeonTran',
     linkedin: 'https://www.linkedin.com/in/leon-tran-loopstarter/',
     title: 'CEO & Co-founder',
-    description: '',
+    description:
+      'Leon Tran is a technical expert with ten years of expertise who is passionate about creating a business.',
   },
   {
     id: 2,
