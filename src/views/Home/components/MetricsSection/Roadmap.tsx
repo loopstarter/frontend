@@ -98,7 +98,7 @@ const IDOPool: React.FC<{ items: Array<string>; title: string; icon: string; mar
         <Flex flex="1" flexDirection="column" alignItems="center">
           <BunnyWrapper>
             <picture>
-              <img src={icon} alt={t('Lunar bunny')} />
+              <img src={icon} alt={t('Loop roadmap')} />
             </picture>
           </BunnyWrapper>
           <HeadingTitle>{title}</HeadingTitle>

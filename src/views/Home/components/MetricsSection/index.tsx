@@ -1,4 +1,5 @@
-import React, { useRef, useCallback } from 'react'
+import React, { useRef, useCallback, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import styled, { keyframes } from 'styled-components'
 import { Flex, useMatchBreakpoints } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
@@ -227,9 +228,21 @@ const settings = {
 }
 
 const Stats = () => {
+  const router = useRouter()
+  const { q } = router.query
+  useEffect(() => {
+    if (q === 'team') {
+      moveToTeam()
+    } else if (q === 'roadmaps') {
+      moveToRoadmaps()
+    }
+  }, [q])
+
   const refStaking = useRef()
   const refLoopNew = useRef()
   const refViewAll = useRef()
+  const refTeam = useRef()
+  const refRoadmaps = useRef()
   const { isMobile } = useMatchBreakpoints()
   const { currentLanguage, setLanguage, t } = useTranslation()
 
@@ -252,6 +265,21 @@ const Stats = () => {
         behavior: 'smooth',
       })
   }, [])
+
+  const moveToTeam = useCallback(() => {
+    refTeam &&
+      refTeam?.current?.scrollIntoView({
+        behavior: 'smooth',
+      })
+  }, [])
+
+  const moveToRoadmaps = useCallback(() => {
+    refRoadmaps &&
+      refRoadmaps?.current?.scrollIntoView({
+        behavior: 'smooth',
+      })
+  }, [])
+
   return (
     <>
       <Section justifyContent="center" alignItems="center" flexDirection="column">
@@ -261,7 +289,7 @@ const Stats = () => {
       <ViewAll ref={refViewAll}>
         <ArrowWrapper onClick={moveToViewAll}>
           <picture>
-            <img src="/images/home/arrow.png" alt={t('Lunar bunny')} />
+            <img src="/images/home/arrow.png" alt={t('LOOP STARTER')} />
           </picture>
          </ArrowWrapper>
         <Label>View All</Label>
@@ -276,7 +304,7 @@ const Stats = () => {
         <Heading>{t('IDO UPCOMING')}</Heading>
         <ArrowWrapper>
           <picture>
-            <img src="/images/home/arrow.png" alt={t('Lunar bunny')} />
+            <img src="/images/home/arrow.png" alt={t('IDO UPCOMING')} />
           </picture>
         </ArrowWrapper>
         <IDOLoopPool />
@@ -288,12 +316,12 @@ const Stats = () => {
 
         <ArrowWrapper onClick={moveToViewAll}>
           <picture>
-            <img src="/images/home/arrow.png" alt={t('Lunar bunny')} />
+            <img src="/images/home/arrow.png" alt={t('LOOP STARTER')} />
           </picture>
         </ArrowWrapper>
         <Future>
           <picture>
-            <img src="/images/home/future.png" alt={t('Lunar bunny')} />
+            <img src="/images/home/future.png" alt={t('LOOP STARTER')} />
           </picture>
         </Future>
         <div>
@@ -306,7 +334,7 @@ const Stats = () => {
             </Title>
             <ArrowWrapper onClick={moveToLoopNew}>
               <picture>
-                <img src="/images/home/arrow-3.png" alt={t('Lunar bunny')} />
+                <img src="/images/home/arrow-3.png" alt={t('LOOP STARTER')} />
               </picture>
             </ArrowWrapper>
           </FlexBox>
@@ -348,17 +376,17 @@ const Stats = () => {
         </Slider>
         <StarsWrapper>
           <picture style={{ margin: '-125px 0 0' }}>
-            <img src="/images/home/isolation-mode.png" alt={t('Lunar bunny')} />
+            <img src="/images/home/isolation-mode.png" alt={t('LOOP STARTER')} />
           </picture>
         </StarsWrapper>
-        <Heading padding="100px 0 0" font="FSMagistralLight" ref={refViewAll} color="#150159">
+        <Heading padding="100px 0 0" font="FSMagistralLight" ref={refRoadmaps} color="#150159">
           {t('LOOP')}
         </Heading>
         <Heading color="#150159">{t('ROADMAP')}</Heading>
 
-        <ArrowWrapper onClick={moveToViewAll}>
+        <ArrowWrapper onClick={moveToRoadmaps}>
           <picture>
-            <img src="/images/home/arrow.png" alt={t('Lunar bunny')} />
+            <img src="/images/home/arrow.png" alt={t('LOOP STARTER')} />
           </picture>
         </ArrowWrapper>
         <RoadmapWrapper>
@@ -409,10 +437,10 @@ const Stats = () => {
           </Title>
           <ArrowWrapper onClick={moveToOutPartner}>
             <picture>
-              <img src="/images/home/arrow-3.png" alt={t('Lunar bunny')} />
+              <img src="/images/home/arrow-3.png" alt={t('LOOP STARTER')} />
             </picture>
           </ArrowWrapper>
-          <Team />
+          <Team ref={refTeam} />
         </FlexBox>
         {/* <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
           <Title color="#fff">
@@ -420,7 +448,7 @@ const Stats = () => {
           </Title>
           <ArrowWrapper onClick={moveToOutPartner}>
             <picture>
-              <img src="/images/home/arrow-3.png" alt={t('Lunar bunny')} />
+              <img src="/images/home/arrow-3.png" alt={t('LOOP STARTER')} />
             </picture>
           </ArrowWrapper>
         </FlexBox>

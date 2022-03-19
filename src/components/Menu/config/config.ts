@@ -5,38 +5,46 @@ export type ConfigMenuItemsType = MenuItemsType & { hideSubNav?: boolean }
 
 const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
   {
-    label: t('Loop Starter'),
+    label: t('Loopdex'),
     icon: 'Swap',
     href: '/#',
     showItemsOnMobile: false,
   },
   {
-    label: t('Exchange'),
-    href: '/#',
+    label: t('Looppad'),
+    href: '/?q=looppad',
     icon: 'Earn',
-    items: [
-      {
-        label: t('Exchange'),
-        // href: 'https://dex.loopstarter.com/swap',
-        href: '/#',
-        target: 'blank',
-      },
-      {
-        label: t('Liquidity'),
-        // href: 'https://dex.loopstarter.com/liquidity',
-        href: '/#',
-        target: 'blank',
-      },
-    ],
+    items: [],
   },
   {
-    label: t('Stake'),
-    href: '/#',
+    label: t('Team'),
+    href: '/?q=team',
     icon: 'Stake',
     items: [],
   },
   {
-    label: 'Token Dao',
+    label: 'Partner',
+    href: '/?q=partner',
+    icon: 'More',
+    hideSubNav: true,
+    items: [],
+  },
+  {
+    label: 'Roadmaps',
+    href: '/?q=roadmaps',
+    icon: 'More',
+    hideSubNav: true,
+    items: [],
+  },
+  {
+    label: 'Doc',
+    href: '/#',
+    icon: 'More',
+    hideSubNav: true,
+    items: [],
+  },
+  {
+    label: 'Whitelist',
     href: '/#',
     icon: 'More',
     hideSubNav: true,

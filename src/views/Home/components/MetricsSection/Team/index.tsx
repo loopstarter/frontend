@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { Flex, Grid, CardBody, Text, Link, useTooltip } from '@loopstarter/uikit'
 
@@ -157,7 +157,10 @@ const TextTitle = styled(Text)`
   }
 `
 const TeamMember = ({ infoMember }) => {
-  const { targetRef, tooltip, tooltipVisible } = useTooltip(infoMember.description, { trigger: 'hover', placement: 'top' })
+  const { targetRef, tooltip, tooltipVisible } = useTooltip(infoMember.description, {
+    trigger: 'hover',
+    placement: 'top',
+  })
 
   return (
     <CardBody id={`member${infoMember.id}`} p={[null, '0', '8px']} m={[null, '0', '0', '16px']}>
@@ -238,9 +241,10 @@ const TeamMember = ({ infoMember }) => {
   )
 }
 
-const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = () => {
+const LoopsTeam: React.FC = forwardRef((props, ref) => {
   return (
     <Grid
+      ref={ref}
       gridGap="16px"
       gridTemplateColumns={[null, 'repeat(3, 1fr)', 'repeat(5, 1fr)']}
       mb="64px"
@@ -252,6 +256,6 @@ const LoopsTeam: React.FC<{ padding?: string; margin?: string }> = () => {
       ))}
     </Grid>
   )
-}
+})
 
 export default LoopsTeam

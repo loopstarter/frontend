@@ -103,10 +103,10 @@ const LoopNew = ({ title, description, img }) => {
     <Section justifyContent="center" alignItems="center" flexDirection="column">
       <PictureWrapper>
         <PictureBg>
-          <img src="/images/home/vector.png" alt={t('Lunar bunny')} />
+          <img src="/images/home/vector.png" alt="Loop New" />
         </PictureBg>
         <Picture>
-          <img src={img} alt={t('Lunar bunny')} />
+          <img src={img} alt={t('Loop New')} />
         </Picture>
       </PictureWrapper>
       <TextWrapper>

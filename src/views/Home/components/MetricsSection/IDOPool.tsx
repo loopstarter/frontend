@@ -135,7 +135,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
         <Flex flex="1" flexDirection="column" alignItems="center">
           <BunnyWrapper>
             <picture>
-              <img src="/images/home/ido-logo.png" alt={t('Lunar bunny')} />
+              <img src="/images/home/ido-logo.png" alt={t('Chessus Defi')} />
             </picture>
           </BunnyWrapper>
           <HeadingTitle>{t('Chessus Defi')}</HeadingTitle>
