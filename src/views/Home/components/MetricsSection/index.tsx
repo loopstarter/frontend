@@ -8,11 +8,11 @@ import dynamic from 'next/dynamic'
 import { languageList } from 'config/localization/languages'
 import { parse1, parse2, parse3, parse4 } from './constants'
 
-const IDOLoopPool = dynamic(() => import('./IDOLoopPool'))
+const IDOLoopPool = loadable(() => import('./IDOLoopPool'))
+const Team = loadable(() => import('./Team'))
 const LoopStarter = dynamic(() => import('./LoopStarter'))
 const LoopNew = dynamic(() => import('./LoopNew'))
 const Roadmap = dynamic(() => import('./Roadmap'))
-const Team = dynamic(() => import('./Team'))
 const RoadmapLoop = dynamic(() => import('./RoadmapLoop'))
 const LangSelector = dynamic(() => import('components/Menu/LangSelector'))
 
@@ -54,13 +54,6 @@ const Title = styled.p<{ color?: string }>`
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 55px;
     line-height: 65px;
-  }
-`
-
-const Picture = styled.picture`
-  padding: 55px 35px;
-  ${({ theme }) => theme.mediaQueries.md} {
-    padding: 10px 35px;
   }
 `
 
