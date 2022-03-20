@@ -1421,10 +1421,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.50.0.tgz#29c6419e8379d496ab6d0426eadf3c4d100cd186"
   integrity sha512-swKHYCOZUGyVt4ge0u8a7AwNcA//h4nx5wIi0sruGye1IJ5Cva0GyK9L2/WdX+kWVTKp92ZiEo1df31lrWGPgA==
 
-"@loopstarter/uikit@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@loopstarter/uikit/-/uikit-0.0.6.tgz#435796f25fceacd253288c38247652870746fd54"
-  integrity sha512-7bonntGmFYDsbMXldce8MnrXGLrbclgGiOOWL9uoFuyhlw6avmWu7I/5CqSHg/VuC2+75iVPWc7ewdBqT4c5Mw==
+"@loopstarter/uikit@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@loopstarter/uikit/-/uikit-0.0.7.tgz#a484347116f6affa26899a2ada4f776ab703db69"
+  integrity sha512-8pqDT5qBkzXfB44KCuJ6BTN+dG/hjTwXF4aZCRvXl98uDob37fbNAQG2507QRM1e+MuDtW3yL7xc5WsafwOhvQ==
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/styled-system" "^5.1.10"

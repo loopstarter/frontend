@@ -30,7 +30,7 @@ const BgWrapper = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   ${({ theme }) => theme.mediaQueries.md} {
-    background-image: url('/images/home/banner-01.svg');
+    background-image: url('/images/home/banner-01.webp');
   }
 `
 
