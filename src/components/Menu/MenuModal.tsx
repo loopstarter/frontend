@@ -1,12 +1,7 @@
 import React, { useRef, useEffect } from 'react'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import styled, { keyframes } from 'styled-components'
-import { useDispatch } from 'react-redux'
 import { Flex, CloseIcon, IconButton, ChevronRightIcon } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
-import orderBy from 'lodash/orderBy'
-import { isTransactionRecent, useAllTransactions } from 'state/transactions/hooks'
-import { AppDispatch } from 'state'
 import LangSelector from 'components/Menu/LangSelector'
 import { languageList } from 'config/localization/languages'
 
@@ -235,21 +230,10 @@ const menu = (t) => [
 ]
 
 const MenuModal: React.FC<InjectedModalProps> = ({ onDismiss, isShowModal }) => {
-  const { chainId } = useActiveWeb3React()
-  const dispatch = useDispatch<AppDispatch>()
-  const allTransactions = useAllTransactions()
   const { currentLanguage, setLanguage, t } = useTranslation()
-
   const menuItems = menu(t)
-
   const wrapperRef = useRef(null)
   useOutsideAlerter(wrapperRef, onDismiss)
-
-  const sortedRecentTransactions = orderBy(
-    Object.values(allTransactions).filter(isTransactionRecent),
-    'addedTime',
-    'desc',
-  )
 
   return (
     <ModalWrapper isShowModal={isShowModal}>

@@ -1,10 +1,10 @@
 import { ResetCSS } from '@loopstarter/uikit'
 import Script from 'next/script'
+import dynamic from 'next/dynamic'
 import BigNumber from 'bignumber.js'
 import EasterEgg from 'components/EasterEgg'
 import GlobalCheckClaimStatus from 'components/GlobalCheckClaimStatus'
 import SubgraphHealthIndicator from 'components/SubgraphHealthIndicator'
-import MenuModal from 'components/Menu/MenuModal'
 import { ToastListener } from 'contexts/ToastsContext'
 import useEagerConnect from 'hooks/useEagerConnect'
 import { useInactiveListener } from 'hooks/useInactiveListener'
@@ -24,6 +24,8 @@ import ErrorBoundary from '../components/ErrorBoundary'
 import Menu from '../components/Menu'
 import Providers from '../Providers'
 import GlobalStyle from '../style/Global'
+
+const MenuModal = dynamic(() => import('components/Menu/MenuModal'))
 
 // This config is required for number formatting
 BigNumber.config({

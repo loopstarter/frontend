@@ -4,15 +4,17 @@ import styled, { keyframes } from 'styled-components'
 import { Flex, useMatchBreakpoints } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 import Slider from 'react-slick'
-import LangSelector from 'components/Menu/LangSelector'
+import dynamic from 'next/dynamic'
 import { languageList } from 'config/localization/languages'
-import IDOLoopPool from './IDOLoopPool'
-import LoopStarter from './LoopStarter'
-import LoopNew from './LoopNew'
-import Roadmap from './Roadmap'
-import Team from './Team'
 import { parse1, parse2, parse3, parse4 } from './constants'
-import RoadmapLoop from './RoadmapLoop'
+
+const IDOLoopPool = dynamic(() => import('./IDOLoopPool'))
+const LoopStarter = dynamic(() => import('./LoopStarter'))
+const LoopNew = dynamic(() => import('./LoopNew'))
+const Roadmap = dynamic(() => import('./Roadmap'))
+const Team = dynamic(() => import('./Team'))
+const RoadmapLoop = dynamic(() => import('./RoadmapLoop'))
+const LangSelector = dynamic(() => import('components/Menu/LangSelector'))
 
 const Section = styled(Flex)`
   background-image: url('/images/home/ido-bg-mobile.jpg');

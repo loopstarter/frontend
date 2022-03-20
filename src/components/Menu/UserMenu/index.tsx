@@ -14,7 +14,7 @@ import {
 import useAuth from 'hooks/useAuth'
 import { useRouter } from 'next/router'
 import { useProfile } from 'state/profile/hooks'
-import ConnectWalletButton, { GoToAppButton } from 'components/ConnectWalletButton'
+import { GoToAppButton } from 'components/ConnectWalletButton'
 import { useGetBnbBalance } from 'hooks/useTokenBalance'
 import { useTranslation } from 'contexts/Localization'
 import { nftsBaseUrl } from 'views/Nft/market/constants'
@@ -22,7 +22,6 @@ import { FetchStatus } from 'config/constants/types'
 import WalletModal, { WalletView, LOW_BNB_BALANCE } from './WalletModal'
 import ProfileUserMenuItem from './ProfileUserMenutItem'
 import WalletUserMenuItem from './WalletUserMenuItem'
-import MenuModal from '../MenuModal'
 
 const IconButtonStyle = styled(IconButton)`
   background: rgba(75, 124, 245, 0.3);
@@ -39,7 +38,6 @@ const UserMenu = ({ toggleMenu }) => {
   const { isInitialized, isLoading, profile } = useProfile()
   const [onPresentWalletModal] = useModal(<WalletModal initialView={WalletView.WALLET_INFO} />)
   const [onPresentTransactionModal] = useModal(<WalletModal initialView={WalletView.TRANSACTIONS} />)
-  const [presentCastVoteModal] = useModal(<MenuModal initialView={WalletView.WALLET_INFO} />)
   const hasProfile = isInitialized && !!profile
   const avatarSrc = profile?.nft?.image?.thumbnail
   const hasLowBnbBalance = fetchStatus === FetchStatus.Fetched && balance.lte(LOW_BNB_BALANCE)
