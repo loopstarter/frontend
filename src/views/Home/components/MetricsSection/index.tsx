@@ -5,6 +5,7 @@ import { Flex, useMatchBreakpoints } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 import Slider from 'react-slick'
 import dynamic from 'next/dynamic'
+import loadable from '@loadable/component'
 import { languageList } from 'config/localization/languages'
 import { parse1, parse2, parse3, parse4 } from './constants'
 
