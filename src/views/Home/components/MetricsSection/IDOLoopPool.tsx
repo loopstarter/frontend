@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Flex, Button, Slider } from '@loopstarter/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
+import useCountDownTimer from 'hooks/useCountDownTimer'
 
 const BgWrapper = styled(Flex)`
   background-image: url('/images/home/loop-ido.png');
@@ -181,6 +182,26 @@ const IdoBtn = styled(Button)`
 const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, margin }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
+  const [timeHarvestRemaining, setTimeHarvestRemaining] = useCountDownTimer()
+  useEffect(() => {
+    const difference = +new Date('April 21, 2022 22:00:00 EST') - +new Date()
+
+    setTimeHarvestRemaining(difference)
+  }, [])
+
+  const timeLeft = timeHarvestRemaining
+    ? {
+        days: Math.floor(timeHarvestRemaining / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((timeHarvestRemaining / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((timeHarvestRemaining / 1000 / 60) % 60),
+        seconds: Math.floor((timeHarvestRemaining / 1000) % 60),
+      }
+    : {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      }
 
   return (
     <FlexWrapper
@@ -203,19 +224,19 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
           <BtnStyle>Coming soon</BtnStyle>
           <TimeWrapper>
             <div>
-              <Time>18</Time>
+              <Time>{timeLeft.days}</Time>
               <TimeLabel>Day</TimeLabel>
             </div>
             <div>
-              <Time>05</Time>
+              <Time>{timeLeft.hours}</Time>
               <TimeLabel>Hours</TimeLabel>
             </div>
             <div>
-              <Time>34</Time>
+              <Time>{timeLeft.minutes}</Time>
               <TimeLabel>Minutes</TimeLabel>
             </div>
             <div>
-              <Time>55</Time>
+              <Time>{timeLeft.seconds}</Time>
               <TimeLabel>Seconds</TimeLabel>
             </div>
           </TimeWrapper>

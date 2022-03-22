@@ -117,7 +117,7 @@ export const Item = styled.a`
 
 const Li = styled.li<{ isActive?: boolean }>`
   list-style: none;
-  font-family: FSMagistral;
+  font-family: FSMagistralLight;
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
@@ -130,7 +130,7 @@ const Li = styled.li<{ isActive?: boolean }>`
   }
 
   a {
-    font-family: FSMagistral;
+    font-family: FSMagistralLight;
   }
 
   &:hover {
@@ -179,10 +179,9 @@ const Link = styled.a`
 const menu = (t) => [
   {
     label: t('Loop DEX'),
-    // href: 'https://dex.loopstarter.com/',
-    href: '/#',
+    href: 'https://dex.loopstarter.com/',
     items: [],
-    target: 'blank',
+    target: '_blank',
   },
   {
     label: t('Loop Starter'),
@@ -209,22 +208,26 @@ const menu = (t) => [
   },
   {
     label: t('Buy Loops'),
-    href: '/#',
+    href: 'https://dex.loopstarter.com/swap',
+    target: '_blank',
     items: [],
   },
   {
     label: t('Document'),
-    href: '/#',
+    href: 'https://docs.loopstarter.com/',
+    target: '_blank',
     items: [],
   },
   {
     label: t('Contract'),
-    href: '/#',
+    href: 'https://docs.loopstarter.com/contract-us/contract-us',
+    target: '_blank',
     items: [],
   },
   {
     label: t('Privacy Policy'),
-    href: '/#',
+    href: 'https://docs.loopstarter.com/faq/terms-and-conditions',
+    target: '_blank',
     items: [],
   },
 ]
@@ -242,7 +245,7 @@ const MenuModal: React.FC<InjectedModalProps> = ({ onDismiss, isShowModal }) => 
           <div>
             {menuItems.map((item) => (
               <Li key={item.label}>
-                <Link {...item}>
+                <Link {...item} onClick={onDismiss}>
                   {item.label}
                   {!!item.items.length && <ChevronRightIcon />}
                 </Link>

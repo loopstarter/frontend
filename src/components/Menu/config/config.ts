@@ -7,7 +7,8 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
   {
     label: t('Loopdex'),
     icon: 'Swap',
-    href: '/#',
+    href: 'https://dex.loopstarter.com/',
+    target: '_blank',
     showItemsOnMobile: false,
   },
   {
@@ -38,7 +39,8 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
   },
   {
     label: 'Doc',
-    href: '/#',
+    href: 'https://docs.loopstarter.com/',
+    target: '_blank',
     icon: 'More',
     hideSubNav: true,
     items: [],
