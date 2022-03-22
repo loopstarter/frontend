@@ -114,6 +114,10 @@ const LoopStarter = () => {
       })
   }, [])
 
+  const handleOnClick = () => {
+    window.open('https://docs.loopstarter.com/', 'blank')
+  }
+
   return (
     <Section justifyContent="center" alignItems="center" flexDirection="column">
       <Heading ref={refViewAll}>{t('About')}</Heading>
@@ -135,7 +139,9 @@ const LoopStarter = () => {
                 )
               : 'LOOPStarter is beyond just being an IDO Launchpad platform. It’s an integrated ecosystem that introduces an all-in-one solution to launch and manage decentralized finances'}
           </Label>
-          <ButtonStyle>{t('Learn more')}</ButtonStyle>
+          <ButtonStyle href="https://docs.loopstarter.com/" target="blank" onClick={handleOnClick}>
+            {t('Learn more')}
+          </ButtonStyle>
         </Wrapper>
       </Flex>
     </Section>
