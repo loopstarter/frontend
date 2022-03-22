@@ -44,7 +44,7 @@
     "@ethersproject/strings": "^5.5.0",
     "@ethersproject/units": "^5.5.0",
     "@loadable/component": "^5.15.2",
-    "@loopstarter/uikit": "^0.0.7",
+    "@loopstarter/uikit": "^0.0.8",
     "@next/bundle-analyzer": "^12.0.7",
     "@pancakeswap/sdk": "^2.4.0",
     "@reduxjs/toolkit": "^1.5.0",
