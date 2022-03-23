@@ -10,6 +10,7 @@ import Hero from './components/Hero'
 import MetricsSection from './components/MetricsSection'
 import UserBanner from './components/UserBanner'
 import FarmAuctionsBanner from './components/Banners/FarmAuctionsBanner'
+import Footer from './components/Footer'
 
 const showBanner = false
 

@@ -2,11 +2,10 @@ import React, { useRef, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import styled, { keyframes } from 'styled-components'
 import { Flex, useMatchBreakpoints } from '@loopstarter/uikit'
-import { useTranslation } from 'contexts/Localization'
 import Slider from 'react-slick'
 import dynamic from 'next/dynamic'
 import loadable from '@loadable/component'
-import { languageList } from 'config/localization/languages'
+import { useTranslation } from 'contexts/Localization'
 import { parse1, parse2, parse3, parse4 } from './constants'
 
 const IDOLoopPool = loadable(() => import('./IDOLoopPool'))
@@ -15,8 +14,7 @@ const LoopStarter = dynamic(() => import('./LoopStarter'))
 const LoopNew = dynamic(() => import('./LoopNew'))
 const Roadmap = dynamic(() => import('./Roadmap'))
 const RoadmapLoop = dynamic(() => import('./RoadmapLoop'))
-const LangSelector = dynamic(() => import('components/Menu/LangSelector'))
-
+const Footer = dynamic(() => import('../Footer'))
 const Section = styled(Flex)`
   background-image: url('/images/home/ido-bg-mobile.jpg');
   background-position: top, center;
@@ -55,23 +53,6 @@ const Title = styled.p<{ color?: string }>`
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 55px;
     line-height: 65px;
-  }
-`
-
-const Li = styled.li`
-  font-family: FSMagistralMedium;
-  font-size: 24px;
-  line-height: 75px;
-  font-weight: 400;
-  color: #ffffff;
-`
-
-const Ul = styled.ul<{ padding?: string }>`
-  list-style: none;
-  padding: ${({ padding }) => padding || '0'};
-  width: 100%;
-  ${({ theme }) => theme.mediaQueries.md} {
-    width: auto;
   }
 `
 
@@ -135,31 +116,10 @@ const ArrowWrapper = styled.div`
   }
 `
 
-const FlexWrapper = styled(Flex)`
-  padding: 0;
-  ${({ theme }) => theme.mediaQueries.md} {
-    padding: 0 490px 0 0;
-  }
-`
-
 const FlexBox = styled(Flex)`
   padding: 50px 0;
   ${({ theme }) => theme.mediaQueries.md} {
     padding: 100px 0;
-  }
-`
-
-const Footer = styled(Flex)`
-  background-image: url('/images/home/footer-bg.png');
-  background-position: top, center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: 44px 20px 0;
-  justify-content: left;
-  ${({ theme }) => theme.mediaQueries.md} {
-    background-image: url('/images/home/footer-bg.png');
-    justify-content: center;
-    padding-top: 48px;
   }
 `
 
@@ -225,6 +185,7 @@ const settings = {
 
 const Stats = () => {
   const router = useRouter()
+  const { t } = useTranslation()
   const { q } = router.query
   useEffect(() => {
     if (q === 'team') {
@@ -240,7 +201,6 @@ const Stats = () => {
   const refTeam = useRef()
   const refRoadmaps = useRef()
   const { isMobile } = useMatchBreakpoints()
-  const { currentLanguage, setLanguage, t } = useTranslation()
 
   const moveToOutPartner = useCallback(() => {
     refStaking &&
@@ -466,47 +426,7 @@ const Stats = () => {
           </Picture>
         </Flex> */}
       </Section>
-      <Footer justifyContent="center" flexWrap="wrap">
-        <FlexWrapper flexDirection="column" flexWrap="wrap">
-          <picture>
-            <img src="/images/home/logo.svg" alt={t('logo')} />
-          </picture>
-          <Flex padding="50px 0 0" alignItems="center">
-            <picture>
-              <a href="https://t.me/Loopstarter" target="_blank">
-                <img src="/images/home/message.svg" alt={t('message')} />
-              </a>
-            </picture>
-            <picture style={{ padding: '0 47px' }}>
-              <a href="https://twitter.com/Loopstarter" target="_blank">
-                <img src="/images/home/twitter-1.svg" alt={t('twitter')} />
-              </a>
-            </picture>
-            <Flex>
-              <LangSelector currentLang={currentLanguage.code} langs={languageList} setLang={setLanguage} />
-            </Flex>
-          </Flex>
-        </FlexWrapper>
-
-        <Flex flexWrap="wrap" alignItems="flex-start">
-          <Ul>
-            <Li>About Us</Li>
-            <Li>Ecosystem</Li>
-            <Li>VC DAO</Li>
-          </Ul>
-          <Ul padding={isMobile ? '0' : '0 68px'}>
-            <Li>Loop Starter</Li>
-            <Li>Exchange</Li>
-            <Li>Stake</Li>
-            <Li>Token DAO</Li>
-          </Ul>
-          <Ul>
-            <Li>Apply for IDO</Li>
-            <Li>FAQ</Li>
-            <Li>Contact</Li>
-          </Ul>
-        </Flex>
-      </Footer>
+      <Footer />
     </>
   )
 }
