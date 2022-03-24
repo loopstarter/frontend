@@ -108,13 +108,13 @@ const Hero = () => {
             )}
           </Description>
           <Flex padding="18px 0 0">
-            <NextLinkFromReactRouter to="/swap">
+            <NextLinkFromReactRouter to="/#">
               <ButtonStyle variant={!account ? 'secondary' : 'primary'}>{t('Investors')}</ButtonStyle>
             </NextLinkFromReactRouter>
-            <NextLinkFromReactRouter to="/swap">
+            <NextLinkFromReactRouter to="/?q=team">
               <ButtonStyle variant={!account ? 'secondary' : 'primary'}>{t('Teams')}</ButtonStyle>
             </NextLinkFromReactRouter>
-            <NextLinkFromReactRouter to="/swap">
+            <NextLinkFromReactRouter to="/#">
               <ButtonStyle variant={!account ? 'secondary' : 'primary'}>{t('Communities')}</ButtonStyle>
             </NextLinkFromReactRouter>
           </Flex>
