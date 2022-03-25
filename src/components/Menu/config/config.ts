@@ -25,7 +25,8 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
   },
   {
     label: 'Partner',
-    href: '/?q=partner',
+    href: 'https://docs.loopstarter.com/our-teams/partnership',
+    target: '_blank',
     icon: 'More',
     hideSubNav: true,
     items: [],

@@ -96,8 +96,12 @@ const TextWrapper = styled.div`
   }
 `
 
-const LoopNew = ({ title, description, img }) => {
+const LoopNew = ({ title, description, img, link }) => {
   const { t } = useTranslation()
+
+  const handleOnClick = () => {
+    window.open(link, '_blank')
+  }
 
   return (
     <Section justifyContent="center" alignItems="center" flexDirection="column">
@@ -113,7 +117,7 @@ const LoopNew = ({ title, description, img }) => {
         <Text>{title}</Text>
         <Label>{description}</Label>
         <Flex flex="1" flexDirection="column" alignItems="center">
-          <ButtonStyle>{t('Learn more')}</ButtonStyle>
+          <ButtonStyle onClick={handleOnClick}>{t('Learn more')}</ButtonStyle>
         </Flex>
       </TextWrapper>
     </Section>

@@ -115,7 +115,7 @@ const LoopStarter = () => {
   }, [])
 
   const handleOnClick = () => {
-    window.open('https://docs.loopstarter.com/', 'blank')
+    window.open('https://docs.loopstarter.com/', '_blank')
   }
 
   return (

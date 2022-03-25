@@ -148,6 +148,22 @@ const Future = styled(Flex)`
   }
 `
 
+const Text = styled.p`
+  font-family: FSMagistralBold;
+  font-size: 16px;
+  line-height: 39px;
+  text-align: center;
+  color: #ff5656;
+  padding: 0 0 40px;
+  span {
+    color: #5685ff;
+    font-family: FSMagistralBold;
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    font-size: 28px;
+  }
+`
+
 const RoadmapWrapper = styled(Flex)`
   width: auto;
   position: relative;
@@ -297,16 +313,19 @@ const Stats = () => {
 
           <LoopNewWrapper flexWrap="wrap">
             <LoopNew
+              link="https://loopstarter.substack.com/p/token-based-dao-and-its-responsibility?s=r"
               img="/images/home/2.png"
               title="What is DAO? Take the power of the collective to new heights."
               description="It goes without saying that the DAO model has long proved its efficiency in providing a successful system for collective management in crypto assets. However, it’s also true that its use cases can be taken a step further, and LOOPStarter makes this happen...."
             />
             <LoopNew
+              link="https://loopstarter.substack.com/p/introducing-loopstarter-invest-or?r=1b140g&s=w&utm_campaign=post&utm_medium=web"
               img="/images/home/3.png"
               title="Several promising features set the LOOPStarter platform apart."
               description="LOOPStarter ecosystem helps to launch and manage Decentralized Finances. The platform looks to democratize cryptocurrencies investment & bring Multi-chain adoption in fruition. We plan to make crypto investment fair and open for everyone, along with its easy accessibility. The LOOPStarter ecosystem will have these solutions..."
             />
             <LoopNew
+              link="https://loopstarter.substack.com/p/what-is-a-loops-token?s=r"
               img="/images/home/1.png"
               title="What is a LOOPS token?"
               description="LOOPStarter protocol will gain value over time thanks to its coin-burning and provide liquidity strategy, making LOOPS a deflationary digital currency. LOOPStarter also brings forward use cases that tend to appeal to more users. As DeFi continues to boom, it provides an effective platform that’s reliable..."
@@ -425,6 +444,9 @@ const Stats = () => {
             <img src="/images/home/scalable.png" alt={t('scalable')} />
           </Picture>
         </Flex> */}
+        <Text>
+          - The project is not optimized for the <span>Safari</span> browser. Please do not use <span>Safari</span> -
+        </Text>
       </Section>
       <Footer />
     </>
