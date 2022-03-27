@@ -444,9 +444,9 @@ const Stats = () => {
             <img src="/images/home/scalable.png" alt={t('scalable')} />
           </Picture>
         </Flex> */}
-        <Text>
+        {/* <Text>
           - The project is not optimized for the <span>Safari</span> browser. Please do not use <span>Safari</span> -
-        </Text>
+        </Text> */}
       </Section>
       <Footer />
     </>

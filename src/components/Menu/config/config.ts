@@ -7,8 +7,9 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
   {
     label: t('Loopdex'),
     icon: 'Swap',
-    href: 'https://dex.loopstarter.com/',
-    target: '_blank',
+    // href: 'https://dex.loopstarter.com/',
+    href: '#',
+    // target: '_blank',
     showItemsOnMobile: false,
   },
   {

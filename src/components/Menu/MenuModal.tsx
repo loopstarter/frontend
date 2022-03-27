@@ -179,9 +179,10 @@ const Link = styled.a`
 const menu = (t) => [
   {
     label: t('Loop DEX'),
-    href: 'https://dex.loopstarter.com/',
+    // href: 'https://dex.loopstarter.com/',
+    href: '#',
     items: [],
-    target: '_blank',
+    // target: '_blank',
   },
   {
     label: t('Loop Starter'),
@@ -208,8 +209,9 @@ const menu = (t) => [
   },
   {
     label: t('Buy Loops'),
-    href: 'https://dex.loopstarter.com/swap',
-    target: '_blank',
+    // href: 'https://dex.loopstarter.com/swap',
+    href: '#',
+    // target: '_blank',
     items: [],
   },
   {
