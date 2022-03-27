@@ -273,7 +273,7 @@ const Stats = () => {
       </Flex>
        */}
 
-        <Heading>{t('IDO UPCOMING')}</Heading>
+        <Heading id="looppad">{t('IDO UPCOMING')}</Heading>
         <ArrowWrapper>
           <picture>
             <img src="/images/home/arrow.png" alt={t('IDO UPCOMING')} />
@@ -405,7 +405,7 @@ const Stats = () => {
             <RoadmapLoop />
           </Flex>
         </Slider>
-        <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
+        <FlexBox justifyContent="center" alignItems="center" flexDirection="column" id="team">
           <Title color="#fff">Loops</Title>
           <Title color="#fff">
             <span> TEAMS</span>

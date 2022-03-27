@@ -14,13 +14,13 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
   },
   {
     label: t('Looppad'),
-    href: '/?q=looppad',
+    href: '/#looppad',
     icon: 'Earn',
     items: [],
   },
   {
     label: t('Team'),
-    href: '/?q=team',
+    href: '/#team',
     icon: 'Stake',
     items: [],
   },
