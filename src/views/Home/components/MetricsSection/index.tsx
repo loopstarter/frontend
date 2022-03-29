@@ -15,6 +15,8 @@ const LoopNew = dynamic(() => import('./LoopNew'))
 const Roadmap = dynamic(() => import('./Roadmap'))
 const RoadmapLoop = dynamic(() => import('./RoadmapLoop'))
 const Footer = dynamic(() => import('../Footer'))
+const OurAdvisors = dynamic(() => import('./OurAdvisors'))
+
 const Section = styled(Flex)`
   background-image: url('/images/home/ido-bg-mobile.jpg');
   background-position: top, center;
@@ -417,6 +419,18 @@ const Stats = () => {
           </ArrowWrapper>
           <Team ref={refTeam} />
         </FlexBox>
+        <FlexBox justifyContent="center" alignItems="center" flexDirection="column" id="team">
+          <Title color="#fff">
+            <span>OUR ADVISORS</span>
+          </Title>
+          <ArrowWrapper>
+            <picture>
+              <img src="/images/home/arrow-3.png" alt={t('OUR ADVISORS')} />
+            </picture>
+          </ArrowWrapper>
+          <OurAdvisors />
+        </FlexBox>
+
         {/* <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
           <Title color="#fff">
             OUR <span> PARTNER</span>

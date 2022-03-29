@@ -146,7 +146,7 @@ const Icon = styled.span`
   }
 `
 
-const TwitterIcon = styled(Icon)`
+export const TwitterIcon = styled(Icon)`
   background-position: 0 0%;
   width: 45px;
   height: 45px;
