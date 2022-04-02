@@ -207,7 +207,7 @@ const Footer = ({ bg }) => {
             <a href="https://loopstarter.substack.com/" target="_blank">
               <SubstackIcon />
             </a>
-            <a href="https://LOOPStarter.medium.com" target="_blank">
+            <a href="https://medium.com/@LOOPStarter" target="_blank">
               <MediumIcon />
             </a>
             <Flex>

@@ -141,7 +141,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
           <HeadingTitle>{t('Chessus Defi')}</HeadingTitle>
           <IconWrapper>
             <picture>
-              <a href="medium.com" target="_blank">
+              <a href="https://medium.com/@LOOPStarter" target="_blank">
                 <img src="/images/home/medium.png" alt={t('medium')} />
               </a>
             </picture>

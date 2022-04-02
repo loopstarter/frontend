@@ -133,7 +133,7 @@ export const links = [
       },
       {
         label: 'Blog',
-        href: 'https://defifarms.medium.com',
+        href: 'https://medium.com/@LOOPStarter',
       },
     ],
   },
