@@ -69,6 +69,11 @@ function MyApp(props: AppProps) {
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="A evolution of Dao on Multi chain " />
+        
+        <meta property="og:title" content="A evolution of Dao on Multi chain" />
+        <meta property="og:description" content="The first DAO multi-chain and multi-launchpad platform with full DEX and deflation mechanism" />
+        <meta property="og:image" content="https://loopstarter.com/images/home/banner-hero.png" />
+        <meta property="og:type" content="website" />
         <title>Loopstarter</title>
       </Head>
       <Providers store={store}>
