@@ -128,7 +128,9 @@ const LoopStarter = () => {
 
       <Flex flexWrap="wrap" alignItems="flex-start" padding={[null, '40px 0 0', '55px 0 0']}>
         <Picture>
-          <Image src="/images/home/laptop.png" alt="LOOP STARTER" width="760" height="466" layout="intrinsic" />
+          <a href="https://www.youtube.com/watch?v=aK4Bh5vkJ04&t=7s" target="_blank">
+            <Image src="/images/home/laptop.png" alt="LOOP STARTER" width="760" height="466" layout="intrinsic" />
+          </a>
         </Picture>
         <Wrapper>
           <Text>{t('LOOPSTARTER - DIVERSIFYING DECENTRALIZED FINANCES')}</Text>
