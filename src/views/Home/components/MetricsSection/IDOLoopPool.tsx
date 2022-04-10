@@ -182,12 +182,14 @@ const IdoBtn = styled(Button)`
 const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, margin }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
-  const [timeHarvestRemaining, setTimeHarvestRemaining] = useCountDownTimer()
-  useEffect(() => {
-    const difference = +new Date('April 21, 2022 22:00:00 EST') - +new Date()
+  // const [timeHarvestRemaining, setTimeHarvestRemaining] = useCountDownTimer()
+  // useEffect(() => {
+  //   const difference = +new Date('April 21, 2022 22:00:00 EST') - +new Date()
+  //   // const difference = +new Date() - +new Date()
 
-    setTimeHarvestRemaining(difference)
-  }, [])
+  //   setTimeHarvestRemaining(difference)
+  // }, [])
+  const timeHarvestRemaining = null
 
   const timeLeft = timeHarvestRemaining
     ? {
@@ -198,9 +200,9 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
       }
     : {
         days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
+        hours: '00',
+        minutes: '00',
+        seconds: '00',
       }
 
   return (
