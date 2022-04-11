@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { Flex, Grid, CardBody, Text, Link, useTooltip } from '@loopstarter/uikit'
-import { TwitterIcon } from '../Footer'
+import { TwitterIcon, TelegramIcon } from '../Footer'
 
 const data = [
   {
@@ -17,6 +17,14 @@ const data = [
     profile: '/images/home/our-advisors/krishna.png',
     twitter: 'https://twitter.com/paycoincapital',
     description: 'Founder PayCoin Capital',
+  },
+  {
+    id: 3,
+    name: 'Can Ukşul',
+    profile: '/images/home/our-advisors/can-uksul.jpeg',
+    twitter: 'https://www.linkedin.com/in/umcaca/',
+    telegram: 'https://t.me/listmyprojects',
+    description: 'Founder at https://www.listmyproject.com/',
   },
 ]
 
@@ -93,11 +101,20 @@ const OurAdvisors = ({ infoMember }) => {
           {infoMember.title}
         </TextTitle>
         <Flex justifyContent="center">
-          <Flex m="4px">
-            <Link external href={infoMember.twitter}>
-              <TwitterIcon />
-            </Link>
-          </Flex>
+          {infoMember.twitter ? (
+            <Flex m="4px">
+              <Link external href={infoMember.twitter}>
+                <TwitterIcon />
+              </Link>
+            </Flex>
+          ) : null}
+          {infoMember.telegram ? (
+            <Flex m="4px">
+              <Link external href={infoMember.telegram}>
+                <TelegramIcon />
+              </Link>
+            </Flex>
+          ) : null}
         </Flex>
       </Flex>
     </CardBody>
@@ -109,7 +126,7 @@ const LoopsOurAdvisors: React.FC = forwardRef((props, ref) => {
     <Grid
       ref={ref}
       gridGap="16px"
-      gridTemplateColumns={[null, 'repeat(2, 1fr)', 'repeat(2, 1fr)']}
+      gridTemplateColumns={[null, 'repeat(3, 1fr)', 'repeat(3, 1fr)']}
       mb="64px"
       mt="64px"
       width="100%"
