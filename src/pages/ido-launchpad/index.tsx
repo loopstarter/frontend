@@ -1,3 +1,3 @@
-import Launchpad from 'views/LaunchpadDetails'
+import Launchpad from 'views/IDOLaunchpad'
 
 export default Launchpad
