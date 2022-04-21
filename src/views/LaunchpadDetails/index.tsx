@@ -5,7 +5,7 @@ import Page from 'components/Layout/Page'
 import { BASE_API_URL } from 'config'
 import { withAuth } from 'hooks/useAuthSign'
 import { useIdoContract } from 'hooks/useContract'
-import React from 'react'
+import React, { useState } from 'react'
 import { get } from 'utils/http'
 
 import Container from 'components/Layout/Container'
@@ -32,12 +32,16 @@ const ButtonClosed = styled(Button)`
   background: linear-gradient(106.04deg, #ffc677 -44.63%, #c94fd8 92.68%);
   border-radius: 5px;
 `
+const ButtonIDOStyled = styled(Button)`
+  border-radius: 8px;
+`
 
 const Launchpad: React.FC = () => {
   const { account, library, connector } = useWeb3React()
   const idoContract = useIdoContract()
   const { t } = useTranslation()
   const { toastSuccess } = useToast()
+  const [stepIDO, setStepIDO] = useState(1)
 
   const handleCommit = () => {
     withAuth(
@@ -59,7 +63,7 @@ const Launchpad: React.FC = () => {
   return (
     <>
       <Page>
-        <Container>
+        <Container maxWidth={1200}>
           <WrapLaunchpad>
             <Flex flexDirection="row">
               <Flex flex={1} flexDirection="column">
@@ -243,10 +247,7 @@ const Launchpad: React.FC = () => {
                     </ButtonClosed>
                   </Flex>
                   <Flex mb={2}>
-                    <CurrencyLogo
-                      size="56px"
-                      address="https://dev.loopstarter.com/images/tokens/0x99976b5D5fd5D83aA6089598deC7fd5336CC310f.png"
-                    />
+                    <CurrencyLogo size="56px" address="0xB8c77482e45F1F44dE1745F52C74426C631bDD52" />
                     <Flex flexDirection="column" ml={2}>
                       <Text fontSize="28px" fontWeight={800} color="#fff">
                         120,000 BSUD
@@ -257,7 +258,7 @@ const Launchpad: React.FC = () => {
                     </Flex>
                   </Flex>
                   <Flex mb={2}>
-                    <CurrencyLogo size="56px" address="0x99976b5D5fd5D83aA6089598deC7fd5336CC310f" />
+                    <CurrencyLogo size="56px" address="0xB8c77482e45F1F44dE1745F52C74426C631bDD52" />
                     <Flex flexDirection="column" ml={2}>
                       <Text fontSize="28px" fontWeight={800} color="#fff">
                         2,181,818.18 LOOPS
@@ -291,13 +292,55 @@ const Launchpad: React.FC = () => {
                       000,000/120,000 $LOOPS
                     </Text>
                   </Flex>
+
+                  {stepIDO === 1 ? (
+                    <Flex justifyContent="center" mt="32px">
+                      <ButtonIDOStyled scale="sm" onClick={() => setStepIDO(2)}>
+                        Next
+                      </ButtonIDOStyled>
+                    </Flex>
+                  ) : null}
+                  {stepIDO === 2 ? (
+                    <>
+                      {' '}
+                      <Flex justifyContent="center" mt="32px">
+                        <ButtonIDOStyled scale="sm" onClick={() => setStepIDO(3)}>
+                          Aprove BUSD
+                        </ButtonIDOStyled>
+                      </Flex>
+                      <Flex justifyContent="center" mt="32px">
+                        <ButtonIDOStyled scale="sm" onClick={() => null}>
+                          {' '}
+                          Claim SHAL
+                        </ButtonIDOStyled>
+                      </Flex>
+                    </>
+                  ) : null}
+
+                  {stepIDO === 3 ? (
+                    <>
+                      <Flex justifyContent="center" mt="32px">
+                        <ButtonIDOStyled scale="sm" onClick={handleCommit}>
+                          Deposit BUSD
+                        </ButtonIDOStyled>
+                      </Flex>
+                      <Flex justifyContent="center" mt="32px">
+                        <ButtonIDOStyled scale="sm" onClick={handleCommit}>
+                          Claim LOOPS
+                        </ButtonIDOStyled>
+                      </Flex>
+                    </>
+                  ) : null}
+                  {stepIDO === 3 || stepIDO === 2 ? (
+                    <Flex mt="32px">
+                      <ButtonIDOStyled minWidth={100} scale="sm" onClick={() => null}>
+                        Add LOOPS to Metamask
+                      </ButtonIDOStyled>
+                    </Flex>
+                  ) : null}
                 </Box>
               </Flex>
             </Flex>
-
-            <Box mt="32px">
-              <Button onClick={handleCommit}>Commit</Button>
-            </Box>
           </WrapLaunchpad>
         </Container>
       </Page>
