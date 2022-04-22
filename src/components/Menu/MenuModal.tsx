@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { Flex, CloseIcon, IconButton, ChevronRightIcon } from '@loopstarter/uikit'
+import { Flex, CloseIcon, IconButton, ChevronRightIcon, InjectedModalProps } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 import LangSelector from 'components/Menu/LangSelector'
 import { languageList } from 'config/localization/languages'
