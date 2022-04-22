@@ -14,15 +14,19 @@ import useToast from 'hooks/useToast'
 import styled from 'styled-components'
 import Footer from './components/Footer'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
+import ConnectWalletButton from 'components/ConnectWalletButton';
 
-const WrapLaunchpad = styled.div`
+const WrapLaunchpad = styled.div<{ noMarginTop: boolean }>`
   border: 1px solid #d520af;
   box-sizing: border-box;
   border-radius: 5px;
-  margin-top: 64px;
+  margin-top: ${({ noMarginTop }) => (noMarginTop ? '0px' : '64px')};
   box-shadow: inset 0 0 10px #d520af, 0 0 10px #d520af;
   background: #360060;
   padding: 32px;
+  width: 100%;
+  margin-left: 16px;
+  margin-right: 16px;
 `
 const ButtonViewLoops = styled(Button)`
   background: #5c0c9b;
@@ -42,6 +46,12 @@ const Launchpad: React.FC = () => {
   const { t } = useTranslation()
   const { toastSuccess } = useToast()
   const [stepIDO, setStepIDO] = useState(1)
+
+  const getIDOInfo = async () => {
+    if (account) {
+      idoContract.poolInfo(0).then((e) => console.log('idoContractInfo', e))
+    }
+  }
 
   const handleCommit = () => {
     withAuth(
@@ -213,7 +223,13 @@ const Launchpad: React.FC = () => {
                   </Text>
                 </Flex>
                 <Flex mt={3} flexDirection="column" alignItems="center">
-                  <ButtonViewLoops scale="sm">View Loops</ButtonViewLoops>
+                  {!account ? (
+                    <ConnectWalletButton />
+                  ) : (
+                    <ButtonViewLoops scale="sm" onClick={getIDOInfo}>
+                      View Loops
+                    </ButtonViewLoops>
+                  )}
                 </Flex>
               </Flex>
 
@@ -342,6 +358,97 @@ const Launchpad: React.FC = () => {
               </Flex>
             </Flex>
           </WrapLaunchpad>
+          <Flex flex={1} mt={4} mb={3}>
+            <Flex flex={1} flexDirection="column">
+              <Flex justifyContent="center">
+                <Text color="#fff" fontWeight={800} fontSize="4">
+                  Pool Information
+                </Text>
+              </Flex>
+            </Flex>
+            <Flex flex={1} flexDirection="column">
+              <Flex justifyContent="center">
+                <Text color="#fff" fontWeight={800} fontSize="4">
+                  Pool Information
+                </Text>
+              </Flex>
+            </Flex>
+          </Flex>
+          <Flex flex={1}>
+            <WrapLaunchpad noMarginTop>
+              <Flex flexDirection="row" justifyContent="space-between">
+                <Box>
+                  <Text color="#883BC3">TOKEN DISTRIBUTION</Text>
+                  <Text color="#fff" fontWeight={800}>
+                    --/4/2022
+                  </Text>
+                </Box>
+                <Box>
+                  <Text color="#883BC3">MIN. ALLOCATION</Text>
+                  <Text color="#fff" fontWeight={800}>
+                    100 BUSD
+                  </Text>
+                </Box>
+                <Box>
+                  <Text color="#883BC3">ALLOCATION SIZE</Text>
+                  <Text color="#fff" fontWeight={800}>
+                    {' '}
+                    -{' '}
+                  </Text>
+                </Box>
+                <Box>
+                  <Text color="#883BC3">LISTING PRICE</Text>
+                  <Text color="#fff" fontWeight={800}>
+                    $ 0.055
+                  </Text>
+                </Box>
+              </Flex>
+            </WrapLaunchpad>
+            <WrapLaunchpad noMarginTop>
+              <Flex flexDirection="row" justifyContent="space-between">
+                <Box>
+                  <Text color="#883BC3">NAME</Text>
+                  <Text color="#fff" fontWeight={800}>
+                    LOOPSTARTER
+                  </Text>
+                </Box>
+                <Box>
+                  <Text color="#883BC3">SYMBOL</Text>
+                  <Text color="#fff" fontWeight={800}>
+                    $LOOPS
+                  </Text>
+                </Box>
+                <Box>
+                  <Text color="#883BC3">DECIMALS</Text>
+                  <Text color="#fff" fontWeight={800}>
+                    18
+                  </Text>
+                </Box>
+                <Box>
+                  <Text color="#883BC3">TOTAL SUPPLY</Text>
+                  <Text color="#fff" fontWeight={800}>
+                    200,000,000
+                  </Text>
+                </Box>
+              </Flex>
+              <Flex flexDirection="row" justifyContent="space-between">
+                <Box>
+                  <Text color="#883BC3">ADDRESS</Text>
+                  <Text
+                    color="#fff"
+                    fontWeight={800}
+                    onClick={() => {
+                      toastSuccess('Copy Success')
+                      navigator.clipboard.writeText('0x4D92Cd12D1Bf0994b9f54a6671059C32D86c0e30')
+                    }}
+                  >
+                    0x4D92Cd12D1Bf0994b9f54a6671059C32D86c0e30
+                    <CopyIcon color="primary" width="20px" ml={2} />
+                  </Text>
+                </Box>
+              </Flex>
+            </WrapLaunchpad>
+          </Flex>
         </Container>
       </Page>
       <div style={{ background: '#100151' }}>
