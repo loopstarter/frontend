@@ -426,7 +426,7 @@ const Stats = () => {
           </ArrowWrapper>
           <Team ref={refTeam} />
         </FlexBox>
-        <FlexBox justifyContent="center" alignItems="center" flexDirection="column" id="team">
+        <FlexBox justifyContent="center" alignItems="center" flexDirection="column" id="advisors">
           <Title color="#fff">
             <span>OUR ADVISORS</span>
           </Title>

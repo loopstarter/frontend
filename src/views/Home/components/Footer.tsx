@@ -152,7 +152,7 @@ export const TwitterIcon = styled(Icon)`
   height: 45px;
 `
 
-const TelegramIcon = styled(Icon)`
+export const TelegramIcon = styled(Icon)`
   background-position: 0 30.463576%;
   background-size: 102.173913%;
   width: 46px;

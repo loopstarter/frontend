@@ -33,6 +33,7 @@ import {
   getPancakeSquadContract,
   getErc721CollectionContract,
   getBunnySpecialXmasContract,
+  getIdoContract,
 } from 'utils/contractHelpers'
 import { getMulticallAddress } from 'utils/addressHelpers'
 import { VaultKey } from 'state/types'
@@ -229,6 +230,11 @@ export const useNftSaleContract = () => {
 export const usePancakeSquadContract = () => {
   const { library } = useActiveWeb3React()
   return useMemo(() => getPancakeSquadContract(library.getSigner()), [library])
+}
+
+export const useIdoContract = () => {
+  const { library } = useActiveWeb3React()
+  return useMemo(() => getIdoContract(library.getSigner()), [library])
 }
 
 export const useFarmAuctionContract = (withSignerIfPossible = true) => {

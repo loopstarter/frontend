@@ -1,4 +1,4 @@
-import { MenuItemsType } from '@loopstarter/uikit'
+import { MenuItemsType, DropdownMenuItemType } from '@loopstarter/uikit'
 import { ContextApi } from 'contexts/Localization/types'
 
 export type ConfigMenuItemsType = MenuItemsType & { hideSubNav?: boolean }
@@ -17,12 +17,14 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     href: '/#looppad',
     icon: 'Earn',
     items: [],
+    showItemsOnMobile: false,
   },
   {
     label: t('Team'),
     href: '/#team',
     icon: 'Stake',
     items: [],
+    showItemsOnMobile: false,
   },
   {
     label: 'Partner',
@@ -31,6 +33,8 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     icon: 'More',
     hideSubNav: true,
     items: [],
+    showItemsOnMobile: false,
+    type: DropdownMenuItemType.EXTERNAL_LINK,
   },
   {
     label: 'Roadmaps',
@@ -38,6 +42,7 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     icon: 'More',
     hideSubNav: true,
     items: [],
+    showItemsOnMobile: false,
   },
   {
     label: 'Doc',
@@ -45,7 +50,9 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     target: '_blank',
     icon: 'More',
     hideSubNav: true,
+    showItemsOnMobile: false,
     items: [],
+    type: DropdownMenuItemType.EXTERNAL_LINK,
   },
   {
     label: 'Whitelist',
@@ -53,6 +60,7 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     icon: 'More',
     hideSubNav: true,
     items: [],
+    showItemsOnMobile: false,
   },
 ]
 

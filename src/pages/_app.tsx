@@ -127,6 +127,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   return (
     <ErrorBoundary>
+      {/* @ts-ignore */}
       <MenuModal onDismiss={toggleMenu} isShowModal={isShowMenu} />
       <Menu toggleMenu={toggleMenu}>
         <Layout>
