@@ -1,21 +1,24 @@
 /* eslint-disable no-debugger */
-import { Box, Button, CopyIcon, Flex, Slider, Text, Skeleton } from '@loopstarter/uikit';
-import { useWeb3React } from '@web3-react/core'
-import Page from 'components/Layout/Page'
-import { BASE_API_URL } from 'config'
-import { withAuth } from 'hooks/useAuthSign'
-import { useIdoContract } from 'hooks/useContract'
-import React, { useEffect, useState } from 'react'
-import { get } from 'utils/http'
+import { Box, Button, CopyIcon, Flex, Skeleton, Slider, Text } from '@loopstarter/uikit';
+import { useWeb3React } from '@web3-react/core';
+import Page from 'components/Layout/Page';
+import { BASE_API_URL } from 'config';
+import { withAuth } from 'hooks/useAuthSign';
+import { useIdoContract } from 'hooks/useContract';
+import React, { useEffect, useState } from 'react';
+import { get } from 'utils/http';
 
-import ConnectWalletButton from 'components/ConnectWalletButton'
-import Container from 'components/Layout/Container'
-import { useTranslation } from 'contexts/Localization'
-import useToast from 'hooks/useToast'
-import styled from 'styled-components'
-import { formatBigNumber } from 'utils/formatBalance'
-import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
-import Footer from './components/Footer'
+import ConnectWalletButton from 'components/ConnectWalletButton';
+import Container from 'components/Layout/Container';
+import { useTranslation } from 'contexts/Localization';
+import useToast from 'hooks/useToast';
+import styled from 'styled-components';
+import { formatBigNumber } from 'utils/formatBalance';
+import { CurrencyLogo } from 'views/Info/components/CurrencyLogo';
+import Footer from './components/Footer';
+
+import BigNumber from 'bignumber.js';
+import { getFullDisplayBalance } from '../../utils/formatBalance';
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
@@ -48,6 +51,7 @@ const Launchpad: React.FC = () => {
   const { toastSuccess } = useToast()
   const [stepIDO, setStepIDO] = useState(1)
   const [poolInfo, setPoolInfo] = useState(null)
+  const [numberParticipant, setNumberParticipant] = useState(null)
 
   const getIDOInfo = async () => {
     if (account) {
@@ -59,6 +63,7 @@ const Launchpad: React.FC = () => {
   }
 
   useEffect(() => {
+    idoContract.getBuyers(0).then((res) => setNumberParticipant(res?.length || 0))
     const interval = setInterval(() => {
       getIDOInfo()
     }, 3000)
@@ -314,8 +319,7 @@ const Launchpad: React.FC = () => {
                   <Box>
                     <Text color="#883BC3">PARTICIPANTS</Text>
                     <Text color="#fff" fontWeight={800}>
-                      {' '}
-                      -{' '}
+                      {numberParticipant === null ?  <Skeleton height={20} width={64} /> :  numberParticipant}
                     </Text>
                   </Box>
                   <Box>
@@ -391,11 +395,16 @@ const Launchpad: React.FC = () => {
                     </Flex>
                   </Flex>
                   <Flex mb={2}>
-                    <CurrencyLogo size="56px" address="0xB8c77482e45F1F44dE1745F52C74426C631bDD52" />
+                    <CurrencyLogo size="56px" address={poolInfo?.idoToken} />
                     <Flex flexDirection="column" ml={2}>
-                      <Text fontSize="28px" fontWeight={800} color="#fff">
-                        2,181,818.18 LOOPS
-                      </Text>
+                      {poolInfo?.totalAmount ? (
+                        <Text fontSize="28px" fontWeight={800} color="#fff">
+                          {getFullDisplayBalance(poolInfo?.totalAmount?._hex, 18, 2)} LOOPS
+                        </Text>
+                      ) : (
+                        <Skeleton height={20} width={64} />
+                      )}
+
                       <Text fontSize="12px" color="#fff">
                         Total Sales Amount
                       </Text>
@@ -406,23 +415,27 @@ const Launchpad: React.FC = () => {
                       mt={2}
                       mb={1}
                       min={0}
-                      max={100}
-                      value={100}
+                      max={1}
+                      value={new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex).toNumber()}
                       onValueChanged={() => null}
                       name="stake"
-                      valueLabel={`${1}%`}
-                      step={1}
                       width="100%"
                     />
                   </Flex>
                   <Flex justifyContent="space-between" mb={4}>
                     <ButtonViewLoops scale="sm">
                       <Text fontSize="12px" color="#fff">
-                        100.00 % Completed
+                        {getFullDisplayBalance(
+                          new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex),
+                          0,
+                          4,
+                        )}{' '}
+                        % Completed
                       </Text>
                     </ButtonViewLoops>
                     <Text fontSize="12px" color="#fff">
-                      000,000/120,000 $LOOPS
+                      {getFullDisplayBalance(poolInfo?.amount?._hex)}/
+                      {getFullDisplayBalance(poolInfo?.totalAmount?._hex)} $LOOPS
                     </Text>
                   </Flex>
 

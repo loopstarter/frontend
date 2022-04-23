@@ -1,5 +1,5 @@
 /* eslint-disable no-debugger */
-import { Box, Button, Flex, LogoIcon, Slider, Text, Skeleton } from '@loopstarter/uikit';
+import { Box, Button, Flex, LogoIcon, Slider, Text, Skeleton } from '@loopstarter/uikit'
 import { useWeb3React } from '@web3-react/core'
 import Page from 'components/Layout/Page'
 import { useIdoContract } from 'hooks/useContract'
@@ -12,10 +12,11 @@ import useTokenBalance, { useGetBnbBalance } from 'hooks/useTokenBalance'
 import styled from 'styled-components'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import Footer from './components/Footer'
-import tokens from 'config/constants/tokens';
+import tokens from 'config/constants/tokens'
 import ConnectWalletButton from 'components/ConnectWalletButton'
-import { formatBigNumber, getFullDisplayBalance } from '../../utils/formatBalance';
-
+import { formatBigNumber, getFullDisplayBalance, getBalanceNumber } from '../../utils/formatBalance'
+import { BIG_ZERO } from '../../utils/bigNumber'
+import BigNumber from 'bignumber.js'
 
 const WrapLaunchpad = styled(Flex)`
   border: 1px solid #d520af;
@@ -40,22 +41,40 @@ const ViewBalance = styled(Flex)`
 const ButtonIDOStyled = styled(Button)`
   border-radius: 8px;
 `
+interface IIDOInfo {
+  amount?: IResponseBNumber
+  totalAmount?: IResponseBNumber
+  remainAmount?: IResponseBNumber
+  startTime?: IResponseBNumber
+  idoToken?: string
+}
+
+interface IResponseBNumber {
+  _hex?: BigNumber
+  _isBigNumber?: boolean
+}
+
+
 const Launchpad: React.FC = () => {
   const { account, library, connector } = useWeb3React()
   const idoContract = useIdoContract()
   const { t } = useTranslation()
   const { toastSuccess } = useToast()
-  const [poolInfo, setPoolInfo] = useState(null)
+  const [poolInfo, setPoolInfo] = useState<IIDOInfo>({})
+  const [numberParticipant, setNumberParticipant] = useState(0);
 
   const getIDOInfo = async () => {
+    console.log('account', account)
     if (account) {
       idoContract.poolInfo(0).then((data) => {
         setPoolInfo(data)
+        console.log('idoContractInfo', data)
       })
     }
   }
 
   useEffect(() => {
+    idoContract.getBuyers(0).then((res) => setNumberParticipant(res?.length || 0))
     const interval = setInterval(() => {
       getIDOInfo()
     }, 3000)
@@ -63,13 +82,15 @@ const Launchpad: React.FC = () => {
     return () => {
       clearInterval(interval)
     }
-  }, [])
+  }, [account])
 
   const balanceLoops = useTokenBalance(tokens.loops.address)
   const balanceBUSD = useTokenBalance(tokens.busd.address)
   const balanceBNB = useGetBnbBalance()
-  console.log('balanceLoops', balanceLoops.balance, balanceBUSD, balanceBNB)
+  // console.log('balanceLoops', balanceLoops.balance, balanceBUSD, balanceBNB)
   
+
+
   return (
     <>
       <Page>
@@ -99,7 +120,7 @@ const Launchpad: React.FC = () => {
                   )}
                 </ViewBalance>
                 <Flex justifyContent="center" mt={4}>
-                  <Text color="#fff">BSUD Balance</Text>
+                  <Text color="#fff">BUSD Balance</Text>
                 </Flex>
                 <ViewBalance mt={2} justifyContent="space-between">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -169,11 +190,16 @@ const Launchpad: React.FC = () => {
                   </Text>
                 </Flex>
                 <Flex mb={2}>
-                  <CurrencyLogo size="56px" address="0xB8c77482e45F1F44dE1745F52C74426C631bDD52" />
+                  <CurrencyLogo size="56px" address={poolInfo?.idoToken} />
                   <Flex flexDirection="column" ml={2}>
-                    <Text fontSize="28px" fontWeight={800} color="#fff">
-                      2,181,818.18 LOOPS
-                    </Text>
+                    {poolInfo?.totalAmount ? (
+                      <Text fontSize="28px" fontWeight={800} color="#fff">
+                        {getFullDisplayBalance(poolInfo?.totalAmount?._hex, 18, 2)} LOOPS
+                      </Text>
+                    ) : (
+                      <Skeleton height={20} width={64} />
+                    )}
+
                     <Text fontSize="12px" color="#fff">
                       Total Sales Amount
                     </Text>
@@ -184,37 +210,40 @@ const Launchpad: React.FC = () => {
                     mt={2}
                     mb={1}
                     min={0}
-                    max={100}
-                    value={100}
+                    max={1}
+                    value={new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex).toNumber()}
                     onValueChanged={() => null}
                     name="stake"
-                    valueLabel={`${1}%`}
-                    step={1}
                     width="100%"
                   />
                 </Flex>
                 <Flex justifyContent="space-between" mb={4}>
                   <ButtonViewLoops scale="sm">
                     <Text fontSize="12px" color="#fff">
-                      100.00 % Completed
+                      {getFullDisplayBalance(
+                        new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex),
+                        0,
+                        4,
+                      )}{' '}
+                      % Completed
                     </Text>
                   </ButtonViewLoops>
                   <Text fontSize="12px" color="#fff">
-                    000,000/120,000 $LOOPS
+                    {getFullDisplayBalance(poolInfo?.amount?._hex)}/{getFullDisplayBalance(poolInfo?.totalAmount?._hex)}{' '}
+                    $LOOPS
                   </Text>
                 </Flex>
                 <Flex flexDirection="row" justifyContent="space-between">
                   <Box>
                     <Text color="#883BC3">Participants</Text>
                     <Text color="#fff" fontWeight={800}>
-                      -
+                      {numberParticipant}
                     </Text>
                   </Box>
                   <Box>
                     <Text color="#883BC3">Alloc. Size</Text>
                     <Text color="#fff" fontWeight={800}>
-                      {' '}
-                      -{' '}
+                      100 BUSD
                     </Text>
                   </Box>
                   <Box>
