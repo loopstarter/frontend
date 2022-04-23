@@ -58,6 +58,13 @@ const Title = styled.p<{ color?: string }>`
   }
 `
 
+const Picture = styled.picture`
+  padding: 55px 35px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 10px 35px;
+  }
+`
+
 const fading = () => keyframes`
   from {
     opacity: 0.9;
@@ -431,9 +438,9 @@ const Stats = () => {
           <OurAdvisors />
         </FlexBox>
 
-        {/* <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
+        <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
           <Title color="#fff">
-            OUR <span> PARTNER</span>
+            OUR <span> PARTNER AND INVESTORS</span>
           </Title>
           <ArrowWrapper onClick={moveToOutPartner}>
             <picture>
@@ -443,21 +450,47 @@ const Stats = () => {
         </FlexBox>
         <Flex ref={refStaking} justifyContent="center" flexWrap="wrap" alignItems="center" padding="0 0 148px">
           <Picture>
-            <img src="/images/home/emurgo.png" alt={t('emurgo')} />
+            <img src="/images/home/changelly.png" alt={t('changelly')} />
           </Picture>
           <Picture>
-            <img src="/images/home/cFund.png" alt={t('cFund')} />
+            <img src="/images/home/orientCapital.png" alt={t('orientCapital')} />
           </Picture>
           <Picture>
-            <img src="/images/home/coin360.png" alt={t('coin360')} />
+            <img src="/images/home/getBlock.png" alt={t('getBlock')} />
           </Picture>
           <Picture>
-            <img src="/images/home/cardano.png" alt={t('cardano')} />
+            <img src="/images/home/legioDAO.png" alt={t('legioDAO')} />
+          </Picture>
+
+          <Picture>
+            <img src="/images/home/verichains.png" alt={t('verichains')} />
           </Picture>
           <Picture>
-            <img src="/images/home/scalable.png" alt={t('scalable')} />
+            <img src="/images/home/whitelistAlert.png" alt={t('whitelistAlert')} />
           </Picture>
-        </Flex> */}
+          <Picture>
+            <img src="/images/home/diviner.png" alt={t('diviner')} />
+          </Picture>
+          <Picture>
+            <img src="/images/home/erax.png" alt={t('erax')} />
+          </Picture>
+          <Picture>
+            <img src="/images/home/cryptoSyzygy.png" alt={t('cryptoSyzygy')} />
+          </Picture>
+
+          <Picture>
+            <img src="/images/home/metamoonshots.png" alt={t('metamoonshots')} />
+          </Picture>
+          <Picture>
+            <img src="/images/home/gotbit.png" alt={t('gotbit')} />
+          </Picture>
+          <Picture>
+            <img src="/images/home/coinmarketcap.png" alt={t('coinmarketcap')} />
+          </Picture>
+          <Picture>
+            <img src="/images/home/coingecko.png" alt={t('coingecko')} />
+          </Picture>
+        </Flex>
         {/* <Text>
           - The project is not optimized for the <span>Safari</span> browser. Please do not use <span>Safari</span> -
         </Text> */}
