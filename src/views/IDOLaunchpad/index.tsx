@@ -1,22 +1,21 @@
 /* eslint-disable no-debugger */
-import { Box, Button, Flex, LogoIcon, Slider, Text, Skeleton } from '@loopstarter/uikit'
+import { Box, Button, Flex, LogoIcon, Skeleton, Slider, Text } from '@loopstarter/uikit'
 import { useWeb3React } from '@web3-react/core'
 import Page from 'components/Layout/Page'
 import { useIdoContract } from 'hooks/useContract'
 import React, { useEffect, useState } from 'react'
 
+import BigNumber from 'bignumber.js'
+import ConnectWalletButton from 'components/ConnectWalletButton'
 import Container from 'components/Layout/Container'
+import tokens from 'config/constants/tokens'
 import { useTranslation } from 'contexts/Localization'
 import useToast from 'hooks/useToast'
 import useTokenBalance, { useGetBnbBalance } from 'hooks/useTokenBalance'
 import styled from 'styled-components'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
+import { formatBigNumber, getFullDisplayBalance } from '../../utils/formatBalance'
 import Footer from './components/Footer'
-import tokens from 'config/constants/tokens'
-import ConnectWalletButton from 'components/ConnectWalletButton'
-import { formatBigNumber, getFullDisplayBalance, getBalanceNumber } from '../../utils/formatBalance'
-import { BIG_ZERO } from '../../utils/bigNumber'
-import BigNumber from 'bignumber.js'
 
 const WrapLaunchpad = styled(Flex)`
   border: 1px solid #d520af;
@@ -54,42 +53,34 @@ interface IResponseBNumber {
   _isBigNumber?: boolean
 }
 
-
 const Launchpad: React.FC = () => {
   const { account, library, connector } = useWeb3React()
   const idoContract = useIdoContract()
   const { t } = useTranslation()
   const { toastSuccess } = useToast()
   const [poolInfo, setPoolInfo] = useState<IIDOInfo>({})
-  const [numberParticipant, setNumberParticipant] = useState(0);
-
-  const getIDOInfo = async () => {
-    console.log('account', account)
-    if (account) {
-      idoContract.poolInfo(0).then((data) => {
-        setPoolInfo(data)
-        console.log('idoContractInfo', data)
-      })
-    }
-  }
+  const [numberParticipant, setNumberParticipant] = useState(0)
 
   useEffect(() => {
     idoContract.getBuyers(0).then((res) => setNumberParticipant(res?.length || 0))
     const interval = setInterval(() => {
-      getIDOInfo()
+      if (account) {
+        idoContract.poolInfo(0).then((data) => {
+          setPoolInfo(data)
+          console.log('idoContractInfo', data)
+        })
+      }
     }, 3000)
 
     return () => {
       clearInterval(interval)
     }
-  }, [account])
+  }, [account, idoContract])
 
   const balanceLoops = useTokenBalance(tokens.loops.address)
   const balanceBUSD = useTokenBalance(tokens.busd.address)
   const balanceBNB = useGetBnbBalance()
   // console.log('balanceLoops', balanceLoops.balance, balanceBUSD, balanceBNB)
-  
-
 
   return (
     <>

@@ -53,25 +53,22 @@ const Launchpad: React.FC = () => {
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
 
-  const getIDOInfo = async () => {
-    if (account) {
-      idoContract.poolInfo(0).then((data) => {
-        setPoolInfo(data)
-        console.log('idoContractInfo', data)
-      })
-    }
-  }
 
   useEffect(() => {
     idoContract.getBuyers(0).then((res) => setNumberParticipant(res?.length || 0))
     const interval = setInterval(() => {
-      getIDOInfo()
+      if (account) {
+        idoContract.poolInfo(0).then((data) => {
+          setPoolInfo(data)
+          console.log('idoContractInfo', data)
+        })
+      }
     }, 3000)
 
     return () => {
       clearInterval(interval)
     }
-  }, [])
+  }, [account, idoContract])
 
   const handleCommit = () => {
     withAuth(
@@ -347,7 +344,7 @@ const Launchpad: React.FC = () => {
                   {!account ? (
                     <ConnectWalletButton />
                   ) : (
-                    <ButtonViewLoops scale="sm" onClick={getIDOInfo}>
+                    <ButtonViewLoops scale="sm">
                       View Loops
                     </ButtonViewLoops>
                   )}
