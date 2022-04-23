@@ -281,7 +281,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
                 <Text>110,000 BUSD</Text>
               </Flex>
             </Flex>
-            <Flex justifyContent="center" >
+            <Flex justifyContent="center">
               <IdoBtn>Join IDO</IdoBtn>
             </Flex>
           </Ido>
