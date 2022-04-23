@@ -1,19 +1,21 @@
 /* eslint-disable no-debugger */
-import { Box, Button, CopyIcon, Flex, Slider, Text, LogoIcon } from '@loopstarter/uikit'
+import { Box, Button, Flex, LogoIcon, Slider, Text, Skeleton } from '@loopstarter/uikit';
 import { useWeb3React } from '@web3-react/core'
 import Page from 'components/Layout/Page'
-import { BASE_API_URL } from 'config'
-import { withAuth } from 'hooks/useAuthSign'
 import { useIdoContract } from 'hooks/useContract'
-import React, { useState } from 'react'
-import { get } from 'utils/http'
+import React, { useEffect, useState } from 'react'
 
 import Container from 'components/Layout/Container'
 import { useTranslation } from 'contexts/Localization'
 import useToast from 'hooks/useToast'
+import { useTokenBalance, useGetBnbBalance } from 'hooks/useTokenBalance'
 import styled from 'styled-components'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import Footer from './components/Footer'
+import tokens from 'config/constants/tokens';
+import ConnectWalletButton from 'components/ConnectWalletButton'
+import { formatBigNumber } from '../../utils/formatBalance';
+
 
 const WrapLaunchpad = styled(Flex)`
   border: 1px solid #d520af;
@@ -43,8 +45,31 @@ const Launchpad: React.FC = () => {
   const idoContract = useIdoContract()
   const { t } = useTranslation()
   const { toastSuccess } = useToast()
-  const [stepIDO, setStepIDO] = useState(1)
+  const [poolInfo, setPoolInfo] = useState(null)
 
+  const getIDOInfo = async () => {
+    if (account) {
+      idoContract.poolInfo(0).then((data) => {
+        setPoolInfo(data)
+      })
+    }
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getIDOInfo()
+    }, 3000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
+  const balanceLoops = useGetBnbBalance()
+  const balanceBUSD = useTokenBalance(tokens.busd.address)
+  const balanceBNB = useGetBnbBalance()
+  console.log('balanceLoops', balanceLoops, balanceBUSD, balanceBNB)
+  
   return (
     <>
       <Page>
@@ -93,9 +118,13 @@ const Launchpad: React.FC = () => {
                       fill="white"
                     />
                   </svg>
-                  <Text color="#fff" ml={2}>
-                    0 BNB
-                  </Text>
+                  {balanceBNB.balance ? (
+                    <Text color="#fff" ml={2}>
+                      {formatBigNumber(balanceBNB.balance, 4, 18)} BNB
+                    </Text>
+                  ) : (
+                    <Skeleton height={20} width={64} />
+                  )}
                 </ViewBalance>
               </Flex>
             </WrapLaunchpad>
@@ -189,7 +218,7 @@ const Launchpad: React.FC = () => {
                 </Flex>
                 <Flex justifyContent="space-around" mb={2}>
                   <Flex justifyContent="center" mt="32px">
-                    <ButtonIDOStyled scale="sm" onClick={() => setStepIDO(3)}>
+                    <ButtonIDOStyled scale="sm">
                       <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M9.5 19.0001C4.25331 19.0001 0 14.7468 0 9.50012C0 4.25343 4.25331 0.00012207 9.5 0.00012207C14.7467 0.00012207 19 4.25343 19 9.50012C19 14.7468 14.7467 19.0001 9.5 19.0001ZM9.5 2.06534C5.39332 2.06534 2.06522 5.39448 2.06522 9.50012C2.06522 13.6058 5.39332 16.9349 9.5 16.9349C13.6067 16.9349 16.9348 13.6058 16.9348 9.50012C16.9348 5.39448 13.6067 2.06534 9.5 2.06534ZM11.3587 13.4757H7.64129V9.2523H5.31794L9.5 5.31806L13.6821 9.2523H11.3587V13.4757Z"
@@ -206,10 +235,13 @@ const Launchpad: React.FC = () => {
                           d="M9.5 19.0001C4.25331 19.0001 0 14.7468 0 9.50012C0 4.25343 4.25331 0.00012207 9.5 0.00012207C14.7467 0.00012207 19 4.25343 19 9.50012C19 14.7468 14.7467 19.0001 9.5 19.0001ZM9.5 2.06534C5.39332 2.06534 2.06522 5.39448 2.06522 9.50012C2.06522 13.6058 5.39332 16.9349 9.5 16.9349C13.6067 16.9349 16.9348 13.6058 16.9348 9.50012C16.9348 5.39448 13.6067 2.06534 9.5 2.06534ZM11.3587 13.4757H7.64129V9.2523H5.31794L9.5 5.31806L13.6821 9.2523H11.3587V13.4757Z"
                           fill="white"
                         />
-                      </svg>  
+                      </svg>
                       IDO Details
                     </ButtonIDOStyled>
                   </Flex>
+                </Flex>
+                <Flex justifyContent="center" mt="32px">
+                  {!account ? <ConnectWalletButton /> : null}
                 </Flex>
               </Flex>
             </WrapLaunchpad>

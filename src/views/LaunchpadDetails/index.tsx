@@ -1,22 +1,23 @@
 /* eslint-disable no-debugger */
-import { Box, Button, CopyIcon, Flex, Slider, Text } from '@loopstarter/uikit'
+import { Box, Button, CopyIcon, Flex, Slider, Text, Skeleton } from '@loopstarter/uikit';
 import { useWeb3React } from '@web3-react/core'
 import Page from 'components/Layout/Page'
 import { BASE_API_URL } from 'config'
 import { withAuth } from 'hooks/useAuthSign'
 import { useIdoContract } from 'hooks/useContract'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { get } from 'utils/http'
 
+import ConnectWalletButton from 'components/ConnectWalletButton'
 import Container from 'components/Layout/Container'
 import { useTranslation } from 'contexts/Localization'
 import useToast from 'hooks/useToast'
 import styled from 'styled-components'
-import Footer from './components/Footer'
+import { formatBigNumber } from 'utils/formatBalance'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
-import ConnectWalletButton from 'components/ConnectWalletButton';
+import Footer from './components/Footer'
 
-const WrapLaunchpad = styled.div<{ noMarginTop: boolean }>`
+const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
   box-sizing: border-box;
   border-radius: 5px;
@@ -46,12 +47,26 @@ const Launchpad: React.FC = () => {
   const { t } = useTranslation()
   const { toastSuccess } = useToast()
   const [stepIDO, setStepIDO] = useState(1)
+  const [poolInfo, setPoolInfo] = useState(null)
 
   const getIDOInfo = async () => {
     if (account) {
-      idoContract.poolInfo(0).then((e) => console.log('idoContractInfo', e))
+      idoContract.poolInfo(0).then((data) => {
+        setPoolInfo(data)
+        console.log('idoContractInfo', data)
+      })
     }
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getIDOInfo()
+    }, 3000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
 
   const handleCommit = () => {
     withAuth(
@@ -67,6 +82,104 @@ const Launchpad: React.FC = () => {
         })
       },
       { account, library, connector },
+    )
+  }
+  const PoolInfomation = () => {
+    return (
+      <>
+        {' '}
+        <Flex flex={1} mt={4} mb={3}>
+          <Flex flex={1} flexDirection="column">
+            <Flex justifyContent="center">
+              <Text color="#fff" fontWeight={800} fontSize="4">
+                Pool Information
+              </Text>
+            </Flex>
+          </Flex>
+          <Flex flex={1} flexDirection="column">
+            <Flex justifyContent="center">
+              <Text color="#fff" fontWeight={800} fontSize="4">
+                Pool Information
+              </Text>
+            </Flex>
+          </Flex>
+        </Flex>
+        <Flex flex={1}>
+          <WrapLaunchpad noMarginTop>
+            <Flex flexDirection="row" justifyContent="space-between">
+              <Box>
+                <Text color="#883BC3">TOKEN DISTRIBUTION</Text>
+                <Text color="#fff" fontWeight={800}>
+                  --/4/2022
+                </Text>
+              </Box>
+              <Box>
+                <Text color="#883BC3">MIN. ALLOCATION</Text>
+                <Text color="#fff" fontWeight={800}>
+                  100 BUSD
+                </Text>
+              </Box>
+              <Box>
+                <Text color="#883BC3">ALLOCATION SIZE</Text>
+                <Text color="#fff" fontWeight={800}>
+                  {' '}
+                  -{' '}
+                </Text>
+              </Box>
+              <Box>
+                <Text color="#883BC3">LISTING PRICE</Text>
+                <Text color="#fff" fontWeight={800}>
+                  $ 0.055
+                </Text>
+              </Box>
+            </Flex>
+          </WrapLaunchpad>
+          <WrapLaunchpad noMarginTop>
+            <Flex flexDirection="row" justifyContent="space-between">
+              <Box>
+                <Text color="#883BC3">NAME</Text>
+                <Text color="#fff" fontWeight={800}>
+                  LOOPSTARTER
+                </Text>
+              </Box>
+              <Box>
+                <Text color="#883BC3">SYMBOL</Text>
+                <Text color="#fff" fontWeight={800}>
+                  $LOOPS
+                </Text>
+              </Box>
+              <Box>
+                <Text color="#883BC3">DECIMALS</Text>
+                <Text color="#fff" fontWeight={800}>
+                  18
+                </Text>
+              </Box>
+              <Box>
+                <Text color="#883BC3">TOTAL SUPPLY</Text>
+                <Text color="#fff" fontWeight={800}>
+                  200,000,000
+                </Text>
+              </Box>
+            </Flex>
+            <Flex flexDirection="row" justifyContent="space-between">
+              <Box>
+                <Text color="#883BC3">ADDRESS</Text>
+                <Text
+                  color="#fff"
+                  fontWeight={800}
+                  onClick={() => {
+                    toastSuccess('Copy Success')
+                    navigator.clipboard.writeText(idoContract.address)
+                  }}
+                >
+                  {idoContract.address}
+                  <CopyIcon color="primary" width="20px" ml={2} />
+                </Text>
+              </Box>
+            </Flex>
+          </WrapLaunchpad>
+        </Flex>
+      </>
     )
   }
 
@@ -184,9 +297,13 @@ const Launchpad: React.FC = () => {
                 <Flex flexDirection="row" justifyContent="space-between">
                   <Box>
                     <Text color="#883BC3">TOTAL RAISE</Text>
-                    <Text color="#fff" fontWeight={800}>
-                      $ 120.000
-                    </Text>
+                    {poolInfo ? (
+                      <Text color="#fff" fontWeight={800}>
+                        $ {formatBigNumber(poolInfo?.totalAmount, 0, 18)}
+                      </Text>
+                    ) : (
+                      <Skeleton height={20} width={64} />
+                    )}
                   </Box>
                   <Box>
                     <Text color="#883BC3">NETWORK</Text>
@@ -215,10 +332,10 @@ const Launchpad: React.FC = () => {
                     fontWeight={800}
                     onClick={() => {
                       toastSuccess('Copy Success')
-                      navigator.clipboard.writeText('0x4D92Cd12D1Bf0994b9f54a6671059C32D86c0e30')
+                      navigator.clipboard.writeText(idoContract.address)
                     }}
                   >
-                    0x4D92Cd12D1Bf0994b9f54a6671059C32D86c0e30
+                    {idoContract.address}
                     <CopyIcon color="primary" width="20px" ml={2} />
                   </Text>
                 </Flex>
@@ -358,97 +475,7 @@ const Launchpad: React.FC = () => {
               </Flex>
             </Flex>
           </WrapLaunchpad>
-          <Flex flex={1} mt={4} mb={3}>
-            <Flex flex={1} flexDirection="column">
-              <Flex justifyContent="center">
-                <Text color="#fff" fontWeight={800} fontSize="4">
-                  Pool Information
-                </Text>
-              </Flex>
-            </Flex>
-            <Flex flex={1} flexDirection="column">
-              <Flex justifyContent="center">
-                <Text color="#fff" fontWeight={800} fontSize="4">
-                  Pool Information
-                </Text>
-              </Flex>
-            </Flex>
-          </Flex>
-          <Flex flex={1}>
-            <WrapLaunchpad noMarginTop>
-              <Flex flexDirection="row" justifyContent="space-between">
-                <Box>
-                  <Text color="#883BC3">TOKEN DISTRIBUTION</Text>
-                  <Text color="#fff" fontWeight={800}>
-                    --/4/2022
-                  </Text>
-                </Box>
-                <Box>
-                  <Text color="#883BC3">MIN. ALLOCATION</Text>
-                  <Text color="#fff" fontWeight={800}>
-                    100 BUSD
-                  </Text>
-                </Box>
-                <Box>
-                  <Text color="#883BC3">ALLOCATION SIZE</Text>
-                  <Text color="#fff" fontWeight={800}>
-                    {' '}
-                    -{' '}
-                  </Text>
-                </Box>
-                <Box>
-                  <Text color="#883BC3">LISTING PRICE</Text>
-                  <Text color="#fff" fontWeight={800}>
-                    $ 0.055
-                  </Text>
-                </Box>
-              </Flex>
-            </WrapLaunchpad>
-            <WrapLaunchpad noMarginTop>
-              <Flex flexDirection="row" justifyContent="space-between">
-                <Box>
-                  <Text color="#883BC3">NAME</Text>
-                  <Text color="#fff" fontWeight={800}>
-                    LOOPSTARTER
-                  </Text>
-                </Box>
-                <Box>
-                  <Text color="#883BC3">SYMBOL</Text>
-                  <Text color="#fff" fontWeight={800}>
-                    $LOOPS
-                  </Text>
-                </Box>
-                <Box>
-                  <Text color="#883BC3">DECIMALS</Text>
-                  <Text color="#fff" fontWeight={800}>
-                    18
-                  </Text>
-                </Box>
-                <Box>
-                  <Text color="#883BC3">TOTAL SUPPLY</Text>
-                  <Text color="#fff" fontWeight={800}>
-                    200,000,000
-                  </Text>
-                </Box>
-              </Flex>
-              <Flex flexDirection="row" justifyContent="space-between">
-                <Box>
-                  <Text color="#883BC3">ADDRESS</Text>
-                  <Text
-                    color="#fff"
-                    fontWeight={800}
-                    onClick={() => {
-                      toastSuccess('Copy Success')
-                      navigator.clipboard.writeText('0x4D92Cd12D1Bf0994b9f54a6671059C32D86c0e30')
-                    }}
-                  >
-                    0x4D92Cd12D1Bf0994b9f54a6671059C32D86c0e30
-                    <CopyIcon color="primary" width="20px" ml={2} />
-                  </Text>
-                </Box>
-              </Flex>
-            </WrapLaunchpad>
-          </Flex>
+          {stepIDO === 1 && <PoolInfomation />}
         </Container>
       </Page>
       <div style={{ background: '#100151' }}>
