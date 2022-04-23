@@ -10,7 +10,7 @@ import { simpleRpcProvider } from 'utils/providers'
 import { useCake, useTokenContract } from './useContract'
 import { useSWRContract } from './useSWRContract'
 
-export const useTokenBalance = (tokenAddress: string) => {
+const useTokenBalance = (tokenAddress: string) => {
   const { account } = useWeb3React()
 
   const contract = useTokenContract(tokenAddress, false)
