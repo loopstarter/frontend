@@ -29,6 +29,8 @@ export const mainnetTokens = defineTokens({
     'Loopstarter Token',
     'https://pancakeswap.finance/',
   ),
+  loops: new Token(MAINNET, '0x33D1b53722A43d2be15943B60061eCc763C30B46', 18, 'LOOPS', 'LOOPS', 'https://loopstarter.com'),
+
   tlos: new Token(MAINNET, '0xb6C53431608E626AC81a9776ac3e999c5556717c', 18, 'TLOS', 'Telos', 'https://www.telos.net/'),
   beta: new Token(
     MAINNET,
@@ -1972,23 +1974,30 @@ export const mainnetTokens = defineTokens({
 export const testnetTokens = defineTokens({
   wbnb: new Token(
     TESTNET,
-    '0x094616F0BdFB0b526bD735Bf66Eca0Ad254ca81F',
+    '0xbb5cc00198193e62bb1c02b2bbea4d542229cd8e',
     18,
     'WBNB',
     'Wrapped BNB',
     'https://www.binance.com/',
   ),
+  loops: new Token(TESTNET, '0x33D1b53722A43d2be15943B60061eCc763C30B46', 18, 'LOOPS', 'LOOPS', 'https://loopstarter.com'),
+
+  lpLoopsBnb: new Token(TESTNET, '0x0cc7fDA73620791a8e22654C754e5C2e1df976a6', 18, 'LP-LOOPS-BNB', 'LP-LOOPS-BNB', 'https://loopstarter.com'),
+  lpLoopsBusd: new Token(TESTNET, '0xAcd398DD095706E9b4A51b028e67023232e8D646', 18, 'LP-LOOPS-BUSD', 'LP-LOOPS-BUSD', 'https://loopstarter.com'),
   cake: new Token(
     TESTNET,
-    '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
+    '0x01BB38d9F8d2d83564bab7BD756EB801651E539F',
     18,
     'CAKE',
     'PancakeSwap Token',
     'https://pancakeswap.finance/',
   ),
+  usdt: new Token(TESTNET, '0x4aa236cf4516c7c94789bf2266fbf033387ff4ae', 18, 'DUSDT', 'Tether USD', 'https://loopstarter.com'),
+  btcb: new Token(TESTNET, '0x5f319004A2378a0ed9b398e102BDda9186AA4242', 18, 'BTCB', 'Binance BTC', 'https://bitcoin.org/'),
+  eth: new Token(TESTNET, '0x0f51c1691F5dBa6BBF95d9dEdA9Fd0f2AB26015D', 18, 'ETH', 'Binance-Peg Ethereum Token', 'https://ethereum.org/en/'),
   busd: new Token(
     TESTNET,
-    '0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee',
+    '0x99976b5d5fd5d83aa6089598dec7fd5336cc310f',
     18,
     'BUSD',
     'Binance USD',

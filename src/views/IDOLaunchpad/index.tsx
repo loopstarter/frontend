@@ -14,7 +14,7 @@ import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import Footer from './components/Footer'
 import tokens from 'config/constants/tokens';
 import ConnectWalletButton from 'components/ConnectWalletButton'
-import { formatBigNumber } from '../../utils/formatBalance';
+import { formatBigNumber, getFullDisplayBalance } from '../../utils/formatBalance';
 
 
 const WrapLaunchpad = styled(Flex)`
@@ -65,10 +65,10 @@ const Launchpad: React.FC = () => {
     }
   }, [])
 
-  const balanceLoops = useGetBnbBalance()
+  const balanceLoops = useTokenBalance(tokens.loops.address)
   const balanceBUSD = useTokenBalance(tokens.busd.address)
   const balanceBNB = useGetBnbBalance()
-  console.log('balanceLoops', balanceLoops, balanceBUSD, balanceBNB)
+  console.log('balanceLoops', balanceLoops.balance, balanceBUSD, balanceBNB)
   
   return (
     <>
@@ -83,35 +83,43 @@ const Launchpad: React.FC = () => {
                 <Flex justifyContent="center" mt={4}>
                   <Text color="#fff">$LOOPS Blance</Text>
                 </Flex>
-                <ViewBalance mt={2}>
+                <ViewBalance mt={2} justifyContent="space-between">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path
                       d="M20 7V5C20 3.897 19.103 3 18 3H5C3.346 3 2 4.346 2 6V18C2 20.201 3.794 21 5 21H20C21.103 21 22 20.103 22 19V9C22 7.897 21.103 7 20 7ZM18 16H16V12H18V16ZM5 7C4.74252 6.98848 4.49941 6.87809 4.32128 6.69182C4.14315 6.50554 4.04373 6.25774 4.04373 6C4.04373 5.74226 4.14315 5.49446 4.32128 5.30818C4.49941 5.12191 4.74252 5.01152 5 5H18V7H5Z"
                       fill="white"
                     />
                   </svg>
-                  <Text color="#fff" ml={2}>
-                    0 LOOPS
-                  </Text>
+                  {balanceLoops.balance ? (
+                    <Text color="#fff" ml={2}>
+                      {getFullDisplayBalance(balanceLoops.balance, 18, 4)} LOOPS
+                    </Text>
+                  ) : (
+                    <Skeleton height={20} width={64} />
+                  )}
                 </ViewBalance>
                 <Flex justifyContent="center" mt={4}>
                   <Text color="#fff">BSUD Balance</Text>
                 </Flex>
-                <ViewBalance mt={2}>
+                <ViewBalance mt={2} justifyContent="space-between">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path
                       d="M20 7V5C20 3.897 19.103 3 18 3H5C3.346 3 2 4.346 2 6V18C2 20.201 3.794 21 5 21H20C21.103 21 22 20.103 22 19V9C22 7.897 21.103 7 20 7ZM18 16H16V12H18V16ZM5 7C4.74252 6.98848 4.49941 6.87809 4.32128 6.69182C4.14315 6.50554 4.04373 6.25774 4.04373 6C4.04373 5.74226 4.14315 5.49446 4.32128 5.30818C4.49941 5.12191 4.74252 5.01152 5 5H18V7H5Z"
                       fill="white"
                     />
                   </svg>
-                  <Text color="#fff" ml={2}>
-                    0 BUSD
-                  </Text>
+                  {balanceBUSD.balance ? (
+                    <Text color="#fff" ml={2}>
+                      {getFullDisplayBalance(balanceBUSD.balance, 18, 4)} BUSD
+                    </Text>
+                  ) : (
+                    <Skeleton height={20} width={64} />
+                  )}
                 </ViewBalance>
                 <Flex justifyContent="center" mt={4}>
                   <Text color="#fff">BNB Balance</Text>
                 </Flex>
-                <ViewBalance mt={2}>
+                <ViewBalance mt={2} justifyContent="space-between">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path
                       d="M20 7V5C20 3.897 19.103 3 18 3H5C3.346 3 2 4.346 2 6V18C2 20.201 3.794 21 5 21H20C21.103 21 22 20.103 22 19V9C22 7.897 21.103 7 20 7ZM18 16H16V12H18V16ZM5 7C4.74252 6.98848 4.49941 6.87809 4.32128 6.69182C4.14315 6.50554 4.04373 6.25774 4.04373 6C4.04373 5.74226 4.14315 5.49446 4.32128 5.30818C4.49941 5.12191 4.74252 5.01152 5 5H18V7H5Z"
