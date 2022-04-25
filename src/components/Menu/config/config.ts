@@ -28,13 +28,10 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
   },
   {
     label: 'Partner',
-    href: 'https://docs.loopstarter.com/our-teams/partnership',
-    target: '_blank',
+    href: '/#partner',
     icon: 'More',
-    hideSubNav: true,
     items: [],
     showItemsOnMobile: false,
-    type: DropdownMenuItemType.EXTERNAL_LINK,
   },
   {
     label: 'Roadmaps',

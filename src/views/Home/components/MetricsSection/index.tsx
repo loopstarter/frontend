@@ -363,10 +363,10 @@ const Stats = () => {
             <img src="/images/home/isolation-mode.png" alt={t('LOOP STARTER')} />
           </picture>
         </StarsWrapper>
-        <Heading padding="100px 0 0" font="FSMagistralLight" ref={refRoadmaps} color="#150159">
+        <Heading padding="100px 0 0" font="FSMagistralLight" ref={refRoadmaps} color="#6fa8ff">
           {t('LOOP')}
         </Heading>
-        <Heading color="#150159">{t('ROADMAP')}</Heading>
+        <Heading color="#6fa8ff">{t('ROADMAP')}</Heading>
 
         <ArrowWrapper onClick={moveToRoadmaps}>
           <picture>
@@ -438,7 +438,7 @@ const Stats = () => {
           <OurAdvisors />
         </FlexBox>
 
-        <FlexBox justifyContent="center" alignItems="center" flexDirection="column">
+        <FlexBox justifyContent="center" alignItems="center" flexDirection="column" id="partner">
           <Title color="#fff">
             OUR <span> PARTNER AND INVESTORS</span>
           </Title>
