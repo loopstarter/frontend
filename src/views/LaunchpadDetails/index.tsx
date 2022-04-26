@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 import Page from 'components/Layout/Page'
 import { BASE_API_URL } from 'config'
 import { withAuth } from 'hooks/useAuthSign'
-import { useIdoContract } from 'hooks/useContract'
+import { useIdoContract, useTokenContract } from 'hooks/useContract'
 import React, { useEffect, useState } from 'react'
 import { get } from 'utils/http'
 
@@ -20,6 +20,10 @@ import Footer from './components/Footer'
 import BigNumber from 'bignumber.js'
 import { getFullDisplayBalance } from '../../utils/formatBalance'
 import tokens from 'config/constants/tokens'
+import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
+import { MaxUint256 } from '@ethersproject/constants';
+import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
+import { ToastDescriptionWithTx } from 'components/Toast'
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
@@ -53,6 +57,9 @@ const Launchpad: React.FC = () => {
   const [stepIDO, setStepIDO] = useState(1)
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
+  const busdContract = useTokenContract(tokens.busd.address)
+  const { callWithGasPrice } = useCallWithGasPrice()
+
 
   useEffect(() => {
     idoContract.getBuyers(0).then((res) => setNumberParticipant(res?.length || 0))
@@ -86,6 +93,47 @@ const Launchpad: React.FC = () => {
       { account, library, connector },
     )
   }
+  
+  const { isApproving, isApproved, isConfirming, handleApprove, handleConfirm } = useApproveConfirmTransaction({
+    onRequiresApproval: async () => {
+      try {
+        const currentAllowance = await busdContract.allowance(account, idoContract.address)
+        return currentAllowance.gt(0)
+      } catch (error) {
+        return false
+      }
+    },
+    onApprove: () => {
+      return callWithGasPrice(busdContract, 'approve', [idoContract.address, MaxUint256])
+    },
+    onApproveSuccess: async ({ receipt }) => {
+      toastSuccess(
+        t('Contract approved - you can now buy NFT with WBNB!'),
+        <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
+      )
+    },
+    onConfirm: () => {
+      // const payAmount = Number.isNaN(nftPrice) ? BigNumber.from(0) : parseUnits(nftToBuy.marketData.currentAskPrice)
+      // if (paymentCurrency === PaymentCurrency.BNB) {
+      //   return callWithGasPrice(nftMarketContract, 'buyTokenUsingBNB', [nftToBuy.collectionAddress, nftToBuy.tokenId], {
+      //     value: payAmount,
+      //   })
+      // }
+      // return callWithGasPrice(nftMarketContract, 'buyTokenUsingWBNB', [
+      //   nftToBuy.collectionAddress,
+      //   nftToBuy.tokenId,
+      //   payAmount,
+      // ])
+    },
+    onSuccess: async ({ receipt }) => {
+      // setConfirmedTxHash(receipt.transactionHash)
+      // setStage(BuyingStage.TX_CONFIRMED)
+      // toastSuccess(
+      //   t('Your NFT has been sent to your wallet'),
+      //   <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
+      // )
+    },
+  })
   const PoolInfomation = () => {
     return (
       <>
@@ -407,9 +455,7 @@ const Launchpad: React.FC = () => {
                       mb={1}
                       min={0}
                       max={1}
-                      value={new BigNumber(poolInfo?.amount?._hex)
-                        .div(poolInfo?.totalAmount?._hex)
-                        .toNumber()}
+                      value={new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex).toNumber()}
                       onValueChanged={() => null}
                       name="stake"
                       width="100%"

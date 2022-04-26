@@ -35,7 +35,7 @@ import {
   getBunnySpecialXmasContract,
   getIdoContract,
 } from 'utils/contractHelpers'
-import { getMulticallAddress } from 'utils/addressHelpers'
+import { getIdoAddress,getMulticallAddress } from 'utils/addressHelpers'
 import { VaultKey } from 'state/types'
 import {
   CakeVault,
@@ -61,6 +61,7 @@ import multiCallAbi from '../config/abi/Multicall.json'
 import { getContract, getProviderOrSigner } from '../utils'
 
 import { IPancakePair } from '../config/abi/types/IPancakePair'
+import IDO_ABI from 'config/abi/ido.json';
 
 /**
  * Helper hooks to get specific contracts (by ABI)
@@ -232,9 +233,8 @@ export const usePancakeSquadContract = () => {
   return useMemo(() => getPancakeSquadContract(library.getSigner()), [library])
 }
 
-export const useIdoContract = () => {
-  const { library } = useActiveWeb3React()
-  return useMemo(() => getIdoContract(library.getSigner()), [library])
+export const useIdoContract = (withSignerIfPossible = true) => {
+  return useContract(getIdoAddress(), IDO_ABI, withSignerIfPossible)
 }
 
 export const useFarmAuctionContract = (withSignerIfPossible = true) => {

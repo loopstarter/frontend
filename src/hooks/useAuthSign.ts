@@ -19,7 +19,7 @@ const checkExistedAccount = async (account) => {
 }
 
 const loginAccount = async (userNonce, { account, library, connector }) => {
-  const msg = `mefi- ${userNonce}`
+  const msg = `loop- ${userNonce}`
   const signature = await signMessage(connector, library, account, msg)
   const body = {
     signature,
