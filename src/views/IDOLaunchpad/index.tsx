@@ -87,7 +87,7 @@ const Launchpad: React.FC = () => {
       <Page>
         <Container maxWidth={1200}>
           <Flex flexDirection="row">
-            <WrapLaunchpad flex={1}>
+            <WrapLaunchpad flex={12}>
               <Flex flex={1} flexDirection="column">
                 <Flex justifyContent="center">
                   <LogoIcon />
@@ -148,7 +148,7 @@ const Launchpad: React.FC = () => {
                 </ViewBalance>
               </Flex>
             </WrapLaunchpad>
-            <WrapLaunchpad flex={1}>
+            <WrapLaunchpad flex={12}>
               <Flex flex={1} flexDirection="column">
                 <Flex justifyContent="center">
                   <picture>
@@ -181,7 +181,7 @@ const Launchpad: React.FC = () => {
                   </Text>
                 </Flex>
                 <Flex mb={2}>
-                  <CurrencyLogo size="56px" address={poolInfo?.idoToken} />
+                  <CurrencyLogo size="56px" address={tokens.loops.address} />
                   <Flex flexDirection="column" ml={2}>
                     {poolInfo?.totalAmount ? (
                       <Text fontSize="28px" fontWeight={800} color="#fff">

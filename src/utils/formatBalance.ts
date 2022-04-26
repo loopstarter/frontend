@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 import { BigNumber as EthersBigNumber, FixedNumber } from '@ethersproject/bignumber'
 import { formatUnits } from '@ethersproject/units'
 import { getLanguageCodeFromLS } from 'contexts/Localization/helpers'
-import { BIG_TEN, BIG_ZERO } from './bigNumber';
+import { BIG_TEN, BIG_ZERO } from './bigNumber'
 
 /**
  * Take a formatted amount, e.g. 15 BNB and convert it to full decimal value, e.g. 15000000000000000

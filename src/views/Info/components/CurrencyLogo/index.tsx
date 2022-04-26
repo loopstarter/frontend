@@ -17,11 +17,12 @@ export const CurrencyLogo: React.FC<{
   size?: string
 }> = ({ address, size = '24px', ...rest }) => {
   const src = useMemo(() => {
-    const checksummedAddress = isAddress(address)
-    if (checksummedAddress) {
-      return `https://assets.trustwalletapp.com/blockchains/smartchain/assets/${checksummedAddress}/logo.png`
-    }
-    return null
+    // const checksummedAddress = isAddress(address)
+    // if (checksummedAddress) {
+    // return `https://assets.trustwalletapp.com/blockchains/smartchain/assets/${checksummedAddress}/logo.png`
+    return `${window.location.origin}/images/tokens/${address}.png`
+    // }
+    // return null
   }, [address])
 
   return <StyledLogo size={size} src={src} alt="token logo" {...rest} />

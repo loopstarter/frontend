@@ -105,6 +105,6 @@ export default {
   },
   ido: {
     56: '0xb7dea93a2d783AFdfF387c66eECbE964e337e9A8',
-    97: '0xb7dea93a2d783AFdfF387c66eECbE964e337e9A8'
-  }
+    97: '0xb7dea93a2d783AFdfF387c66eECbE964e337e9A8',
+  },
 }
