@@ -407,7 +407,9 @@ const Launchpad: React.FC = () => {
                       mb={1}
                       min={0}
                       max={1}
-                      value={new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex).toNumber()}
+                      value={new BigNumber(poolInfo?.amount?._hex)
+                        .div(poolInfo?.totalAmount?._hex)
+                        .toNumber()}
                       onValueChanged={() => null}
                       name="stake"
                       width="100%"
@@ -417,9 +419,9 @@ const Launchpad: React.FC = () => {
                     <ButtonViewLoops scale="sm">
                       <Text fontSize="12px" color="#fff">
                         {getFullDisplayBalance(
-                          new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex),
+                          new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex).multipliedBy(100),
                           0,
-                          4,
+                          2,
                         )}{' '}
                         % Completed
                       </Text>

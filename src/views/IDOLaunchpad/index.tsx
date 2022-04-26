@@ -212,9 +212,9 @@ const Launchpad: React.FC = () => {
                   <ButtonViewLoops scale="sm">
                     <Text fontSize="12px" color="#fff">
                       {getFullDisplayBalance(
-                        new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex),
+                        new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex).multipliedBy(100),
                         0,
-                        4,
+                        2,
                       )}{' '}
                       % Completed
                     </Text>
