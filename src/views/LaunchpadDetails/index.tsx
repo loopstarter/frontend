@@ -17,13 +17,14 @@ import { formatBigNumber } from 'utils/formatBalance'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import Footer from './components/Footer'
 
+import { MaxUint256 } from '@ethersproject/constants'
 import BigNumber from 'bignumber.js'
-import { getFullDisplayBalance } from '../../utils/formatBalance'
+import { ToastDescriptionWithTx } from 'components/Toast'
 import tokens from 'config/constants/tokens'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
-import { MaxUint256 } from '@ethersproject/constants';
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
-import { ToastDescriptionWithTx } from 'components/Toast'
+import { getFullDisplayBalance } from '../../utils/formatBalance'
+import ApproveAndConfirmStage from './components/ApproveAndConfirmStage'
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
@@ -60,7 +61,6 @@ const Launchpad: React.FC = () => {
   const busdContract = useTokenContract(tokens.busd.address)
   const { callWithGasPrice } = useCallWithGasPrice()
 
-
   useEffect(() => {
     idoContract.getBuyers(0).then((res) => setNumberParticipant(res?.length || 0))
     const interval = setInterval(() => {
@@ -93,7 +93,7 @@ const Launchpad: React.FC = () => {
       { account, library, connector },
     )
   }
-  
+
   const { isApproving, isApproved, isConfirming, handleApprove, handleConfirm } = useApproveConfirmTransaction({
     onRequiresApproval: async () => {
       try {
@@ -113,6 +113,8 @@ const Launchpad: React.FC = () => {
       )
     },
     onConfirm: () => {
+      console.log('onConfirm')
+
       // const payAmount = Number.isNaN(nftPrice) ? BigNumber.from(0) : parseUnits(nftToBuy.marketData.currentAskPrice)
       // if (paymentCurrency === PaymentCurrency.BNB) {
       //   return callWithGasPrice(nftMarketContract, 'buyTokenUsingBNB', [nftToBuy.collectionAddress, nftToBuy.tokenId], {
@@ -426,7 +428,7 @@ const Launchpad: React.FC = () => {
                     <CurrencyLogo size="56px" address={tokens.busd.address} />
                     <Flex flexDirection="column" ml={2}>
                       <Text fontSize="28px" fontWeight={800} color="#fff">
-                        120,000 BSUD
+                        120,000 BUSD
                       </Text>
                       <Text fontSize="12px" color="#fff">
                         Total Raise Amount
@@ -487,33 +489,19 @@ const Launchpad: React.FC = () => {
                   ) : null}
                   {stepIDO === 2 ? (
                     <>
-                      {' '}
-                      <Flex justifyContent="center" mt="32px">
-                        <ButtonIDOStyled scale="sm" onClick={() => setStepIDO(3)}>
-                          Aprove BUSD
-                        </ButtonIDOStyled>
-                      </Flex>
-                      <Flex justifyContent="center" mt="32px">
-                        <ButtonIDOStyled scale="sm" onClick={() => null}>
-                          {' '}
-                          Claim SHAL
-                        </ButtonIDOStyled>
-                      </Flex>
-                    </>
-                  ) : null}
-
-                  {stepIDO === 3 ? (
-                    <>
-                      <Flex justifyContent="center" mt="32px">
-                        <ButtonIDOStyled scale="sm" onClick={handleCommit}>
-                          Deposit BUSD
-                        </ButtonIDOStyled>
-                      </Flex>
-                      <Flex justifyContent="center" mt="32px">
+                      <ApproveAndConfirmStage
+                        variant="buy"
+                        handleApprove={handleApprove}
+                        isApproved={isApproved}
+                        isApproving={isApproving}
+                        isConfirming={isConfirming}
+                        handleConfirm={handleConfirm}
+                      />
+                      {isApproved && <Flex justifyContent="center" mt="8px">
                         <ButtonIDOStyled scale="sm" onClick={handleCommit}>
                           Claim LOOPS
                         </ButtonIDOStyled>
-                      </Flex>
+                      </Flex>}
                     </>
                   ) : null}
                   {stepIDO === 3 || stepIDO === 2 ? (
