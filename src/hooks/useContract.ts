@@ -35,7 +35,7 @@ import {
   getBunnySpecialXmasContract,
   getIdoContract,
 } from 'utils/contractHelpers'
-import { getIdoAddress,getMulticallAddress } from 'utils/addressHelpers'
+import { getIdoAddress, getMulticallAddress } from 'utils/addressHelpers'
 import { VaultKey } from 'state/types'
 import {
   CakeVault,
@@ -61,7 +61,7 @@ import multiCallAbi from '../config/abi/Multicall.json'
 import { getContract, getProviderOrSigner } from '../utils'
 
 import { IPancakePair } from '../config/abi/types/IPancakePair'
-import IDO_ABI from 'config/abi/ido.json';
+import IDO_ABI from 'config/abi/ido.json'
 
 /**
  * Helper hooks to get specific contracts (by ABI)

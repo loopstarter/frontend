@@ -55,7 +55,7 @@ const Launchpad: React.FC = () => {
   const idoContract = useIdoContract()
   const { t } = useTranslation()
   const { toastSuccess } = useToast()
-  const pid = 0;
+  const pid = 0
   const [stepIDO, setStepIDO] = useState(1)
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
@@ -68,7 +68,7 @@ const Launchpad: React.FC = () => {
       if (account) {
         idoContract.poolInfo(pid).then((data) => {
           setPoolInfo(data)
-          console.log('idoContractInfo pid:',pid, data)
+          // console.log('idoContractInfo pid:', pid, data)
         })
       }
     }, 3000)
@@ -87,15 +87,14 @@ const Launchpad: React.FC = () => {
           console.error('Failed to fetch ido-signature')
           return err
         })
-        if (res.statusCode === 200) {
-          idoContract.buy(res.pid, res?.sign?.v, res?.sign?.r, res?.sign?.s).then((data) => {
-            console.log("data", data);
-            
-          })
-        }
-        console.log({
-          res,
+        console.log('res', res)
+
+        // if (res.status === 200) {
+        idoContract.buy(res.pid, res?.sign?.v, res?.sign?.r, res?.sign?.s).then((data) => {
+          console.log('data', data)
+          toastSuccess(t('Succcess'), <ToastDescriptionWithTx txHash={data.hash} />)
         })
+        // }
       },
       { account, library, connector },
     )
@@ -120,6 +119,7 @@ const Launchpad: React.FC = () => {
       )
     },
     onConfirm: () => {
+      // handleCommit()
       console.log('onConfirm')
 
       // const payAmount = Number.isNaN(nftPrice) ? BigNumber.from(0) : parseUnits(nftToBuy.marketData.currentAskPrice)
@@ -513,7 +513,7 @@ const Launchpad: React.FC = () => {
                       )}
                       <Flex justifyContent="center" mt="8px">
                         <ButtonIDOStyled scale="sm" onClick={handleCommit}>
-                          Claim LOOPS
+                          Buy IDO
                         </ButtonIDOStyled>
                       </Flex>
                     </>

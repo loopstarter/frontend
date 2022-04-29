@@ -37,8 +37,8 @@ const loginAccount = async (userNonce, { account, library, connector }) => {
   })
   if (res.ok) {
     const data = await res.json()
-    console.log("authen res ", res);
-    
+    console.log('authen res ', res)
+
     localStorage.setItem(LOOP_TOKEN, data.token)
     return data.token
   }

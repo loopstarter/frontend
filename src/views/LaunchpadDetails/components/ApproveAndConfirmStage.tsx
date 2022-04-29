@@ -51,7 +51,7 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
       )}
       <Flex justifyContent="center" mt="8px">
         <ButtonIDOStyled scale="sm" disabled={!isApproved || isConfirming} onClick={handleConfirm} variant="primary">
-          {isConfirming ? t('Confirming') : t(`Deposit ${tokens.usdt.symbol}`)}
+          {isConfirming ? t('Confirming') : t(`Buy IDO`)}
         </ButtonIDOStyled>
       </Flex>
     </Flex>
