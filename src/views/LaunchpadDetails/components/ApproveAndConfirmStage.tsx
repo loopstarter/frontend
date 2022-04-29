@@ -3,6 +3,7 @@ import { Flex, Text, Button, Spinner } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 // import { StepIndicator } from './styles'
 import styled from 'styled-components'
+import tokens from 'config/constants/tokens';
 
 interface ApproveAndConfirmStageProps {
   variant: 'buy' | 'sell'
@@ -33,7 +34,7 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
   return (
     <Flex p="16px" flexDirection="column">
       <Flex mb="8px" alignItems="center">
-        <Flex flexDirection="column" alignItems="center" justifyContent='center'>
+        <Flex flexDirection="column" alignItems="center" justifyContent="center">
           {!isApproved && (
             <Text mt="8px" maxWidth="275px" small color="textSubtle">
               {t('Please enable your BUSD to buy IDO')}
@@ -44,13 +45,13 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
       {!isApproved && (
         <Flex justifyContent="center">
           <ButtonIDOStyled scale="sm" variant="primary" disabled={isApproving || isApproved} onClick={handleApprove}>
-            {isApproving ? `${t('Approving')}...` : isApproved ? t('Approved') : t('Approve BUSD')}
+            {isApproving ? `${t('Approving')}...` : isApproved ? t('Approved') : t(`Approve ${tokens.usdt.symbol}`)}
           </ButtonIDOStyled>
         </Flex>
       )}
       <Flex justifyContent="center" mt="8px">
         <ButtonIDOStyled scale="sm" disabled={!isApproved || isConfirming} onClick={handleConfirm} variant="primary">
-          {isConfirming ? t('Confirming') : t('Deposit BUSD')}
+          {isConfirming ? t('Confirming') : t(`Deposit ${tokens.usdt.symbol}`)}
         </ButtonIDOStyled>
       </Flex>
     </Flex>

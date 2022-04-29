@@ -55,19 +55,20 @@ const Launchpad: React.FC = () => {
   const idoContract = useIdoContract()
   const { t } = useTranslation()
   const { toastSuccess } = useToast()
+  const pid = 0;
   const [stepIDO, setStepIDO] = useState(1)
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
-  const busdContract = useTokenContract(tokens.busd.address)
+  const usdtContract = useTokenContract(tokens.usdt.address)
   const { callWithGasPrice } = useCallWithGasPrice()
 
   useEffect(() => {
-    idoContract.getBuyers(0).then((res) => setNumberParticipant(res?.length || 0))
+    idoContract.getBuyers(pid).then((res) => setNumberParticipant(res?.length || 0))
     const interval = setInterval(() => {
       if (account) {
-        idoContract.poolInfo(0).then((data) => {
+        idoContract.poolInfo(pid).then((data) => {
           setPoolInfo(data)
-          console.log('idoContractInfo', data)
+          console.log('idoContractInfo pid:',pid, data)
         })
       }
     }, 3000)
@@ -81,11 +82,17 @@ const Launchpad: React.FC = () => {
     withAuth(
       async () => {
         const res = await get({
-          url: `${BASE_API_URL}/ido-signature?pid=0`,
+          url: `${BASE_API_URL}/ido-signature?pid=${pid}`,
         }).catch((err) => {
           console.error('Failed to fetch ido-signature')
           return err
         })
+        if (res.statusCode === 200) {
+          idoContract.buy(res.pid, res?.sign?.v, res?.sign?.r, res?.sign?.s).then((data) => {
+            console.log("data", data);
+            
+          })
+        }
         console.log({
           res,
         })
@@ -97,14 +104,14 @@ const Launchpad: React.FC = () => {
   const { isApproving, isApproved, isConfirming, handleApprove, handleConfirm } = useApproveConfirmTransaction({
     onRequiresApproval: async () => {
       try {
-        const currentAllowance = await busdContract.allowance(account, idoContract.address)
+        const currentAllowance = await usdtContract.allowance(account, idoContract.address)
         return currentAllowance.gt(0)
       } catch (error) {
         return false
       }
     },
     onApprove: () => {
-      return callWithGasPrice(busdContract, 'approve', [idoContract.address, MaxUint256])
+      return callWithGasPrice(usdtContract, 'approve', [idoContract.address, MaxUint256])
     },
     onApproveSuccess: async ({ receipt }) => {
       toastSuccess(
@@ -425,10 +432,10 @@ const Launchpad: React.FC = () => {
                     </ButtonClosed>
                   </Flex>
                   <Flex mb={2}>
-                    <CurrencyLogo size="56px" address={tokens.busd.address} />
+                    <CurrencyLogo size="56px" address={tokens.usdt.address} />
                     <Flex flexDirection="column" ml={2}>
                       <Text fontSize="28px" fontWeight={800} color="#fff">
-                        120,000 BUSD
+                        120,000 {tokens.usdt.symbol}
                       </Text>
                       <Text fontSize="12px" color="#fff">
                         Total Raise Amount
@@ -497,11 +504,18 @@ const Launchpad: React.FC = () => {
                         isConfirming={isConfirming}
                         handleConfirm={handleConfirm}
                       />
-                      {isApproved && <Flex justifyContent="center" mt="8px">
+                      {isApproved && (
+                        <Flex justifyContent="center" mt="8px">
+                          <ButtonIDOStyled scale="sm" onClick={handleCommit}>
+                            Claim LOOPS
+                          </ButtonIDOStyled>
+                        </Flex>
+                      )}
+                      <Flex justifyContent="center" mt="8px">
                         <ButtonIDOStyled scale="sm" onClick={handleCommit}>
                           Claim LOOPS
                         </ButtonIDOStyled>
-                      </Flex>}
+                      </Flex>
                     </>
                   ) : null}
                   {stepIDO === 3 || stepIDO === 2 ? (
