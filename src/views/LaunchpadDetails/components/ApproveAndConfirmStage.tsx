@@ -40,7 +40,7 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
       <Flex mb="8px" alignItems="center">
         <Flex flexDirection="column" alignItems="center" justifyContent="center">
           {!isApproved && (
-            <Text mt="8px" maxWidth="275px" small color="textSubtle">
+            <Text mt="8px" textAlign="center" small color="orange">
               {t('Please enable your BUSD to buy IDO')}
             </Text>
           )}
@@ -64,12 +64,12 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
         </ButtonIDOStyled>
       </Flex>
       {isBuyer && (
-        <Text mt="8px" maxWidth="275px" small color="textSubtle">
+        <Text mt="8px" small color="#1EAB81" fontWeight={600} textAlign="center">
           {t('You are already a member of this project!')}
         </Text>
       )}
       {!canHasEnoughBalance2BuyIDO && (
-        <Text mt="8px" maxWidth="275px" small color="red">
+        <Text mt="8px" small color="red" textAlign="center">
           {t('You do not have enough balance to buy IDO')}
         </Text>
       )}
