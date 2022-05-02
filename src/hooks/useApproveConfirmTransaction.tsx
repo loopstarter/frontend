@@ -78,7 +78,7 @@ interface OnSuccessProps {
 interface ApproveConfirmTransaction {
   onApprove: () => Promise<TransactionResponse>
   onConfirm: (params?) => Promise<TransactionResponse>
-  onRequiresApproval?: () => Promise<boolean>
+  onRequiresApproval?: (currentAccount: string) => Promise<boolean>
   onSuccess: ({ state, receipt }: OnSuccessProps) => void
   onApproveSuccess?: ({ state, receipt }: OnSuccessProps) => void
 }
@@ -135,8 +135,9 @@ const useApproveConfirmTransaction = ({
 
   // Check if approval is necessary, re-check if account changes
   useEffect(() => {
+
     if (account && handlePreApprove.current) {
-      handlePreApprove.current().then((result) => {
+      handlePreApprove.current(account).then((result) => {
         if (result) {
           dispatch({ type: 'requires_approval' })
         }
@@ -144,6 +145,7 @@ const useApproveConfirmTransaction = ({
     }
   }, [account, handlePreApprove, dispatch])
 
+  
   return {
     isApproving: state.approvalState === 'loading',
     isApproved: state.approvalState === 'success',

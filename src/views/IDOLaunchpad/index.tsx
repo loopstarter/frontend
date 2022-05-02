@@ -202,7 +202,10 @@ const Launchpad: React.FC = () => {
                     mb={1}
                     min={0}
                     max={1}
-                    value={new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex).toNumber()}
+                    value={new BigNumber(poolInfo?.totalAmount?._hex)
+                      .minus(poolInfo?.remainAmount?._hex)
+                      .div(poolInfo?.totalAmount?._hex)
+                      .toNumber()}
                     onValueChanged={() => null}
                     name="stake"
                     width="100%"
@@ -212,7 +215,10 @@ const Launchpad: React.FC = () => {
                   <ButtonViewLoops scale="sm">
                     <Text fontSize="12px" color="#fff">
                       {getFullDisplayBalance(
-                        new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex).multipliedBy(100),
+                        new BigNumber(poolInfo?.totalAmount?._hex)
+                          .minus(poolInfo?.remainAmount?._hex)
+                          .div(poolInfo?.totalAmount?._hex)
+                          .multipliedBy(100),
                         0,
                         2,
                       )}{' '}
@@ -220,7 +226,7 @@ const Launchpad: React.FC = () => {
                     </Text>
                   </ButtonViewLoops>
                   <Text fontSize="12px" color="#fff">
-                    {getFullDisplayBalance(poolInfo?.amount?._hex)}/{getFullDisplayBalance(poolInfo?.totalAmount?._hex)}{' '}
+                    {getFullDisplayBalance(poolInfo?.to?._hex)}/{getFullDisplayBalance(poolInfo?.totalAmount?._hex)}{' '}
                     $LOOPS
                   </Text>
                 </Flex>

@@ -25,6 +25,8 @@ import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { getFullDisplayBalance } from '../../utils/formatBalance'
 import ApproveAndConfirmStage from './components/ApproveAndConfirmStage'
+import { BIG_ONE } from '../../utils/bigNumber';
+import { registerToken } from 'utils/wallet';
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
@@ -59,7 +61,7 @@ const Launchpad: React.FC = () => {
   const [stepIDO, setStepIDO] = useState(1)
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
-  const usdtContract = useTokenContract(tokens.usdt.address)
+  const usdtContract = useTokenContract(tokens.usdt.address, true)
   const { callWithGasPrice } = useCallWithGasPrice()
 
   useEffect(() => {
@@ -89,21 +91,22 @@ const Launchpad: React.FC = () => {
         })
         console.log('res', res)
 
-        // if (res.status === 200) {
+        if (res.status === 200) {
         idoContract.buy(res.pid, res?.sign?.v, res?.sign?.r, res?.sign?.s).then((data) => {
           console.log('data', data)
           toastSuccess(t('Succcess'), <ToastDescriptionWithTx txHash={data.hash} />)
         })
-        // }
+        }
       },
       { account, library, connector },
     )
   }
 
   const { isApproving, isApproved, isConfirming, handleApprove, handleConfirm } = useApproveConfirmTransaction({
-    onRequiresApproval: async () => {
+    onRequiresApproval: async (currentAccount) => {
+
       try {
-        const currentAllowance = await usdtContract.allowance(account, idoContract.address)
+        const currentAllowance = await usdtContract.allowance(currentAccount || account, idoContract.address)        
         return currentAllowance.gt(0)
       } catch (error) {
         return false
@@ -119,7 +122,7 @@ const Launchpad: React.FC = () => {
       )
     },
     onConfirm: () => {
-      // handleCommit()
+      handleCommit()
       console.log('onConfirm')
 
       // const payAmount = Number.isNaN(nftPrice) ? BigNumber.from(0) : parseUnits(nftToBuy.marketData.currentAskPrice)
@@ -146,7 +149,6 @@ const Launchpad: React.FC = () => {
   const PoolInfomation = () => {
     return (
       <>
-        {' '}
         <Flex flex={1} mt={4} mb={3}>
           <Flex flex={1} flexDirection="column">
             <Flex justifyContent="center">
@@ -422,7 +424,7 @@ const Launchpad: React.FC = () => {
                             fill="#479EEE"
                           />
                         </svg>{' '}
-                        1 BUSD = 18,18 $LOOPS
+                        1 LOOPS = {getFullDisplayBalance(poolInfo?.tokenBuy2IDOtoken?._hex, 18, 2)} $BUSD
                       </Text>
                     </ButtonViewLoops>
                     <ButtonClosed scale="sm" ml={2}>
@@ -435,7 +437,12 @@ const Launchpad: React.FC = () => {
                     <CurrencyLogo size="56px" address={tokens.usdt.address} />
                     <Flex flexDirection="column" ml={2}>
                       <Text fontSize="28px" fontWeight={800} color="#fff">
-                        120,000 {tokens.usdt.symbol}
+                        {getFullDisplayBalance(
+                          new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
+                          36,
+                          2,
+                        )}{' '}
+                        ${tokens.usdt.symbol}
                       </Text>
                       <Text fontSize="12px" color="#fff">
                         Total Raise Amount
@@ -464,7 +471,10 @@ const Launchpad: React.FC = () => {
                       mb={1}
                       min={0}
                       max={1}
-                      value={new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex).toNumber()}
+                      value={new BigNumber(poolInfo?.totalAmount?._hex)
+                        .minus(poolInfo?.remainAmount?._hex)
+                        .div(poolInfo?.totalAmount?._hex)
+                        .toNumber()}
                       onValueChanged={() => null}
                       name="stake"
                       width="100%"
@@ -474,7 +484,10 @@ const Launchpad: React.FC = () => {
                     <ButtonViewLoops scale="sm">
                       <Text fontSize="12px" color="#fff">
                         {getFullDisplayBalance(
-                          new BigNumber(poolInfo?.amount?._hex).div(poolInfo?.totalAmount?._hex).multipliedBy(100),
+                          new BigNumber(poolInfo?.totalAmount?._hex)
+                            .minus(poolInfo?.remainAmount?._hex)
+                            .div(poolInfo?.totalAmount?._hex)
+                            .multipliedBy(100),
                           0,
                           2,
                         )}{' '}
@@ -482,8 +495,20 @@ const Launchpad: React.FC = () => {
                       </Text>
                     </ButtonViewLoops>
                     <Text fontSize="12px" color="#fff">
-                      {getFullDisplayBalance(poolInfo?.amount?._hex)}/
-                      {getFullDisplayBalance(poolInfo?.totalAmount?._hex)} $LOOPS
+                      {getFullDisplayBalance(
+                        new BigNumber(poolInfo?.totalAmount?._hex)
+                          .minus(poolInfo?.remainAmount?._hex)
+                          .multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
+                        36,
+                        2,
+                      )}
+                      /
+                      {getFullDisplayBalance(
+                        new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
+                        36,
+                        2,
+                      )}{' '}
+                      ${tokens.usdt.symbol}
                     </Text>
                   </Flex>
 
@@ -504,24 +529,23 @@ const Launchpad: React.FC = () => {
                         isConfirming={isConfirming}
                         handleConfirm={handleConfirm}
                       />
-                      {isApproved && (
+                      {/* {isApproved && (
                         <Flex justifyContent="center" mt="8px">
                           <ButtonIDOStyled scale="sm" onClick={handleCommit}>
                             Claim LOOPS
                           </ButtonIDOStyled>
                         </Flex>
-                      )}
-                      <Flex justifyContent="center" mt="8px">
-                        <ButtonIDOStyled scale="sm" onClick={handleCommit}>
-                          Buy IDO
-                        </ButtonIDOStyled>
-                      </Flex>
+                      )} */}
                     </>
                   ) : null}
                   {stepIDO === 3 || stepIDO === 2 ? (
                     <Flex mt="32px">
-                      <ButtonIDOStyled minWidth={100} scale="sm" onClick={() => null}>
-                        Add LOOPS to Metamask
+                      <ButtonIDOStyled
+                        minWidth={100}
+                        scale="sm"
+                        onClick={() => registerToken(tokens.loops.address, tokens.loops.symbol, tokens.loops.decimals)}
+                      >
+                        Add {tokens.loops.symbol} to Metamask
                       </ButtonIDOStyled>
                     </Flex>
                   ) : null}
