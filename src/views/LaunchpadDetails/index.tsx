@@ -23,10 +23,12 @@ import { ToastDescriptionWithTx } from 'components/Toast'
 import tokens from 'config/constants/tokens'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
+import { registerToken } from 'utils/wallet'
+import { BIG_ZERO } from '../../utils/bigNumber'
 import { getFullDisplayBalance } from '../../utils/formatBalance'
 import ApproveAndConfirmStage from './components/ApproveAndConfirmStage'
-import { BIG_ONE } from '../../utils/bigNumber'
-import { registerToken } from 'utils/wallet'
+import useTokenBalance from 'hooks/useTokenBalance';
+import { BIG_TEN } from 'utils/bigNumber';
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
@@ -64,6 +66,7 @@ const Launchpad: React.FC = () => {
   const usdtContract = useTokenContract(tokens.usdt.address, true)
   const [isBuyer, setIsBuyer] = useState(false);
   const { callWithGasPrice } = useCallWithGasPrice()
+  const balance2BuyIDO = useTokenBalance(tokens.usdt.address)
 
   useEffect(() => {
     idoContract.getBuyers(pid).then((res) => setNumberParticipant(res?.length || 0))
@@ -120,7 +123,7 @@ const Launchpad: React.FC = () => {
     },
     onApproveSuccess: async ({ receipt }) => {
       toastSuccess(
-        t('Contract approved - you can now buy NFT with WBNB!'),
+        t('Contract approved - you can now buy IDO!'),
         <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
       )
     },
@@ -143,10 +146,10 @@ const Launchpad: React.FC = () => {
     onSuccess: async ({ receipt }) => {
       // setConfirmedTxHash(receipt.transactionHash)
       // setStage(BuyingStage.TX_CONFIRMED)
-      // toastSuccess(
-      //   t('Your NFT has been sent to your wallet'),
-      //   <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
-      // )
+      toastSuccess(
+        t('Your IDO has been register. Congratulation!'),
+        <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
+      )
     },
   })
   const PoolInfomation = () => {
@@ -246,6 +249,10 @@ const Launchpad: React.FC = () => {
       </>
     )
   }
+  const canHasEnoughBalance2BuyIDO = new BigNumber(balance2BuyIDO.balance)
+    .minus(new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken._hex).div(BIG_TEN.pow(18)))
+    .gt(0)
+
 
   return (
     <>
@@ -468,6 +475,21 @@ const Launchpad: React.FC = () => {
                       </Text>
                     </Flex>
                   </Flex>
+                  <Flex mt={3}>
+                    <Text fontSize="14px" color={canHasEnoughBalance2BuyIDO ? '#fff' : 'red' }>
+                      Your {tokens.usdt.symbol} balance: {getFullDisplayBalance(balance2BuyIDO.balance, 18, 2)}
+                    </Text>
+                  </Flex>
+                  <Flex mt={2}>
+                    <Text fontSize="14px" color="#fff">
+                      Require balance {tokens.usdt.symbol}:{' '}
+                      {getFullDisplayBalance(
+                        new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
+                        36,
+                        2,
+                      )}
+                    </Text>
+                  </Flex>
                   <Flex>
                     <Slider
                       mt={2}
@@ -483,7 +505,7 @@ const Launchpad: React.FC = () => {
                       width="100%"
                     />
                   </Flex>
-                  <Flex justifyContent="space-between" mb={4}>
+                  <Flex justifyContent="space-between" mb={2}>
                     <ButtonViewLoops scale="sm">
                       <Text fontSize="12px" color="#fff">
                         {getFullDisplayBalance(
@@ -532,6 +554,7 @@ const Launchpad: React.FC = () => {
                         isConfirming={isConfirming}
                         handleConfirm={handleConfirm}
                         isBuyer={isBuyer}
+                        canHasEnoughBalance2BuyIDO={canHasEnoughBalance2BuyIDO}
                       />
                       {/* {isApproved && (
                         <Flex justifyContent="center" mt="8px">

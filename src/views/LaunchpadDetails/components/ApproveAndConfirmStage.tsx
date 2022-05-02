@@ -13,6 +13,7 @@ interface ApproveAndConfirmStageProps {
   handleApprove: () => void
   handleConfirm: () => void
   isBuyer: boolean
+  canHasEnoughBalance2BuyIDO: boolean
 }
 const ButtonIDOStyled = styled(Button)`
   border-radius: 8px;
@@ -30,6 +31,7 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
   handleApprove,
   handleConfirm,
   isBuyer,
+  canHasEnoughBalance2BuyIDO,
 }) => {
   const { t } = useTranslation()
 
@@ -54,19 +56,23 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
       <Flex justifyContent="center" mt="8px">
         <ButtonIDOStyled
           scale="sm"
-          disabled={!isApproved || isConfirming || isBuyer}
+          disabled={!isApproved || isConfirming || isBuyer || !canHasEnoughBalance2BuyIDO}
           onClick={handleConfirm}
           variant="primary"
         >
-          {isConfirming ? t('Confirming') : t(`Buy IDO`)}
+          {isConfirming ? t('Confirming...') : t(`Buy IDO`)}
         </ButtonIDOStyled>
-
       </Flex>
-        {isBuyer && (
-          <Text mt="8px" maxWidth="275px" small color="textSubtle">
-            {t('You are already a member of this project!')}
-          </Text>
-        )}
+      {isBuyer && (
+        <Text mt="8px" maxWidth="275px" small color="textSubtle">
+          {t('You are already a member of this project!')}
+        </Text>
+      )}
+      {!canHasEnoughBalance2BuyIDO && (
+        <Text mt="8px" maxWidth="275px" small color="red">
+          {t('You do not have enough balance to buy IDO')}
+        </Text>
+      )}
     </Flex>
   )
 }
