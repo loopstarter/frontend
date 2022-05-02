@@ -476,7 +476,7 @@ const Launchpad: React.FC = () => {
                     </Flex>
                   </Flex>
                   <Flex mt={3}>
-                    <Text fontSize="14px" color={canHasEnoughBalance2BuyIDO ? '#fff' : 'red' }>
+                    <Text fontSize="14px" color={canHasEnoughBalance2BuyIDO ? '#1EAB81' : 'red'} fontWeight={600}>
                       Your {tokens.usdt.symbol} balance: {getFullDisplayBalance(balance2BuyIDO.balance, 18, 2)}
                     </Text>
                   </Flex>
