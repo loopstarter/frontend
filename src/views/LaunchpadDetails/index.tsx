@@ -25,8 +25,8 @@ import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { getFullDisplayBalance } from '../../utils/formatBalance'
 import ApproveAndConfirmStage from './components/ApproveAndConfirmStage'
-import { BIG_ONE } from '../../utils/bigNumber';
-import { registerToken } from 'utils/wallet';
+import { BIG_ONE } from '../../utils/bigNumber'
+import { registerToken } from 'utils/wallet'
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
@@ -62,6 +62,7 @@ const Launchpad: React.FC = () => {
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
   const usdtContract = useTokenContract(tokens.usdt.address, true)
+  const [isBuyer, setIsBuyer] = useState(false);
   const { callWithGasPrice } = useCallWithGasPrice()
 
   useEffect(() => {
@@ -74,6 +75,7 @@ const Launchpad: React.FC = () => {
         })
       }
     }, 3000)
+    idoContract.isBuyer(account, pid).then((hasBuy) => setIsBuyer(hasBuy))
 
     return () => {
       clearInterval(interval)
@@ -92,10 +94,12 @@ const Launchpad: React.FC = () => {
         console.log('res', res)
 
         if (res.status === 200) {
-        idoContract.buy(res.pid, res?.sign?.v, res?.sign?.r, res?.sign?.s).then((data) => {
-          console.log('data', data)
-          toastSuccess(t('Succcess'), <ToastDescriptionWithTx txHash={data.hash} />)
-        })
+          idoContract.buy(res.pid, res?.sign?.v, res?.sign?.r, res?.sign?.s).then((data) => {
+            toastSuccess(t('Succcess'), <ToastDescriptionWithTx txHash={data.hash} />)
+          })
+        }
+        if (res.message === 'you bought') {
+          toastSuccess(t('Succcess'), t('You already bought!'))
         }
       },
       { account, library, connector },
@@ -104,9 +108,8 @@ const Launchpad: React.FC = () => {
 
   const { isApproving, isApproved, isConfirming, handleApprove, handleConfirm } = useApproveConfirmTransaction({
     onRequiresApproval: async (currentAccount) => {
-
       try {
-        const currentAllowance = await usdtContract.allowance(currentAccount || account, idoContract.address)        
+        const currentAllowance = await usdtContract.allowance(currentAccount || account, idoContract.address)
         return currentAllowance.gt(0)
       } catch (error) {
         return false
@@ -528,6 +531,7 @@ const Launchpad: React.FC = () => {
                         isApproving={isApproving}
                         isConfirming={isConfirming}
                         handleConfirm={handleConfirm}
+                        isBuyer={isBuyer}
                       />
                       {/* {isApproved && (
                         <Flex justifyContent="center" mt="8px">

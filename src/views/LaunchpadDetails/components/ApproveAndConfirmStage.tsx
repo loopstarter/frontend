@@ -12,6 +12,7 @@ interface ApproveAndConfirmStageProps {
   isConfirming: boolean
   handleApprove: () => void
   handleConfirm: () => void
+  isBuyer: boolean
 }
 const ButtonIDOStyled = styled(Button)`
   border-radius: 8px;
@@ -28,6 +29,7 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
   isConfirming,
   handleApprove,
   handleConfirm,
+  isBuyer,
 }) => {
   const { t } = useTranslation()
 
@@ -50,10 +52,21 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
         </Flex>
       )}
       <Flex justifyContent="center" mt="8px">
-        <ButtonIDOStyled scale="sm" disabled={!isApproved || isConfirming} onClick={handleConfirm} variant="primary">
+        <ButtonIDOStyled
+          scale="sm"
+          disabled={!isApproved || isConfirming || isBuyer}
+          onClick={handleConfirm}
+          variant="primary"
+        >
           {isConfirming ? t('Confirming') : t(`Buy IDO`)}
         </ButtonIDOStyled>
+
       </Flex>
+        {isBuyer && (
+          <Text mt="8px" maxWidth="275px" small color="textSubtle">
+            {t('You are already a member of this project!')}
+          </Text>
+        )}
     </Flex>
   )
 }
