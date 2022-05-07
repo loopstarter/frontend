@@ -4,6 +4,8 @@ import { useTranslation } from 'contexts/Localization'
 // import { StepIndicator } from './styles'
 import styled from 'styled-components'
 import tokens from 'config/constants/tokens';
+import { ToastDescriptionWithTx } from 'components/Toast'
+
 
 interface ApproveAndConfirmStageProps {
   variant: 'buy' | 'sell'
@@ -15,6 +17,8 @@ interface ApproveAndConfirmStageProps {
   isBuyer: boolean
   canHasEnoughBalance2BuyIDO: boolean
   hasSignForIDO: boolean
+  isIDOFinished: boolean
+  idoContract: any
 }
 const ButtonIDOStyled = styled(Button)`
   border-radius: 8px;
@@ -33,7 +37,9 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
   handleConfirm,
   isBuyer,
   canHasEnoughBalance2BuyIDO,
-  hasSignForIDO
+  hasSignForIDO,
+  isIDOFinished,
+  idoContract
 }) => {
   const { t } = useTranslation()
 
@@ -58,11 +64,13 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
       <Flex justifyContent="center" mt="8px">
         <ButtonIDOStyled
           scale="sm"
-          disabled={!isApproved || isConfirming || isBuyer || !canHasEnoughBalance2BuyIDO || !hasSignForIDO}
+          disabled={
+            !isApproved || isConfirming || isBuyer || !canHasEnoughBalance2BuyIDO || !hasSignForIDO || isIDOFinished
+          }
           onClick={handleConfirm}
           variant="primary"
         >
-          {isConfirming ? t('Confirming...') : t(`Buy IDO`)}
+          {isIDOFinished ? t('Finished') : isConfirming ? t('Confirming...') : t(`Buy IDO`)}
         </ButtonIDOStyled>
       </Flex>
       {isBuyer && (
@@ -79,6 +87,11 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
         <Text mt="8px" small color="red" textAlign="center">
           {t('You need to sign contract for IDO')}
         </Text>
+      )}
+      {isIDOFinished && (
+        <Flex justifyContent="center" mt="8px">
+          <ToastDescriptionWithTx txHash={idoContract?.address} type='address'/>
+        </Flex>
       )}
     </Flex>
   )

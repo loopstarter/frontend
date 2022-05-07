@@ -8,9 +8,10 @@ import truncateHash from 'utils/truncateHash'
 interface DescriptionWithTxProps {
   description?: string
   txHash?: string
+  type?: 'transaction' | 'token' | 'address' | 'block' | 'countdown'
 }
 
-const DescriptionWithTx: React.FC<DescriptionWithTxProps> = ({ txHash, children }) => {
+const DescriptionWithTx: React.FC<DescriptionWithTxProps> = ({ txHash, children, type = 'transaction' }) => {
   const { chainId } = useActiveWeb3React()
   const { t } = useTranslation()
 
@@ -18,7 +19,7 @@ const DescriptionWithTx: React.FC<DescriptionWithTxProps> = ({ txHash, children 
     <>
       {typeof children === 'string' ? <Text as="p">{children}</Text> : children}
       {txHash && (
-        <Link external href={getBscScanLink(txHash, 'transaction', chainId)}>
+        <Link external href={getBscScanLink(txHash, type, chainId)}>
           {t('View on BscScan')}: {truncateHash(txHash, 8, 0)}
         </Link>
       )}

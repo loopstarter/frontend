@@ -60,7 +60,6 @@ const Launchpad: React.FC = () => {
   const { t } = useTranslation()
   const { toastSuccess, toastError } = useToast()
   const pid = 0
-  const [stepIDO, setStepIDO] = useState(1)
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
   const usdtContract = useTokenContract(tokens.usdt.address, true)
@@ -160,6 +159,14 @@ const Launchpad: React.FC = () => {
     if (signData?.pid === pid && signData?.sign?.v) {
       return true
     }
+    return false
+  }
+  const isIDOFinished = (poolData: any) => {
+    const pStatus = new BigNumber(poolData?.status?._hex).toNumber()    
+    if (pStatus === 2) {
+      return true
+    }
+
     return false
   }
 
@@ -391,6 +398,8 @@ const Launchpad: React.FC = () => {
                     isBuyer={isBuyer}
                     canHasEnoughBalance2BuyIDO={canHasEnoughBalance2BuyIDO}
                     hasSignForIDO={hasSignForIDO(signatureIDOData)}
+                    isIDOFinished={isIDOFinished(poolInfo)}
+                    idoContract={idoContract}
                   />
                   {isBuyer && (
                     <Flex justifyContent="center" mt="8px">
