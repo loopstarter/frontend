@@ -78,19 +78,19 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
           {t('You are already a member of this project!')}
         </Text>
       )}
-      {!canHasEnoughBalance2BuyIDO && (
+      {!canHasEnoughBalance2BuyIDO && !isIDOFinished && (
         <Text mt="8px" small color="red" textAlign="center">
           {t('You do not have enough balance to buy IDO')}
         </Text>
       )}
-      {!hasSignForIDO && (
+      {!hasSignForIDO && !isIDOFinished && (
         <Text mt="8px" small color="red" textAlign="center">
           {t('You need to sign contract for IDO')}
         </Text>
       )}
       {isIDOFinished && (
         <Flex justifyContent="center" mt="8px">
-          <ToastDescriptionWithTx txHash={idoContract?.address} type='address'/>
+          <ToastDescriptionWithTx txHash={idoContract?.address} type="address" />
         </Flex>
       )}
     </Flex>

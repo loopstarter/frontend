@@ -29,6 +29,7 @@ import { registerToken } from 'utils/wallet'
 import { getFullDisplayBalance } from '../../utils/formatBalance'
 import ApproveAndConfirmStage from './components/ApproveAndConfirmStage'
 import PoolInfomation from './components/PoolInfomation'
+import { BIG_ZERO } from '../../utils/bigNumber'
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
@@ -67,6 +68,9 @@ const Launchpad: React.FC = () => {
   const { callWithGasPrice } = useCallWithGasPrice()
   const balance2BuyIDO = useTokenBalance(tokens.usdt.address)
   const [signatureIDOData, setSignatureIDOData] = useState({})
+  const [currentClaimTime, setCurrentClaimTime] = useState(0)
+  const [periodPercent, setPeriodPercent] = useState([])
+  const [claimState, setClaimState] = useState({})
 
   useEffect(() => {
     idoContract.getBuyers(pid).then((res) => setNumberParticipant(res?.length || 0))
@@ -79,11 +83,19 @@ const Launchpad: React.FC = () => {
       }
     }, 3000)
     idoContract.isBuyer(account, pid).then((hasBuy) => setIsBuyer(hasBuy))
+    idoContract?.currentClaimTime(pid).then((time) => setCurrentClaimTime(time))
+    idoContract?.getPeriodPercent(pid).then((arr) => setPeriodPercent(arr))
 
     return () => {
       clearInterval(interval)
     }
   }, [account, idoContract])
+
+  useEffect(() => {
+    if (account) {
+      getUserClaimState(poolInfo)
+    }
+  }, [account, poolInfo])
 
   const { isApproving, isApproved, isConfirming, handleApprove, handleConfirm, handleSign4IDO } =
     useApproveConfirmTransaction({
@@ -105,7 +117,6 @@ const Launchpad: React.FC = () => {
         )
       },
       onSignForIDO: () => {
-        console.log('onSignForIDO', signatureIDOData)
         withAuth(
           async () => {
             const res = await get({
@@ -117,13 +128,15 @@ const Launchpad: React.FC = () => {
             console.log('res handleCommit', res)
             if (res.message === 'you bought') {
               toastSuccess(t('Succcess'), t('You already bought!'))
+              setSignatureIDOData({})
+              return
+            }
+            if (res.status !== 200) {
+              toastError(t('Error'), t(res?.message))
+              setSignatureIDOData({})
               return
             }
             setSignatureIDOData(res)
-            // const txBuy = await callBuyIDO(res)
-            // if (txBuy) {
-            //   toastSuccess(t('Succcess'), <ToastDescriptionWithTx txHash={txBuy.hash} />)
-            // }
           },
           { account, library, connector },
         )
@@ -136,10 +149,6 @@ const Launchpad: React.FC = () => {
           signatureIDOData?.sign?.r,
           signatureIDOData?.sign?.s,
         )
-        // const txBuy = await callBuyIDO(res)
-        // if (txBuy) {
-        //   toastSuccess(t('Succcess'), <ToastDescriptionWithTx txHash={txBuy.hash} />)
-        // }
       },
       onSuccess: async ({ receipt }) => {
         // setConfirmedTxHash(receipt.transactionHash)
@@ -162,12 +171,38 @@ const Launchpad: React.FC = () => {
     return false
   }
   const isIDOFinished = (poolData: any) => {
-    const pStatus = new BigNumber(poolData?.status?._hex).toNumber()    
+    const pStatus = new BigNumber(poolData?.status?._hex).toNumber()
     if (pStatus === 2) {
       return true
     }
-
     return false
+  }
+  const getIDOState = (poolData: any) => {
+    return new BigNumber(poolData?.status?._hex).toNumber() || 0
+  }
+
+  const getUserClaimState = async (poolData: any): void => {
+    let TotalPercent = BIG_ZERO
+    periodPercent.forEach((nextValue): void => {
+      TotalPercent = TotalPercent.plus(new BigNumber(nextValue?._hex))
+    })
+    console.log('TotalPercent', TotalPercent.gte(new BigNumber(100)), currentClaimTime)
+    if (TotalPercent.gte(new BigNumber(100))) {
+      setClaimState({
+        message: 'You already claim all reward!',
+        hasClaim: false,
+      })
+    } else if (TotalPercent.lt(new BigNumber(100)) && currentClaimTime) {
+      setClaimState({
+        message: 'Claim',
+        hasClaim: true,
+      })
+    } else {
+      setClaimState({
+        message: 'Claim',
+        hasClaim: true,
+      })
+    }
   }
 
   return (
@@ -381,13 +416,14 @@ const Launchpad: React.FC = () => {
                       ${tokens.usdt.symbol}
                     </Text>
                   </Flex>
-                  {!hasSignForIDO(signatureIDOData) && (
-                    <Flex justifyContent="center" mt="32px">
-                      <ButtonIDOStyled scale="sm" onClick={() => handleSign4IDO()}>
-                        SignForIDO
-                      </ButtonIDOStyled>
-                    </Flex>
-                  )}
+                  {!hasSignForIDO(signatureIDOData) ||
+                    (isIDOFinished(poolInfo) && (
+                      <Flex justifyContent="center" mt="16px">
+                        <ButtonIDOStyled scale="sm" onClick={() => handleSign4IDO()}>
+                          SignForIDO
+                        </ButtonIDOStyled>
+                      </Flex>
+                    ))}
                   <ApproveAndConfirmStage
                     variant="buy"
                     handleApprove={handleApprove}
@@ -405,6 +441,7 @@ const Launchpad: React.FC = () => {
                     <Flex justifyContent="center" mt="8px">
                       <ButtonIDOStyled
                         scale="sm"
+                        disabled={isIDOFinished(poolInfo)}
                         onClick={async () => {
                           try {
                             const tx = await callWithGasPrice(idoContract, 'refund', [pid])
@@ -416,6 +453,25 @@ const Launchpad: React.FC = () => {
                         }}
                       >
                         Refund
+                      </ButtonIDOStyled>
+                    </Flex>
+                  )}
+                  {getIDOState(poolInfo) === 2 && (
+                    <Flex justifyContent="center" mt="8px">
+                      <ButtonIDOStyled
+                        scale="sm"
+                        disabled={!claimState?.hasClaim}
+                        onClick={async () => {
+                          try {
+                            const tx = await callWithGasPrice(idoContract, 'claim', [pid])
+                            console.log(tx, 'claim')
+                            toastSuccess('Claim success', <ToastDescriptionWithTx txHash={tx?.hash} />)
+                          } catch (error) {
+                            toastError('Something wrong!', error?.data?.message)
+                          }
+                        }}
+                      >
+                        {claimState?.message ? t(claimState?.message) : t('Claim')}
                       </ButtonIDOStyled>
                     </Flex>
                   )}
