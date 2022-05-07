@@ -23,12 +23,12 @@ import { ToastDescriptionWithTx } from 'components/Toast'
 import tokens from 'config/constants/tokens'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
+import useTokenBalance from 'hooks/useTokenBalance'
+import { BIG_TEN } from 'utils/bigNumber'
 import { registerToken } from 'utils/wallet'
-import { BIG_ZERO } from '../../utils/bigNumber'
 import { getFullDisplayBalance } from '../../utils/formatBalance'
 import ApproveAndConfirmStage from './components/ApproveAndConfirmStage'
-import useTokenBalance from 'hooks/useTokenBalance';
-import { BIG_TEN } from 'utils/bigNumber';
+import PoolInfomation from './components/PoolInfomation'
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
@@ -58,7 +58,7 @@ const Launchpad: React.FC = () => {
   const { account, library, connector } = useWeb3React()
   const idoContract = useIdoContract()
   const { t } = useTranslation()
-  const { toastSuccess } = useToast()
+  const { toastSuccess, toastError } = useToast()
   const pid = 0
   const [stepIDO, setStepIDO] = useState(1)
   const [poolInfo, setPoolInfo] = useState(null)
@@ -67,6 +67,7 @@ const Launchpad: React.FC = () => {
   const [isBuyer, setIsBuyer] = useState(false);
   const { callWithGasPrice } = useCallWithGasPrice()
   const balance2BuyIDO = useTokenBalance(tokens.usdt.address)
+  const [signatureIDOData, setSignatureIDOData] = useState({});
 
   useEffect(() => {
     idoContract.getBuyers(pid).then((res) => setNumberParticipant(res?.length || 0))
@@ -95,15 +96,15 @@ const Launchpad: React.FC = () => {
           return err
         })
         console.log('res', res)
-
-        if (res.status === 200) {
-          idoContract.buy(res.pid, res?.sign?.v, res?.sign?.r, res?.sign?.s).then((data) => {
-            toastSuccess(t('Succcess'), <ToastDescriptionWithTx txHash={data.hash} />)
-          })
-        }
         if (res.message === 'you bought') {
           toastSuccess(t('Succcess'), t('You already bought!'))
+          return
         }
+        setSignatureIDOData(res)
+        idoContract.buy(res.pid, res?.sign?.v, res?.sign?.r, res?.sign?.s).then((data) => {
+          console.log("data idoContract.buy ", data);
+          toastSuccess(t('Succcess'), <ToastDescriptionWithTx txHash={data.hash} />)
+        })
       },
       { account, library, connector },
     )
@@ -131,17 +132,7 @@ const Launchpad: React.FC = () => {
       handleCommit()
       console.log('onConfirm')
 
-      // const payAmount = Number.isNaN(nftPrice) ? BigNumber.from(0) : parseUnits(nftToBuy.marketData.currentAskPrice)
-      // if (paymentCurrency === PaymentCurrency.BNB) {
-      //   return callWithGasPrice(nftMarketContract, 'buyTokenUsingBNB', [nftToBuy.collectionAddress, nftToBuy.tokenId], {
-      //     value: payAmount,
-      //   })
-      // }
-      // return callWithGasPrice(nftMarketContract, 'buyTokenUsingWBNB', [
-      //   nftToBuy.collectionAddress,
-      //   nftToBuy.tokenId,
-      //   payAmount,
-      // ])
+
     },
     onSuccess: async ({ receipt }) => {
       // setConfirmedTxHash(receipt.transactionHash)
@@ -152,103 +143,7 @@ const Launchpad: React.FC = () => {
       )
     },
   })
-  const PoolInfomation = () => {
-    return (
-      <>
-        <Flex flex={1} mt={4} mb={3}>
-          <Flex flex={1} flexDirection="column">
-            <Flex justifyContent="center">
-              <Text color="#fff" fontWeight={800} fontSize="4">
-                Pool Information
-              </Text>
-            </Flex>
-          </Flex>
-          <Flex flex={1} flexDirection="column">
-            <Flex justifyContent="center">
-              <Text color="#fff" fontWeight={800} fontSize="4">
-                Pool Information
-              </Text>
-            </Flex>
-          </Flex>
-        </Flex>
-        <Flex flex={1}>
-          <WrapLaunchpad noMarginTop>
-            <Flex flexDirection="row" justifyContent="space-between">
-              <Box>
-                <Text color="#883BC3">TOKEN DISTRIBUTION</Text>
-                <Text color="#fff" fontWeight={800}>
-                  --/4/2022
-                </Text>
-              </Box>
-              <Box>
-                <Text color="#883BC3">MIN. ALLOCATION</Text>
-                <Text color="#fff" fontWeight={800}>
-                  100 BUSD
-                </Text>
-              </Box>
-              <Box>
-                <Text color="#883BC3">ALLOCATION SIZE</Text>
-                <Text color="#fff" fontWeight={800}>
-                  {' '}
-                  -{' '}
-                </Text>
-              </Box>
-              <Box>
-                <Text color="#883BC3">LISTING PRICE</Text>
-                <Text color="#fff" fontWeight={800}>
-                  $ 0.055
-                </Text>
-              </Box>
-            </Flex>
-          </WrapLaunchpad>
-          <WrapLaunchpad noMarginTop>
-            <Flex flexDirection="row" justifyContent="space-between">
-              <Box>
-                <Text color="#883BC3">NAME</Text>
-                <Text color="#fff" fontWeight={800}>
-                  LOOPSTARTER
-                </Text>
-              </Box>
-              <Box>
-                <Text color="#883BC3">SYMBOL</Text>
-                <Text color="#fff" fontWeight={800}>
-                  $LOOPS
-                </Text>
-              </Box>
-              <Box>
-                <Text color="#883BC3">DECIMALS</Text>
-                <Text color="#fff" fontWeight={800}>
-                  18
-                </Text>
-              </Box>
-              <Box>
-                <Text color="#883BC3">TOTAL SUPPLY</Text>
-                <Text color="#fff" fontWeight={800}>
-                  200,000,000
-                </Text>
-              </Box>
-            </Flex>
-            <Flex flexDirection="row" justifyContent="space-between">
-              <Box>
-                <Text color="#883BC3">ADDRESS</Text>
-                <Text
-                  color="#fff"
-                  fontWeight={800}
-                  onClick={() => {
-                    toastSuccess('Copy Success')
-                    navigator.clipboard.writeText(idoContract.address)
-                  }}
-                >
-                  {idoContract.address}
-                  <CopyIcon color="primary" width="20px" ml={2} />
-                </Text>
-              </Box>
-            </Flex>
-          </WrapLaunchpad>
-        </Flex>
-      </>
-    )
-  }
+  
   const canHasEnoughBalance2BuyIDO = new BigNumber(balance2BuyIDO.balance)
     .minus(new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken._hex).div(BIG_TEN.pow(18)))
     .gt(0)
@@ -291,78 +186,7 @@ const Launchpad: React.FC = () => {
                     </svg>
                   </Button>
                   <Button variant="text" m={1} mt={2}>
-                    <svg width="58" height="44" viewBox="0 0 58 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect width="58" height="44" rx="5" fill="#450279" />
-                      <mask id="mask0_1020_3687" maskUnits="userSpaceOnUse" x="17" y="10" width="24" height="24">
-                        <rect x="17" y="10" width="23.5848" height="23.5848" fill="#C4C4C4" />
-                      </mask>
-                      <g mask="url(#mask0_1020_3687)">
-                        <path
-                          d="M18.1797 22.1328C18.4146 22.1328 18.6478 22.1488 18.8916 22.1506C19.7329 22.1506 20.5753 22.1506 21.419 22.1506C21.54 22.1506 21.6147 22.1666 21.6183 22.3126C21.6522 23.6348 21.8385 24.9487 22.1736 26.2282C22.1799 26.2576 22.1847 26.2873 22.1878 26.3172L21.4332 26.189C20.659 26.0555 19.8848 25.9167 19.1105 25.7903C19.061 25.7866 19.0139 25.7675 18.9759 25.7355C18.9379 25.7036 18.9109 25.6605 18.8987 25.6124C18.5293 24.6596 18.3032 23.6574 18.2277 22.6383C18.2197 22.5919 18.2065 22.5465 18.1886 22.503L18.1797 22.1328Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M18.1797 21.0566C18.2224 20.7505 18.2633 20.4443 18.3061 20.14C18.4192 19.3761 18.6217 18.6282 18.9094 17.9117C18.9313 17.8736 18.9611 17.8406 18.9967 17.8148C19.0322 17.789 19.0729 17.7711 19.1159 17.7622C20.0307 17.5966 20.9491 17.4418 21.8657 17.2852L22.195 17.23C21.8294 18.5855 21.6298 19.9804 21.6005 21.3841C21.5258 21.3841 21.4777 21.4001 21.4225 21.4001H18.3025C18.2613 21.3986 18.2203 21.3944 18.1797 21.3876V21.0566Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M22.3335 22.165H28.408V27.0649H28.1855C26.6746 27.0284 25.1692 26.8683 23.6844 26.5861C23.5064 26.5541 23.3159 26.5309 23.1362 26.4829C23.101 26.4728 23.0685 26.4549 23.0411 26.4305C23.0136 26.4062 22.992 26.3761 22.9778 26.3423C22.7998 25.4524 22.6076 24.5625 22.4599 23.6725C22.3851 23.1795 22.3744 22.6812 22.3335 22.165Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M29.1786 27.0653V22.1672H35.2549C35.2104 22.7225 35.2015 23.2707 35.1161 23.8065C34.9826 24.6341 34.7975 25.4546 34.6337 26.2786C34.6287 26.3386 34.6021 26.3946 34.5589 26.4365C34.5157 26.4784 34.4589 26.5032 34.3988 26.5064C32.7601 26.8259 31.0983 27.0128 29.4295 27.0653H29.1786Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M28.4072 16.5007V21.3881H22.3843C22.3843 21.1229 22.3683 20.8541 22.3843 20.5925C22.463 19.4643 22.655 18.3469 22.9574 17.2571C22.9859 17.1557 23.0162 17.0791 23.1496 17.0613C24.8503 16.7222 26.5774 16.5328 28.3111 16.4954L28.4072 16.5007Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M29.1763 21.3837V16.5052C29.2403 16.5052 29.2991 16.4945 29.3543 16.4963C30.8855 16.5263 32.4114 16.6852 33.9159 16.9715C33.9291 16.9767 33.9428 16.9803 33.9569 16.9822C34.4695 16.9537 34.6474 17.226 34.7542 17.7048C35.0357 18.9121 35.1955 20.1445 35.2312 21.3837H29.1763Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M29.1805 15.7383V11.1802C29.6121 11.2078 30.0346 11.3159 30.4264 11.4988C31.5726 12.0025 32.4074 12.8603 33.0961 13.8748C33.5998 14.6211 34.0076 15.4278 34.31 16.2758C32.619 15.9484 30.9027 15.7685 29.1805 15.7383Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M28.4125 11.1802V15.7365C26.6897 15.7634 24.9727 15.9421 23.2812 16.2705C23.5204 15.5994 23.8244 14.9532 24.189 14.3411C24.7267 13.3879 25.4688 12.5655 26.3621 11.933C26.9084 11.5555 27.5314 11.3033 28.1864 11.1944C28.2594 11.1909 28.3235 11.1909 28.4125 11.1802Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M23.231 27.2981C24.1618 27.4262 25.0108 27.5633 25.8526 27.6541C26.6945 27.7448 27.5435 27.7911 28.4049 27.857V32.3759C27.8236 32.3252 27.2604 32.1478 26.755 31.8562C25.6355 31.2315 24.8239 30.3007 24.1956 29.2078C23.8468 28.6009 23.562 27.9584 23.231 27.2981Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M29.1763 32.3783V27.8255C30.9006 27.7926 32.6187 27.6092 34.311 27.2773C34.2488 27.4411 34.2007 27.5764 34.1437 27.7116C33.6098 28.9949 32.9157 30.166 31.878 31.1075C31.1945 31.76 30.3319 32.1938 29.4005 32.3534C29.3275 32.3605 29.2635 32.3694 29.1763 32.3783Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M39.4061 22.1507C39.3805 22.9422 39.261 23.7278 39.0501 24.4911C38.9398 24.8756 38.8098 25.2529 38.6817 25.6302C38.6702 25.6635 38.6517 25.6939 38.6274 25.7194C38.6032 25.7449 38.5737 25.7648 38.5411 25.7779C37.5052 25.9648 36.4676 26.1428 35.3926 26.3297C35.4602 26.0396 35.5296 25.7779 35.5848 25.5128C35.8058 24.5225 35.9333 23.5136 35.9657 22.4995C35.9657 22.1436 35.9764 22.1436 36.3127 22.1436H39.399L39.4061 22.1507Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M39.399 21.3891H35.9888C35.9599 19.9841 35.7596 18.5879 35.3926 17.2314L36.5388 17.4219C37.1617 17.5287 37.7847 17.6426 38.4111 17.7423C38.4841 17.7473 38.5535 17.7753 38.6095 17.8223C38.6655 17.8694 38.7051 17.9329 38.7226 18.0039C39.1042 19.0248 39.3321 20.0966 39.399 21.1844C39.4025 21.2449 39.399 21.3055 39.399 21.3891Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M25.421 11.7851C25.1719 12.02 24.9085 12.2389 24.6771 12.497C23.7114 13.5532 22.9832 14.804 22.5413 16.1652C22.5242 16.2492 22.4802 16.3254 22.416 16.3822C22.3518 16.4391 22.2708 16.4735 22.1853 16.4802C21.2741 16.6226 20.3663 16.7899 19.4569 16.9483C19.4302 16.9483 19.4035 16.9483 19.3447 16.9483C20.6034 14.4958 22.7575 12.6215 25.3605 11.7139L25.421 11.7851Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M32.174 11.7039C34.8039 12.6049 36.9845 14.4864 38.2609 16.9561C37.9424 16.9045 37.6629 16.86 37.3835 16.8119C36.6983 16.6945 36.013 16.5681 35.326 16.456C35.2691 16.453 35.2147 16.4313 35.1712 16.3943C35.1278 16.3573 35.0978 16.3071 35.0857 16.2513C34.686 15 34.0471 13.8382 33.2045 12.8305C32.8859 12.4567 32.5477 12.1079 32.174 11.7039Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M19.3236 26.6001L20.4609 26.7888C21.0661 26.8938 21.6676 27.0077 22.2746 27.1038C22.3282 27.1069 22.3792 27.1278 22.4196 27.1633C22.4599 27.1988 22.4872 27.2468 22.497 27.2996C22.9053 28.57 23.557 29.7488 24.4157 30.7702C24.6666 31.071 24.9496 31.3469 25.2219 31.6317C25.2894 31.6822 25.3493 31.7422 25.3999 31.8096C22.6928 30.8806 20.6887 29.1559 19.3236 26.6001Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M32.1962 31.8476C32.5931 31.4008 32.9811 30.9986 33.3335 30.5661C34.102 29.6196 34.6869 28.5379 35.0581 27.3767C35.0713 27.2972 35.111 27.2245 35.1708 27.1705C35.2306 27.1165 35.307 27.0844 35.3874 27.0794C36.2987 26.9388 37.2081 26.7697 38.1176 26.6131C38.1633 26.6101 38.209 26.6101 38.2547 26.6131C36.9838 29.0724 34.8139 30.9471 32.1962 31.8476Z"
-                          fill="white"
-                        />
-                      </g>
-                    </svg>
+                    <SVGWebsite />
                   </Button>
                 </Flex>
                 <Flex flexDirection="row" justifyContent="space-between">
@@ -556,13 +380,23 @@ const Launchpad: React.FC = () => {
                         isBuyer={isBuyer}
                         canHasEnoughBalance2BuyIDO={canHasEnoughBalance2BuyIDO}
                       />
-                      {/* {isApproved && (
+                      {isBuyer && (
                         <Flex justifyContent="center" mt="8px">
-                          <ButtonIDOStyled scale="sm" onClick={handleCommit}>
-                            Claim LOOPS
+                          <ButtonIDOStyled scale="sm" onClick={async () => {
+                            try {
+                              const tx = await callWithGasPrice(idoContract, 'refund', [pid])
+                              console.log(tx, 'refund')
+                              toastSuccess('Refund success', <ToastDescriptionWithTx txHash={tx?.transactionHash} />)
+
+                            } catch (error) {
+                              toastError("Something wrong!", error?.data?.message)
+                            }
+                            
+                          }}>
+                            Refund
                           </ButtonIDOStyled>
                         </Flex>
-                      )} */}
+                      )}
                     </>
                   ) : null}
                   {stepIDO === 3 || stepIDO === 2 ? (
@@ -580,7 +414,7 @@ const Launchpad: React.FC = () => {
               </Flex>
             </Flex>
           </WrapLaunchpad>
-          {stepIDO === 1 && <PoolInfomation />}
+          {stepIDO === 1 && <PoolInfomation idoContract={idoContract} />}
         </Container>
       </Page>
       <div style={{ background: '#100151' }}>
@@ -598,3 +432,81 @@ const Launchpad: React.FC = () => {
 }
 
 export default Launchpad
+
+
+const SVGWebsite = () => {
+  return (
+    <svg width="58" height="44" viewBox="0 0 58 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="58" height="44" rx="5" fill="#450279" />
+      <mask id="mask0_1020_3687" maskUnits="userSpaceOnUse" x="17" y="10" width="24" height="24">
+        <rect x="17" y="10" width="23.5848" height="23.5848" fill="#C4C4C4" />
+      </mask>
+      <g mask="url(#mask0_1020_3687)">
+        <path
+          d="M18.1797 22.1328C18.4146 22.1328 18.6478 22.1488 18.8916 22.1506C19.7329 22.1506 20.5753 22.1506 21.419 22.1506C21.54 22.1506 21.6147 22.1666 21.6183 22.3126C21.6522 23.6348 21.8385 24.9487 22.1736 26.2282C22.1799 26.2576 22.1847 26.2873 22.1878 26.3172L21.4332 26.189C20.659 26.0555 19.8848 25.9167 19.1105 25.7903C19.061 25.7866 19.0139 25.7675 18.9759 25.7355C18.9379 25.7036 18.9109 25.6605 18.8987 25.6124C18.5293 24.6596 18.3032 23.6574 18.2277 22.6383C18.2197 22.5919 18.2065 22.5465 18.1886 22.503L18.1797 22.1328Z"
+          fill="white"
+        />
+        <path
+          d="M18.1797 21.0566C18.2224 20.7505 18.2633 20.4443 18.3061 20.14C18.4192 19.3761 18.6217 18.6282 18.9094 17.9117C18.9313 17.8736 18.9611 17.8406 18.9967 17.8148C19.0322 17.789 19.0729 17.7711 19.1159 17.7622C20.0307 17.5966 20.9491 17.4418 21.8657 17.2852L22.195 17.23C21.8294 18.5855 21.6298 19.9804 21.6005 21.3841C21.5258 21.3841 21.4777 21.4001 21.4225 21.4001H18.3025C18.2613 21.3986 18.2203 21.3944 18.1797 21.3876V21.0566Z"
+          fill="white"
+        />
+        <path
+          d="M22.3335 22.165H28.408V27.0649H28.1855C26.6746 27.0284 25.1692 26.8683 23.6844 26.5861C23.5064 26.5541 23.3159 26.5309 23.1362 26.4829C23.101 26.4728 23.0685 26.4549 23.0411 26.4305C23.0136 26.4062 22.992 26.3761 22.9778 26.3423C22.7998 25.4524 22.6076 24.5625 22.4599 23.6725C22.3851 23.1795 22.3744 22.6812 22.3335 22.165Z"
+          fill="white"
+        />
+        <path
+          d="M29.1786 27.0653V22.1672H35.2549C35.2104 22.7225 35.2015 23.2707 35.1161 23.8065C34.9826 24.6341 34.7975 25.4546 34.6337 26.2786C34.6287 26.3386 34.6021 26.3946 34.5589 26.4365C34.5157 26.4784 34.4589 26.5032 34.3988 26.5064C32.7601 26.8259 31.0983 27.0128 29.4295 27.0653H29.1786Z"
+          fill="white"
+        />
+        <path
+          d="M28.4072 16.5007V21.3881H22.3843C22.3843 21.1229 22.3683 20.8541 22.3843 20.5925C22.463 19.4643 22.655 18.3469 22.9574 17.2571C22.9859 17.1557 23.0162 17.0791 23.1496 17.0613C24.8503 16.7222 26.5774 16.5328 28.3111 16.4954L28.4072 16.5007Z"
+          fill="white"
+        />
+        <path
+          d="M29.1763 21.3837V16.5052C29.2403 16.5052 29.2991 16.4945 29.3543 16.4963C30.8855 16.5263 32.4114 16.6852 33.9159 16.9715C33.9291 16.9767 33.9428 16.9803 33.9569 16.9822C34.4695 16.9537 34.6474 17.226 34.7542 17.7048C35.0357 18.9121 35.1955 20.1445 35.2312 21.3837H29.1763Z"
+          fill="white"
+        />
+        <path
+          d="M29.1805 15.7383V11.1802C29.6121 11.2078 30.0346 11.3159 30.4264 11.4988C31.5726 12.0025 32.4074 12.8603 33.0961 13.8748C33.5998 14.6211 34.0076 15.4278 34.31 16.2758C32.619 15.9484 30.9027 15.7685 29.1805 15.7383Z"
+          fill="white"
+        />
+        <path
+          d="M28.4125 11.1802V15.7365C26.6897 15.7634 24.9727 15.9421 23.2812 16.2705C23.5204 15.5994 23.8244 14.9532 24.189 14.3411C24.7267 13.3879 25.4688 12.5655 26.3621 11.933C26.9084 11.5555 27.5314 11.3033 28.1864 11.1944C28.2594 11.1909 28.3235 11.1909 28.4125 11.1802Z"
+          fill="white"
+        />
+        <path
+          d="M23.231 27.2981C24.1618 27.4262 25.0108 27.5633 25.8526 27.6541C26.6945 27.7448 27.5435 27.7911 28.4049 27.857V32.3759C27.8236 32.3252 27.2604 32.1478 26.755 31.8562C25.6355 31.2315 24.8239 30.3007 24.1956 29.2078C23.8468 28.6009 23.562 27.9584 23.231 27.2981Z"
+          fill="white"
+        />
+        <path
+          d="M29.1763 32.3783V27.8255C30.9006 27.7926 32.6187 27.6092 34.311 27.2773C34.2488 27.4411 34.2007 27.5764 34.1437 27.7116C33.6098 28.9949 32.9157 30.166 31.878 31.1075C31.1945 31.76 30.3319 32.1938 29.4005 32.3534C29.3275 32.3605 29.2635 32.3694 29.1763 32.3783Z"
+          fill="white"
+        />
+        <path
+          d="M39.4061 22.1507C39.3805 22.9422 39.261 23.7278 39.0501 24.4911C38.9398 24.8756 38.8098 25.2529 38.6817 25.6302C38.6702 25.6635 38.6517 25.6939 38.6274 25.7194C38.6032 25.7449 38.5737 25.7648 38.5411 25.7779C37.5052 25.9648 36.4676 26.1428 35.3926 26.3297C35.4602 26.0396 35.5296 25.7779 35.5848 25.5128C35.8058 24.5225 35.9333 23.5136 35.9657 22.4995C35.9657 22.1436 35.9764 22.1436 36.3127 22.1436H39.399L39.4061 22.1507Z"
+          fill="white"
+        />
+        <path
+          d="M39.399 21.3891H35.9888C35.9599 19.9841 35.7596 18.5879 35.3926 17.2314L36.5388 17.4219C37.1617 17.5287 37.7847 17.6426 38.4111 17.7423C38.4841 17.7473 38.5535 17.7753 38.6095 17.8223C38.6655 17.8694 38.7051 17.9329 38.7226 18.0039C39.1042 19.0248 39.3321 20.0966 39.399 21.1844C39.4025 21.2449 39.399 21.3055 39.399 21.3891Z"
+          fill="white"
+        />
+        <path
+          d="M25.421 11.7851C25.1719 12.02 24.9085 12.2389 24.6771 12.497C23.7114 13.5532 22.9832 14.804 22.5413 16.1652C22.5242 16.2492 22.4802 16.3254 22.416 16.3822C22.3518 16.4391 22.2708 16.4735 22.1853 16.4802C21.2741 16.6226 20.3663 16.7899 19.4569 16.9483C19.4302 16.9483 19.4035 16.9483 19.3447 16.9483C20.6034 14.4958 22.7575 12.6215 25.3605 11.7139L25.421 11.7851Z"
+          fill="white"
+        />
+        <path
+          d="M32.174 11.7039C34.8039 12.6049 36.9845 14.4864 38.2609 16.9561C37.9424 16.9045 37.6629 16.86 37.3835 16.8119C36.6983 16.6945 36.013 16.5681 35.326 16.456C35.2691 16.453 35.2147 16.4313 35.1712 16.3943C35.1278 16.3573 35.0978 16.3071 35.0857 16.2513C34.686 15 34.0471 13.8382 33.2045 12.8305C32.8859 12.4567 32.5477 12.1079 32.174 11.7039Z"
+          fill="white"
+        />
+        <path
+          d="M19.3236 26.6001L20.4609 26.7888C21.0661 26.8938 21.6676 27.0077 22.2746 27.1038C22.3282 27.1069 22.3792 27.1278 22.4196 27.1633C22.4599 27.1988 22.4872 27.2468 22.497 27.2996C22.9053 28.57 23.557 29.7488 24.4157 30.7702C24.6666 31.071 24.9496 31.3469 25.2219 31.6317C25.2894 31.6822 25.3493 31.7422 25.3999 31.8096C22.6928 30.8806 20.6887 29.1559 19.3236 26.6001Z"
+          fill="white"
+        />
+        <path
+          d="M32.1962 31.8476C32.5931 31.4008 32.9811 30.9986 33.3335 30.5661C34.102 29.6196 34.6869 28.5379 35.0581 27.3767C35.0713 27.2972 35.111 27.2245 35.1708 27.1705C35.2306 27.1165 35.307 27.0844 35.3874 27.0794C36.2987 26.9388 37.2081 26.7697 38.1176 26.6131C38.1633 26.6101 38.209 26.6101 38.2547 26.6131C36.9838 29.0724 34.8139 30.9471 32.1962 31.8476Z"
+          fill="white"
+        />
+      </g>
+    </svg>
+  )
+}
