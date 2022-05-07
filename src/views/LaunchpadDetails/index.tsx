@@ -70,6 +70,7 @@ const Launchpad: React.FC = () => {
   const [signatureIDOData, setSignatureIDOData] = useState({})
   const [currentClaimTime, setCurrentClaimTime] = useState(0)
   const [periodPercent, setPeriodPercent] = useState([])
+  const [userClaimNumber, setUserClaimNumber] = useState(0);
   const [claimState, setClaimState] = useState({})
 
   useEffect(() => {
@@ -85,6 +86,7 @@ const Launchpad: React.FC = () => {
     idoContract.isBuyer(account, pid).then((hasBuy) => setIsBuyer(hasBuy))
     idoContract?.currentClaimTime(pid).then((time) => setCurrentClaimTime(time))
     idoContract?.getPeriodPercent(pid).then((arr) => setPeriodPercent(arr))
+    idoContract?.userIndex(pid, account).then((numberClaim) => setUserClaimNumber(numberClaim))
 
     return () => {
       clearInterval(interval)
@@ -186,13 +188,14 @@ const Launchpad: React.FC = () => {
     periodPercent.forEach((nextValue): void => {
       TotalPercent = TotalPercent.plus(new BigNumber(nextValue?._hex))
     })
-    console.log('TotalPercent', TotalPercent.gte(new BigNumber(100)), currentClaimTime)
-    if (TotalPercent.gte(new BigNumber(100))) {
+    // -------- 
+    const numberHasBeenClaimed = new BigNumber(userClaimNumber?._hex).toNumber() || 0
+    if (TotalPercent.gte(new BigNumber(100)) && periodPercent.length === numberHasBeenClaimed) {
       setClaimState({
         message: 'You already claim all reward!',
         hasClaim: false,
       })
-    } else if (TotalPercent.lt(new BigNumber(100)) && currentClaimTime) {
+    } else if (TotalPercent.lt(new BigNumber(100)) && currentClaimTime && periodPercent.length !== numberHasBeenClaimed) {
       setClaimState({
         message: 'Claim',
         hasClaim: true,
@@ -200,7 +203,7 @@ const Launchpad: React.FC = () => {
     } else {
       setClaimState({
         message: 'Claim',
-        hasClaim: true,
+        hasClaim: false,
       })
     }
   }
