@@ -64,10 +64,10 @@ const Launchpad: React.FC = () => {
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
   const usdtContract = useTokenContract(tokens.usdt.address, true)
-  const [isBuyer, setIsBuyer] = useState(false);
+  const [isBuyer, setIsBuyer] = useState(false)
   const { callWithGasPrice } = useCallWithGasPrice()
   const balance2BuyIDO = useTokenBalance(tokens.usdt.address)
-  const [signatureIDOData, setSignatureIDOData] = useState({});
+  const [signatureIDOData, setSignatureIDOData] = useState({})
 
   useEffect(() => {
     idoContract.getBuyers(pid).then((res) => setNumberParticipant(res?.length || 0))
@@ -86,68 +86,82 @@ const Launchpad: React.FC = () => {
     }
   }, [account, idoContract])
 
-  const handleCommit = () => {
-    withAuth(
-      async () => {
-        const res = await get({
-          url: `${BASE_API_URL}/ido-signature?pid=${pid}`,
-        }).catch((err) => {
-          console.error('Failed to fetch ido-signature')
-          return err
-        })
-        console.log('res', res)
-        if (res.message === 'you bought') {
-          toastSuccess(t('Succcess'), t('You already bought!'))
-          return
+  const { isApproving, isApproved, isConfirming, handleApprove, handleConfirm, handleSign4IDO } =
+    useApproveConfirmTransaction({
+      onRequiresApproval: async (currentAccount) => {
+        try {
+          const currentAllowance = await usdtContract.allowance(currentAccount || account, idoContract.address)
+          return currentAllowance.gt(0) // Approve token Buy
+        } catch (error) {
+          return false
         }
-        setSignatureIDOData(res)
-        idoContract.buy(res.pid, res?.sign?.v, res?.sign?.r, res?.sign?.s).then((data) => {
-          console.log("data idoContract.buy ", data);
-          toastSuccess(t('Succcess'), <ToastDescriptionWithTx txHash={data.hash} />)
-        })
       },
-      { account, library, connector },
-    )
-  }
+      onApprove: () => {
+        return callWithGasPrice(usdtContract, 'approve', [idoContract.address, MaxUint256])
+      },
+      onApproveSuccess: async ({ receipt }) => {
+        toastSuccess(
+          t('Contract approved - you can now buy IDO!'),
+          <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
+        )
+      },
+      onSignForIDO: () => {
+        console.log('onSignForIDO', signatureIDOData)
+        withAuth(
+          async () => {
+            const res = await get({
+              url: `${BASE_API_URL}/ido-signature?pid=${pid}`,
+            }).catch((err) => {
+              console.error('Failed to fetch ido-signature')
+              return err
+            })
+            console.log('res handleCommit', res)
+            if (res.message === 'you bought') {
+              toastSuccess(t('Succcess'), t('You already bought!'))
+              return
+            }
+            setSignatureIDOData(res)
+            // const txBuy = await callBuyIDO(res)
+            // if (txBuy) {
+            //   toastSuccess(t('Succcess'), <ToastDescriptionWithTx txHash={txBuy.hash} />)
+            // }
+          },
+          { account, library, connector },
+        )
+      },
+      onConfirm: (params) => {
+        console.log('onConfirm', params, signatureIDOData)
+        return idoContract.buy(
+          signatureIDOData.pid,
+          signatureIDOData?.sign?.v,
+          signatureIDOData?.sign?.r,
+          signatureIDOData?.sign?.s,
+        )
+        // const txBuy = await callBuyIDO(res)
+        // if (txBuy) {
+        //   toastSuccess(t('Succcess'), <ToastDescriptionWithTx txHash={txBuy.hash} />)
+        // }
+      },
+      onSuccess: async ({ receipt }) => {
+        // setConfirmedTxHash(receipt.transactionHash)
+        // setStage(BuyingStage.TX_CONFIRMED)
+        toastSuccess(
+          t('Your IDO has been register. Congratulation!'),
+          <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
+        )
+      },
+    })
 
-  const { isApproving, isApproved, isConfirming, handleApprove, handleConfirm } = useApproveConfirmTransaction({
-    onRequiresApproval: async (currentAccount) => {
-      try {
-        const currentAllowance = await usdtContract.allowance(currentAccount || account, idoContract.address)
-        return currentAllowance.gt(0)
-      } catch (error) {
-        return false
-      }
-    },
-    onApprove: () => {
-      return callWithGasPrice(usdtContract, 'approve', [idoContract.address, MaxUint256])
-    },
-    onApproveSuccess: async ({ receipt }) => {
-      toastSuccess(
-        t('Contract approved - you can now buy IDO!'),
-        <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
-      )
-    },
-    onConfirm: () => {
-      handleCommit()
-      console.log('onConfirm')
-
-
-    },
-    onSuccess: async ({ receipt }) => {
-      // setConfirmedTxHash(receipt.transactionHash)
-      // setStage(BuyingStage.TX_CONFIRMED)
-      toastSuccess(
-        t('Your IDO has been register. Congratulation!'),
-        <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
-      )
-    },
-  })
-  
   const canHasEnoughBalance2BuyIDO = new BigNumber(balance2BuyIDO.balance)
     .minus(new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken._hex).div(BIG_TEN.pow(18)))
     .gt(0)
 
+  const hasSignForIDO = (signData: any) => {
+    if (signData?.pid === pid && signData?.sign?.v) {
+      return true
+    }
+    return false
+  }
 
   return (
     <>
@@ -360,61 +374,56 @@ const Launchpad: React.FC = () => {
                       ${tokens.usdt.symbol}
                     </Text>
                   </Flex>
-
-                  {stepIDO === 1 ? (
+                  {!hasSignForIDO(signatureIDOData) && (
                     <Flex justifyContent="center" mt="32px">
-                      <ButtonIDOStyled scale="sm" onClick={() => setStepIDO(2)}>
-                        Next
+                      <ButtonIDOStyled scale="sm" onClick={() => handleSign4IDO()}>
+                        SignForIDO
                       </ButtonIDOStyled>
                     </Flex>
-                  ) : null}
-                  {stepIDO === 2 ? (
-                    <>
-                      <ApproveAndConfirmStage
-                        variant="buy"
-                        handleApprove={handleApprove}
-                        isApproved={isApproved}
-                        isApproving={isApproving}
-                        isConfirming={isConfirming}
-                        handleConfirm={handleConfirm}
-                        isBuyer={isBuyer}
-                        canHasEnoughBalance2BuyIDO={canHasEnoughBalance2BuyIDO}
-                      />
-                      {isBuyer && (
-                        <Flex justifyContent="center" mt="8px">
-                          <ButtonIDOStyled scale="sm" onClick={async () => {
-                            try {
-                              const tx = await callWithGasPrice(idoContract, 'refund', [pid])
-                              console.log(tx, 'refund')
-                              toastSuccess('Refund success', <ToastDescriptionWithTx txHash={tx?.transactionHash} />)
-
-                            } catch (error) {
-                              toastError("Something wrong!", error?.data?.message)
-                            }
-                            
-                          }}>
-                            Refund
-                          </ButtonIDOStyled>
-                        </Flex>
-                      )}
-                    </>
-                  ) : null}
-                  {stepIDO === 3 || stepIDO === 2 ? (
-                    <Flex mt="32px">
+                  )}
+                  <ApproveAndConfirmStage
+                    variant="buy"
+                    handleApprove={handleApprove}
+                    isApproved={isApproved}
+                    isApproving={isApproving}
+                    isConfirming={isConfirming}
+                    handleConfirm={handleConfirm}
+                    isBuyer={isBuyer}
+                    canHasEnoughBalance2BuyIDO={canHasEnoughBalance2BuyIDO}
+                    hasSignForIDO={hasSignForIDO(signatureIDOData)}
+                  />
+                  {isBuyer && (
+                    <Flex justifyContent="center" mt="8px">
                       <ButtonIDOStyled
-                        minWidth={100}
                         scale="sm"
-                        onClick={() => registerToken(tokens.loops.address, tokens.loops.symbol, tokens.loops.decimals)}
+                        onClick={async () => {
+                          try {
+                            const tx = await callWithGasPrice(idoContract, 'refund', [pid])
+                            console.log(tx, 'refund')
+                            toastSuccess('Refund success', <ToastDescriptionWithTx txHash={tx?.transactionHash} />)
+                          } catch (error) {
+                            toastError('Something wrong!', error?.data?.message)
+                          }
+                        }}
                       >
-                        Add {tokens.loops.symbol} to Metamask
+                        Refund
                       </ButtonIDOStyled>
                     </Flex>
-                  ) : null}
+                  )}
+                  <Flex mt="32px">
+                    <ButtonIDOStyled
+                      minWidth={100}
+                      scale="sm"
+                      onClick={() => registerToken(tokens.loops.address, tokens.loops.symbol, tokens.loops.decimals)}
+                    >
+                      Add {tokens.loops.symbol} to Metamask
+                    </ButtonIDOStyled>
+                  </Flex>
                 </Box>
               </Flex>
             </Flex>
           </WrapLaunchpad>
-          {stepIDO === 1 && <PoolInfomation idoContract={idoContract} />}
+          <PoolInfomation idoContract={idoContract} />
         </Container>
       </Page>
       <div style={{ background: '#100151' }}>
@@ -432,7 +441,6 @@ const Launchpad: React.FC = () => {
 }
 
 export default Launchpad
-
 
 const SVGWebsite = () => {
   return (

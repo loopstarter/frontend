@@ -78,6 +78,7 @@ interface OnSuccessProps {
 interface ApproveConfirmTransaction {
   onApprove: () => Promise<TransactionResponse>
   onConfirm: (params?) => Promise<TransactionResponse>
+  onSignForIDO: (params?) => void
   onRequiresApproval?: (currentAccount: string) => Promise<boolean>
   onSuccess: ({ state, receipt }: OnSuccessProps) => void
   onApproveSuccess?: ({ state, receipt }: OnSuccessProps) => void
@@ -85,6 +86,7 @@ interface ApproveConfirmTransaction {
 
 const useApproveConfirmTransaction = ({
   onApprove,
+  onSignForIDO,
   onConfirm,
   onRequiresApproval,
   onSuccess = noop,
@@ -127,7 +129,7 @@ const useApproveConfirmTransaction = ({
       } catch (error) {
         dispatch({ type: 'confirm_error' })
         logError(error)
-        toastError(t('Error'), t('Please try again. Confirm the transaction and make sure you are paying enough gas!'))
+        toastError(t('Error'), t( error?.data?.message || 'Please try again. Confirm the transaction and make sure you are paying enough gas!'))
       }
     },
     [onConfirm, dispatch, onSuccess, state, t, toastError, toastSuccess],
@@ -155,6 +157,7 @@ const useApproveConfirmTransaction = ({
     hasConfirmFailed: state.confirmState === 'fail',
     handleApprove,
     handleConfirm,
+    handleSign4IDO: onSignForIDO,
   }
 }
 
