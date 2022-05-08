@@ -435,7 +435,7 @@ const Launchpad: React.FC = () => {
                     </Text>
                   </Flex>
                   {!hasSignForIDO() &&
-                    (!isIDOFinished(poolInfo) && (
+                    (!isIDOFinished(poolInfo) && !isBuyer && (
                       <Flex justifyContent="center" mt="16px">
                         <ButtonIDOStyled scale="sm" onClick={() => handleSign4IDO()}>
                           SignForIDO

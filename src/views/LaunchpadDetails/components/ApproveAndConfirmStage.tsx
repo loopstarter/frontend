@@ -81,7 +81,7 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
           {t('You do not have enough balance to buy IDO')}
         </Text>
       )}
-      {!hasSignForIDO && !isIDOFinished && (
+      {!hasSignForIDO && !isIDOFinished && !isBuyer && (
         <Text mt="8px" small color="red" textAlign="center">
           {t('You need to sign contract for buy IDO')}
         </Text>
