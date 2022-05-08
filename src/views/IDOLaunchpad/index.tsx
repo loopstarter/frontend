@@ -263,7 +263,7 @@ const Launchpad: React.FC = () => {
                     </ButtonIDOStyled>
                   </Flex>
                   <Flex justifyContent="center" mt="32px">
-                    <ButtonIDOStyled scale="sm" onClick={() => window.open('/launchpad-details')}>
+                    <ButtonIDOStyled scale="sm" onClick={() => window.open('/launchpad-details/1')}>
                       <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M9.5 19.0001C4.25331 19.0001 0 14.7468 0 9.50012C0 4.25343 4.25331 0.00012207 9.5 0.00012207C14.7467 0.00012207 19 4.25343 19 9.50012C19 14.7468 14.7467 19.0001 9.5 19.0001ZM9.5 2.06534C5.39332 2.06534 2.06522 5.39448 2.06522 9.50012C2.06522 13.6058 5.39332 16.9349 9.5 16.9349C13.6067 16.9349 16.9348 13.6058 16.9348 9.50012C16.9348 5.39448 13.6067 2.06534 9.5 2.06534ZM11.3587 13.4757H7.64129V9.2523H5.31794L9.5 5.31806L13.6821 9.2523H11.3587V13.4757Z"

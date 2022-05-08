@@ -30,6 +30,8 @@ import { getFullDisplayBalance } from '../../utils/formatBalance'
 import ApproveAndConfirmStage from './components/ApproveAndConfirmStage'
 import PoolInfomation from './components/PoolInfomation'
 import { BIG_ZERO } from '../../utils/bigNumber'
+import { useRouter } from 'next/router'
+
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
@@ -57,10 +59,13 @@ const ButtonIDOStyled = styled(Button)`
 
 const Launchpad: React.FC = () => {
   const { account, library, connector } = useWeb3React()
+  const router = useRouter()
+  
   const idoContract = useIdoContract()
   const { t } = useTranslation()
   const { toastSuccess, toastError } = useToast()
-  const pid = 0
+  const pid = Number(router.query?.pid)
+
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
   const usdtContract = useTokenContract(tokens.usdt.address, true)
@@ -72,6 +77,10 @@ const Launchpad: React.FC = () => {
   const [periodPercent, setPeriodPercent] = useState([])
   const [userClaimNumber, setUserClaimNumber] = useState(0);
   const [claimState, setClaimState] = useState({})
+
+  // ----- 
+  // const currencyA = useCurrency(currencyIdA)
+  // const currencyB = useCurrency(currencyIdB)
 
   useEffect(() => {
     idoContract.getBuyers(pid).then((res) => setNumberParticipant(res?.length || 0))
@@ -419,8 +428,8 @@ const Launchpad: React.FC = () => {
                       ${tokens.usdt.symbol}
                     </Text>
                   </Flex>
-                  {!hasSignForIDO(signatureIDOData) ||
-                    (isIDOFinished(poolInfo) && (
+                  {!hasSignForIDO(signatureIDOData) &&
+                    (!isIDOFinished(poolInfo) && (
                       <Flex justifyContent="center" mt="16px">
                         <ButtonIDOStyled scale="sm" onClick={() => handleSign4IDO()}>
                           SignForIDO
