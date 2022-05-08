@@ -5,7 +5,7 @@ import Page from 'components/Layout/Page'
 import { BASE_API_URL } from 'config'
 import { withAuth } from 'hooks/useAuthSign'
 import { useIdoContract, useTokenContract } from 'hooks/useContract'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { get } from 'utils/http'
 
 import ConnectWalletButton from 'components/ConnectWalletButton'
@@ -137,17 +137,13 @@ const Launchpad: React.FC = () => {
               return err
             })
             console.log('res handleCommit', res)
+            setSignatureIDOData(res)
             if (res.message === 'you bought') {
               toastSuccess(t('Succcess'), t('You already bought!'))
-              setSignatureIDOData({})
-              return
             }
-            if (res.status !== 200) {
-              toastError(t('Error'), t(res?.message))
-              setSignatureIDOData({})
-              return
+            if (res.status !== 200 && !res?.pid) {
+              toastError(t('Error'), res?.message)
             }
-            setSignatureIDOData(res)
           },
           { account, library, connector },
         )
@@ -175,12 +171,22 @@ const Launchpad: React.FC = () => {
     .minus(new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken._hex).div(BIG_TEN.pow(18)))
     .gt(0)
 
-  const hasSignForIDO = (signData: any) => {
-    if (signData?.pid === pid && signData?.sign?.v) {
+  // const hasSignForIDO = (signData: any) => {
+    
+  //   if (signData?.pid === pid && signData?.sign?.v) {
+  //     return true
+  //   }
+  //   return false
+  // }
+  
+  const hasSignForIDO = useCallback(() => {
+    //   console.log('hasSignForIDO', signatureIDOData, signData, pid)
+    if (signatureIDOData?.pid === pid && signatureIDOData?.sign?.v) {
       return true
     }
     return false
-  }
+  }, [signatureIDOData, pid])
+
   const isIDOFinished = (poolData: any) => {
     const pStatus = new BigNumber(poolData?.status?._hex).toNumber()
     if (pStatus === 2) {
@@ -428,7 +434,7 @@ const Launchpad: React.FC = () => {
                       ${tokens.usdt.symbol}
                     </Text>
                   </Flex>
-                  {!hasSignForIDO(signatureIDOData) &&
+                  {!hasSignForIDO() &&
                     (!isIDOFinished(poolInfo) && (
                       <Flex justifyContent="center" mt="16px">
                         <ButtonIDOStyled scale="sm" onClick={() => handleSign4IDO()}>
@@ -445,7 +451,7 @@ const Launchpad: React.FC = () => {
                     handleConfirm={handleConfirm}
                     isBuyer={isBuyer}
                     canHasEnoughBalance2BuyIDO={canHasEnoughBalance2BuyIDO}
-                    hasSignForIDO={hasSignForIDO(signatureIDOData)}
+                    hasSignForIDO={hasSignForIDO()}
                     isIDOFinished={isIDOFinished(poolInfo)}
                     idoContract={idoContract}
                   />

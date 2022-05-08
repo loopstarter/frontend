@@ -46,13 +46,11 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
   return (
     <Flex p="16px" flexDirection="column">
       <Flex mb="8px" alignItems="center">
-        <Flex flexDirection="column" alignItems="center" justifyContent="center">
           {!isApproved && (
             <Text mt="8px" textAlign="center" small color="orange">
               {t('Please enable your BUSD to buy IDO')}
             </Text>
           )}
-        </Flex>
       </Flex>
       {!isApproved && (
         <Flex justifyContent="center">
@@ -85,7 +83,7 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
       )}
       {!hasSignForIDO && !isIDOFinished && (
         <Text mt="8px" small color="red" textAlign="center">
-          {t('You need to sign contract for IDO')}
+          {t('You need to sign contract for buy IDO')}
         </Text>
       )}
       {isIDOFinished && (
