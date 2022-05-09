@@ -224,7 +224,7 @@ const Launchpad: React.FC = () => {
         hasClaim: false,
       })
     } else if (
-      TotalPercent.lt(new BigNumber(100)) &&
+      TotalPercent.lte(new BigNumber(100)) &&
       currentClaimTime &&
       periodPercent.length !== numberHasBeenClaimed
     ) {
@@ -237,9 +237,9 @@ const Launchpad: React.FC = () => {
         message: 'Claim',
         hasClaim: false,
       })
-    }
+    }    
   }
-
+  
   return (
     <>
       <Page>
