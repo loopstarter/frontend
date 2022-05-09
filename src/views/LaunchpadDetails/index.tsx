@@ -170,7 +170,7 @@ const Launchpad: React.FC = () => {
 
   const canHasEnoughBalance2BuyIDO = new BigNumber(balance2BuyIDO.balance)
     .minus(new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken._hex).div(BIG_TEN.pow(18)))
-    .gt(0)
+    .gte(0)
 
   // const hasSignForIDO = (signData: any) => {
     
