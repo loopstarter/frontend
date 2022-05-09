@@ -164,6 +164,7 @@ const Launchpad: React.FC = () => {
           t('Your IDO has been register. Congratulation!'),
           <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
         )
+        setSignatureIDOData({})
       },
     })
 
