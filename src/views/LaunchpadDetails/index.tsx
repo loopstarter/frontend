@@ -108,10 +108,15 @@ const Launchpad: React.FC = () => {
   }, [account, poolInfo])
 
   const _refreshDataIDO = () => {
+    idoContract.getBuyers(pid).then((res) => setNumberParticipant(res?.length || 0))
     idoContract.isBuyer(account, pid).then((hasBuy) => setIsBuyer(hasBuy))
     idoContract?.currentClaimTime(pid).then((time) => setCurrentClaimTime(time))
     idoContract?.getPeriodPercent(pid).then((arr) => setPeriodPercent(arr))
     idoContract?.userIndex(pid, account).then((numberClaim) => setUserClaimNumber(numberClaim))
+    idoContract.poolInfo(pid).then((data) => {
+      setPoolInfo(data)
+      getUserClaimState(data)
+    })
   }
 
   const { isApproving, isApproved, isConfirming, handleApprove, handleConfirm, handleSign4IDO } =
