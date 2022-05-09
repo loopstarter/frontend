@@ -32,7 +32,6 @@ import PoolInfomation from './components/PoolInfomation'
 import { BIG_ZERO } from '../../utils/bigNumber'
 import { useRouter } from 'next/router'
 
-
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
   box-sizing: border-box;
@@ -60,7 +59,7 @@ const ButtonIDOStyled = styled(Button)`
 const Launchpad: React.FC = () => {
   const { account, library, connector } = useWeb3React()
   const router = useRouter()
-  
+
   const idoContract = useIdoContract()
   const { t } = useTranslation()
   const { toastSuccess, toastError } = useToast()
@@ -75,10 +74,10 @@ const Launchpad: React.FC = () => {
   const [signatureIDOData, setSignatureIDOData] = useState({})
   const [currentClaimTime, setCurrentClaimTime] = useState(0)
   const [periodPercent, setPeriodPercent] = useState([])
-  const [userClaimNumber, setUserClaimNumber] = useState(0);
+  const [userClaimNumber, setUserClaimNumber] = useState(0)
   const [claimState, setClaimState] = useState({})
 
-  // ----- 
+  // -----
   // const currencyA = useCurrency(currencyIdA)
   // const currencyB = useCurrency(currencyIdB)
 
@@ -107,6 +106,13 @@ const Launchpad: React.FC = () => {
       getUserClaimState(poolInfo)
     }
   }, [account, poolInfo])
+
+  const _refreshDataIDO = () => {
+    idoContract.isBuyer(account, pid).then((hasBuy) => setIsBuyer(hasBuy))
+    idoContract?.currentClaimTime(pid).then((time) => setCurrentClaimTime(time))
+    idoContract?.getPeriodPercent(pid).then((arr) => setPeriodPercent(arr))
+    idoContract?.userIndex(pid, account).then((numberClaim) => setUserClaimNumber(numberClaim))
+  }
 
   const { isApproving, isApproved, isConfirming, handleApprove, handleConfirm, handleSign4IDO } =
     useApproveConfirmTransaction({
@@ -165,6 +171,7 @@ const Launchpad: React.FC = () => {
           <ToastDescriptionWithTx txHash={receipt.transactionHash} />,
         )
         setSignatureIDOData({})
+        _refreshDataIDO()
       },
     })
 
@@ -173,13 +180,13 @@ const Launchpad: React.FC = () => {
     .gte(0)
 
   // const hasSignForIDO = (signData: any) => {
-    
+
   //   if (signData?.pid === pid && signData?.sign?.v) {
   //     return true
   //   }
   //   return false
   // }
-  
+
   const hasSignForIDO = useCallback(() => {
     //   console.log('hasSignForIDO', signatureIDOData, signData, pid)
     if (signatureIDOData?.pid === pid && signatureIDOData?.sign?.v) {
@@ -204,14 +211,18 @@ const Launchpad: React.FC = () => {
     periodPercent.forEach((nextValue): void => {
       TotalPercent = TotalPercent.plus(new BigNumber(nextValue?._hex))
     })
-    // -------- 
+    // --------
     const numberHasBeenClaimed = new BigNumber(userClaimNumber?._hex).toNumber() || 0
     if (TotalPercent.gte(new BigNumber(100)) && periodPercent.length === numberHasBeenClaimed) {
       setClaimState({
         message: 'You already claim all reward!',
         hasClaim: false,
       })
-    } else if (TotalPercent.lt(new BigNumber(100)) && currentClaimTime && periodPercent.length !== numberHasBeenClaimed) {
+    } else if (
+      TotalPercent.lt(new BigNumber(100)) &&
+      currentClaimTime &&
+      periodPercent.length !== numberHasBeenClaimed
+    ) {
       setClaimState({
         message: 'Claim',
         hasClaim: true,
@@ -435,14 +446,13 @@ const Launchpad: React.FC = () => {
                       ${tokens.usdt.symbol}
                     </Text>
                   </Flex>
-                  {!hasSignForIDO() &&
-                    (!isIDOFinished(poolInfo) && !isBuyer && (
-                      <Flex justifyContent="center" mt="16px">
-                        <ButtonIDOStyled scale="sm" onClick={() => handleSign4IDO()}>
-                          SignForIDO
-                        </ButtonIDOStyled>
-                      </Flex>
-                    ))}
+                  {!hasSignForIDO() && !isIDOFinished(poolInfo) && !isBuyer && (
+                    <Flex justifyContent="center" mt="16px">
+                      <ButtonIDOStyled scale="sm" onClick={() => handleSign4IDO()}>
+                        SignForIDO
+                      </ButtonIDOStyled>
+                    </Flex>
+                  )}
                   <ApproveAndConfirmStage
                     variant="buy"
                     handleApprove={handleApprove}
@@ -469,6 +479,7 @@ const Launchpad: React.FC = () => {
                           } catch (error) {
                             toastError('Something wrong!', error?.data?.message)
                           }
+                          _refreshDataIDO()
                         }}
                       >
                         Refund
@@ -488,6 +499,7 @@ const Launchpad: React.FC = () => {
                           } catch (error) {
                             toastError('Something wrong!', error?.data?.message)
                           }
+                          _refreshDataIDO()
                         }}
                       >
                         {claimState?.message ? t(claimState?.message) : t('Claim')}
