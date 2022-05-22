@@ -237,15 +237,15 @@ const Launchpad: React.FC = () => {
         message: 'Claim',
         hasClaim: false,
       })
-    }    
+    }
   }
-  
+
   return (
     <>
       <Page>
         <Container maxWidth={1200}>
           <WrapLaunchpad>
-            <Flex flexDirection="row">
+            <Flex flexDirection="row" flexWrap="wrap">
               <Flex flex={1} flexDirection="column">
                 <picture>
                   <img src="/images/home/logo.svg" alt={t('logo')} width={80} />
@@ -310,7 +310,7 @@ const Launchpad: React.FC = () => {
                     </Text>
                   </Box>
                 </Flex>
-                <Flex mt={3} flexDirection="column" alignItems="center">
+                <Flex mt={3} flexDirection="column" alignItems="center" maxWidth="100%" overflow="scroll">
                   <Text color="#883BC3">IDO SALES CONTRACT ADDRESS</Text>
                   <Text
                     color="#fff"

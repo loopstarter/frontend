@@ -30,17 +30,10 @@ const PoolInfomation = ({ idoContract }: { idoContract: any }) => {
             </Text>
           </Flex>
         </Flex>
-        <Flex flex={1} flexDirection="column">
-          <Flex justifyContent="center">
-            <Text color="#fff" fontWeight={800} fontSize="4">
-              Pool Information
-            </Text>
-          </Flex>
-        </Flex>
       </Flex>
-      <Flex flex={1}>
+      <Flex flex={1} flexWrap="wrap">
         <WrapLaunchpad noMarginTop>
-          <Flex flexDirection="row" justifyContent="space-between">
+          <Flex flexDirection="row" justifyContent="space-between" flexWrap="wrap">
             <Box>
               <Text color="#883BC3">TOKEN DISTRIBUTION</Text>
               <Text color="#fff" fontWeight={800}>
@@ -69,7 +62,7 @@ const PoolInfomation = ({ idoContract }: { idoContract: any }) => {
           </Flex>
         </WrapLaunchpad>
         <WrapLaunchpad noMarginTop>
-          <Flex flexDirection="row" justifyContent="space-between">
+          <Flex flexDirection="row" justifyContent="space-between" flexWrap="wrap">
             <Box>
               <Text color="#883BC3">NAME</Text>
               <Text color="#fff" fontWeight={800}>

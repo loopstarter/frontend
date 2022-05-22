@@ -129,7 +129,13 @@ const useApproveConfirmTransaction = ({
       } catch (error) {
         dispatch({ type: 'confirm_error' })
         logError(error)
-        toastError(t('Error'), t( error?.data?.message || 'Please try again. Confirm the transaction and make sure you are paying enough gas!'))
+        toastError(
+          t('Error'),
+          t(
+            error?.data?.message ||
+              'Please try again. Confirm the transaction and make sure you are paying enough gas!',
+          ),
+        )
       }
     },
     [onConfirm, dispatch, onSuccess, state, t, toastError, toastSuccess],
@@ -137,7 +143,6 @@ const useApproveConfirmTransaction = ({
 
   // Check if approval is necessary, re-check if account changes
   useEffect(() => {
-
     if (account && handlePreApprove.current) {
       handlePreApprove.current(account).then((result) => {
         if (result) {
@@ -147,7 +152,6 @@ const useApproveConfirmTransaction = ({
     }
   }, [account, handlePreApprove, dispatch])
 
-  
   return {
     isApproving: state.approvalState === 'loading',
     isApproved: state.approvalState === 'success',

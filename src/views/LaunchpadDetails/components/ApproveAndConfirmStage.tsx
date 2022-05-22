@@ -3,9 +3,8 @@ import { Flex, Text, Button, Spinner } from '@loopstarter/uikit'
 import { useTranslation } from 'contexts/Localization'
 // import { StepIndicator } from './styles'
 import styled from 'styled-components'
-import tokens from 'config/constants/tokens';
+import tokens from 'config/constants/tokens'
 import { ToastDescriptionWithTx } from 'components/Toast'
-
 
 interface ApproveAndConfirmStageProps {
   variant: 'buy' | 'sell'
@@ -39,18 +38,18 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
   canHasEnoughBalance2BuyIDO,
   hasSignForIDO,
   isIDOFinished,
-  idoContract
+  idoContract,
 }) => {
   const { t } = useTranslation()
 
   return (
     <Flex p="16px" flexDirection="column">
       <Flex mb="8px" alignItems="center">
-          {!isApproved && (
-            <Text mt="8px" textAlign="center" small color="orange">
-              {t('Please enable your BUSD to buy IDO')}
-            </Text>
-          )}
+        {!isApproved && (
+          <Text mt="8px" textAlign="center" small color="orange">
+            {t('Please enable your BUSD to buy IDO')}
+          </Text>
+        )}
       </Flex>
       {!isApproved && (
         <Flex justifyContent="center">
