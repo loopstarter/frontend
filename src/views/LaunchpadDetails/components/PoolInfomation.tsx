@@ -1,5 +1,5 @@
 /* eslint-disable no-debugger */
-import { Box, Button, CopyIcon, Flex, Text } from '@loopstarter/uikit'
+import { Box, Button, CopyIcon, Flex, Text, useMatchBreakpoints } from '@loopstarter/uikit'
 import useToast from 'hooks/useToast'
 import React from 'react'
 import styled from 'styled-components'
@@ -19,6 +19,7 @@ const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
 
 const PoolInfomation = ({ idoContract }: { idoContract: any }) => {
   const { toastSuccess, toastError } = useToast()
+  const { isMobile } = useMatchBreakpoints()
 
   return (
     <>
@@ -99,7 +100,9 @@ const PoolInfomation = ({ idoContract }: { idoContract: any }) => {
                   navigator.clipboard.writeText(idoContract.address)
                 }}
               >
-                {idoContract.address}
+                {isMobile
+                  ? `${idoContract.address?.slice(0, 7)}...${idoContract.address?.slice(-7)}`
+                  : idoContract.address}
                 <CopyIcon color="primary" width="20px" ml={2} />
               </Text>
             </Box>

@@ -20,7 +20,18 @@ interface ApproveAndConfirmStageProps {
   idoContract: any
 }
 const ButtonIDOStyled = styled(Button)`
-  border-radius: 8px;
+  border-radius: 6px;
+  margin-left: 4px;
+  margin-right: 4px;
+  font-size: 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 100%;
+  font-family: 'Kanit', sans-serif;
+  background-color: ${({ whitelist }) =>
+    whitelist
+      ? 'linear-gradient(106.04deg, #FFC677 -44.63%, #C94FD8 92.68%)'
+      : 'linear-gradient(94.76deg, #44aeea 0%, #5150ff 139.11%)'};
 `
 
 // Buy Flow:

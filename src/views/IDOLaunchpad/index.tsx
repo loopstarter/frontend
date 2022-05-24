@@ -25,7 +25,7 @@ const WrapLaunchpad = styled(Flex)`
   background: #360060;
   padding: 32px;
   margin: 16px;
-  margin-top: 64px;
+  margin-top: 16px;
   height: fix-content;
 `
 const ButtonViewLoops = styled(Button)`
@@ -38,7 +38,18 @@ const ViewBalance = styled(Flex)`
   padding: 8px 16px;
 `
 const ButtonIDOStyled = styled(Button)`
-  border-radius: 8px;
+  border-radius: 6px;
+  margin-left: 4px;
+  margin-right: 4px;
+  font-size: 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 100%;
+  font-family: 'Kanit', sans-serif;
+  background: ${({ whitelist }) =>
+    whitelist
+      ? 'linear-gradient(106.04deg, #FFC677 -44.63%, #C94FD8 92.68%)'
+      : 'linear-gradient(94.76deg, #44aeea 0%, #5150ff 139.11%)'};
 `
 interface IIDOInfo {
   amount?: IResponseBNumber
@@ -85,8 +96,8 @@ const Launchpad: React.FC = () => {
   return (
     <>
       <Page>
-        <Container maxWidth={1200}>
-          <Flex flexDirection="row">
+        <Container maxWidth={1200} mobileNoPadding>
+          <Flex flexDirection="row" flexWrap="wrap" mt={5}>
             <WrapLaunchpad flex={12}>
               <Flex flex={1} flexDirection="column">
                 <Flex justifyContent="center">
@@ -250,10 +261,17 @@ const Launchpad: React.FC = () => {
                     </Text>
                   </Box>
                 </Flex>
-                <Flex justifyContent="space-around" mb={2}>
-                  <Flex justifyContent="center" mt="32px">
-                    <ButtonIDOStyled scale="sm">
-                      <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <Flex justifyContent="space-around" mb={2} marginX="-16px">
+                  <Flex justifyContent="center" mt="32px" flex={1}>
+                    <ButtonIDOStyled scale="sm" whitelist>
+                      <svg
+                        width="19"
+                        height="19"
+                        viewBox="0 0 19 19"
+                        fill="none"
+                        style={{ marginRight: 4 }}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
                         <path
                           d="M9.5 19.0001C4.25331 19.0001 0 14.7468 0 9.50012C0 4.25343 4.25331 0.00012207 9.5 0.00012207C14.7467 0.00012207 19 4.25343 19 9.50012C19 14.7468 14.7467 19.0001 9.5 19.0001ZM9.5 2.06534C5.39332 2.06534 2.06522 5.39448 2.06522 9.50012C2.06522 13.6058 5.39332 16.9349 9.5 16.9349C13.6067 16.9349 16.9348 13.6058 16.9348 9.50012C16.9348 5.39448 13.6067 2.06534 9.5 2.06534ZM11.3587 13.4757H7.64129V9.2523H5.31794L9.5 5.31806L13.6821 9.2523H11.3587V13.4757Z"
                           fill="white"
@@ -262,9 +280,16 @@ const Launchpad: React.FC = () => {
                       Apply Whitelist
                     </ButtonIDOStyled>
                   </Flex>
-                  <Flex justifyContent="center" mt="32px">
+                  <Flex justifyContent="center" mt="32px" flex={1}>
                     <ButtonIDOStyled scale="sm" onClick={() => window.open('/launchpad-details/1')}>
-                      <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg
+                        width="19"
+                        height="19"
+                        viewBox="0 0 19 19"
+                        fill="none"
+                        style={{ marginRight: 4 }}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
                         <path
                           d="M9.5 19.0001C4.25331 19.0001 0 14.7468 0 9.50012C0 4.25343 4.25331 0.00012207 9.5 0.00012207C14.7467 0.00012207 19 4.25343 19 9.50012C19 14.7468 14.7467 19.0001 9.5 19.0001ZM9.5 2.06534C5.39332 2.06534 2.06522 5.39448 2.06522 9.50012C2.06522 13.6058 5.39332 16.9349 9.5 16.9349C13.6067 16.9349 16.9348 13.6058 16.9348 9.50012C16.9348 5.39448 13.6067 2.06534 9.5 2.06534ZM11.3587 13.4757H7.64129V9.2523H5.31794L9.5 5.31806L13.6821 9.2523H11.3587V13.4757Z"
                           fill="white"
@@ -275,13 +300,13 @@ const Launchpad: React.FC = () => {
                   </Flex>
                 </Flex>
                 <Flex justifyContent="center" mt="32px">
-                  {!account ? <ConnectWalletButton /> : null}
+                  {!account ? <ConnectWalletButton style={{ width: '100%' }} /> : null}
                 </Flex>
               </Flex>
             </WrapLaunchpad>
-            <Flex flex={1}>
+            {/* <Flex flex={1}>
               <div />
-            </Flex>
+            </Flex> */}
           </Flex>
         </Container>
       </Page>

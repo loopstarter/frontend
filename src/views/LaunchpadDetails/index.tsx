@@ -1,5 +1,5 @@
 /* eslint-disable no-debugger */
-import { Box, Button, CopyIcon, Flex, Skeleton, Slider, Text } from '@loopstarter/uikit'
+import { Box, Button, CopyIcon, Flex, Skeleton, Slider, Text, useMatchBreakpoints } from '@loopstarter/uikit'
 import { useWeb3React } from '@web3-react/core'
 import Page from 'components/Layout/Page'
 import { BASE_API_URL } from 'config'
@@ -36,11 +36,10 @@ const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
   border: 1px solid #d520af;
   box-sizing: border-box;
   border-radius: 5px;
-  margin-top: ${({ noMarginTop }) => (noMarginTop ? '0px' : '64px')};
+  margin-top: ${({ noMarginTop }) => (noMarginTop ? '0px' : '16px')};
   box-shadow: inset 0 0 10px #d520af, 0 0 10px #d520af;
   background: #360060;
   padding: 32px;
-  width: 100%;
   margin-left: 16px;
   margin-right: 16px;
 `
@@ -53,12 +52,24 @@ const ButtonClosed = styled(Button)`
   border-radius: 5px;
 `
 const ButtonIDOStyled = styled(Button)`
-  border-radius: 8px;
+  border-radius: 6px;
+  margin-left: 4px;
+  margin-right: 4px;
+  font-size: 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 100%;
+  font-family: 'Kanit', sans-serif;
+  background: ${({ whitelist }) =>
+    whitelist
+      ? 'linear-gradient(106.04deg, #FFC677 -44.63%, #C94FD8 92.68%)'
+      : 'linear-gradient(94.76deg, #44aeea 0%, #5150ff 139.11%)'};
 `
 
 const Launchpad: React.FC = () => {
   const { account, library, connector } = useWeb3React()
   const router = useRouter()
+  const { isMobile } = useMatchBreakpoints()
 
   const idoContract = useIdoContract()
   const { t } = useTranslation()
@@ -243,7 +254,7 @@ const Launchpad: React.FC = () => {
   return (
     <>
       <Page>
-        <Container maxWidth={1200}>
+        <Container maxWidth={1200} mt={5} mobileNoPadding>
           <WrapLaunchpad>
             <Flex flexDirection="row" flexWrap="wrap">
               <Flex flex={1} flexDirection="column">
@@ -280,7 +291,7 @@ const Launchpad: React.FC = () => {
                     <SVGWebsite />
                   </Button>
                 </Flex>
-                <Flex flexDirection="row" justifyContent="space-between">
+                <Flex flexDirection="row" justifyContent="space-between" flexWrap='wrap'>
                   <Box>
                     <Text color="#883BC3">TOTAL RAISE</Text>
                     {poolInfo ? (
@@ -310,7 +321,7 @@ const Launchpad: React.FC = () => {
                     </Text>
                   </Box>
                 </Flex>
-                <Flex mt={3} flexDirection="column" alignItems="center" maxWidth="100%" overflow="scroll">
+                <Flex mt={3} flexDirection="column" alignItems="center" overflow="auto">
                   <Text color="#883BC3">IDO SALES CONTRACT ADDRESS</Text>
                   <Text
                     color="#fff"
@@ -320,12 +331,14 @@ const Launchpad: React.FC = () => {
                       navigator.clipboard.writeText(idoContract.address)
                     }}
                   >
-                    {idoContract.address}
+                    {isMobile
+                      ? `${idoContract.address?.slice(0, 7)}...${idoContract.address?.slice(-7)}`
+                      : idoContract.address}
                     <CopyIcon color="primary" width="20px" ml={2} />
                   </Text>
                 </Flex>
                 <Flex mt={3} flexDirection="column" alignItems="center">
-                  {!account ? <ConnectWalletButton /> : <ButtonViewLoops scale="sm">View Loops</ButtonViewLoops>}
+                  {!account ? <ConnectWalletButton /> : <ButtonIDOStyled scale="sm">View Loops</ButtonIDOStyled>}
                 </Flex>
               </Flex>
 
@@ -333,7 +346,7 @@ const Launchpad: React.FC = () => {
                 <Box
                   mt="32px"
                   p="16px"
-                  ml="16px"
+                  ml={isMobile ? '0px' : '16px'}
                   style={{
                     background: '#450279',
                   }}
@@ -454,7 +467,7 @@ const Launchpad: React.FC = () => {
                   {!hasSignForIDO() && !isIDOFinished(poolInfo) && !isBuyer && (
                     <Flex justifyContent="center" mt="16px">
                       <ButtonIDOStyled scale="sm" onClick={() => handleSign4IDO()}>
-                        SignForIDO
+                        Sign For IDO
                       </ButtonIDOStyled>
                     </Flex>
                   )}
