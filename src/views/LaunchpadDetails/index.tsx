@@ -324,7 +324,13 @@ const Launchpad: React.FC = () => {
                   </Text>
                 </Flex>
                 <Flex mt={3} flexDirection="column" alignItems="center">
-                  {!account ? <ConnectWalletButton /> : <ButtonIDOStyled scale="sm">View Loops</ButtonIDOStyled>}
+                  {!account ? (
+                    <ConnectWalletButton />
+                  ) : (
+                    <ButtonIDOStyled onClick={() => openLink(configIDO[pid].viewTokenLink)} scale="sm">
+                      View {configIDO[pid].tokenInfo.sell.symbol}
+                    </ButtonIDOStyled>
+                  )}
                 </Flex>
               </Flex>
 

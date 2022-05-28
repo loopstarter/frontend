@@ -7,7 +7,8 @@ export interface IConfigIDO {
     social: {
         twitter?: string;
         website?: string;
-    }, 
+    },
+    viewTokenLink: string;
     tokenInfo: {
         sell: {
             symbol: string
@@ -28,6 +29,7 @@ export const configIDO: IConfigIDO[] = [
         social: {
 
         },
+        viewTokenLink: "",
         tokenInfo: {
             sell: {
                 symbol: "LOOPS",
@@ -47,6 +49,7 @@ export const configIDO: IConfigIDO[] = [
             twitter: "",
             website: "https://loopstarter.com/"
         },
+        viewTokenLink: "https://loopstarter.com/",
         tokenInfo: {
             sell: {
                 symbol: "LOOPS",
