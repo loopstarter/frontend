@@ -41,7 +41,7 @@ const WrapLaunchpad = styled.div<{ noMarginTop?: boolean; isMobile: boolean }>`
   margin-top: ${({ noMarginTop }) => (noMarginTop ? '0px' : '16px')};
   box-shadow: inset 0 0 10px #d520af, 0 0 10px #d520af;
   background: #360060;
-  padding: 28px;
+  padding: 24px;
   margin-left: ${({ isMobile }) => (isMobile ? '0px' : '16px')};
   margin-right: ${({ isMobile }) => (isMobile ? '0px' : '16px')};
 `
@@ -88,7 +88,7 @@ const Launchpad: React.FC = () => {
   const [currentClaimTime, setCurrentClaimTime] = useState(0)
   const [periodPercent, setPeriodPercent] = useState([])
   const [userClaimNumber, setUserClaimNumber] = useState(0)
-  const [claimState, setClaimState] = useState({})
+  const [claimState, setClaimState] = useState<{ hasClaim?: boolean; message?: string }>({})
 
   // -----
   // const currencyA = useCurrency(currencyIdA)
@@ -498,6 +498,7 @@ const Launchpad: React.FC = () => {
                             console.log(tx, 'refund')
                             toastSuccess('Refund success', <ToastDescriptionWithTx txHash={tx?.transactionHash} />)
                           } catch (error) {
+                            // @ts-ignore
                             toastError('Something wrong!', error?.data?.message)
                           }
                           _refreshDataIDO()
@@ -518,6 +519,7 @@ const Launchpad: React.FC = () => {
                             console.log(tx, 'claim')
                             toastSuccess('Claim success', <ToastDescriptionWithTx txHash={tx?.hash} />)
                           } catch (error) {
+                            // @ts-ignore
                             toastError('Something wrong!', error?.data?.message)
                           }
                           _refreshDataIDO()

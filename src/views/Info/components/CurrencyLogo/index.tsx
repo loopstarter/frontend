@@ -15,6 +15,7 @@ const StyledLogo = styled(LogoLoader)<{ size: string }>`
 export const CurrencyLogo: React.FC<{
   address?: string
   size?: string
+  style?: unknown
 }> = ({ address, size = '24px', ...rest }) => {
   const src = useMemo(() => {
     // const checksummedAddress = isAddress(address)

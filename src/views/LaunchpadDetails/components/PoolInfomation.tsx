@@ -11,7 +11,7 @@ const WrapLaunchpad = styled.div<{ noMarginTop?: boolean; isMobile: boolean }>`
   margin-top: ${({ noMarginTop }) => (noMarginTop ? '16px' : '64px')};
   box-shadow: inset 0 0 10px #d520af, 0 0 10px #d520af;
   background: #360060;
-  padding: 28px;
+  padding: 24px;
   margin-left: ${({ isMobile }) => (isMobile ? '0px' : '16px')};
   margin-right: ${({ isMobile }) => (isMobile ? '0px' : '16px')};
 `
