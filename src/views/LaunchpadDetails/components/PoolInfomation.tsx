@@ -4,17 +4,16 @@ import useToast from 'hooks/useToast'
 import React from 'react'
 import styled from 'styled-components'
 
-const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
+const WrapLaunchpad = styled.div<{ noMarginTop?: boolean; isMobile: boolean }>`
   border: 1px solid #d520af;
   box-sizing: border-box;
   border-radius: 5px;
-  margin-top: ${({ noMarginTop }) => (noMarginTop ? '0px' : '64px')};
+  margin-top: ${({ noMarginTop }) => (noMarginTop ? '16px' : '64px')};
   box-shadow: inset 0 0 10px #d520af, 0 0 10px #d520af;
   background: #360060;
-  padding: 32px;
-  width: 100%;
-  margin-left: 16px;
-  margin-right: 16px;
+  padding: 28px;
+  margin-left: ${({ isMobile }) => (isMobile ? '0px' : '16px')};
+  margin-right: ${({ isMobile }) => (isMobile ? '0px' : '16px')};
 `
 
 const PoolInfomation = ({ idoContract }: { idoContract: any }) => {
@@ -33,7 +32,7 @@ const PoolInfomation = ({ idoContract }: { idoContract: any }) => {
         </Flex>
       </Flex>
       <Flex flex={1} flexWrap="wrap">
-        <WrapLaunchpad noMarginTop>
+        <WrapLaunchpad noMarginTop isMobile={isMobile}>
           <Flex flexDirection="row" justifyContent="space-between" flexWrap="wrap">
             <Box>
               <Text color="#883BC3">TOKEN DISTRIBUTION</Text>
@@ -62,7 +61,7 @@ const PoolInfomation = ({ idoContract }: { idoContract: any }) => {
             </Box>
           </Flex>
         </WrapLaunchpad>
-        <WrapLaunchpad noMarginTop>
+        <WrapLaunchpad noMarginTop isMobile={isMobile}>
           <Flex flexDirection="row" justifyContent="space-between" flexWrap="wrap">
             <Box>
               <Text color="#883BC3">NAME</Text>

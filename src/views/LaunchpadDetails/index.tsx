@@ -31,17 +31,19 @@ import ApproveAndConfirmStage from './components/ApproveAndConfirmStage'
 import PoolInfomation from './components/PoolInfomation'
 import { BIG_ZERO } from '../../utils/bigNumber'
 import { useRouter } from 'next/router'
+import { configIDO } from './config'
 
-const WrapLaunchpad = styled.div<{ noMarginTop?: boolean }>`
+
+const WrapLaunchpad = styled.div<{ noMarginTop?: boolean; isMobile: boolean }>`
   border: 1px solid #d520af;
   box-sizing: border-box;
   border-radius: 5px;
   margin-top: ${({ noMarginTop }) => (noMarginTop ? '0px' : '16px')};
   box-shadow: inset 0 0 10px #d520af, 0 0 10px #d520af;
   background: #360060;
-  padding: 32px;
-  margin-left: 16px;
-  margin-right: 16px;
+  padding: 28px;
+  margin-left: ${({ isMobile }) => (isMobile ? '0px' : '16px')};
+  margin-right: ${({ isMobile }) => (isMobile ? '0px' : '16px')};
 `
 const ButtonViewLoops = styled(Button)`
   background: #5c0c9b;
@@ -74,7 +76,7 @@ const Launchpad: React.FC = () => {
   const idoContract = useIdoContract()
   const { t } = useTranslation()
   const { toastSuccess, toastError } = useToast()
-  const pid = Number(router.query?.pid)
+  const pid = Number(router.query?.pid) || 0
 
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
@@ -250,48 +252,32 @@ const Launchpad: React.FC = () => {
       })
     }
   }
+  const openLink = (link: string | undefined) => {
+    if (link) {
+      window.open(link, '_blank')
+    }
+  }
 
   return (
     <>
       <Page>
         <Container maxWidth={1200} mt={5} mobileNoPadding>
-          <WrapLaunchpad>
+          <WrapLaunchpad isMobile={isMobile}>
             <Flex flexDirection="row" flexWrap="wrap">
               <Flex flex={1} flexDirection="column">
                 <picture>
-                  <img src="/images/home/logo.svg" alt={t('logo')} width={80} />
+                  <img src={configIDO[pid].projectLogo} alt={t('logo')} width={80} />
                 </picture>
-                <Text style={{ color: '#fff' }}>
-                  Initial token distribution event for LOOPStarter tokens with allocation based on a whitelist and
-                  ranking order based on the score achieved by each individual. LOOPStarter is a platform used to launch
-                  crypto projects, introduce some new coins, and increase liquidity. This is one of the biggest things
-                  for this digital world, especially when it comes to decentralized finance. LOOPStarter is beyond just
-                  being a IDO Launchpad platform. It’s an integrated ecosystem that introduces an all-in-one solution to
-                  launch and manage decentralized finances. It supports all the major Multi-chain wallets along with our
-                  inline wallet management system. The portal will integrate a launchpad for decentralized fundraising
-                  for new projects needing liquidity at the start in a fair manner. The first DAO supports multi-chain,
-                  cross-platform launchpad with a full DEX and deflation mechanism.
-                </Text>
+                <Text style={{ color: '#fff' }}>{configIDO[pid].projectDescription}</Text>
                 <Flex>
-                  <Button variant="text" m={1} mt={2}>
-                    <svg width="58" height="44" viewBox="0 0 58 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect width="58" height="44" rx="5" fill="#450279" />
-                      <mask id="mask0_1020_3686" maskUnits="userSpaceOnUse" x="16" y="10" width="24" height="24">
-                        <rect x="16" y="10" width="23.5848" height="23.5848" fill="#C4C4C4" />
-                      </mask>
-                      <g mask="url(#mask0_1020_3686)">
-                        <path
-                          d="M24.6468 30.8729H23.0643C22.6866 30.8257 22.3065 30.7934 21.9314 30.7338C20.5406 30.5207 19.1964 30.0721 17.9564 29.4071C17.6931 29.2655 17.4372 29.1065 17.1788 28.955C18.3067 29.0394 19.4408 28.9319 20.5327 28.637C21.6295 28.3302 22.6557 27.812 23.5537 27.1116C22.6465 27.0819 21.7705 26.7736 21.0447 26.2287C20.3188 25.6838 19.7784 24.9286 19.4967 24.0658C20.1309 24.1703 20.7798 24.1415 21.4022 23.9813C18.8682 23.3403 17.8695 21.0845 17.9912 19.6536C18.5746 19.9606 19.2204 20.1305 19.8793 20.1504C18.9781 19.5184 18.3466 18.5714 18.1098 17.4964C17.8729 16.4215 18.0478 15.2968 18.5999 14.3445C20.9575 17.1195 23.9412 18.6524 27.5982 18.9008C27.4623 18.1956 27.4801 17.4694 27.6504 16.7717C27.8962 15.8743 28.4205 15.078 29.1478 14.4976C29.8751 13.9172 30.7678 13.5826 31.6974 13.542C32.2932 13.5182 32.8876 13.6175 33.4433 13.8338C33.999 14.0501 34.5041 14.3787 34.9271 14.7991C34.9615 14.8399 35.0073 14.8695 35.0586 14.8841C35.11 14.8987 35.1645 14.8977 35.2152 14.8811C36.0484 14.6982 36.8508 14.3961 37.5977 13.9843C37.6574 13.9495 37.722 13.9222 37.8188 13.875C37.502 14.8417 36.8683 15.6733 36.0202 16.2351C36.8418 16.1369 37.645 15.921 38.4051 15.5941C38.3505 15.6811 38.3257 15.7208 38.2983 15.7606C37.7727 16.5233 37.1257 17.1947 36.3829 17.7481C36.3343 17.7788 36.2952 17.8226 36.2702 17.8744C36.2452 17.9262 36.2351 17.984 36.2413 18.0412C36.2756 18.9705 36.1921 19.9004 35.9928 20.8088C35.2848 24.1279 33.6079 26.8259 30.808 28.7786C29.2678 29.8443 27.4904 30.5173 25.6306 30.7387L24.6468 30.8729Z"
-                          fill="white"
-                        />
-                      </g>
-                    </svg>
+                  <Button variant="text" m={1} mt={2} onClick={() => openLink(configIDO[pid].social.twitter)}>
+                    <SvgTwitter />
                   </Button>
-                  <Button variant="text" m={1} mt={2}>
+                  <Button variant="text" m={1} mt={2} onClick={() => openLink(configIDO[pid].social.website)}>
                     <SVGWebsite />
                   </Button>
                 </Flex>
-                <Flex flexDirection="row" justifyContent="space-between" flexWrap='wrap'>
+                <Flex flexDirection="row" justifyContent="space-between" flexWrap="wrap">
                   <Box>
                     <Text color="#883BC3">TOTAL RAISE</Text>
                     {poolInfo ? (
@@ -362,7 +348,9 @@ const Launchpad: React.FC = () => {
                             fill="#479EEE"
                           />
                         </svg>{' '}
-                        1 LOOPS = {getFullDisplayBalance(poolInfo?.tokenBuy2IDOtoken?._hex, 18, 2)} $BUSD
+                        1 {configIDO[pid].tokenInfo.sell.symbol} ={' '}
+                        {getFullDisplayBalance(poolInfo?.tokenBuy2IDOtoken?._hex, 18, 2)} $
+                        {configIDO[pid].tokenInfo.useForBuy.symbol}
                       </Text>
                     </ButtonViewLoops>
                     <ButtonClosed scale="sm" ml={2}>
@@ -372,15 +360,19 @@ const Launchpad: React.FC = () => {
                     </ButtonClosed>
                   </Flex>
                   <Flex mb={2}>
-                    <CurrencyLogo size="56px" address={tokens.usdt.address} />
+                    <CurrencyLogo size="56px" address={tokens.usdt.address} style={{ background: 'center' }} />
                     <Flex flexDirection="column" ml={2}>
-                      <Text fontSize="28px" fontWeight={800} color="#fff">
-                        {getFullDisplayBalance(
-                          new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-                          36,
-                          2,
-                        )}{' '}
-                        ${tokens.usdt.symbol}
+                      <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
+                        {poolInfo?.totalAmount?._hex ? (
+                          getFullDisplayBalance(
+                            new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
+                            36,
+                            2,
+                          )
+                        ) : (
+                          <Skeleton height={20} width={64} />
+                        )}
+                        {configIDO[pid].tokenInfo.useForBuy.symbol}
                       </Text>
                       <Text fontSize="12px" color="#fff">
                         Total Raise Amount
@@ -388,14 +380,20 @@ const Launchpad: React.FC = () => {
                     </Flex>
                   </Flex>
                   <Flex mb={2}>
-                    <CurrencyLogo size="56px" address={tokens.loops.address} />
+                    <CurrencyLogo size="56px" address={tokens.loops.address} style={{ background: 'center' }} />
                     <Flex flexDirection="column" ml={2}>
                       {poolInfo?.totalAmount ? (
-                        <Text fontSize="28px" fontWeight={800} color="#fff">
-                          {getFullDisplayBalance(poolInfo?.totalAmount?._hex, 18, 2)} LOOPS
+                        <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
+                          {getFullDisplayBalance(poolInfo?.totalAmount?._hex, 18, 2)}{' '}
+                          {configIDO[pid].tokenInfo.sell.symbol}
                         </Text>
                       ) : (
-                        <Skeleton height={20} width={64} />
+                        <>
+                          <Skeleton height={20} width={64} />
+                          <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
+                            {configIDO[pid].tokenInfo.sell.symbol}
+                          </Text>
+                        </>
                       )}
 
                       <Text fontSize="12px" color="#fff">
@@ -405,16 +403,21 @@ const Launchpad: React.FC = () => {
                   </Flex>
                   <Flex mt={3}>
                     <Text fontSize="14px" color={canHasEnoughBalance2BuyIDO ? '#1EAB81' : 'red'} fontWeight={600}>
-                      Your {tokens.usdt.symbol} balance: {getFullDisplayBalance(balance2BuyIDO.balance, 18, 2)}
+                      Your {configIDO[pid].tokenInfo.useForBuy.symbol} balance:{' '}
+                      {getFullDisplayBalance(balance2BuyIDO.balance, 18, 2)}
                     </Text>
                   </Flex>
                   <Flex mt={2}>
                     <Text fontSize="14px" color="#fff">
-                      Require balance {tokens.usdt.symbol}:{' '}
-                      {getFullDisplayBalance(
-                        new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-                        36,
-                        2,
+                      Require balance {configIDO[pid].tokenInfo.useForBuy.symbol}:{' '}
+                      {poolInfo?.amount?._hex ? (
+                        getFullDisplayBalance(
+                          new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
+                          36,
+                          2,
+                        )
+                      ) : (
+                        <Skeleton height={20} width={64} />
                       )}
                     </Text>
                   </Flex>
@@ -461,7 +464,7 @@ const Launchpad: React.FC = () => {
                         36,
                         2,
                       )}{' '}
-                      ${tokens.usdt.symbol}
+                      ${configIDO[pid].tokenInfo.useForBuy.symbol}
                     </Text>
                   </Flex>
                   {!hasSignForIDO() && !isIDOFinished(poolInfo) && !isBuyer && (
@@ -528,9 +531,15 @@ const Launchpad: React.FC = () => {
                     <ButtonIDOStyled
                       minWidth={100}
                       scale="sm"
-                      onClick={() => registerToken(tokens.loops.address, tokens.loops.symbol, tokens.loops.decimals)}
+                      onClick={() =>
+                        registerToken(
+                          configIDO[pid].tokenInfo.sell.address,
+                          configIDO[pid].tokenInfo.sell.symbol,
+                          configIDO[pid].tokenInfo.sell.decimals,
+                        )
+                      }
                     >
-                      Add {tokens.loops.symbol} to Metamask
+                      Add {configIDO[pid].tokenInfo.sell.symbol} to Metamask
                     </ButtonIDOStyled>
                   </Flex>
                 </Box>
@@ -626,6 +635,22 @@ const SVGWebsite = () => {
         />
         <path
           d="M32.1962 31.8476C32.5931 31.4008 32.9811 30.9986 33.3335 30.5661C34.102 29.6196 34.6869 28.5379 35.0581 27.3767C35.0713 27.2972 35.111 27.2245 35.1708 27.1705C35.2306 27.1165 35.307 27.0844 35.3874 27.0794C36.2987 26.9388 37.2081 26.7697 38.1176 26.6131C38.1633 26.6101 38.209 26.6101 38.2547 26.6131C36.9838 29.0724 34.8139 30.9471 32.1962 31.8476Z"
+          fill="white"
+        />
+      </g>
+    </svg>
+  )
+}
+const SvgTwitter = () => {
+  return (
+    <svg width="58" height="44" viewBox="0 0 58 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="58" height="44" rx="5" fill="#450279" />
+      <mask id="mask0_1020_3686" maskUnits="userSpaceOnUse" x="16" y="10" width="24" height="24">
+        <rect x="16" y="10" width="23.5848" height="23.5848" fill="#C4C4C4" />
+      </mask>
+      <g mask="url(#mask0_1020_3686)">
+        <path
+          d="M24.6468 30.8729H23.0643C22.6866 30.8257 22.3065 30.7934 21.9314 30.7338C20.5406 30.5207 19.1964 30.0721 17.9564 29.4071C17.6931 29.2655 17.4372 29.1065 17.1788 28.955C18.3067 29.0394 19.4408 28.9319 20.5327 28.637C21.6295 28.3302 22.6557 27.812 23.5537 27.1116C22.6465 27.0819 21.7705 26.7736 21.0447 26.2287C20.3188 25.6838 19.7784 24.9286 19.4967 24.0658C20.1309 24.1703 20.7798 24.1415 21.4022 23.9813C18.8682 23.3403 17.8695 21.0845 17.9912 19.6536C18.5746 19.9606 19.2204 20.1305 19.8793 20.1504C18.9781 19.5184 18.3466 18.5714 18.1098 17.4964C17.8729 16.4215 18.0478 15.2968 18.5999 14.3445C20.9575 17.1195 23.9412 18.6524 27.5982 18.9008C27.4623 18.1956 27.4801 17.4694 27.6504 16.7717C27.8962 15.8743 28.4205 15.078 29.1478 14.4976C29.8751 13.9172 30.7678 13.5826 31.6974 13.542C32.2932 13.5182 32.8876 13.6175 33.4433 13.8338C33.999 14.0501 34.5041 14.3787 34.9271 14.7991C34.9615 14.8399 35.0073 14.8695 35.0586 14.8841C35.11 14.8987 35.1645 14.8977 35.2152 14.8811C36.0484 14.6982 36.8508 14.3961 37.5977 13.9843C37.6574 13.9495 37.722 13.9222 37.8188 13.875C37.502 14.8417 36.8683 15.6733 36.0202 16.2351C36.8418 16.1369 37.645 15.921 38.4051 15.5941C38.3505 15.6811 38.3257 15.7208 38.2983 15.7606C37.7727 16.5233 37.1257 17.1947 36.3829 17.7481C36.3343 17.7788 36.2952 17.8226 36.2702 17.8744C36.2452 17.9262 36.2351 17.984 36.2413 18.0412C36.2756 18.9705 36.1921 19.9004 35.9928 20.8088C35.2848 24.1279 33.6079 26.8259 30.808 28.7786C29.2678 29.8443 27.4904 30.5173 25.6306 30.7387L24.6468 30.8729Z"
           fill="white"
         />
       </g>
