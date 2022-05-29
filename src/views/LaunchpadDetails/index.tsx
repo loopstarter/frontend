@@ -80,10 +80,10 @@ const Launchpad: React.FC = () => {
 
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
-  const usdtContract = useTokenContract(tokens.usdt.address, true)
+  const token4buyContract = useTokenContract(configIDO[pid].tokenInfo.useForBuy.address, true)
   const [isBuyer, setIsBuyer] = useState(false)
   const { callWithGasPrice } = useCallWithGasPrice()
-  const balance2BuyIDO = useTokenBalance(tokens.usdt.address)
+  const balance2BuyIDO = useTokenBalance(configIDO[pid].tokenInfo.useForBuy.address)
   const [signatureIDOData, setSignatureIDOData] = useState({})
   const [currentClaimTime, setCurrentClaimTime] = useState(0)
   const [periodPercent, setPeriodPercent] = useState([])
@@ -136,14 +136,14 @@ const Launchpad: React.FC = () => {
     useApproveConfirmTransaction({
       onRequiresApproval: async (currentAccount) => {
         try {
-          const currentAllowance = await usdtContract.allowance(currentAccount || account, idoContract.address)
+          const currentAllowance = await token4buyContract.allowance(currentAccount || account, idoContract.address)
           return currentAllowance.gt(0) // Approve token Buy
         } catch (error) {
           return false
         }
       },
       onApprove: () => {
-        return callWithGasPrice(usdtContract, 'approve', [idoContract.address, MaxUint256])
+        return callWithGasPrice(token4buyContract, 'approve', [idoContract.address, MaxUint256])
       },
       onApproveSuccess: async ({ receipt }) => {
         toastSuccess(
