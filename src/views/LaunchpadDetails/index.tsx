@@ -69,7 +69,10 @@ const ButtonIDOStyled = styled(Button)`
 `
 
 const getIDOStateText = (stt: number) => {
-  return 'Closed'
+  if (stt === 0) return "Coming soon"
+  if (stt === 1) return "Active"
+  if (stt === 2) return "Ended"
+  return 'Coming soon'
 }
 
 const Launchpad: React.FC = () => {
@@ -172,6 +175,9 @@ const Launchpad: React.FC = () => {
             if (res?.pid === undefined) {
               toastError(t('Error sign IDO: '), res?.message)
             }
+            if (res?.pid !== undefined && res?.sign) {
+              toastSuccess(t('Succcess'), t('Sign IDO success. Now you can join this project!'))
+            }
           },
           { account, library, connector },
         )
@@ -224,6 +230,7 @@ const Launchpad: React.FC = () => {
     }
     return false
   }
+  // 
   const getIDOState = (poolData: any) => {
     return new BigNumber(poolData?.status?._hex).toNumber() || 0
   }
@@ -365,12 +372,16 @@ const Launchpad: React.FC = () => {
                     </ButtonViewLoops>
                     <ButtonClosed scale="sm" ml={2}>
                       <Text fontSize="12px" color="#fff">
-                        Closed
+                        {getIDOStateText(getIDOState(poolInfo))}
                       </Text>
                     </ButtonClosed>
                   </Flex>
                   <Flex mb={2}>
-                    <CurrencyLogo size="56px" address={configIDO[pid].tokenInfo.useForBuy.address} style={{ background: 'center' }} />
+                    <CurrencyLogo
+                      size="56px"
+                      address={configIDO[pid].tokenInfo.useForBuy.address}
+                      style={{ background: 'center' }}
+                    />
                     <Flex flexDirection="column" ml={2}>
                       <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
                         {poolInfo?.totalAmount?._hex ? (
@@ -559,7 +570,7 @@ const Launchpad: React.FC = () => {
               </Flex>
             </Flex>
           </WrapLaunchpad>
-          <PoolInfomation idoContract={idoContract} />
+          <PoolInfomation idoContract={idoContract} pid={pid} />
         </Container>
       </Page>
       <div style={{ background: '#100151' }}>

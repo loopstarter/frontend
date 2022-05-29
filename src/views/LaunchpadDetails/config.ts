@@ -14,11 +14,22 @@ export interface IConfigIDO {
             symbol: string
             address: string
             decimals: number
-        }, 
+        },
         useForBuy: {
             symbol: string
             address: string
         }
+    },
+    projectInfo: {
+        timeDistribute?: string
+        allocation?: string
+        allocationSize?: string
+        listingPrice?: string
+        projectName?: string
+        symbol?: string
+        demicals?: number
+        totalSupply?: string
+        addressToken?: string
     }
 }
 
@@ -42,6 +53,17 @@ export const configIDO: IConfigIDO[] = [
                 symbol: "BUSD",
                 address: tokens.busd.address
             }
+        },
+        projectInfo: {
+            timeDistribute: "30/05/2022",
+            allocation: "10 BUSD",
+            allocationSize: " - ",
+            listingPrice: "$ 0.10",
+            projectName: "LOOPS SET",
+            symbol: "LOOPS",
+            demicals: tokens.loops.decimals,
+            totalSupply: "100,000,000",
+            addressToken: tokens.loops.address,
         }
     },
     {
@@ -63,7 +85,8 @@ export const configIDO: IConfigIDO[] = [
                 symbol: "USDT",
                 address: tokens.usdt.address
             }
-        }
+        },
+        projectInfo: {}
     }
 
 ]
