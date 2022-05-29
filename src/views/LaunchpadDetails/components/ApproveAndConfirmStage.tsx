@@ -5,6 +5,7 @@ import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
 import { ToastDescriptionWithTx } from 'components/Toast'
+import { configIDO } from '../config'
 
 interface ApproveAndConfirmStageProps {
   variant: 'buy' | 'sell'
@@ -18,7 +19,9 @@ interface ApproveAndConfirmStageProps {
   hasSignForIDO: boolean
   isIDOFinished: boolean
   idoContract: any
+  pid: number
 }
+
 const ButtonIDOStyled = styled(Button)`
   border-radius: 6px;
   margin-left: 4px;
@@ -50,6 +53,7 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
   hasSignForIDO,
   isIDOFinished,
   idoContract,
+  pid,
 }) => {
   const { t } = useTranslation()
 
@@ -65,7 +69,7 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
       {!isApproved && (
         <Flex justifyContent="center">
           <ButtonIDOStyled scale="sm" variant="primary" disabled={isApproving || isApproved} onClick={handleApprove}>
-            {isApproving ? `${t('Approving')}...` : isApproved ? t('Approved') : t(`Approve ${tokens.usdt.symbol}`)}
+            {isApproving ? `${t('Approving')}...` : isApproved ? t('Approved') : t(`Approve ${configIDO[pid].tokenInfo.useForBuy.symbol}`)}
           </ButtonIDOStyled>
         </Flex>
       )}

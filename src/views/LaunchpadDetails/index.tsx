@@ -492,6 +492,7 @@ const Launchpad: React.FC = () => {
                     hasSignForIDO={hasSignForIDO()}
                     isIDOFinished={isIDOFinished(poolInfo)}
                     idoContract={idoContract}
+                    pid={pid}
                   />
                   {isBuyer && (
                     <Flex justifyContent="center" mt="8px">
