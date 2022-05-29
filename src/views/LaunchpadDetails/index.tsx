@@ -68,6 +68,10 @@ const ButtonIDOStyled = styled(Button)`
       : 'linear-gradient(94.76deg, #44aeea 0%, #5150ff 139.11%)'};
 `
 
+const getIDOStateText = (stt: number) => {
+  return 'Closed'
+}
+
 const Launchpad: React.FC = () => {
   const { account, library, connector } = useWeb3React()
   const router = useRouter()
@@ -165,8 +169,8 @@ const Launchpad: React.FC = () => {
             if (res.message === 'you bought') {
               toastSuccess(t('Succcess'), t('You already bought!'))
             }
-            if (res.status !== 200 && !res?.pid) {
-              toastError(t('Error'), res?.message)
+            if (res?.pid === undefined) {
+              toastError(t('Error sign IDO: '), res?.message)
             }
           },
           { account, library, connector },
