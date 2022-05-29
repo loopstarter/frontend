@@ -41,8 +41,12 @@ export const formatBnbv2 = (bnb: BigNumber) => {
 export const padTime = (num: number) => num.toString().padStart(2, '0')
 
 export const formatRoundTime = (secondsBetweenBlocks: number) => {
-  const { hours, minutes, seconds } = getTimePeriods(secondsBetweenBlocks)
+  const {days, hours, minutes, seconds } = getTimePeriods(secondsBetweenBlocks)
   const minutesSeconds = `${padTime(minutes)}:${padTime(seconds)}`
+
+  if (days > 0) {
+    return `${padTime(days)} days ${padTime(hours)}:${minutesSeconds}`
+  }
 
   if (hours > 0) {
     return `${padTime(hours)}:${minutesSeconds}`

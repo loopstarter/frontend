@@ -32,6 +32,7 @@ import PoolInfomation from './components/PoolInfomation'
 import { BIG_ZERO } from '../../utils/bigNumber'
 import { useRouter } from 'next/router'
 import { configIDO } from './config'
+import { CountdownIDO } from './components/CountdownIDO'
 
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean; isMobile: boolean }>`
@@ -96,6 +97,7 @@ const Launchpad: React.FC = () => {
   const [periodPercent, setPeriodPercent] = useState([])
   const [userClaimNumber, setUserClaimNumber] = useState(0)
   const [claimState, setClaimState] = useState<{ hasClaim?: boolean; message?: string }>({})
+
 
   // -----
   // const currencyA = useCurrency(currencyIdA)
@@ -230,7 +232,7 @@ const Launchpad: React.FC = () => {
     }
     return false
   }
-  // 
+  //
   const getIDOState = (poolData: any) => {
     return new BigNumber(poolData?.status?._hex).toNumber() || 0
   }
@@ -293,7 +295,7 @@ const Launchpad: React.FC = () => {
                     <Text color="#883BC3">TOTAL RAISE</Text>
                     {poolInfo ? (
                       <Text color="#fff" fontWeight={800}>
-                        $ {formatBigNumber(poolInfo?.totalAmount, 0, 18)}
+                        $ {formatBigNumber(poolInfo?.totalAmount, 0, 18)} {configIDO[pid].tokenInfo.useForBuy.symbol}
                       </Text>
                     ) : (
                       <Skeleton height={20} width={64} />
@@ -509,6 +511,15 @@ const Launchpad: React.FC = () => {
                     idoContract={idoContract}
                     pid={pid}
                   />
+                  {poolInfo?.endTime && getIDOState(poolInfo) === 1 ? (
+                    <Flex justifyContent='flex-end' >
+                      <Text color='white'>
+                        Finish in: 
+                      </Text>
+                      <CountdownIDO timeFinished={poolInfo?.endTime} />
+                    </Flex>
+                  ) : null}
+
                   {isBuyer && (
                     <Flex justifyContent="center" mt="8px">
                       <ButtonIDOStyled
@@ -551,7 +562,7 @@ const Launchpad: React.FC = () => {
                       </ButtonIDOStyled>
                     </Flex>
                   )}
-                  <Flex mt="32px">
+                  <Flex mt="16px">
                     <ButtonIDOStyled
                       minWidth={100}
                       scale="sm"
