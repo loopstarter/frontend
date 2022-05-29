@@ -366,7 +366,7 @@ const Launchpad: React.FC = () => {
                     </ButtonClosed>
                   </Flex>
                   <Flex mb={2}>
-                    <CurrencyLogo size="56px" address={tokens.usdt.address} style={{ background: 'center' }} />
+                    <CurrencyLogo size="56px" address={configIDO[pid].tokenInfo.useForBuy.address} style={{ background: 'center' }} />
                     <Flex flexDirection="column" ml={2}>
                       <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
                         {poolInfo?.totalAmount?._hex ? (

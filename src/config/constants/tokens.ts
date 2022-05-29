@@ -31,7 +31,7 @@ export const mainnetTokens = defineTokens({
   ),
   loops: new Token(
     MAINNET,
-    '0x33D1b53722A43d2be15943B60061eCc763C30B46',
+    '0x753fEa7E228a40502AAcE7400B953DDfbd2BA653',
     18,
     'LOOPS',
     'LOOPS',

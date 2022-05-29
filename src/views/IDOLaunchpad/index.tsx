@@ -71,6 +71,7 @@ const Launchpad: React.FC = () => {
   const { toastSuccess } = useToast()
   const [poolInfo, setPoolInfo] = useState<IIDOInfo>({})
   const [numberParticipant, setNumberParticipant] = useState(0)
+  const pid = 0
 
   useEffect(() => {
     idoContract.getBuyers(0).then((res) => setNumberParticipant(res?.length || 0))
@@ -281,7 +282,7 @@ const Launchpad: React.FC = () => {
                     </ButtonIDOStyled>
                   </Flex>
                   <Flex justifyContent="center" mt="32px" flex={1}>
-                    <ButtonIDOStyled scale="sm" onClick={() => window.open('/launchpad-details/1')}>
+                    <ButtonIDOStyled scale="sm" onClick={() => window.open(`/launchpad-details/${pid}`)}>
                       <svg
                         width="19"
                         height="19"
