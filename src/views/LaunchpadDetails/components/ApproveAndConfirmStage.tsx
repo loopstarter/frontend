@@ -69,7 +69,11 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
       {!isApproved && (
         <Flex justifyContent="center">
           <ButtonIDOStyled scale="sm" variant="primary" disabled={isApproving || isApproved} onClick={handleApprove}>
-            {isApproving ? `${t('Approving')}...` : isApproved ? t('Approved') : t(`Approve ${configIDO[pid].tokenInfo.useForBuy.symbol}`)}
+            {isApproving
+              ? `${t('Approving')}...`
+              : isApproved
+              ? t('Approved')
+              : t(`Approve ${configIDO[pid].tokenInfo.useForBuy.symbol}`)}
           </ButtonIDOStyled>
         </Flex>
       )}

@@ -3,7 +3,7 @@ import { Box, Button, CopyIcon, Flex, Text, useMatchBreakpoints } from '@loopsta
 import useToast from 'hooks/useToast'
 import React from 'react'
 import styled from 'styled-components'
-import { configIDO } from '../config';
+import { configIDO } from '../config'
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean; isMobile: boolean }>`
   border: 1px solid #d520af;

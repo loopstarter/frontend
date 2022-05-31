@@ -34,7 +34,6 @@ import { useRouter } from 'next/router'
 import { configIDO } from './config'
 import { CountdownIDO } from './components/CountdownIDO'
 
-
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean; isMobile: boolean }>`
   border: 1px solid #d520af;
   box-sizing: border-box;
@@ -70,9 +69,9 @@ const ButtonIDOStyled = styled(Button)`
 `
 
 const getIDOStateText = (stt: number) => {
-  if (stt === 0) return "Coming soon"
-  if (stt === 1) return "Active"
-  if (stt === 2) return "Ended"
+  if (stt === 0) return 'Coming soon'
+  if (stt === 1) return 'Active'
+  if (stt === 2) return 'Ended'
   return 'Coming soon'
 }
 
@@ -97,7 +96,6 @@ const Launchpad: React.FC = () => {
   const [periodPercent, setPeriodPercent] = useState([])
   const [userClaimNumber, setUserClaimNumber] = useState(0)
   const [claimState, setClaimState] = useState<{ hasClaim?: boolean; message?: string }>({})
-
 
   // -----
   // const currencyA = useCurrency(currencyIdA)
@@ -512,10 +510,8 @@ const Launchpad: React.FC = () => {
                     pid={pid}
                   />
                   {poolInfo?.endTime && getIDOState(poolInfo) === 1 ? (
-                    <Flex justifyContent='flex-end' >
-                      <Text color='white'>
-                        Finish in: 
-                      </Text>
+                    <Flex justifyContent="flex-end">
+                      <Text color="white">Finish in:</Text>
                       <CountdownIDO timeFinished={poolInfo?.endTime} />
                     </Flex>
                   ) : null}
