@@ -58,7 +58,7 @@ const ApproveAndConfirmStage: React.FC<ApproveAndConfirmStageProps> = ({
   const { t } = useTranslation()
 
   return (
-    <Flex p="16px" flexDirection="column">
+    <Flex flexDirection="column">
       <Flex mb="8px" alignItems="center">
         {!isApproved && (
           <Text mt="8px" textAlign="center" small color="orange">

@@ -388,12 +388,12 @@ const Launchpad: React.FC = () => {
                           getFullDisplayBalance(
                             new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
                             36,
-                            2,
+                            0,
                           )
                         ) : (
                           <Skeleton height={20} width={64} />
                         )}
-                        {configIDO[pid].tokenInfo.useForBuy.symbol}
+                        {' '}{configIDO[pid].tokenInfo.useForBuy.symbol}
                       </Text>
                       <Text fontSize="12px" color="#fff">
                         Total Raise Amount
@@ -405,7 +405,7 @@ const Launchpad: React.FC = () => {
                     <Flex flexDirection="column" ml={2}>
                       {poolInfo?.totalAmount ? (
                         <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
-                          {getFullDisplayBalance(poolInfo?.totalAmount?._hex, 18, 2)}{' '}
+                          {getFullDisplayBalance(poolInfo?.totalAmount?._hex, 18, 0)}{' '}
                           {configIDO[pid].tokenInfo.sell.symbol}
                         </Text>
                       ) : (
@@ -483,7 +483,7 @@ const Launchpad: React.FC = () => {
                       {getFullDisplayBalance(
                         new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
                         36,
-                        2,
+                        0,
                       )}{' '}
                       ${configIDO[pid].tokenInfo.useForBuy.symbol}
                     </Text>
