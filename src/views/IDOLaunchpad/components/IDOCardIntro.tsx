@@ -119,14 +119,6 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
             {poolInfo?.totalAmount ? (
               <Text fontSize="28px" fontWeight={800} color="#fff">
                 {getFullDisplayBalance(
-                  new BigNumber(poolInfo?.totalAmount?._hex)
-                    .minus(poolInfo?.remainAmount?._hex)
-                    .multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-                  36,
-                  2,
-                )}
-                /
-                {getFullDisplayBalance(
                   new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
                   36,
                   0,
@@ -183,7 +175,7 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
             {getFullDisplayBalance(
               new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
               36,
-              2,
+              0,
             )}{' '}
             ${project.tokenInfo.useForBuy.symbol}
           </Text>
