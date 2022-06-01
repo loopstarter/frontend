@@ -336,7 +336,7 @@ const Launchpad: React.FC = () => {
                 </Flex>
                 <Flex mt={3} flexDirection="column" alignItems="center">
                   {!account ? (
-                    <ConnectWalletButton />
+                    <ConnectWalletButton isFullWidth />
                   ) : (
                     <ButtonIDOStyled onClick={() => openLink(configIDO[pid].viewTokenLink)} scale="sm">
                       View {configIDO[pid].tokenInfo.sell.symbol}
@@ -392,8 +392,8 @@ const Launchpad: React.FC = () => {
                           )
                         ) : (
                           <Skeleton height={20} width={64} />
-                        )}
-                        {' '}{configIDO[pid].tokenInfo.useForBuy.symbol}
+                        )}{' '}
+                        {configIDO[pid].tokenInfo.useForBuy.symbol}
                       </Text>
                       <Text fontSize="12px" color="#fff">
                         Total Raise Amount

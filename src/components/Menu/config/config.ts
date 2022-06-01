@@ -51,14 +51,14 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     items: [],
     type: DropdownMenuItemType.EXTERNAL_LINK,
   },
-  {
-    label: 'Whitelist',
-    href: '/#',
-    icon: 'More',
-    hideSubNav: true,
-    items: [],
-    showItemsOnMobile: false,
-  },
+  // {
+  //   label: 'Whitelist',
+  //   href: '/#',
+  //   icon: 'More',
+  //   hideSubNav: true,
+  //   items: [],
+  //   showItemsOnMobile: false,
+  // },
 ]
 
 export default config

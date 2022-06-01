@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 
 const ConnectButton = styled(Button)`
-  width: 124px;
+  width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '124px')};
   height: 42px;
   background: linear-gradient(266.6deg, #4c37dc 8.18%, #6a5aff 92.89%);
   border-radius: 9px;
