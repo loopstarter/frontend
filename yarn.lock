@@ -1437,10 +1437,10 @@
     hoist-non-react-statics "^3.3.1"
     react-is "^16.12.0"
 
-"@loopstarter/uikit@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@loopstarter/uikit/-/uikit-0.0.9.tgz#70372b49287e5a1a2b7986dd5914347d3aca04ca"
-  integrity sha512-9yBWLh8bwRWEB+X3zeTYk2YKAsiP1cD7erRkPxEnq7R5f8HAIAOoTg3f22atx/lcgqkwQVGRctAb7hz57uF/5Q==
+"@loopstarter/uikit@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@loopstarter/uikit/-/uikit-0.1.0.tgz#24f2fa2fede3cfe19391dc4c38e3204f26ea98cd"
+  integrity sha512-bl7nhSWAboYEIoqDywgAEK5QWjAK7S7YzBHRsbDTgw1GSmGm6n6NzM5T1cXa8f3RWAuoQZSjMmGM5VMPysvAiw==
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/styled-system" "^5.1.10"
