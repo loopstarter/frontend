@@ -1976,6 +1976,14 @@ export const mainnetTokens = defineTokens({
     'Ertha Token',
     'https://ertha.io/',
   ),
+  acdx: new Token(
+    MAINNET,
+    '0xCba729cd87ced92c156588199cDA1eD790D5B3C7',
+    18,
+    'ACDX',
+    'ACDX Token',
+    'https://acadex.network/',
+  ),
 } as const)
 
 export const testnetTokens = defineTokens({

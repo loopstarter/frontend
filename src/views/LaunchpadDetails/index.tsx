@@ -277,7 +277,7 @@ const Launchpad: React.FC = () => {
             <Flex flexDirection="row" flexWrap="wrap">
               <Flex flex={1} flexDirection="column">
                 <picture>
-                  <img src={configIDO[pid].projectLogo} alt={t('logo')} width={80} />
+                  <img src={configIDO[pid].projectLogo} alt={t('logo')} width={configIDO[pid].projectInfo.logoWidth || 80} />
                 </picture>
                 <Text style={{ color: '#fff' }}>{configIDO[pid].projectDescription}</Text>
                 <Flex>

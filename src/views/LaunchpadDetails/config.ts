@@ -32,6 +32,7 @@ export interface IConfigIDO {
     totalSupply?: string
     addressToken?: string
     access?: string
+    logoWidth?: number
   }
 }
 
@@ -74,21 +75,20 @@ export const configIDO: IConfigIDO[] = [
   },
   {
     pid: 1,
-    projectDescription:
-      'Initial token distribution event for LOOPStarter tokens with allocation based on a whitelist and ranking order based on the score achieved by each individual.LOOPStarter is a platform used to launch crypto projects, introduce some new coins, and increase liquidity.This is one of the biggest things for this digital world, especially when it comes to decentralized finance.LOOPStarter is beyond just being a IDO Launchpad platform.It’s an integrated ecosystem that introduces an all-in -one solution to launch and manage decentralized finances.It supports all the major Multi - chain wallets along with our inline wallet management system.The portal will integrate a launchpad for decentralized fundraising for new projects needing liquidity at the start in a fair manner.The first DAO supports multi - chain, cross - platform launchpad with a full DEX and deflation mechanism.',
+    projectDescription: 'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
     projectShortDescription:
-      'Initial token distribution event for LOOPStarter tokens with allocation based on a whitelist and ranking order based on the score achieved by each individual.',
-    projectLogo: '/images/home/logo.svg',
+      'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
+    projectLogo: '/images/app-ido/acdx.png',
     social: {
       twitter: '',
-      website: 'https://loopstarter.com/',
+      website: 'https://acadex.network/',
     },
-    viewTokenLink: 'https://loopstarter.com/',
+    viewTokenLink: 'https://acadex.network/',
     tokenInfo: {
       sell: {
-        symbol: 'LOOPS-A',
-        address: tokens.loops.address,
-        decimals: tokens.loops.decimals,
+        symbol: tokens.acdx.symbol,
+        address: tokens.acdx.address,
+        decimals: tokens.acdx.decimals,
       },
       useForBuy: {
         symbol: 'BUSD',
@@ -96,88 +96,17 @@ export const configIDO: IConfigIDO[] = [
       },
     },
     projectInfo: {
-      timeDistribute: '30/05/2022',
-      allocation: '10 BUSD',
+      timeDistribute: '08/06/2022',
+      allocation: '100 BUSD',
       allocationSize: ' - ',
       listingPrice: '$ 0.10',
-      projectName: 'LOOPS SET',
-      symbol: 'LOOPS',
-      demicals: tokens.loops.decimals,
+      projectName: 'PIONEERING DECENTRALIZED EDUCATION NETWORK',
+      symbol: 'ACDX',
+      demicals: tokens.acdx.decimals,
       totalSupply: '100,000,000',
-      addressToken: tokens.loops.address,
+      addressToken: tokens.acdx.address,
       access: 'Public',
-    },
-  },
-  {
-    pid: 2,
-    projectDescription:
-      'Initial token distribution event for LOOPStarter tokens with allocation based on a whitelist and ranking order based on the score achieved by each individual.LOOPStarter is a platform used to launch crypto projects, introduce some new coins, and increase liquidity.This is one of the biggest things for this digital world, especially when it comes to decentralized finance.LOOPStarter is beyond just being a IDO Launchpad platform.It’s an integrated ecosystem that introduces an all-in -one solution to launch and manage decentralized finances.It supports all the major Multi - chain wallets along with our inline wallet management system.The portal will integrate a launchpad for decentralized fundraising for new projects needing liquidity at the start in a fair manner.The first DAO supports multi - chain, cross - platform launchpad with a full DEX and deflation mechanism.',
-    projectShortDescription:
-      'Initial token distribution event for LOOPStarter tokens with allocation based on a whitelist and ranking order based on the score achieved by each individual.',
-    projectLogo: '/images/home/logo.svg',
-    social: {
-      twitter: '',
-      website: 'https://loopstarter.com/',
-    },
-    viewTokenLink: 'https://loopstarter.com/',
-    tokenInfo: {
-      sell: {
-        symbol: 'LOOPS-B',
-        address: tokens.loops.address,
-        decimals: tokens.loops.decimals,
-      },
-      useForBuy: {
-        symbol: 'BUSD',
-        address: tokens.busd.address,
-      },
-    },
-    projectInfo: {
-      timeDistribute: '30/05/2022',
-      allocation: '10 BUSD',
-      allocationSize: ' - ',
-      listingPrice: '$ 0.10',
-      projectName: 'LOOPS SET',
-      symbol: 'LOOPS',
-      demicals: tokens.loops.decimals,
-      totalSupply: '100,000,000',
-      addressToken: tokens.loops.address,
-      access: 'Public',
-    },
-  },
-  {
-    pid: 4,
-    projectDescription:
-      'Initial token distribution event for LOOPStarter tokens with allocation based on a whitelist and ranking order based on the score achieved by each individual.LOOPStarter is a platform used to launch crypto projects, introduce some new coins, and increase liquidity.This is one of the biggest things for this digital world, especially when it comes to decentralized finance.LOOPStarter is beyond just being a IDO Launchpad platform.It’s an integrated ecosystem that introduces an all-in -one solution to launch and manage decentralized finances.It supports all the major Multi - chain wallets along with our inline wallet management system.The portal will integrate a launchpad for decentralized fundraising for new projects needing liquidity at the start in a fair manner.The first DAO supports multi - chain, cross - platform launchpad with a full DEX and deflation mechanism.',
-    projectShortDescription:
-      'Initial token distribution event for LOOPStarter tokens with allocation based on a whitelist and ranking order based on the score achieved by each individual.',
-    projectLogo: '/images/home/logo.svg',
-    social: {
-      twitter: '',
-      website: 'https://loopstarter.com/',
-    },
-    viewTokenLink: 'https://loopstarter.com/',
-    tokenInfo: {
-      sell: {
-        symbol: 'LOOPS',
-        address: tokens.loops.address,
-        decimals: tokens.loops.decimals,
-      },
-      useForBuy: {
-        symbol: 'BUSD',
-        address: tokens.busd.address,
-      },
-    },
-    projectInfo: {
-      timeDistribute: '30/05/2022',
-      allocation: '10 BUSD',
-      allocationSize: ' - ',
-      listingPrice: '$ 0.10',
-      projectName: 'LOOPS SET',
-      symbol: 'LOOPS',
-      demicals: tokens.loops.decimals,
-      totalSupply: '100,000,000',
-      addressToken: tokens.loops.address,
-      access: 'Public',
-    },
-  },
+      logoWidth: 120,
+    }
+  }
 ]

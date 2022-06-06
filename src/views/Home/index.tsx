@@ -11,6 +11,7 @@ import MetricsSection from './components/MetricsSection'
 import UserBanner from './components/UserBanner'
 import FarmAuctionsBanner from './components/Banners/FarmAuctionsBanner'
 import Footer from './components/Footer'
+import TwitterComponent from './Announcements'
 
 const showBanner = false
 
@@ -77,6 +78,7 @@ const Home: React.FC = () => {
           </UserBannerWrapper>
         )}
         <HomeBanner account={account} />
+        {/* <TwitterComponent link="https://twitter.com/LFG_org" /> */}
         <Hero />
       </StyledHeroSection>
       <MetricsSection />

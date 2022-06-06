@@ -88,7 +88,7 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
       <Flex flex={1} flexDirection="column">
         <Flex justifyContent="center">
           <picture>
-            <img src={project.projectLogo} alt={t('logo')} width={80} />
+            <img src={project.projectLogo} alt={t('logo')} width={project.projectInfo.logoWidth || 80} />
           </picture>
         </Flex>
         <Flex justifyContent="center">
