@@ -114,7 +114,7 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
           <Text style={{ color: '#fff' }}>{project.projectShortDescription}</Text>
         </Flex>
         <Flex mb={2}>
-          <CurrencyLogo size="56px" address={tokens.loops.address} />
+          <CurrencyLogo size="56px" address={project.tokenInfo.sell.address} />
           <Flex flexDirection="column" ml={2}>
             {poolInfo?.totalAmount ? (
               <Text fontSize="28px" fontWeight={800} color="#fff">

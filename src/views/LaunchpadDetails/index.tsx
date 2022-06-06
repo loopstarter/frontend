@@ -277,7 +277,11 @@ const Launchpad: React.FC = () => {
             <Flex flexDirection="row" flexWrap="wrap">
               <Flex flex={1} flexDirection="column">
                 <picture>
-                  <img src={configIDO[pid].projectLogo} alt={t('logo')} width={configIDO[pid].projectInfo.logoWidth || 80} />
+                  <img
+                    src={configIDO[pid].projectLogo}
+                    alt={t('logo')}
+                    width={configIDO[pid].projectInfo.logoWidth || 80}
+                  />
                 </picture>
                 <Text style={{ color: '#fff' }}>{configIDO[pid].projectDescription}</Text>
                 <Flex>
@@ -401,7 +405,7 @@ const Launchpad: React.FC = () => {
                     </Flex>
                   </Flex>
                   <Flex mb={2}>
-                    <CurrencyLogo size="56px" address={tokens.loops.address} style={{ background: 'center' }} />
+                    <CurrencyLogo size="56px" address={configIDO[pid].tokenInfo.sell.address} style={{ background: 'center' }} />
                     <Flex flexDirection="column" ml={2}>
                       {poolInfo?.totalAmount ? (
                         <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
