@@ -114,13 +114,13 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
           <Text style={{ color: '#fff' }}>{project.projectShortDescription}</Text>
         </Flex>
         <Flex mb={2}>
-          <CurrencyLogo size="56px" address={project.tokenInfo.sell.address} />
+          <CurrencyLogo size="56px" address={project.tokenInfo.useForBuy.address} />
           <Flex flexDirection="column" ml={2}>
             {poolInfo?.totalAmount ? (
               <Text fontSize="28px" fontWeight={800} color="#fff">
                 {getFullDisplayBalance(
                   new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-                  36,
+                  project.tokenInfo.sell.decimals + project.tokenInfo.useForBuy.decimals,
                   0,
                 )}{' '}
                 ${project.tokenInfo.useForBuy.symbol}
@@ -168,13 +168,13 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
               new BigNumber(poolInfo?.totalAmount?._hex)
                 .minus(poolInfo?.remainAmount?._hex)
                 .multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-              36,
+              project.tokenInfo.sell.decimals + project.tokenInfo.useForBuy.decimals,
               2,
             )}
             /
             {getFullDisplayBalance(
               new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-              36,
+              project.tokenInfo.sell.decimals + project.tokenInfo.useForBuy.decimals,
               0,
             )}{' '}
             ${project.tokenInfo.useForBuy.symbol}

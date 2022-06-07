@@ -297,7 +297,8 @@ const Launchpad: React.FC = () => {
                     <Text color="#883BC3">TOTAL RAISE</Text>
                     {poolInfo ? (
                       <Text color="#fff" fontWeight={800}>
-                        $ {formatBigNumber(poolInfo?.totalAmount, 0, 18)} {configIDO[pid].tokenInfo.useForBuy.symbol}
+                        $ {formatBigNumber(poolInfo?.totalAmount, 0, configIDO[pid].tokenInfo.sell.decimals)}{' '}
+                        {configIDO[pid].tokenInfo.useForBuy.symbol}
                       </Text>
                     ) : (
                       <Skeleton height={20} width={64} />
@@ -370,8 +371,12 @@ const Launchpad: React.FC = () => {
                           />
                         </svg>{' '}
                         1 {configIDO[pid].tokenInfo.sell.symbol} ={' '}
-                        {getFullDisplayBalance(poolInfo?.tokenBuy2IDOtoken?._hex, 18, 2)} $
-                        {configIDO[pid].tokenInfo.useForBuy.symbol}
+                        {getFullDisplayBalance(
+                          poolInfo?.tokenBuy2IDOtoken?._hex,
+                          configIDO[pid].tokenInfo.sell.decimals,
+                          2,
+                        )}{' '}
+                        ${configIDO[pid].tokenInfo.useForBuy.symbol}
                       </Text>
                     </ButtonViewLoops>
                     <ButtonClosed scale="sm" ml={2}>
@@ -391,7 +396,7 @@ const Launchpad: React.FC = () => {
                         {poolInfo?.totalAmount?._hex ? (
                           getFullDisplayBalance(
                             new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-                            36,
+                            configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
                             0,
                           )
                         ) : (
@@ -413,7 +418,11 @@ const Launchpad: React.FC = () => {
                     <Flex flexDirection="column" ml={2}>
                       {poolInfo?.totalAmount ? (
                         <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
-                          {getFullDisplayBalance(poolInfo?.totalAmount?._hex, 18, 0)}{' '}
+                          {getFullDisplayBalance(
+                            poolInfo?.totalAmount?._hex,
+                            configIDO[pid].tokenInfo.sell.decimals,
+                            0,
+                          )}{' '}
                           {configIDO[pid].tokenInfo.sell.symbol}
                         </Text>
                       ) : (
@@ -433,7 +442,7 @@ const Launchpad: React.FC = () => {
                   <Flex mt={3}>
                     <Text fontSize="14px" color={canHasEnoughBalance2BuyIDO ? '#1EAB81' : 'red'} fontWeight={600}>
                       Your {configIDO[pid].tokenInfo.useForBuy.symbol} balance:{' '}
-                      {getFullDisplayBalance(balance2BuyIDO.balance, 18, 2)}
+                      {getFullDisplayBalance(balance2BuyIDO.balance, configIDO[pid].tokenInfo.useForBuy.decimals, 2)}
                     </Text>
                   </Flex>
                   <Flex mt={2}>
@@ -442,7 +451,7 @@ const Launchpad: React.FC = () => {
                       {poolInfo?.amount?._hex ? (
                         getFullDisplayBalance(
                           new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-                          36,
+                          configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
                           2,
                         )
                       ) : (
@@ -484,13 +493,13 @@ const Launchpad: React.FC = () => {
                         new BigNumber(poolInfo?.totalAmount?._hex)
                           .minus(poolInfo?.remainAmount?._hex)
                           .multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-                        36,
+                        configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
                         2,
                       )}
                       /
                       {getFullDisplayBalance(
                         new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-                        36,
+                        configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
                         0,
                       )}{' '}
                       ${configIDO[pid].tokenInfo.useForBuy.symbol}

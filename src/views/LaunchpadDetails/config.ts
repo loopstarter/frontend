@@ -19,6 +19,7 @@ export interface IConfigIDO {
     useForBuy: {
       symbol: string
       address: string
+      decimals: number
     }
   }
   projectInfo: {
@@ -95,6 +96,8 @@ export const configIDO: IConfigIDO[] = [
       useForBuy: {
         symbol: 'BUSD',
         address: tokens.busd.address,
+        decimals: tokens.busd.decimals,
+
       },
     },
     projectInfo: {
@@ -109,7 +112,7 @@ export const configIDO: IConfigIDO[] = [
       addressToken: tokens.acdx.address,
       access: 'Public',
       logoWidth: 120,
-      startTime: 1654707600
+      startTime: 1654682400
     }
   }
 ]

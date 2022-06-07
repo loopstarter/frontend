@@ -188,7 +188,7 @@ const nextIDO = {
     'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
   description2:
     'Bound to upscale the global education quality and learning systems, by instituting study inclusiveness, subsidized student loans, reward learners, authors, creatives and curb study certificate forgery, blockchain intellectual property copyrighting and authentication using NFT, AR & VR technology.',
-  linkIdo: '/launchpad-details/1',
+  linkIdo: '/launchpad-details/0',
   cap: '13,333,333.3 ',
   raise: '40,000 BUSD',
   exchange: '1 ACDX = 0.003 BUSD',
@@ -206,7 +206,7 @@ const nextIDO = {
 const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, margin }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
-  const { secondsRemaining } = useCountdown(1654707600)
+  const { secondsRemaining } = useCountdown(1654682400)
   const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining)
 
   
