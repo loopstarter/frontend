@@ -4,6 +4,8 @@ import { Flex, Button, Slider } from '@loopstarter/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
 import useCountDownTimer from 'hooks/useCountDownTimer'
+import useCountdown from '../../../Predictions/hooks/useCountdown';
+import getTimePeriods from 'utils/getTimePeriods';
 
 const BgWrapper = styled(Flex)`
   background-image: url('/images/home/loop-ido.png');
@@ -179,9 +181,35 @@ const IdoBtn = styled(Button)`
   }
 `
 
+const nextIDO = {
+  name: 'ACADEX - ACDX',
+  token: 'ACADEX',
+  description1:
+    'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
+  description2:
+    'Bound to upscale the global education quality and learning systems, by instituting study inclusiveness, subsidized student loans, reward learners, authors, creatives and curb study certificate forgery, blockchain intellectual property copyrighting and authentication using NFT, AR & VR technology.',
+  linkIdo: '/launchpad-details/1',
+  cap: '13,333,333.3 ',
+  raise: '40,000 BUSD',
+  exchange: '1 ACDX = 0.003 BUSD',
+}
+// const nextIDO = {
+//   name: 'LOOPSTARTER - LOOPS',
+//   token: 'LOOPS',
+//   description1:
+//     'LOOPStarter was launched on a decentralized exchange - LOOPDEX using LOOPS tokens, which has become an exchange and a crowdfunding platform for all new projects.',
+//   description2: 'The first DAO supports multi-chain, cross-platform launchpad with a full DEX and deflation mechanism.',
+//   linkIdo: '/launchpad-details/1'
+// }
+
+
 const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, margin }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
+  const { secondsRemaining } = useCountdown(1654646400)
+  const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining)
+
+  
   // const [timeHarvestRemaining, setTimeHarvestRemaining] = useCountDownTimer()
   // useEffect(() => {
   //   const difference = +new Date('April 21, 2022 22:00:00 EST') - +new Date()
@@ -222,41 +250,36 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
         id="homepage-hero"
       >
         <Flex flex="1" flexDirection="column" alignItems="center">
-          <HeadingTitle>{t('LOOPSTARTER - LOOPS')}</HeadingTitle>
+          <HeadingTitle>{t(nextIDO.name)}</HeadingTitle>
           <BtnStyle>Coming soon</BtnStyle>
           <TimeWrapper>
             <div>
-              <Time>{timeLeft.days}</Time>
+              <Time>{days}</Time>
               <TimeLabel>Day</TimeLabel>
             </div>
             <div>
-              <Time>{timeLeft.hours}</Time>
+              <Time>{hours}</Time>
               <TimeLabel>Hours</TimeLabel>
             </div>
             <div>
-              <Time>{timeLeft.minutes}</Time>
+              <Time>{minutes}</Time>
               <TimeLabel>Minutes</TimeLabel>
             </div>
             <div>
-              <Time>{timeLeft.seconds}</Time>
+              <Time>{seconds}</Time>
               <TimeLabel>Seconds</TimeLabel>
             </div>
           </TimeWrapper>
-          <Description>
-            LOOPStarter was launched on a decentralized exchange - LOOPDEX using LOOPS tokens, which has become an
-            exchange and a crowdfunding platform for all new projects.
-          </Description>
-          <Description>
-            The first DAO supports multi-chain, cross-platform launchpad with a full DEX and deflation mechanism.
-          </Description>
+          <Description>{nextIDO.description1}</Description>
+          <Description>{nextIDO.description2}</Description>
           <Ido>
             <Flex flexDirection="column" padding="0 45px 0 0">
               <Flex width="100%" justifyContent="space-between">
                 <div>
                   <Text>Swap Amount</Text>
-                  <Text>0 LOOPS</Text>
+                  <Text>0 {nextIDO.token}</Text>
                 </div>
-                <Text>1 LOOPS = 0.055 BUSD</Text>
+                <Text>{nextIDO.exchange}</Text>
               </Flex>
               <Line />
               <Text>Swap progress</Text>
@@ -277,12 +300,16 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
                 </Text>
               </Flex>
               <Flex width="100%" justifyContent="space-between" padding="0 0 10px">
-                <Text>2,000,000 LOOPS</Text>
-                <Text>110,000 BUSD</Text>
+                <Text>
+                  {nextIDO.cap} {nextIDO.token}
+                </Text>
+                <Text>{nextIDO.raise}</Text>
               </Flex>
             </Flex>
             <Flex justifyContent="center">
-              <IdoBtn>Join IDO</IdoBtn>
+              <a href={nextIDO.linkIdo} target="_blank">
+                <IdoBtn>Join IDO</IdoBtn>
+              </a>
             </Flex>
           </Ido>
         </Flex>
