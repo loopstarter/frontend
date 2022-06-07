@@ -526,13 +526,15 @@ const Launchpad: React.FC = () => {
                     idoContract={idoContract}
                     pid={pid}
                   />
-                  {poolInfo?.endTime && getIDOState(poolInfo) === 1 ? (
+                  {poolInfo?.endTime &&
+                  getIDOState(poolInfo) === 1 &&
+                  configIDO[pid].projectInfo.startTime - new Date().getTime()/1000 < 0 ? (
                     <Flex justifyContent="flex-end">
                       <Text color="white">Finish in:</Text>
                       <CountdownIDO timeFinished={poolInfo?.endTime} />
                     </Flex>
                   ) : null}
-                  {getIDOState(poolInfo) === 0 ? (
+                  {getIDOState(poolInfo) === 0 || getIDOState(poolInfo) === 1 ? (
                     <Flex justifyContent="flex-end">
                       <Text color="white">Start in:</Text>
                       <CountdownIDO timeFinished={configIDO[pid].projectInfo.startTime} />
