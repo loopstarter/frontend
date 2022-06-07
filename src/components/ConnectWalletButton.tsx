@@ -42,7 +42,11 @@ export const GoToAppButton = (props) => {
   const { login, logout } = useAuth()
   const { onPresentConnectModal } = useWalletModal(login, logout, t)
 
-  return <ConnectButton {...props}>{t('Go to App')}</ConnectButton>
+  return (
+    <a href="https://app.loopstarter.com/" target='_blank'>
+      <ConnectButton {...props}>{t('Go to App')}</ConnectButton>
+    </a>
+  )
 }
 
 export default ConnectWalletButton

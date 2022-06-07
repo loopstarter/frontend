@@ -28,6 +28,7 @@ export interface IConfigIDO {
     allocationSize?: string
     listingPrice?: string
     projectName?: string
+    projectNameShort?: string
     symbol?: string
     demicals?: number
     totalSupply?: string
@@ -106,6 +107,7 @@ export const configIDO: IConfigIDO[] = [
       allocationSize: ' - ',
       listingPrice: '$0.01',
       projectName: 'PIONEERING DECENTRALIZED EDUCATION NETWORK',
+      projectNameShort: 'Acadex Network',
       symbol: 'ACDX',
       demicals: tokens.acdx.decimals,
       totalSupply: '1,000,000,000',

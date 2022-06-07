@@ -42,7 +42,7 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     showItemsOnMobile: false,
   },
   {
-    label: 'Doc',
+    label: 'Docs',
     href: 'https://docs.loopstarter.com/',
     target: '_blank',
     icon: 'More',

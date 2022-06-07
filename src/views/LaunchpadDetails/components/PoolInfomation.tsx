@@ -32,29 +32,29 @@ const PoolInfomation = ({ idoContract, pid }: { idoContract: any; pid: number })
           </Flex>
         </Flex>
       </Flex>
-      <Flex flex={1} flexWrap="wrap">
+      <Flex flex={1} flexWrap="wrap" justifyContent='center'>
         <WrapLaunchpad noMarginTop isMobile={isMobile}>
           <Flex flexDirection="row" justifyContent="space-between" flexWrap="wrap">
-            <Box>
-              <Text color="#883BC3">TOKEN DISTRIBUTION</Text>
+            <Box pr={2} pl={2}>
+              <Text color="#883BC3">DATE</Text>
               <Text color="#fff" fontWeight={800}>
                 {configIDO[pid].projectInfo.timeDistribute}
               </Text>
             </Box>
-            <Box>
-              <Text color="#883BC3">MIN. ALLOCATION</Text>
+            <Box pr={2} pl={2}>
+              <Text color="#883BC3">TICKET SIZE</Text>
               <Text color="#fff" fontWeight={800}>
                 {configIDO[pid].projectInfo.allocation}
               </Text>
             </Box>
-            <Box>
+            <Box pr={2} pl={2}>
               <Text color="#883BC3">ALLOCATION SIZE</Text>
               <Text color="#fff" fontWeight={800}>
                 {configIDO[pid].projectInfo.allocationSize}
               </Text>
             </Box>
-            <Box>
-              <Text color="#883BC3">LISTING PRICE</Text>
+            <Box pr={2} pl={2}>
+              <Text color="#883BC3"> PRICE</Text>
               <Text color="#fff" fontWeight={800}>
                 {configIDO[pid].projectInfo.listingPrice}
               </Text>
@@ -63,25 +63,25 @@ const PoolInfomation = ({ idoContract, pid }: { idoContract: any; pid: number })
         </WrapLaunchpad>
         <WrapLaunchpad noMarginTop isMobile={isMobile}>
           <Flex flexDirection="row" justifyContent="space-between" flexWrap="wrap">
-            <Box>
+            <Box pr={2} pl={2}>
               <Text color="#883BC3">NAME</Text>
               <Text color="#fff" fontWeight={800}>
-                {configIDO[pid].projectInfo.projectName}
+                {configIDO[pid].projectInfo.projectNameShort}
               </Text>
             </Box>
-            <Box>
+            <Box pr={2} pl={2}>
               <Text color="#883BC3">SYMBOL</Text>
               <Text color="#fff" fontWeight={800}>
                 $ {configIDO[pid].projectInfo.symbol}
               </Text>
             </Box>
-            <Box>
+            <Box pr={2} pl={2}>
               <Text color="#883BC3">DECIMALS</Text>
               <Text color="#fff" fontWeight={800}>
                 {configIDO[pid].projectInfo.demicals}
               </Text>
             </Box>
-            <Box>
+            <Box pr={2} pl={2}>
               <Text color="#883BC3">TOTAL SUPPLY</Text>
               <Text color="#fff" fontWeight={800}>
                 {configIDO[pid].projectInfo.totalSupply}
@@ -89,7 +89,7 @@ const PoolInfomation = ({ idoContract, pid }: { idoContract: any; pid: number })
             </Box>
           </Flex>
           <Flex flexDirection="row" justifyContent="space-between">
-            <Box>
+            <Box pr={2} pl={2}>
               <Text color="#883BC3">ADDRESS TOKEN</Text>
               <Text
                 color="#fff"
