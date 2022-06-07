@@ -405,7 +405,11 @@ const Launchpad: React.FC = () => {
                     </Flex>
                   </Flex>
                   <Flex mb={2}>
-                    <CurrencyLogo size="56px" address={configIDO[pid].tokenInfo.sell.address} style={{ background: 'center' }} />
+                    <CurrencyLogo
+                      size="56px"
+                      address={configIDO[pid].tokenInfo.sell.address}
+                      style={{ background: 'center' }}
+                    />
                     <Flex flexDirection="column" ml={2}>
                       {poolInfo?.totalAmount ? (
                         <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
@@ -517,6 +521,12 @@ const Launchpad: React.FC = () => {
                     <Flex justifyContent="flex-end">
                       <Text color="white">Finish in:</Text>
                       <CountdownIDO timeFinished={poolInfo?.endTime} />
+                    </Flex>
+                  ) : null}
+                  {getIDOState(poolInfo) === 0 ? (
+                    <Flex justifyContent="flex-end">
+                      <Text color="white">Start in:</Text>
+                      <CountdownIDO timeFinished={configIDO[pid].projectInfo.startTime} />
                     </Flex>
                   ) : null}
 

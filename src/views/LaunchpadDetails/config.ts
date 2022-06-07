@@ -32,7 +32,8 @@ export interface IConfigIDO {
     totalSupply?: string
     addressToken?: string
     access?: string
-    logoWidth?: number
+    logoWidth?: number,
+    startTime: number
   }
 }
 
@@ -71,6 +72,7 @@ export const configIDO: IConfigIDO[] = [
       totalSupply: '100,000,000',
       addressToken: tokens.loops.address,
       access: 'Public',
+      startTime: 1654646400
     },
   },
   {
@@ -99,14 +101,15 @@ export const configIDO: IConfigIDO[] = [
       timeDistribute: '08/06/2022',
       allocation: '100 BUSD',
       allocationSize: ' - ',
-      listingPrice: '$ 0.10',
+      listingPrice: '$0.01',
       projectName: 'PIONEERING DECENTRALIZED EDUCATION NETWORK',
       symbol: 'ACDX',
       demicals: tokens.acdx.decimals,
-      totalSupply: '100,000,000',
+      totalSupply: '1,000,000,000',
       addressToken: tokens.acdx.address,
       access: 'Public',
       logoWidth: 120,
+      startTime: 1654646400
     }
   }
 ]
