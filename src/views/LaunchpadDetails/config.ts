@@ -72,7 +72,7 @@ export const configIDO: IConfigIDO[] = [
       totalSupply: '100,000,000',
       addressToken: tokens.loops.address,
       access: 'Public',
-      startTime: 1654646400
+      startTime: 1654707600
     },
   },
   {
@@ -109,7 +109,7 @@ export const configIDO: IConfigIDO[] = [
       addressToken: tokens.acdx.address,
       access: 'Public',
       logoWidth: 120,
-      startTime: 1654646400
+      startTime: 1654707600
     }
   }
 ]

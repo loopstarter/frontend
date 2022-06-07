@@ -206,7 +206,7 @@ const nextIDO = {
 const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, margin }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
-  const { secondsRemaining } = useCountdown(1654646400)
+  const { secondsRemaining } = useCountdown(1654707600)
   const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining)
 
   
