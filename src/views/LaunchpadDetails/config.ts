@@ -105,7 +105,7 @@ export const configIDO: IConfigIDO[] = [
       timeDistribute: '08/06/2022',
       allocation: '100 BUSD',
       allocationSize: ' - ',
-      listingPrice: '$0.01',
+      listingPrice: '$0.003',
       projectName: 'PIONEERING DECENTRALIZED EDUCATION NETWORK',
       projectNameShort: 'Acadex Network',
       symbol: 'ACDX',

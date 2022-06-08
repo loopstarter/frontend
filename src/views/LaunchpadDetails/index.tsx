@@ -1,5 +1,5 @@
 /* eslint-disable no-debugger */
-import { Box, Button, CopyIcon, Flex, Skeleton, Slider, Text, useMatchBreakpoints } from '@loopstarter/uikit'
+import { Box, Button, CopyIcon, Flex, LinkExternal, Skeleton, Slider, Text, useMatchBreakpoints } from '@loopstarter/uikit'
 import { useWeb3React } from '@web3-react/core'
 import Page from 'components/Layout/Page'
 import { BASE_API_URL } from 'config'
@@ -33,6 +33,7 @@ import { BIG_ZERO } from '../../utils/bigNumber'
 import { useRouter } from 'next/router'
 import { configIDO } from './config'
 import { CountdownIDO } from './components/CountdownIDO'
+import { getBscScanLink } from '../../utils/index';
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean; isMobile: boolean }>`
   border: 1px solid #d520af;
@@ -297,7 +298,16 @@ const Launchpad: React.FC = () => {
                     <Text color="#883BC3">TOTAL RAISE</Text>
                     {poolInfo ? (
                       <Text color="#fff" fontWeight={800}>
-                        $ {formatBigNumber(poolInfo?.totalAmount, 0, configIDO[pid].tokenInfo.sell.decimals)}{' '}
+                        ${' '}
+                        {poolInfo?.totalAmount?._hex ? (
+                          getFullDisplayBalance(
+                            new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
+                            configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
+                            0,
+                          )
+                        ) : (
+                          <Skeleton height={20} width={64} />
+                        )}{' '}
                         {configIDO[pid].tokenInfo.useForBuy.symbol}
                       </Text>
                     ) : (
@@ -324,19 +334,21 @@ const Launchpad: React.FC = () => {
                   </Box>
                 </Flex>
                 <Flex mt={3} flexDirection="column" alignItems="center" overflow="auto">
-                  <Text color="#883BC3">IDO SALES CONTRACT ADDRESS</Text>
                   <Text
-                    color="#fff"
-                    fontWeight={800}
+                    color="#883BC3"
                     onClick={() => {
                       toastSuccess('Copy Success')
                       navigator.clipboard.writeText(idoContract.address)
                     }}
                   >
-                    {isMobile
-                      ? `${idoContract.address?.slice(0, 7)}...${idoContract.address?.slice(-7)}`
-                      : idoContract.address}
-                    <CopyIcon color="primary" width="20px" ml={2} />
+                    IDO SALES CONTRACT ADDRESS <CopyIcon color="primary" width="20px" ml={2} cursor="pointer" />
+                  </Text>
+                  <Text color="#fff" fontWeight={800}>
+                    <LinkExternal href={getBscScanLink(idoContract.address, 'address')}>
+                      {isMobile
+                        ? `${idoContract.address?.slice(0, 7)}...${idoContract.address?.slice(-7)}`
+                        : idoContract.address}
+                    </LinkExternal>
                   </Text>
                 </Flex>
                 <Flex mt={3} flexDirection="column" alignItems="center">
@@ -528,13 +540,15 @@ const Launchpad: React.FC = () => {
                   />
                   {poolInfo?.endTime &&
                   getIDOState(poolInfo) === 1 &&
-                  configIDO[pid].projectInfo.startTime - new Date().getTime()/1000 < 0 ? (
+                  configIDO[pid].projectInfo.startTime - new Date().getTime() / 1000 < 0 ? (
                     <Flex justifyContent="flex-end">
                       <Text color="white">Finish in:</Text>
                       <CountdownIDO timeFinished={poolInfo?.endTime} />
                     </Flex>
                   ) : null}
-                  {getIDOState(poolInfo) === 0 || getIDOState(poolInfo) === 1 ? (
+                  {getIDOState(poolInfo) === 0 ||
+                  (getIDOState(poolInfo) === 1 &&
+                    new Date().getTime() / 1000 < configIDO[pid].projectInfo.startTime) ? (
                     <Flex justifyContent="flex-end">
                       <Text color="white">Start in:</Text>
                       <CountdownIDO timeFinished={configIDO[pid].projectInfo.startTime} />
