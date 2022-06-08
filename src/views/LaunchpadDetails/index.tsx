@@ -385,8 +385,8 @@ const Launchpad: React.FC = () => {
                         1 {configIDO[pid].tokenInfo.sell.symbol} ={' '}
                         {getFullDisplayBalance(
                           poolInfo?.tokenBuy2IDOtoken?._hex,
-                          configIDO[pid].tokenInfo.sell.decimals,
-                          2,
+                          configIDO[pid].tokenInfo.useForBuy.decimals,
+                          3,
                         )}{' '}
                         ${configIDO[pid].tokenInfo.useForBuy.symbol}
                       </Text>
