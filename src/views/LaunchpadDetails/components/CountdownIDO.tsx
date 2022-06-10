@@ -5,7 +5,8 @@ import { Box, Button, CopyIcon, Flex, Skeleton, Slider, Text, useMatchBreakpoint
 
 export const CountdownIDO = ({ timeFinished }) => {
   const { secondsRemaining } = useCountdown(timeFinished)
-  const countdown = formatRoundTime(secondsRemaining)
+  
+  const countdown = formatRoundTime(secondsRemaining > 0 ? secondsRemaining : 0)
 
   return <Text color="white">{countdown}</Text>
 }

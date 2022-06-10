@@ -34,6 +34,7 @@ import { useRouter } from 'next/router'
 import { configIDO } from './config'
 import { CountdownIDO } from './components/CountdownIDO'
 import { getBscScanLink } from '../../utils/index';
+import useCountdown from 'views/Predictions/hooks/useCountdown'
 
 const WrapLaunchpad = styled.div<{ noMarginTop?: boolean; isMobile: boolean }>`
   border: 1px solid #d520af;
@@ -97,6 +98,8 @@ const Launchpad: React.FC = () => {
   const [periodPercent, setPeriodPercent] = useState([])
   const [userClaimNumber, setUserClaimNumber] = useState(0)
   const [claimState, setClaimState] = useState<{ hasClaim?: boolean; message?: string }>({})
+  const { secondsRemaining } = useCountdown(poolInfo?.endTime)
+
 
   // -----
   // const currencyA = useCurrency(currencyIdA)
@@ -226,7 +229,8 @@ const Launchpad: React.FC = () => {
 
   const isIDOFinished = (poolData: any) => {
     const pStatus = new BigNumber(poolData?.status?._hex).toNumber()
-    if (pStatus === 2) {
+
+    if (pStatus === 2 || secondsRemaining < 0) {
       return true
     }
     return false
@@ -538,7 +542,7 @@ const Launchpad: React.FC = () => {
                     idoContract={idoContract}
                     pid={pid}
                   />
-                  {poolInfo?.endTime &&
+                  {secondsRemaining > 0 &&
                   getIDOState(poolInfo) === 1 &&
                   configIDO[pid].projectInfo.startTime - new Date().getTime() / 1000 < 0 ? (
                     <Flex justifyContent="flex-end">

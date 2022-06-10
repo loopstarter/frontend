@@ -207,7 +207,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const { secondsRemaining } = useCountdown(1654682400)
-  const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining)
+  const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining > 0 ?secondsRemaining: 0)
 
   
   // const [timeHarvestRemaining, setTimeHarvestRemaining] = useCountDownTimer()
@@ -218,20 +218,6 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
   //   setTimeHarvestRemaining(difference)
   // }, [])
   const timeHarvestRemaining = null
-
-  const timeLeft = timeHarvestRemaining
-    ? {
-        days: Math.floor(timeHarvestRemaining / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((timeHarvestRemaining / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((timeHarvestRemaining / 1000 / 60) % 60),
-        seconds: Math.floor((timeHarvestRemaining / 1000) % 60),
-      }
-    : {
-        days: 0,
-        hours: '00',
-        minutes: '00',
-        seconds: '00',
-      }
 
   return (
     <FlexWrapper
@@ -251,7 +237,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
       >
         <Flex flex="1" flexDirection="column" alignItems="center">
           <HeadingTitle>{t(nextIDO.name)}</HeadingTitle>
-          <BtnStyle>Coming soon</BtnStyle>
+          <BtnStyle>Finished</BtnStyle>
           <TimeWrapper>
             <div>
               <Time>{days}</Time>
