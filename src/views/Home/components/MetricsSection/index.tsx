@@ -414,7 +414,7 @@ const Stats = () => {
             <RoadmapLoop />
           </Flex>
         </Slider>
-        <FlexBox justifyContent="center" alignItems="center" flexDirection="column" id="team">
+        {/* <FlexBox justifyContent="center" alignItems="center" flexDirection="column" id="team">
           <Title color="#fff">Loops</Title>
           <Title color="#fff">
             <span> TEAMS</span>
@@ -436,7 +436,7 @@ const Stats = () => {
             </picture>
           </ArrowWrapper>
           <OurAdvisors />
-        </FlexBox>
+        </FlexBox> */}
 
         <FlexBox justifyContent="center" alignItems="center" flexDirection="column" id="partner">
           <Title color="#fff">
