@@ -162,7 +162,7 @@ const Launchpad: React.FC = () => {
               </Flex>
             </WrapLaunchpad>
             <Flex flexDirection="row" flexWrap="wrap">
-              {configIDO.map((project) => (
+              {configIDO.filter((item) => !item.hidden).map((project) => (
                 <IDOCardInfo project={project} pid={project.pid} />
               ))}
             </Flex>

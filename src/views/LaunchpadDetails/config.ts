@@ -2,6 +2,7 @@ import tokens from 'config/constants/tokens'
 
 export interface IConfigIDO {
   pid: number
+  hidden: boolean
   projectDescription: string
   projectShortDescription: string
   projectLogo: string
@@ -24,6 +25,8 @@ export interface IConfigIDO {
   }
   projectInfo: {
     timeDistribute?: string
+    timeDistributeEnd?: string
+    timeDistributeListing?: string
     allocation?: string
     allocationSize?: string
     listingPrice?: string
@@ -79,6 +82,7 @@ export const configIDO: IConfigIDO[] = [
   // },
   {
     pid: 0,
+    hidden: true,
     projectDescription: 'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
     projectShortDescription:
       'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
@@ -103,6 +107,8 @@ export const configIDO: IConfigIDO[] = [
     },
     projectInfo: {
       timeDistribute: '08/06/2022',
+      timeDistributeEnd: '--/--/2022',
+      timeDistributeListing: '--/--/2022',
       allocation: '100 BUSD',
       allocationSize: ' - ',
       listingPrice: '$0.003',
@@ -112,6 +118,49 @@ export const configIDO: IConfigIDO[] = [
       demicals: tokens.acdx.decimals,
       totalSupply: '1,000,000,000',
       addressToken: tokens.acdx.address,
+      access: 'Public',
+      logoWidth: 120,
+      startTime: 1654682400
+    }
+  },
+  {
+    pid: 1,
+    hidden: false,
+    projectDescription: 'WalkN exists with only one mission - To bring people, fitness and crypto together by building a solid platform that rewards people to take care of their fitness. WalkN provides a platform for improving one\'s fitness while earning rewards in cryptocurrency.It leverages the newly born trend, Move2Earn.The app users purchase an NFT of their choice, start the app, and earn money with every step they take.',
+    projectShortDescription:
+      'WalkN App I Walk, Jog, or Run & Earn Rewards!',
+    projectLogo: '/images/app-ido/walkn-pid-1.png',
+    social: {
+      twitter: 'https://twitter.com/WalkN_app',
+      website: 'https://walkn.app/',
+    },
+    viewTokenLink: 'https://walkn.app/',
+    tokenInfo: {
+      sell: {
+        symbol: tokens.fakefordemo.symbol,
+        address: tokens.fakefordemo.address,
+        decimals: tokens.fakefordemo.decimals,
+      },
+      useForBuy: {
+        symbol: tokens.busd.symbol,
+        address: tokens.busd.address,
+        decimals: tokens.busd.decimals,
+
+      },
+    },
+    projectInfo: {
+      timeDistribute: '25/06/2022',
+      timeDistributeEnd: '26/06/2022',
+      timeDistributeListing: '27/06/2022',
+      allocation: '100 BUSD',
+      allocationSize: ' - ',
+      listingPrice: '$0.0049',
+      projectName: 'WalkN App I Walk, Jog, or Run & Earn Rewards!',
+      projectNameShort: 'WalkN',
+      symbol: 'WALKN',
+      demicals: tokens.busd.decimals,
+      totalSupply: '3,000,000,000',
+      addressToken: tokens.busd.address,
       access: 'Public',
       logoWidth: 120,
       startTime: 1654682400
