@@ -182,16 +182,15 @@ const IdoBtn = styled(Button)`
 `
 
 const nextIDO = {
-  name: 'ACADEX - ACDX',
-  token: 'ACADEX',
-  description1:
-    'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
+  name: 'WALKN',
+  token: 'WALKN',
+  description1: 'WalkN App I Walk, Jog, or Run & Earn Rewards!',
   description2:
-    'Bound to upscale the global education quality and learning systems, by instituting study inclusiveness, subsidized student loans, reward learners, authors, creatives and curb study certificate forgery, blockchain intellectual property copyrighting and authentication using NFT, AR & VR technology.',
-  linkIdo: '/launchpad-details/0',
-  cap: '13,333,333.3 ',
-  raise: '40,000 BUSD',
-  exchange: '1 ACDX = 0.003 BUSD',
+    "WalkN exists with only one mission - To bring people, fitness and crypto together by building a solid platform that rewards people to take care of their fitness. WalkN provides a platform for improving one's fitness while earning rewards in cryptocurrency.It leverages the newly born trend, Move2Earn.The app users purchase an NFT of their choice, start the app, and earn money with every step they take.",
+  linkIdo: '/launchpad-details/1',
+  cap: '3,000,000,000',
+  raise: '100,000 BUSD',
+  exchange: '1 WALKN = 0.0049 BUSD',
 }
 // const nextIDO = {
 //   name: 'LOOPSTARTER - LOOPS',
