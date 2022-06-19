@@ -208,15 +208,6 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
   const { secondsRemaining } = useCountdown(1654682400)
   const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining > 0 ?secondsRemaining: 0)
 
-  
-  // const [timeHarvestRemaining, setTimeHarvestRemaining] = useCountDownTimer()
-  // useEffect(() => {
-  //   const difference = +new Date('April 21, 2022 22:00:00 EST') - +new Date()
-  //   // const difference = +new Date() - +new Date()
-
-  //   setTimeHarvestRemaining(difference)
-  // }, [])
-  const timeHarvestRemaining = null
 
   return (
     <FlexWrapper
@@ -236,7 +227,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
       >
         <Flex flex="1" flexDirection="column" alignItems="center">
           <HeadingTitle>{t(nextIDO.name)}</HeadingTitle>
-          <BtnStyle>Finished</BtnStyle>
+          <BtnStyle>Comming Soon</BtnStyle>
           <TimeWrapper>
             <div>
               <Time>{days}</Time>
