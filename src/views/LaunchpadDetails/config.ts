@@ -39,6 +39,7 @@ export interface IConfigIDO {
     // addressToken?: string
     access?: string
     roundType: string
+    linkWhiteList?: string
     logoWidth: number,
     startTime: number
   }
@@ -164,7 +165,8 @@ export const configIDO: IConfigIDO[] = [
       symbol: 'WALKN',
       totalSupply: '3,000,000,000',
       access: 'Public',
-      roundType: 'Guaranteed round',
+      roundType: 'FCFS round',
+      linkWhiteList: 'https://t.me/walknapp',
       logoWidth: 120,
       startTime: 1656162000
     }
@@ -208,6 +210,7 @@ export const configIDO: IConfigIDO[] = [
       totalSupply: '3,000,000,000',
       access: 'Public',
       roundType: 'Guaranteed round',
+      linkWhiteList: 'https://t.me/walknapp',
       logoWidth: 120,
       startTime: 1656162000
     }
@@ -251,6 +254,7 @@ export const configIDO: IConfigIDO[] = [
       totalSupply: '3,000,000,000',
       access: 'Public',
       roundType: 'Guaranteed round',
+      linkWhiteList: 'https://t.me/walknapp',
       logoWidth: 120,
       startTime: 1656162000
     }

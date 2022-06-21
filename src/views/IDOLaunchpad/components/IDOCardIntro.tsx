@@ -106,7 +106,7 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
                   fill="#3071EF"
                 />
               </svg>{' '}
-              Applications Open
+              {project.projectInfo.roundType}
             </Text>
           </ButtonViewLoops>
         </Flex>
@@ -123,7 +123,8 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
                     new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
                     project.tokenInfo.sell.decimals + project.tokenInfo.useForBuy.decimals,
                     // 0,
-                  ), 0
+                  ),
+                  0,
                 )}{' '}
                 ${project.tokenInfo.useForBuy.symbol}
               </Text>
@@ -204,7 +205,13 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
         </Flex>
         <Flex justifyContent="space-around" mb={2} marginX="-16px">
           <Flex justifyContent="center" mt="32px" flex={1}>
-            <ButtonIDOStyled scale="sm" whitelist>
+            <ButtonIDOStyled
+              scale="sm"
+              whitelist
+              onClick={() =>
+                project.projectInfo.linkWhiteList ? window.open(project.projectInfo.linkWhiteList) : null
+              }
+            >
               <svg
                 width="19"
                 height="19"
