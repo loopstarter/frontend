@@ -32,7 +32,7 @@ const PoolInfomation = ({ idoContract, pid }: { idoContract: any; pid: number })
           </Flex>
         </Flex>
       </Flex>
-      <Flex flex={1} flexWrap="wrap" justifyContent='center'>
+      <Flex flex={1} flexWrap="wrap" justifyContent="center">
         <WrapLaunchpad noMarginTop isMobile={isMobile}>
           <Flex flexDirection="row" justifyContent="space-between" flexWrap="wrap">
             <Box pr={2} pl={2}>
@@ -78,7 +78,7 @@ const PoolInfomation = ({ idoContract, pid }: { idoContract: any; pid: number })
             <Box pr={2} pl={2}>
               <Text color="#883BC3">DECIMALS</Text>
               <Text color="#fff" fontWeight={800}>
-                {configIDO[pid].projectInfo.demicals}
+                {configIDO[pid].tokenInfo.sell.decimals}
               </Text>
             </Box>
             <Box pr={2} pl={2}>
@@ -96,14 +96,14 @@ const PoolInfomation = ({ idoContract, pid }: { idoContract: any; pid: number })
                 fontWeight={800}
                 onClick={() => {
                   toastSuccess('Copy Success')
-                  navigator.clipboard.writeText(configIDO[pid].projectInfo.addressToken)
+                  navigator.clipboard.writeText(configIDO[pid].tokenInfo.sell.address)
                 }}
               >
                 {isMobile
-                  ? `${configIDO[pid].projectInfo.addressToken?.slice(0, 7)}...${configIDO[
+                  ? `${configIDO[pid].tokenInfo.sell.address?.slice(0, 7)}...${configIDO[
                       pid
-                    ].projectInfo.addressToken?.slice(-7)}`
-                  : configIDO[pid].projectInfo.addressToken}
+                    ].tokenInfo.sell.address?.slice(-7)}`
+                  : configIDO[pid].tokenInfo.sell.address}
                 <CopyIcon color="primary" width="20px" ml={2} />
               </Text>
             </Box>

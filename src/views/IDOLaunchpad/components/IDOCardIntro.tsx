@@ -10,7 +10,7 @@ import tokens from 'config/constants/tokens'
 import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
-import { getFullDisplayBalance } from '../../../utils/formatBalance'
+import { formatNumber, getFullDisplayBalance, getBalanceNumber } from '../../../utils/formatBalance'
 import { IConfigIDO } from '../../LaunchpadDetails/config'
 
 const WrapLaunchpad = styled(Flex)`
@@ -118,10 +118,12 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
           <Flex flexDirection="column" ml={2}>
             {poolInfo?.totalAmount ? (
               <Text fontSize="28px" fontWeight={800} color="#fff">
-                {getFullDisplayBalance(
-                  new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-                  project.tokenInfo.sell.decimals + project.tokenInfo.useForBuy.decimals,
-                  0,
+                {formatNumber(
+                  getBalanceNumber(
+                    new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
+                    project.tokenInfo.sell.decimals + project.tokenInfo.useForBuy.decimals,
+                    // 0,
+                  ), 0
                 )}{' '}
                 ${project.tokenInfo.useForBuy.symbol}
               </Text>

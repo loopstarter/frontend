@@ -26,7 +26,7 @@ import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useTokenBalance from 'hooks/useTokenBalance'
 import { BIG_TEN } from 'utils/bigNumber'
 import { registerToken } from 'utils/wallet'
-import { getFullDisplayBalance } from '../../utils/formatBalance'
+import { formatNumber, getFullDisplayBalance, getBalanceNumber } from '../../utils/formatBalance'
 import ApproveAndConfirmStage from './components/ApproveAndConfirmStage'
 import PoolInfomation from './components/PoolInfomation'
 import { BIG_ZERO } from '../../utils/bigNumber'
@@ -304,9 +304,13 @@ const Launchpad: React.FC = () => {
                       <Text color="#fff" fontWeight={800}>
                         ${' '}
                         {poolInfo?.totalAmount?._hex ? (
-                          getFullDisplayBalance(
-                            new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-                            configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
+                          formatNumber(
+                            getBalanceNumber(
+                              new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(
+                                poolInfo?.tokenBuy2IDOtoken?._hex,
+                              ),
+                              configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
+                            ),
                             0,
                           )
                         ) : (
@@ -410,9 +414,13 @@ const Launchpad: React.FC = () => {
                     <Flex flexDirection="column" ml={2}>
                       <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
                         {poolInfo?.totalAmount?._hex ? (
-                          getFullDisplayBalance(
-                            new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
-                            configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
+                          formatNumber(
+                            getBalanceNumber(
+                              new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(
+                                poolInfo?.tokenBuy2IDOtoken?._hex,
+                              ),
+                              configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
+                            ),
                             0,
                           )
                         ) : (
@@ -434,10 +442,8 @@ const Launchpad: React.FC = () => {
                     <Flex flexDirection="column" ml={2}>
                       {poolInfo?.totalAmount ? (
                         <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
-                          {getFullDisplayBalance(
-                            poolInfo?.totalAmount?._hex,
-                            configIDO[pid].tokenInfo.sell.decimals,
-                            0,
+                          {formatNumber(
+                            getBalanceNumber(poolInfo?.totalAmount?._hex, configIDO[pid].tokenInfo.sell.decimals),
                           )}{' '}
                           {configIDO[pid].tokenInfo.sell.symbol}
                         </Text>

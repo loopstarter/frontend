@@ -34,9 +34,9 @@ export interface IConfigIDO {
     projectName?: string
     projectNameShort?: string
     symbol?: string
-    demicals?: number
+    // demicals?: number
     totalSupply?: string
-    addressToken?: string
+    // addressToken?: string
     access?: string
     logoWidth?: number,
     startTime: number
@@ -161,9 +161,7 @@ export const configIDO: IConfigIDO[] = [
       projectName: 'WalkN App I Walk, Jog, or Run & Earn Rewards!',
       projectNameShort: 'WalkN',
       symbol: 'WALKN',
-      demicals: tokens.busd.decimals,
       totalSupply: '3,000,000,000',
-      addressToken: tokens.busd.address,
       access: 'Public',
       logoWidth: 120,
       startTime: 1656162000
@@ -205,9 +203,7 @@ export const configIDO: IConfigIDO[] = [
       projectName: 'WalkN App I Walk, Jog, or Run & Earn Rewards!',
       projectNameShort: 'WalkN',
       symbol: 'WALKN',
-      demicals: tokens.busd.decimals,
       totalSupply: '3,000,000,000',
-      addressToken: tokens.busd.address,
       access: 'Public',
       logoWidth: 120,
       startTime: 1656162000
@@ -249,9 +245,7 @@ export const configIDO: IConfigIDO[] = [
       projectName: 'WalkN App I Walk, Jog, or Run & Earn Rewards!',
       projectNameShort: 'WalkN',
       symbol: 'WALKN',
-      demicals: tokens.busd.decimals,
       totalSupply: '3,000,000,000',
-      addressToken: tokens.busd.address,
       access: 'Public',
       logoWidth: 120,
       startTime: 1656162000
