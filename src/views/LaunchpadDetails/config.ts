@@ -25,9 +25,9 @@ export interface IConfigIDO {
     }
   }
   projectInfo: {
-    timeDistribute?: string
-    timeDistributeEnd?: string
-    timeDistributeListing?: string
+    timeDistribute: string
+    timeDistributeEnd: string
+    timeDistributeListing: string
     allocation?: string
     allocationSize?: string
     listingPrice?: string
@@ -38,7 +38,8 @@ export interface IConfigIDO {
     totalSupply?: string
     // addressToken?: string
     access?: string
-    logoWidth?: number,
+    roundType: string
+    logoWidth: number,
     startTime: number
   }
 }
@@ -135,7 +136,7 @@ export const configIDO: IConfigIDO[] = [
     projectLogo: '/images/app-ido/walkn-pid-1.png',
     social: {
       twitter: 'https://twitter.com/WalkN_app',
-      website: 'https://walkn.app/',
+      website: 'https://t.me/walknapp',
     },
     viewTokenLink: 'https://walkn.app/',
     tokenInfo: {
@@ -163,6 +164,7 @@ export const configIDO: IConfigIDO[] = [
       symbol: 'WALKN',
       totalSupply: '3,000,000,000',
       access: 'Public',
+      roundType: 'Guaranteed round',
       logoWidth: 120,
       startTime: 1656162000
     }
@@ -177,7 +179,7 @@ export const configIDO: IConfigIDO[] = [
     projectLogo: '/images/app-ido/walkn-pid-1.png',
     social: {
       twitter: 'https://twitter.com/WalkN_app',
-      website: 'https://walkn.app/',
+      website: 'https://t.me/walknapp',
     },
     viewTokenLink: 'https://walkn.app/',
     tokenInfo: {
@@ -205,6 +207,7 @@ export const configIDO: IConfigIDO[] = [
       symbol: 'WALKN',
       totalSupply: '3,000,000,000',
       access: 'Public',
+      roundType: 'Guaranteed round',
       logoWidth: 120,
       startTime: 1656162000
     }
@@ -219,7 +222,7 @@ export const configIDO: IConfigIDO[] = [
     projectLogo: '/images/app-ido/walkn-pid-1.png',
     social: {
       twitter: 'https://twitter.com/WalkN_app',
-      website: 'https://walkn.app/',
+      website: 'https://t.me/walknapp',
     },
     viewTokenLink: 'https://walkn.app/',
     tokenInfo: {
@@ -247,6 +250,7 @@ export const configIDO: IConfigIDO[] = [
       symbol: 'WALKN',
       totalSupply: '3,000,000,000',
       access: 'Public',
+      roundType: 'Guaranteed round',
       logoWidth: 120,
       startTime: 1656162000
     }
