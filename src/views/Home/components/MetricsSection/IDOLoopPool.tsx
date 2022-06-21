@@ -191,6 +191,7 @@ const nextIDO = {
   cap: '3,000,000,000',
   raise: '100,000 BUSD',
   exchange: '1 WALKN = 0.0049 BUSD',
+  startTime: 1656162000,
 }
 // const nextIDO = {
 //   name: 'LOOPSTARTER - LOOPS',
@@ -205,7 +206,7 @@ const nextIDO = {
 const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, margin }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
-  const { secondsRemaining } = useCountdown(1654682400)
+  const { secondsRemaining } = useCountdown(nextIDO.startTime)
   const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining > 0 ?secondsRemaining: 0)
 
 

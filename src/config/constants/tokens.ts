@@ -1984,6 +1984,14 @@ export const mainnetTokens = defineTokens({
     'ACDX Token',
     'https://acadex.network/',
   ),
+  walkn: new Token(
+    MAINNET,
+    '0x904160F6E18D90882e85c9AC0475ef3412241723',
+    18,
+    'WALKN',
+    'WALKN',
+    'https://walkn.app/',
+  ),
   fakefordemo: new Token(
     MAINNET,
     '0x42d44f1c45349d47d34976ce3a2ff0c3dd3210a8',
