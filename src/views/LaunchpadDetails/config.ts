@@ -41,7 +41,8 @@ export interface IConfigIDO {
     roundType: string
     linkWhiteList?: string
     logoWidth: number,
-    startTime: number
+    startTime: number,
+    totalSales: number,
   }
 }
 
@@ -166,9 +167,10 @@ export const configIDO: IConfigIDO[] = [
       totalSupply: '3,000,000,000',
       access: 'Public',
       roundType: 'FCFS round',
-      linkWhiteList: 'https://t.me/walknapp',
+      linkWhiteList: 'https://sweepwidget.com/view/59279-8ltinjxv',
       logoWidth: 120,
-      startTime: 1656162000
+      startTime: 1656162000,
+      totalSales: 29000
     }
   },
   {
@@ -210,9 +212,10 @@ export const configIDO: IConfigIDO[] = [
       totalSupply: '3,000,000,000',
       access: 'Public',
       roundType: 'Guaranteed round',
-      linkWhiteList: 'https://t.me/walknapp',
+      linkWhiteList: 'https://sweepwidget.com/view/59279-8ltinjxv',
       logoWidth: 120,
-      startTime: 1656162000
+      startTime: 1656162000,
+      totalSales: 36000
     }
   },
   {
@@ -254,9 +257,10 @@ export const configIDO: IConfigIDO[] = [
       totalSupply: '3,000,000,000',
       access: 'Public',
       roundType: 'Guaranteed round',
-      linkWhiteList: 'https://t.me/walknapp',
+      linkWhiteList: 'https://sweepwidget.com/view/59279-8ltinjxv',
       logoWidth: 120,
-      startTime: 1656162000
+      startTime: 1656162000,
+      totalSales: 35000
     }
   }
 ]

@@ -414,15 +414,16 @@ const Launchpad: React.FC = () => {
                     <Flex flexDirection="column" ml={2}>
                       <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
                         {poolInfo?.totalAmount?._hex ? (
-                          formatNumber(
-                            getBalanceNumber(
-                              new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(
-                                poolInfo?.tokenBuy2IDOtoken?._hex,
-                              ),
-                              configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
-                            ),
-                            0,
-                          )
+                          // formatNumber(
+                          //   getBalanceNumber(
+                          //     new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(
+                          //       poolInfo?.tokenBuy2IDOtoken?._hex,
+                          //     ),
+                          //     configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
+                          //   ),
+                          //   0,
+                          // )
+                          formatNumber(configIDO[pid].projectInfo.totalSales, 0)
                         ) : (
                           <Skeleton height={20} width={64} />
                         )}{' '}

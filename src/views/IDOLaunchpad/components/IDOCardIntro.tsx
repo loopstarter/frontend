@@ -118,14 +118,15 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
           <Flex flexDirection="column" ml={2}>
             {poolInfo?.totalAmount ? (
               <Text fontSize="28px" fontWeight={800} color="#fff">
-                {formatNumber(
+                {/* {formatNumber(
                   getBalanceNumber(
                     new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
                     project.tokenInfo.sell.decimals + project.tokenInfo.useForBuy.decimals,
                     // 0,
                   ),
                   0,
-                )}{' '}
+                )}{' '} */}
+                {formatNumber(project.projectInfo.totalSales, 0)}{' '}
                 ${project.tokenInfo.useForBuy.symbol}
               </Text>
             ) : (
