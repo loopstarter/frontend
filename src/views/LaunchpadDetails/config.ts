@@ -46,7 +46,7 @@ export interface IConfigIDO {
   }
 }
 
-export const configIDO: IConfigIDO[] = [
+const configIDOMainnet: IConfigIDO[] = [
   // {
   //   pid: 0,
   //   projectDescription:
@@ -399,3 +399,100 @@ export const configIDO: IConfigIDO[] = [
     }
   },
 ]
+
+const configIDOTestnet: IConfigIDO[] = [
+  {
+    pid: 2,
+    mainContractIDO: "0x2806333ab858908724191688C370213cf2eeC59f",
+    hidden: false,
+    projectDescription: 'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
+    projectShortDescription:
+      'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
+    projectLogo: '/images/app-ido/acdx.png',
+    social: {
+      twitter: '',
+      website: 'https://acadex.network/',
+    },
+    viewTokenLink: 'https://acadex.network/',
+    tokenInfo: {
+      sell: {
+        symbol: tokens.acdx.symbol,
+        address: tokens.acdx.address,
+        decimals: tokens.acdx.decimals,
+      },
+      useForBuy: {
+        symbol: 'BUSD',
+        address: tokens.busd.address,
+        decimals: tokens.busd.decimals,
+
+      },
+    },
+    projectInfo: {
+      timeDistribute: '08/06/2022',
+      timeDistributeEnd: '--/--/2022',
+      timeDistributeListing: '--/--/2022',
+      allocation: '100 BUSD',
+      allocationSize: ' - ',
+      listingPrice: '$0.003',
+      projectName: 'PIONEERING DECENTRALIZED EDUCATION NETWORK',
+      projectNameShort: 'Acadex Network',
+      symbol: 'ACDX',
+      demicals: tokens.acdx.decimals,
+      totalSupply: '1,000,000,000',
+      addressToken: tokens.acdx.address,
+      access: 'Public',
+      logoWidth: 120,
+      startTime: 1654682400
+    }
+  },
+  {
+    pid: 5,
+    mainContractIDO: "0x2806333ab858908724191688C370213cf2eeC59f",
+    hidden: true,
+    projectDescription: 'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
+    projectShortDescription:
+      'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
+    projectLogo: '/images/app-ido/acdx.png',
+    social: {
+      twitter: '',
+      website: 'https://acadex.network/',
+    },
+    viewTokenLink: 'https://acadex.network/',
+    tokenInfo: {
+      sell: {
+        symbol: tokens.acdx.symbol,
+        address: tokens.acdx.address,
+        decimals: tokens.acdx.decimals,
+      },
+      useForBuy: {
+        symbol: 'BUSD',
+        address: tokens.busd.address,
+        decimals: tokens.busd.decimals,
+
+      },
+    },
+    projectInfo: {
+      timeDistribute: '08/06/2022',
+      timeDistributeEnd: '--/--/2022',
+      timeDistributeListing: '--/--/2022',
+      allocation: '100 BUSD',
+      allocationSize: ' - ',
+      listingPrice: '$0.003',
+      projectName: 'PIONEERING DECENTRALIZED EDUCATION NETWORK',
+      projectNameShort: 'Acadex Network',
+      symbol: 'ACDX',
+      demicals: tokens.acdx.decimals,
+      totalSupply: '1,000,000,000',
+      addressToken: tokens.acdx.address,
+      access: 'Public',
+      logoWidth: 120,
+      startTime: 1654682400
+    }
+  },
+]
+
+
+
+
+
+export const configIDO: IConfigIDO[] = process.env.NEXT_PUBLIC_CHAIN_ID === '56' ? configIDOMainnet : configIDOTestnet
