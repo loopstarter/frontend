@@ -403,91 +403,83 @@ const configIDOMainnet: IConfigIDO[] = [
 const configIDOTestnet: IConfigIDO[] = [
   {
     pid: 2,
-    mainContractIDO: "0x2806333ab858908724191688C370213cf2eeC59f",
-    hidden: false,
-    projectDescription: 'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
+    projectDescription:
+      'Initial token distribution event for LOOPStarter tokens with allocation based on a whitelist and ranking order based on the score achieved by each individual.LOOPStarter is a platform used to launch crypto projects, introduce some new coins, and increase liquidity.This is one of the biggest things for this digital world, especially when it comes to decentralized finance.LOOPStarter is beyond just being a IDO Launchpad platform.It’s an integrated ecosystem that introduces an all-in -one solution to launch and manage decentralized finances.It supports all the major Multi - chain wallets along with our inline wallet management system.The portal will integrate a launchpad for decentralized fundraising for new projects needing liquidity at the start in a fair manner.The first DAO supports multi - chain, cross - platform launchpad with a full DEX and deflation mechanism.',
     projectShortDescription:
-      'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
-    projectLogo: '/images/app-ido/acdx.png',
+      'Initial token distribution event for LOOPStarter tokens with allocation based on a whitelist and ranking order based on the score achieved by each individual.',
+    projectLogo: '/images/home/logo.svg',
     social: {
       twitter: '',
-      website: 'https://acadex.network/',
+      website: 'https://loopstarter.com/',
     },
-    viewTokenLink: 'https://acadex.network/',
+    viewTokenLink: 'https://loopstarter.com/',
     tokenInfo: {
       sell: {
-        symbol: tokens.acdx.symbol,
-        address: tokens.acdx.address,
-        decimals: tokens.acdx.decimals,
+        symbol: tokens.loops.symbol,
+        address: tokens.loops.address,
+        decimals: tokens.loops.decimals,
       },
       useForBuy: {
-        symbol: 'BUSD',
+        symbol: tokens.busd.symbol,
         address: tokens.busd.address,
         decimals: tokens.busd.decimals,
-
       },
     },
     projectInfo: {
-      timeDistribute: '08/06/2022',
-      timeDistributeEnd: '--/--/2022',
-      timeDistributeListing: '--/--/2022',
-      allocation: '100 BUSD',
+      timeDistribute: '25/06/2022',
+      timeDistributeEnd: '26/06/2022',
+      timeDistributeListing: '27/06/2022',
+      allocation: '10 BUSD',
       allocationSize: ' - ',
-      listingPrice: '$0.003',
-      projectName: 'PIONEERING DECENTRALIZED EDUCATION NETWORK',
-      projectNameShort: 'Acadex Network',
-      symbol: 'ACDX',
-      demicals: tokens.acdx.decimals,
-      totalSupply: '1,000,000,000',
-      addressToken: tokens.acdx.address,
+      listingPrice: '$ 0.10',
+      projectName: 'LOOPS SET',
+      symbol: 'LOOPS',
+      demicals: tokens.loops.decimals,
+      totalSupply: '100,000,000',
+      addressToken: tokens.loops.address,
       access: 'Public',
-      logoWidth: 120,
-      startTime: 1654682400
-    }
+      startTime: 1652110453
+    },
   },
   {
     pid: 5,
-    mainContractIDO: "0x2806333ab858908724191688C370213cf2eeC59f",
-    hidden: true,
-    projectDescription: 'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
+    projectDescription:
+      'Initial token distribution event for LOOPStarter tokens with allocation based on a whitelist and ranking order based on the score achieved by each individual.LOOPStarter is a platform used to launch crypto projects, introduce some new coins, and increase liquidity.This is one of the biggest things for this digital world, especially when it comes to decentralized finance.LOOPStarter is beyond just being a IDO Launchpad platform.It’s an integrated ecosystem that introduces an all-in -one solution to launch and manage decentralized finances.It supports all the major Multi - chain wallets along with our inline wallet management system.The portal will integrate a launchpad for decentralized fundraising for new projects needing liquidity at the start in a fair manner.The first DAO supports multi - chain, cross - platform launchpad with a full DEX and deflation mechanism.',
     projectShortDescription:
-      'Acadex Network is the World’s Pioneering Decentralized Education Network, introducing blockchain’s first Proof of Knowledge (PoK) consensus.',
-    projectLogo: '/images/app-ido/acdx.png',
+      'Initial token distribution event for LOOPStarter tokens with allocation based on a whitelist and ranking order based on the score achieved by each individual.',
+    projectLogo: '/images/home/logo.svg',
     social: {
       twitter: '',
-      website: 'https://acadex.network/',
+      website: 'https://loopstarter.com/',
     },
-    viewTokenLink: 'https://acadex.network/',
+    viewTokenLink: 'https://loopstarter.com/',
     tokenInfo: {
       sell: {
-        symbol: tokens.acdx.symbol,
-        address: tokens.acdx.address,
-        decimals: tokens.acdx.decimals,
+        symbol: tokens.loops.symbol,
+        address: tokens.loops.address,
+        decimals: tokens.loops.decimals,
       },
       useForBuy: {
-        symbol: 'BUSD',
+        symbol: tokens.busd.symbol,
         address: tokens.busd.address,
         decimals: tokens.busd.decimals,
-
       },
     },
     projectInfo: {
-      timeDistribute: '08/06/2022',
-      timeDistributeEnd: '--/--/2022',
-      timeDistributeListing: '--/--/2022',
-      allocation: '100 BUSD',
+      timeDistribute: '25/06/2022',
+      timeDistributeEnd: '26/06/2022',
+      timeDistributeListing: '27/06/2022',
+      allocation: '10 BUSD',
       allocationSize: ' - ',
-      listingPrice: '$0.003',
-      projectName: 'PIONEERING DECENTRALIZED EDUCATION NETWORK',
-      projectNameShort: 'Acadex Network',
-      symbol: 'ACDX',
-      demicals: tokens.acdx.decimals,
-      totalSupply: '1,000,000,000',
-      addressToken: tokens.acdx.address,
+      listingPrice: '$ 0.10',
+      projectName: 'LOOPS SET',
+      symbol: 'LOOPS',
+      demicals: tokens.loops.decimals,
+      totalSupply: '100,000,000',
+      addressToken: tokens.loops.address,
       access: 'Public',
-      logoWidth: 120,
-      startTime: 1654682400
-    }
+      startTime: 1652110453
+    },
   },
 ]
 
