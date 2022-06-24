@@ -23,6 +23,7 @@ const WrapLaunchpad = styled(Flex)`
   margin: 16px;
   margin-top: 16px;
   height: fix-content;
+  position: relative
 `
 const ButtonViewLoops = styled(Button)`
   background: #5c0c9b;
@@ -83,6 +84,12 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
     }
   }, [account, idoContract, pid])
 
+    const isSoldOut = new BigNumber(poolInfo?.totalAmount?._hex)
+      .minus(poolInfo?.remainAmount?._hex)
+      .div(poolInfo?.totalAmount?._hex)
+      .multipliedBy(100)
+      .toNumber()
+
   return (
     <WrapLaunchpad flex={12}>
       <Flex flex={1} flexDirection="column">
@@ -126,8 +133,7 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
                   ),
                   0,
                 )}{' '} */}
-                {formatNumber(project.projectInfo.totalSales, 0)}{' '}
-                ${project.tokenInfo.useForBuy.symbol}
+                {formatNumber(project.projectInfo.totalSales, 0)} ${project.tokenInfo.useForBuy.symbol}
               </Text>
             ) : (
               <Skeleton height={20} width={64} />
@@ -252,6 +258,10 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
           {!account ? <ConnectWalletButton style={{ width: '100%' }} /> : null}
         </Flex>
       </Flex>
+      {isSoldOut >= 100 ? <div style={{ position: 'absolute', top: 0, right: 16, width: 100, height: 100, transform: 'rotate(60deg)' }}>
+        {/* <div>Sold out</div> */}
+        <img src="/images/home/sold-out.png" alt="Sold out" />
+      </div> : null}
     </WrapLaunchpad>
   )
 }
