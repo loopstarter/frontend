@@ -401,6 +401,8 @@ const configIDOMainnet: IConfigIDO[] = [
 ]
 
 const configIDOTestnet: IConfigIDO[] = [
+  {},
+  {},
   {
     pid: 2,
     projectDescription:
@@ -434,13 +436,14 @@ const configIDOTestnet: IConfigIDO[] = [
       listingPrice: '$ 0.10',
       projectName: 'LOOPS SET',
       symbol: 'LOOPS',
-      demicals: tokens.loops.decimals,
       totalSupply: '100,000,000',
-      addressToken: tokens.loops.address,
       access: 'Public',
-      startTime: 1652110453
+      startTime: 1652110453,
+      totalSales: 40000,
     },
   },
+  {},
+  {},
   {
     pid: 5,
     hidden: true,
@@ -475,11 +478,10 @@ const configIDOTestnet: IConfigIDO[] = [
       listingPrice: '$ 0.10',
       projectName: 'LOOPS SET',
       symbol: 'LOOPS',
-      demicals: tokens.loops.decimals,
       totalSupply: '100,000,000',
-      addressToken: tokens.loops.address,
       access: 'Public',
-      startTime: 1652110453
+      startTime: 1652110453,
+      totalSales: 40000
     },
   },
 ]
