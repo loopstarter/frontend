@@ -401,8 +401,8 @@ const configIDOMainnet: IConfigIDO[] = [
 ]
 
 const configIDOTestnet: IConfigIDO[] = [
-  {},
-  {},
+  { hidden: true, },
+  { hidden: true, },
   {
     pid: 2,
     projectDescription:
@@ -442,8 +442,8 @@ const configIDOTestnet: IConfigIDO[] = [
       totalSales: 40000,
     },
   },
-  {},
-  {},
+  { hidden: true, },
+  { hidden: true, },
   {
     pid: 5,
     hidden: true,
