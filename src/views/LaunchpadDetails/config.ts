@@ -129,7 +129,7 @@ export const configIDO: IConfigIDO[] = [
   //   }
   // },
   {
-    pid: 0,
+    pid: 3,
     mainContractIDO: "0xcb987B25679c47Fc3BB6A713d5f9Fc3D1242469d",
     hidden: false,
     projectDescription: 'WalkN exists with only one mission - To bring people, fitness and crypto together by building a solid platform that rewards people to take care of their fitness. WalkN provides a platform for improving one\'s fitness while earning rewards in cryptocurrency.It leverages the newly born trend, Move2Earn.The app users purchase an NFT of their choice, start the app, and earn money with every step they take.',
@@ -174,7 +174,7 @@ export const configIDO: IConfigIDO[] = [
     }
   },
   {
-    pid: 1,
+    pid: 4,
     mainContractIDO: "0xcb987B25679c47Fc3BB6A713d5f9Fc3D1242469d",
     hidden: false,
     projectDescription: 'WalkN exists with only one mission - To bring people, fitness and crypto together by building a solid platform that rewards people to take care of their fitness. WalkN provides a platform for improving one\'s fitness while earning rewards in cryptocurrency.It leverages the newly born trend, Move2Earn.The app users purchase an NFT of their choice, start the app, and earn money with every step they take.',
@@ -219,7 +219,7 @@ export const configIDO: IConfigIDO[] = [
     }
   },
   {
-    pid: 2,
+    pid: 5,
     mainContractIDO: "0xcb987B25679c47Fc3BB6A713d5f9Fc3D1242469d",
     hidden: false,
     projectDescription: 'WalkN exists with only one mission - To bring people, fitness and crypto together by building a solid platform that rewards people to take care of their fitness. WalkN provides a platform for improving one\'s fitness while earning rewards in cryptocurrency.It leverages the newly born trend, Move2Earn.The app users purchase an NFT of their choice, start the app, and earn money with every step they take.',
