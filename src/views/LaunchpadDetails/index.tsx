@@ -80,12 +80,16 @@ const getIDOStateText = (stt: number) => {
 const Launchpad: React.FC = () => {
   const { account, library, connector } = useWeb3React()
   const router = useRouter()
+  console.log('router', router.query)
+  
   const { isMobile } = useMatchBreakpoints()
 
   const idoContract = useIdoContract()
   const { t } = useTranslation()
   const { toastSuccess, toastError } = useToast()
-  const pid = Number(router.query?.pid) || 0
+  // const [pid, setPid] = useState(Number(router.query?.pid) || 0),
+  const pid = Number(router.query?.pid) || 5
+
 
   const [poolInfo, setPoolInfo] = useState(null)
   const [numberParticipant, setNumberParticipant] = useState(null)
@@ -99,7 +103,6 @@ const Launchpad: React.FC = () => {
   const [userClaimNumber, setUserClaimNumber] = useState(0)
   const [claimState, setClaimState] = useState<{ hasClaim?: boolean; message?: string }>({})
   const { secondsRemaining } = useCountdown(poolInfo?.endTime)
-
 
   // -----
   // const currencyA = useCurrency(currencyIdA)
@@ -123,13 +126,13 @@ const Launchpad: React.FC = () => {
     return () => {
       clearInterval(interval)
     }
-  }, [account, idoContract])
+  }, [account, idoContract, pid])
 
   useEffect(() => {
     if (account) {
       getUserClaimState(poolInfo)
     }
-  }, [account, poolInfo])
+  }, [account, poolInfo, pid])
 
   const _refreshDataIDO = () => {
     idoContract.getBuyers(pid).then((res) => setNumberParticipant(res?.length || 0))
@@ -414,16 +417,16 @@ const Launchpad: React.FC = () => {
                     <Flex flexDirection="column" ml={2}>
                       <Text fontSize={isMobile ? '20px' : '28px'} fontWeight={800} color="#fff">
                         {poolInfo?.totalAmount?._hex ? (
-                          // formatNumber(
-                          //   getBalanceNumber(
-                          //     new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(
-                          //       poolInfo?.tokenBuy2IDOtoken?._hex,
-                          //     ),
-                          //     configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
-                          //   ),
-                          //   0,
-                          // )
-                          formatNumber(configIDO[pid].projectInfo.totalSales, 0)
+                          formatNumber(
+                            getBalanceNumber(
+                              new BigNumber(poolInfo?.totalAmount?._hex).multipliedBy(
+                                poolInfo?.tokenBuy2IDOtoken?._hex,
+                              ),
+                              configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
+                            ),
+                            0,
+                          )
+                          // formatNumber(configIDO[pid].projectInfo.totalSales, 0)
                         ) : (
                           <Skeleton height={20} width={64} />
                         )}{' '}
