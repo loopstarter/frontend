@@ -43,6 +43,9 @@ export interface IConfigIDO {
     logoWidth: number,
     startTime: number,
     totalSales: number,
+    internalParticipant: number
+    userPerPool: number
+    allocationNumber: number
   }
 }
 interface IConfigHiddenIDO {
@@ -50,7 +53,7 @@ interface IConfigHiddenIDO {
   hidden: true
 }
 
-export const configIDO: (IConfigIDO | IConfigHiddenIDO )[] = [
+export const configIDO: (IConfigIDO)[] = [
   // {
   //   pid: 0,
   //   projectDescription:
@@ -456,7 +459,10 @@ export const configIDO: (IConfigIDO | IConfigHiddenIDO )[] = [
       linkWhiteList: 'https://sweepwidget.com/view/59279-8ltinjxv',
       logoWidth: 120,
       startTime: 1656151200,
-      totalSales: 35000
+      totalSales: 35000,
+      internalParticipant: 21,
+      userPerPool: 70,
+      allocationNumber: 500,
     }
   },
   {
@@ -501,7 +507,10 @@ export const configIDO: (IConfigIDO | IConfigHiddenIDO )[] = [
       linkWhiteList: 'https://sweepwidget.com/view/59279-8ltinjxv',
       logoWidth: 120,
       startTime: 1656151200,
-      totalSales: 36000
+      totalSales: 36000,
+      internalParticipant: 54,
+      userPerPool: 180,
+      allocationNumber: 200,
     }
   },
   {
@@ -546,7 +555,10 @@ export const configIDO: (IConfigIDO | IConfigHiddenIDO )[] = [
       linkWhiteList: 'https://sweepwidget.com/view/59279-8ltinjxv',
       logoWidth: 120,
       startTime: 1656151200,
-      totalSales: 29000
+      totalSales: 29000,
+      internalParticipant: 101,
+      userPerPool: 290,
+      allocationNumber: 100,
     }
   },
 ]

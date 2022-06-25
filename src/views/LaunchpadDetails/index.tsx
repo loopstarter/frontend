@@ -216,11 +216,16 @@ const Launchpad: React.FC = () => {
   //   .gte(0)
   console.log(
     'canHasEnoughBalance2BuyIDO',
-    new BigNumber(balance2BuyIDO.balance).toNumber(),
-    new BigNumber(poolInfo?.amount?._hex).toNumber(),
-    new BigNumber(poolInfo?.tokenBuy2IDOtoken._hex).toNumber(),
-    new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken._hex).div(BIG_TEN.pow(36)),
-    poolInfo?.tokenBuy2IDOtoken._hex,
+    // new BigNumber(100).toNumber(),
+    // new BigNumber(poolInfo?.amount?._hex).toNumber(),
+    // new BigNumber(poolInfo?.tokenBuy2IDOtoken._hex).toNumber(),
+    // new BigNumber(poolInfo?.amount?._hex).multipliedBy(new BigNumber(poolInfo?.tokenBuy2IDOtoken._hex)).div(BIG_TEN.pow(36)).gte(0),
+    new BigNumber(poolInfo?.amount?._hex).multipliedBy(new BigNumber(poolInfo?.tokenBuy2IDOtoken._hex)).div(BIG_TEN.pow(36)).toNumber(),
+    // new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken._hex),
+    // new BigNumber(100)
+    // .minus(new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken._hex).div(BIG_TEN.pow(18)))
+    // .gte(0),
+    // poolInfo?.tokenBuy2IDOtoken._hex,
   )
   
 
@@ -344,7 +349,11 @@ const Launchpad: React.FC = () => {
                   <Box>
                     <Text color="#883BC3">PARTICIPANTS</Text>
                     <Text color="#fff" fontWeight={800}>
-                      {numberParticipant === null ? <Skeleton height={20} width={64} /> : numberParticipant}
+                      {numberParticipant === null ? (
+                        <Skeleton height={20} width={64} />
+                      ) : (
+                        numberParticipant + configIDO[pid].projectInfo.internalParticipant || 0
+                      )}
                     </Text>
                   </Box>
                   <Box>
@@ -436,8 +445,8 @@ const Launchpad: React.FC = () => {
                             ),
                             0,
                           )
-                          // formatNumber(configIDO[pid].projectInfo.totalSales, 0)
                         ) : (
+                          // formatNumber(configIDO[pid].projectInfo.totalSales, 0)
                           <Skeleton height={20} width={64} />
                         )}{' '}
                         {configIDO[pid].tokenInfo.useForBuy.symbol}
@@ -504,6 +513,7 @@ const Launchpad: React.FC = () => {
                       value={new BigNumber(poolInfo?.totalAmount?._hex)
                         .minus(poolInfo?.remainAmount?._hex)
                         .div(poolInfo?.totalAmount?._hex)
+                        .plus(configIDO[pid].projectInfo.internalParticipant / configIDO[pid].projectInfo.userPerPool)
                         .toNumber()}
                       onValueChanged={() => null}
                       name="stake"
@@ -517,6 +527,7 @@ const Launchpad: React.FC = () => {
                           new BigNumber(poolInfo?.totalAmount?._hex)
                             .minus(poolInfo?.remainAmount?._hex)
                             .div(poolInfo?.totalAmount?._hex)
+                            .plus(configIDO[pid].projectInfo.internalParticipant / configIDO[pid].projectInfo.userPerPool)
                             .multipliedBy(100),
                           0,
                           2,
@@ -528,7 +539,11 @@ const Launchpad: React.FC = () => {
                       {getFullDisplayBalance(
                         new BigNumber(poolInfo?.totalAmount?._hex)
                           .minus(poolInfo?.remainAmount?._hex)
-                          .multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
+                          .multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex).plus(
+                  new BigNumber(configIDO[pid].projectInfo.internalParticipant)
+                    .multipliedBy(configIDO[pid].projectInfo.allocationNumber)
+                    .multipliedBy(BIG_TEN.pow(configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals)),
+                ),
                         configIDO[pid].tokenInfo.sell.decimals + configIDO[pid].tokenInfo.useForBuy.decimals,
                         2,
                       )}

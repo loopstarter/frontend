@@ -12,6 +12,7 @@ import styled from 'styled-components'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import { formatNumber, getFullDisplayBalance, getBalanceNumber } from '../../../utils/formatBalance'
 import { IConfigIDO } from '../../LaunchpadDetails/config'
+import { BIG_TEN } from '../../../utils/bigNumber';
 
 const WrapLaunchpad = styled(Flex)`
   border: 1px solid #d520af;
@@ -153,6 +154,7 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
             value={new BigNumber(poolInfo?.totalAmount?._hex)
               .minus(poolInfo?.remainAmount?._hex)
               .div(poolInfo?.totalAmount?._hex)
+              .plus(project.projectInfo.internalParticipant / project.projectInfo.userPerPool)
               .toNumber()}
             onValueChanged={() => null}
             name="stake"
@@ -166,6 +168,7 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
                 new BigNumber(poolInfo?.totalAmount?._hex)
                   .minus(poolInfo?.remainAmount?._hex)
                   .div(poolInfo?.totalAmount?._hex)
+                  .plus(project.projectInfo.internalParticipant / project.projectInfo.userPerPool)
                   .multipliedBy(100),
                 0,
                 2,
@@ -177,7 +180,12 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
             {getFullDisplayBalance(
               new BigNumber(poolInfo?.totalAmount?._hex)
                 .minus(poolInfo?.remainAmount?._hex)
-                .multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex),
+                .multipliedBy(poolInfo?.tokenBuy2IDOtoken?._hex)
+                .plus(
+                  new BigNumber(project.projectInfo.internalParticipant)
+                    .multipliedBy(project.projectInfo.allocationNumber)
+                    .multipliedBy(BIG_TEN.pow(project.tokenInfo.sell.decimals + project.tokenInfo.useForBuy.decimals)),
+                ),
               project.tokenInfo.sell.decimals + project.tokenInfo.useForBuy.decimals,
               2,
             )}
@@ -194,7 +202,7 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
           <Box>
             <Text color="#883BC3">Participants</Text>
             <Text color="#fff" fontWeight={800}>
-              {numberParticipant}
+              {numberParticipant + project.projectInfo.internalParticipant || 0}
             </Text>
           </Box>
           <Box>
@@ -258,10 +266,12 @@ export const IDOCardInfo: React.FC = ({ project, pid }: { project: IConfigIDO; p
           {!account ? <ConnectWalletButton style={{ width: '100%' }} /> : null}
         </Flex>
       </Flex>
-      {isSoldOut >= 100 ? <div style={{ position: 'absolute', top: 0, right: 16, width: 100, height: 100, transform: 'rotate(60deg)' }}>
-        {/* <div>Sold out</div> */}
-        <img src="/images/home/sold-out.png" alt="Sold out" />
-      </div> : null}
+      {isSoldOut >= 100 ? (
+        <div style={{ position: 'absolute', top: 0, right: 16, width: 100, height: 100, transform: 'rotate(60deg)' }}>
+          {/* <div>Sold out</div> */}
+          <img src="/images/home/sold-out.png" alt="Sold out" />
+        </div>
+      ) : null}
     </WrapLaunchpad>
   )
 }
