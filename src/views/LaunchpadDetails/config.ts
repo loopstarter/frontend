@@ -45,8 +45,12 @@ export interface IConfigIDO {
     totalSales: number,
   }
 }
+interface IConfigHiddenIDO {
+  pid: number,
+  hidden: true
+}
 
-export const configIDO: IConfigIDO[] = [
+export const configIDO: (IConfigIDO | IConfigHiddenIDO )[] = [
   // {
   //   pid: 0,
   //   projectDescription:
