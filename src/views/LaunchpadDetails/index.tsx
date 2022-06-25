@@ -209,10 +209,20 @@ const Launchpad: React.FC = () => {
         _refreshDataIDO()
       },
     })
+    const canHasEnoughBalance2BuyIDO = true
 
-  const canHasEnoughBalance2BuyIDO = new BigNumber(balance2BuyIDO.balance)
-    .minus(new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken._hex).div(BIG_TEN.pow(18)))
-    .gte(-1)
+  // const canHasEnoughBalance2BuyIDO = new BigNumber(balance2BuyIDO.balance)
+  //   .minus(new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken._hex).div(BIG_TEN.pow(36)))
+  //   .gte(0)
+  console.log(
+    'canHasEnoughBalance2BuyIDO',
+    new BigNumber(balance2BuyIDO.balance).toNumber(),
+    new BigNumber(poolInfo?.amount?._hex).toNumber(),
+    new BigNumber(poolInfo?.tokenBuy2IDOtoken._hex).toNumber(),
+    new BigNumber(poolInfo?.amount?._hex).multipliedBy(poolInfo?.tokenBuy2IDOtoken._hex).div(BIG_TEN.pow(36)),
+    poolInfo?.tokenBuy2IDOtoken._hex,
+  )
+  
 
   // const hasSignForIDO = (signData: any) => {
 
