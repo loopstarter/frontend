@@ -363,7 +363,7 @@ const Launchpad: React.FC = () => {
                     </Text>
                   </Box>
                 </Flex>
-                <Flex mt={3} flexDirection="column" alignItems="center" overflow="auto">
+                {/* <Flex mt={3} flexDirection="column" alignItems="center" overflow="auto">
                   <Text
                     color="#883BC3"
                     onClick={() => {
@@ -380,7 +380,7 @@ const Launchpad: React.FC = () => {
                         : idoContract.address}
                     </LinkExternal>
                   </Text>
-                </Flex>
+                </Flex> */}
                 <Flex mt={3} flexDirection="column" alignItems="center">
                   {!account ? (
                     <ConnectWalletButton isFullWidth />

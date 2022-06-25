@@ -261,6 +261,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
               <Line />
               <Text>Swap progress</Text>
               <Flex alignItems="center">
+                {/* @ts-expect-error: no comment */}
                 <Slider width="100%" name="sliderdisabled" value={progress} min={1} max={100} />
                 <Text>{progress}%</Text>
               </Flex>
