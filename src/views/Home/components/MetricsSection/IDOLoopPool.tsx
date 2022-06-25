@@ -191,7 +191,7 @@ const nextIDO = {
   cap: '3,000,000,000',
   raise: '100,000 BUSD',
   exchange: '1 WALKN = 0.0049 BUSD',
-  startTime: 1656162000,
+  startTime: 1656151200,
 }
 // const nextIDO = {
 //   name: 'LOOPSTARTER - LOOPS',
