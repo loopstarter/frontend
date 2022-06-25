@@ -187,7 +187,7 @@ const nextIDO = {
   description1: 'WalkN App I Walk, Jog, or Run & Earn Rewards!',
   description2:
     "WalkN exists with only one mission - To bring people, fitness and crypto together by building a solid platform that rewards people to take care of their fitness. WalkN provides a platform for improving one's fitness while earning rewards in cryptocurrency.It leverages the newly born trend, Move2Earn.The app users purchase an NFT of their choice, start the app, and earn money with every step they take.",
-  linkIdo: '/launchpad-details/1',
+  linkIdo: 'https://app.loopstarter.com',
   cap: '3,000,000,000',
   raise: '100,000 BUSD',
   exchange: '1 WALKN = 0.0049 BUSD',
