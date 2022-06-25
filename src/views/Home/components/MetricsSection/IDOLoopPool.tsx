@@ -209,7 +209,7 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
   const { secondsRemaining } = useCountdown(nextIDO.startTime)
   const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining > 0 ?secondsRemaining: 0)
 
-
+  const progress = 33.87
   return (
     <FlexWrapper
       flex="1"
@@ -261,11 +261,11 @@ const IDOPool: React.FC<{ padding?: string; margin?: string }> = ({ padding, mar
               <Line />
               <Text>Swap progress</Text>
               <Flex alignItems="center">
-                <Slider width="100%" name="sliderdisabled" value={0} min={1} max={100} />
-                <Text>0%</Text>
+                <Slider width="100%" name="sliderdisabled" value={progress} min={1} max={100} />
+                <Text>{progress}%</Text>
               </Flex>
               <Flex width="100%" justifyContent="space-between" padding="0 44px 0 0">
-                <Text>0%</Text>
+                <Text>{progress}%</Text>
                 <Text>100%</Text>
               </Flex>
               <Flex width="100%" justifyContent="space-between">
