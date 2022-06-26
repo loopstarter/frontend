@@ -598,7 +598,7 @@ const Launchpad: React.FC = () => {
                     <Flex justifyContent="center" mt="8px">
                       <ButtonIDOStyled
                         scale="sm"
-                        disabled={isIDOFinished(poolInfo)}
+                        disabled={false} // {isIDOFinished(poolInfo)}
                         onClick={async () => {
                           try {
                             const tx = await callWithGasPrice(idoContract, 'refund', [pid])
