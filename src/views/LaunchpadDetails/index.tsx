@@ -31,7 +31,7 @@ import ApproveAndConfirmStage from './components/ApproveAndConfirmStage'
 import PoolInfomation from './components/PoolInfomation'
 import { BIG_ZERO } from '../../utils/bigNumber'
 import { useRouter } from 'next/router'
-import { configIDO } from './config'
+import { configIDO } from '../../config/constants/configIDO'
 import { CountdownIDO } from './components/CountdownIDO'
 import { getBscScanLink } from '../../utils/index';
 import useCountdown from 'views/Predictions/hooks/useCountdown'

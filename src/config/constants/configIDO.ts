@@ -10,6 +10,8 @@ export interface IConfigIDO {
   social: {
     twitter?: string
     website?: string
+    telegram?: string
+    whitepaper?: string
   }
   viewTokenLink: string
   tokenInfo: {
@@ -177,7 +179,7 @@ export const configIDO: (IConfigIDO)[] = [
       linkWhiteList: 'https://sweepwidget.com/view/59279-8ltinjxv',
       logoWidth: 120,
       startTime: 1656162000,
-      totalSales: 29000
+      totalSales: 10000
     }
   },
   {
@@ -420,7 +422,7 @@ export const configIDO: (IConfigIDO)[] = [
   {
     pid: 9,
     mainContractIDO: "0xcb987B25679c47Fc3BB6A713d5f9Fc3D1242469d",
-    hidden: false,
+    hidden: true,
     projectDescription: 'WalkN exists with only one mission - To bring people, fitness and crypto together by building a solid platform that rewards people to take care of their fitness. WalkN provides a platform for improving one\'s fitness while earning rewards in cryptocurrency.It leverages the newly born trend, Move2Earn.The app users purchase an NFT of their choice, start the app, and earn money with every step they take.',
     projectShortDescription:
       'WalkN App I Walk, Jog, or Run & Earn Rewards!',
@@ -468,7 +470,7 @@ export const configIDO: (IConfigIDO)[] = [
   {
     pid: 10,
     mainContractIDO: "0xcb987B25679c47Fc3BB6A713d5f9Fc3D1242469d",
-    hidden: false,
+    hidden: true,
     projectDescription: 'WalkN exists with only one mission - To bring people, fitness and crypto together by building a solid platform that rewards people to take care of their fitness. WalkN provides a platform for improving one\'s fitness while earning rewards in cryptocurrency.It leverages the newly born trend, Move2Earn.The app users purchase an NFT of their choice, start the app, and earn money with every step they take.',
     projectShortDescription:
       'WalkN App I Walk, Jog, or Run & Earn Rewards!',
@@ -516,7 +518,7 @@ export const configIDO: (IConfigIDO)[] = [
   {
     pid: 11,
     mainContractIDO: "0xcb987B25679c47Fc3BB6A713d5f9Fc3D1242469d",
-    hidden: false,
+    hidden: true,
     projectDescription: 'WalkN exists with only one mission - To bring people, fitness and crypto together by building a solid platform that rewards people to take care of their fitness. WalkN provides a platform for improving one\'s fitness while earning rewards in cryptocurrency.It leverages the newly born trend, Move2Earn.The app users purchase an NFT of their choice, start the app, and earn money with every step they take.',
     projectShortDescription:
       'WalkN App I Walk, Jog, or Run & Earn Rewards!',
@@ -558,6 +560,56 @@ export const configIDO: (IConfigIDO)[] = [
       totalSales: 29000,
       internalParticipant: 101,
       userPerPool: 290,
+      allocationNumber: 100,
+    }
+  },
+  {
+    pid: 12,
+    mainContractIDO: "0xcb987B25679c47Fc3BB6A713d5f9Fc3D1242469d",
+    hidden: false,
+    projectDescription: "movn is the Superapp of sports, a move-to-earn web3 platform where players can earn money to adopt a more active lifestyle. The Sports Coin (MOV) is movn's utility token and the symbol of this new sports economy.",
+    projectShortDescription:
+      'movn is the Superapp of sports',
+    projectLogo: '/images/app-ido/movn-pid-12.png',
+    social: {
+      twitter: 'https://twitter.com/movn_world',
+      website: 'https://movn.ws/',
+      telegram: 'https://t.me/movn_world',
+      whitepaper: 'https://whitepaper.movn.ws/'
+    },
+    viewTokenLink: 'https://movn.ws/',
+    tokenInfo: {
+      sell: {
+        symbol: tokens.fakefordemo.symbol,
+        address: tokens.fakefordemo.address,
+        decimals: tokens.fakefordemo.decimals,
+      },
+      useForBuy: {
+        symbol: tokens.busd.symbol,
+        address: tokens.busd.address,
+        decimals: tokens.busd.decimals,
+
+      },
+    },
+    projectInfo: {
+      timeDistribute: '--/07/2022',
+      timeDistributeEnd: '--/07/2022',
+      timeDistributeListing: '--/07/2022',
+      allocation: '100 BUSD',
+      allocationSize: ' - ',
+      listingPrice: '$0.15',
+      projectName: 'movn is the Superapp of sports',
+      projectNameShort: 'MOVN',
+      symbol: 'MOVN',
+      totalSupply: '4,400,000,000',
+      access: 'Public',
+      roundType: 'FCFS round',
+      linkWhiteList: 'https://whitepaper.movn.ws/',
+      logoWidth: 140,
+      startTime: 1656161200,
+      totalSales: 50000,
+      internalParticipant: 0,
+      userPerPool: 100,
       allocationNumber: 100,
     }
   },

@@ -11,7 +11,7 @@ import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import { formatNumber, getFullDisplayBalance, getBalanceNumber } from '../../../utils/formatBalance'
-import { IConfigIDO } from '../../LaunchpadDetails/config'
+import { IConfigIDO } from '../../../config/constants/configIDO'
 import { BIG_TEN } from '../../../utils/bigNumber';
 
 const WrapLaunchpad = styled(Flex)`

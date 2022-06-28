@@ -16,7 +16,7 @@ import styled from 'styled-components'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import { formatBigNumber, getFullDisplayBalance } from '../../utils/formatBalance'
 import Footer from '../LaunchpadDetails/components/Footer'
-import { configIDO } from 'views/LaunchpadDetails/config'
+import { configIDO } from 'config/constants/configIDO'
 import { IDOCardInfo } from './components/IDOCardIntro'
 
 const WrapLaunchpad = styled(Flex)`

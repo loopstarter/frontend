@@ -5,7 +5,7 @@ import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
 import { ToastDescriptionWithTx } from 'components/Toast'
-import { configIDO } from '../config'
+import { configIDO } from '../../../config/constants/configIDO'
 
 interface ApproveAndConfirmStageProps {
   variant: 'buy' | 'sell'
