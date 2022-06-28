@@ -1996,9 +1996,9 @@ export const mainnetTokens = defineTokens({
     MAINNET,
     '0x42d44f1c45349d47d34976ce3a2ff0c3dd3210a8',
     9,
-    'WALKN',
-    'WALKN',
-    'https://walkn.app/',
+    'MOVN',
+    'MOVN',
+    'https://whitepaper.movn.ws/',
   ),
 } as const)
 
