@@ -608,7 +608,7 @@ export const configIDO: (IConfigIDO)[] = [
       timeDistribute: '10/07/2022',
       timeDistributeEnd: '13/07/2022',
       timeDistributeListing: '14/07/2022',
-      allocation: '100 BUSD',
+      allocation: '200 BUSD',
       allocationSize: ' - ',
       listingPrice: '$0.15',
       projectName: 'movn is the Superapp of sports',
