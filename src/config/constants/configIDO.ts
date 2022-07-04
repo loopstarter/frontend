@@ -1,5 +1,18 @@
 import tokens from 'config/constants/tokens'
 
+export const nextIDO = {
+  name: 'MOVN',
+  token: 'MOV',
+  description1: 'movn is the Superapp of sports',
+  description2:
+    "movn is the Superapp of sports, a move-to-earn web3 platform where players can earn money to adopt a more active lifestyle. The Sports Coin (MOV) is movn's utility token and the symbol of this new sports economy. movn is an application already available for download on the Google Play Store and IOS.",
+  linkIdo: 'https://app.loopstarter.com',
+  cap: '1,000,000,000',
+  raise: '50,000 BUSD',
+  exchange: '1 MOV = 0.15 BUSD',
+  startTime: 1656151200,
+}
+
 export interface IConfigIDO {
   pid: number
   mainContractIDO: string
@@ -580,9 +593,9 @@ export const configIDO: (IConfigIDO)[] = [
     viewTokenLink: 'https://movn.ws/',
     tokenInfo: {
       sell: {
-        symbol: tokens.fakefordemo.symbol,
-        address: tokens.fakefordemo.address,
-        decimals: tokens.fakefordemo.decimals,
+        symbol: tokens.mov.symbol,
+        address: tokens.mov.address,
+        decimals: tokens.mov.decimals,
       },
       useForBuy: {
         symbol: tokens.busd.symbol,
@@ -592,21 +605,71 @@ export const configIDO: (IConfigIDO)[] = [
       },
     },
     projectInfo: {
-      timeDistribute: '--/07/2022',
-      timeDistributeEnd: '--/07/2022',
-      timeDistributeListing: '--/07/2022',
+      timeDistribute: '10/07/2022',
+      timeDistributeEnd: '13/07/2022',
+      timeDistributeListing: '14/07/2022',
       allocation: '100 BUSD',
       allocationSize: ' - ',
       listingPrice: '$0.15',
       projectName: 'movn is the Superapp of sports',
       projectNameShort: 'MOVN',
-      symbol: 'MOVN',
-      totalSupply: '4,400,000,000',
+      symbol: 'MOV',
+      totalSupply: '1,00,000,000',
+      access: 'Public',
+      roundType: 'Guaranteed round',
+      linkWhiteList: 'https://whitepaper.movn.ws/',
+      logoWidth: 140,
+      startTime: 1657670400,
+      totalSales: 50000,
+      internalParticipant: 0,
+      userPerPool: 100,
+      allocationNumber: 200,
+    }
+  },
+  {
+    pid: 13,
+    mainContractIDO: "0xcb987B25679c47Fc3BB6A713d5f9Fc3D1242469d",
+    hidden: false,
+    projectDescription: "movn is the Superapp of sports, a move-to-earn web3 platform where players can earn money to adopt a more active lifestyle. The Sports Coin (MOV) is movn's utility token and the symbol of this new sports economy.",
+    projectShortDescription:
+      'movn is the Superapp of sports',
+    projectLogo: '/images/app-ido/movn-pid-12.png',
+    social: {
+      twitter: 'https://twitter.com/movn_world',
+      website: 'https://movn.ws/',
+      telegram: 'https://t.me/movn_world',
+      whitepaper: 'https://whitepaper.movn.ws/'
+    },
+    viewTokenLink: 'https://movn.ws/',
+    tokenInfo: {
+      sell: {
+        symbol: tokens.mov.symbol,
+        address: tokens.mov.address,
+        decimals: tokens.mov.decimals,
+      },
+      useForBuy: {
+        symbol: tokens.busd.symbol,
+        address: tokens.busd.address,
+        decimals: tokens.busd.decimals,
+
+      },
+    },
+    projectInfo: {
+      timeDistribute: '10/07/2022',
+      timeDistributeEnd: '13/07/2022',
+      timeDistributeListing: '14/07/2022',
+      allocation: '100 BUSD',
+      allocationSize: ' - ',
+      listingPrice: '$0.15',
+      projectName: 'movn is the Superapp of sports',
+      projectNameShort: 'MOVN',
+      symbol: 'MOV',
+      totalSupply: '1,00,000,000',
       access: 'Public',
       roundType: 'FCFS round',
       linkWhiteList: 'https://whitepaper.movn.ws/',
       logoWidth: 140,
-      startTime: 1656161200,
+      startTime: 1657670400,
       totalSales: 50000,
       internalParticipant: 0,
       userPerPool: 100,

@@ -1992,6 +1992,14 @@ export const mainnetTokens = defineTokens({
     'WALKN',
     'https://walkn.app/',
   ),
+  mov: new Token(
+    MAINNET,
+    '0x6D802Ac662b898622F7A13e1F4cB1A50C7085b6E',
+    18,
+    'MOV',
+    'MOV',
+    'https://twitter.com/MOVN_world/status/1543538036926988292',
+  ),
   fakefordemo: new Token(
     MAINNET,
     '0x42d44f1c45349d47d34976ce3a2ff0c3dd3210a8',
