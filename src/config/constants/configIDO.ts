@@ -10,7 +10,7 @@ export const nextIDO = {
   cap: '1,000,000,000',
   raise: '50,000 BUSD',
   exchange: '1 MOV = 0.15 BUSD',
-  startTime: 1656151200,
+  startTime: 1657670400,
 }
 
 export interface IConfigIDO {
